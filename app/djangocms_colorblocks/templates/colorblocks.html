@@ -1,0 +1,26 @@
+{% comment %} {% load static sekizai_tags %}
+
+{% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{% static 'djangocms_slider/css/owl.carousel.min.css' %}">{% endaddtoblock %} {% endcomment %}
+<div id="colorblocks-{{ id }}" class="ftco-services ftco-no-pb">
+  <div class="container-wrap">
+    <div class="row no-gutters">
+      {% for colorblock in colorblocks %}
+      <div class="col d-flex justify-content-center services align-self-stretch pb-4 px-4 ftco-animate" 
+        style="background-color:{{colorblock.color}};"
+        >
+        <div class="media block-6 d-block text-center">
+          <div class="icon h1 d-flex justify-content-center align-items-center">
+              {% if colorblock.icon %}
+              <i class="bi bi-{{colorblock.icon}}" style="color:{{colorblock.color}};"></i>
+              {% endif %}
+          </div>
+          <div class="media-body p-2 mt-3">
+            <h3 class="heading">{{colorblock.title}}</h3>
+            <p>{{colorblock.text}}</p>
+          </div>
+        </div>      
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags static %}
+
+{% block content %}
+
+  {% include 'core/breadcrumbs.html' %}
+
+  <section class="ftco-section bg-light pt-5">
+    <div class="container">
+      {% block app_content %}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}

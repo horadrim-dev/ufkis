@@ -1,0 +1,22 @@
+{% load cms_tags sekizai_tags thumbnail static %}
+
+  {% if user.is_authenticated %}
+  <div class="row d-flex justify-content-end pb-4 pe-3">
+    {% render_model_add object_list.0 %}
+  </div>
+  {% endif %}
+
+  <div class="row">
+    {% for obj in object_list %}
+      {% include 'news/includes/post_item.html' %}
+    {% empty %}
+      <p> Записей не найдено.</p>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="col">
+      <a href="{% url 'news:index' %}" class="btn btn-outline-primary btn-lg py-3 my-3 w-100">
+        Больше новостей
+      </a>
+    </div>
+  </div>

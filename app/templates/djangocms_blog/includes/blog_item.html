@@ -1,0 +1,84 @@
+{% load djangocms_blog i18n easy_thumbnails_tags cms_tags %}
+
+        {% comment %} <div class="col-md-6 col-lg-4 ftco-animate"> {% endcomment %}
+<article id="post-{{ post.slug }}" class="post-item blog-entry col-md-6 col-lg-4 ftco-animate">
+    <header>
+        {% comment %} <h3> {% endcomment %}
+        <a href="{{ post.get_absolute_url }}" 
+        class="block-20 d-flex align-items-end" 
+        style="{% if image %}
+                {% thumbnail post.main_image post.thumbnail_options.size crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
+                background-image: url({{thumb.url}});
+            {% endif %}"
+        >
+        {% comment %} {{ post.title }} {% endcomment %}
+            <div class="meta-date text-center p-2">
+                <span class="day">27</span>
+                <span class="mos">January</span>
+                <span class="yr">2019</span>
+            </div>
+        </a>
+        {% comment %} </h3> {% endcomment %}
+        {% if post.subtitle %}
+            <h4>{{ post.subtitle }}</h4>
+        {% endif %}
+        {% block blog_meta %}
+            {% include "djangocms_blog/includes/blog_meta.html" %}
+        {% endblock %}
+    </header>
+    {% comment %} {% if image and post.main_image %}
+    <div class="blog-visual">
+        {% thumbnail post.main_image post.thumbnail_options.size crop=post.thumbnail_options.crop upscale=post.thumbnail_options.upscale subject_location=post.main_image.subject_location as thumb %}
+        <img src="{{ thumb.url }}" alt="{{ post.main_image.default_alt_text }}" width="{{ thumb.width }}" height="{{ thumb.height }}" />
+    </div>
+    {% else %}
+        {% media_images post as previews %}
+        <div class="blog-visual">
+          {% for preview in previews %}<img src="{{ preview }}" />{% endfor %}
+        </div>
+    {% endif %} {% endcomment %}
+
+
+    <div class="blog-lead text bg-white p-4">
+        <h3 class="heading"><a href="#">{{ post.title }}</a></h3>
+        <p>
+        {% if not TRUNCWORDS_COUNT %}
+            {% render_model post "abstract" "" "" "safe" %}
+        {% else %}
+            {% render_model post "abstract" "" "" "truncatewords_html:TRUNCWORDS_COUNT|safe"  %}
+        {% endif %}
+        </p>
+    </div>
+    <footer class="read-more">
+        {% comment %} <a href="{{ post.get_absolute_url }}">{% trans "read more" %} &raquo;</a> {% endcomment %}
+        <div class="d-flex align-items-center mt-4">
+            <p class="mb-0"><a href="#" class="btn btn-secondary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+            <p class="ml-auto mb-0">
+                <a href="#" class="mr-2">Admin</a>
+                <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+            </p>
+        </div>
+    </footer>
+</article>
+
+            {% comment %} <div class="blog-entry"> {% endcomment %}
+              {% comment %} <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url('images/image_1.jpg');">
+								<div class="meta-date text-center p-2">
+                  <span class="day">27</span>
+                  <span class="mos">January</span>
+                  <span class="yr">2019</span>
+                </div>
+              </a> {% endcomment %}
+              {% comment %} <div class="text bg-white p-4">
+                <h3 class="heading"><a href="#">Skills To Develop Your Child Memory</a></h3>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+
+                <div class="d-flex align-items-center mt-4">
+	                <p class="mb-0"><a href="#" class="btn btn-secondary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>
+	                <p class="ml-auto mb-0">
+	                	<a href="#" class="mr-2">Admin</a>
+	                	<a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
+	                </p>
+                </div>
+              </div> {% endcomment %}
+            {% comment %} </div> {% endcomment %}

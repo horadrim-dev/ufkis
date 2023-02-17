@@ -1,0 +1,52 @@
+{% load static sekizai_tags %}
+
+{% addtoblock "js" %}<script src="{% static 'djangocms_animated_numbers/js/jquery.animateNumber.min.js' %}"></script>{% endaddtoblock %}
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+    var counter = function() {
+      
+      $('#animated-numbers-{{id}}').waypoint( function( direction ) {
+        if( direction === 'down' && !$(this.element).hasClass('ftco-animated') ) {
+          var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',')
+          $('.number').each(function(){
+            var $this = $(this),
+              num = $this.data('number');
+            $this.animateNumber(
+              {
+                number: num,
+                numberStep: comma_separator_number_step
+              }, {{duration}}
+            );
+          });
+        }
+      } , { offset: '95%' } );
+
+    }
+    counter();
+
+	});
+</script>
+{% endaddtoblock %}
+
+<div id="animated-numbers-{{id}}" class="ftco-counter">
+    <div class="row d-md-flex align-items-center justify-content-center">
+      <div class="col-lg-10">
+        <div class="row d-md-flex align-items-center">
+          {% for number in numbers %}
+          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
+            <div class="block-18">
+              {% comment %} <div class="icon"><i class="bi bi-bank"></i></div> {% endcomment %}
+              <div class="text">
+                <strong class="number" data-number="{{number.number}}">0</strong>
+                <span>{{number.title}}</span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+</div>
