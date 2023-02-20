@@ -1,4 +1,6 @@
 from django.db import models, transaction
+from cms.extensions import PageExtension
+from cms.extensions.extension_pool import extension_pool
 
 class OrderedModel(models.Model):
     
@@ -37,3 +39,18 @@ class OrderedModel(models.Model):
     class Meta:
         abstract = True
         ordering = ['order']
+
+
+
+class IconExtension(PageExtension):
+    ''' 
+    Adding text font-awesome name icon to page 
+    for displaying in menu 
+    '''
+    fa_icon = models.CharField(verbose_name="Иконка страницы",
+                                help_text='Названия иконок брать <a href="https://fontawesome.com/v4/icons/" target="blank">отсюда</a>', 
+                                max_length=32, default="", 
+                                blank=True, )
+
+
+extension_pool.register(IconExtension)
