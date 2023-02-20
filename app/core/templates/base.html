@@ -1,14 +1,19 @@
 {% load cms_tags sekizai_tags static %}
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 10]> <html  lang="ru" class="iex"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<html lang="ru">
+<!--<![endif]-->
     <head>
       <title>{% page_attribute "page_title" %}</title>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      {% comment %} <meta name="description" content="Multipurpose HTML template."> {% endcomment %}
 
-      <link rel="shortcut icon" type="image/png" href="{% static 'core/images/icons/favicon.ico' %}"/>     
+      {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'core/images/icons/favicon.ico' %}"/>      {% endcomment %}
 
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">{% endaddtoblock %}
+      {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/bootstrap-icons.css' %}">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animate.css' %}">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/magnific-popup.css' %}">{% endaddtoblock %}
@@ -24,36 +29,76 @@
       {% addtoblock "js" %}<script src="{% static 'core/js/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/js/aos.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/js/scrollax.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/main.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/js/main.js' %}"></script>{% endaddtoblock %} {% endcomment %}
 
-      {% addtoblock "js" %}<script src="{% static 'core/js/accessibility.min.js' %}"></script>{% endaddtoblock %}
+      <script src="{% static 'core/scripts/jquery.min.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">
+      <script src="{% static 'core/scripts/script.js' %}"></script>
+      <link rel="stylesheet" href="{% static 'core/style.css' %}">
+      <link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">
+      <link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">
+      <link rel="stylesheet" href="{% static 'core/css/animations.css' %}">
+      <link rel="stylesheet" href="{% static 'core/css/components.css' %}">
+      <link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">
+      <link rel="stylesheet" href="{% static 'core/scripts/magnific-popup.css' %}">
+      <link rel="stylesheet" href="{% static 'core/scripts/php/contact-form.css' %}">
+      <link rel="stylesheet" href="{% static 'core/scripts/social.stream.css' %}">
+      <link rel="icon" href="{% static 'core/template-images/favicon.png' %}">
+      <link rel="stylesheet" href="{% static 'core/skin.css' %}">
 
-        {% render_block "css" %}
+      {# fix header for admin view #}
+      {% if request.user.is_authenticated %}
+      <style>
+        .navbar-fixed-top {
+          top: unset;
+        }
+      </style>
+      {% endif %}
+
+      {% addtoblock "js" %}<link rel="stylesheet" href="{% static 'core/scripts/font-awesome/css/font-awesome.css' %}">{% endaddtoblock %}
+      
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/imagesloaded.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/php/contact-form.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/social.stream.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/jquery.slimscroll.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/smooth.scroll.min.js' %}"></script>{% endaddtoblock %}
+
+      {% comment %} {% addtoblock "js" %}<script src="{% static 'core/js/accessibility.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+
+
+      {% render_block "css" %}
     </head>
     <body>
 
+    <div id="preloader"></div>
+
 		{% cms_toolbar %}
 
-		{% if request.user.is_authenticated %}
-			<div class="w-100" style="height:46px;"></div>
-		{% endif %}
-
-
-		<header>
-			{% static_placeholder 'header' %}
+		{% comment %} <header> {% endcomment %}
+			{% comment %} {% static_placeholder 'header' %} {% endcomment %}
 			{% comment %} <img id="specialButton" style="cursor:pointer;" src="https://lidrekon.ru/images/special.png" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" /> {% endcomment %}
-			{% include 'core/navbar.html' %}
-		</header>
+    {% include 'core/header.html' %}
+		{% comment %} </header> {% endcomment %}
   
 		{% block content %}
 			{% placeholder "content" %}
+      {% include 'core/index-construction.html' %}
+      {% comment %} {% include 'core/index-main.html' %} {% endcomment %}
 		{% endblock content %}
-			
-		<footer class="ftco-footer ftco-bg-dark ftco-section pb-0">
+    
+    {% include 'core/footer.html' %}
+		{% comment %} <footer class="ftco-footer ftco-bg-dark ftco-section pb-0">
 			<div class="container">
 				{% static_placeholder 'footer' %}
 				
-				{% include 'core/footer.html' %}
 				<div class="row">
 				<div class="col-md-12 text-center">
 					<p>
@@ -62,13 +107,13 @@
 				</div>
 				</div>
 			</div>
-		</footer>
+		</footer> {% endcomment %}
 
-        {% if not user.is_authenticated %}
-        <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
-        {% endif %}
+        {% comment %} {% if not user.is_authenticated %} {% endcomment %}
+        {% comment %} <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> {% endcomment %}
+        {% comment %} {% endif %} {% endcomment %}
         {% comment %} <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script> {% endcomment %}
 
-        {% render_block "js" %}
+        {% comment %} {% render_block "js" %} {% endcomment %}
     </body>
 </html>

@@ -1,17 +1,32 @@
 {% load menu_tags %}
 
 {% for child in children %}
-<li class="nav-item {% if child.children %}dropdown{% endif %} {% if child.selected %}active selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
+<li class="nav-item active {% if child.children %}dropdown{% endif %} {% if child.selected %}active selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
 	<a class="nav-link {% if child.children %}dropdown-toggle{% endif %}" 
-		{% if child.children %} data-bs-auto-close="outside" aria-expanded="false"{%else%} aria-current="page"{% endif %}
+		{% if child.children %} data-toggle="dropdown" {% endif %}
+		{% comment %} {% if child.children %} data-bs-auto-close="outside" aria-expanded="false"{%else%} aria-current="page"{% endif %} {% endcomment %}
 		href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
 
 		{{ child.get_menu_title }}
 	</a>
 	{% if child.children %}
-	<ul class="dropdown-menu shadow">
+	<ul class="dropdown-menu multi-level">
 		{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
 	</ul>
 	{% endif %}
 </li>
 {% endfor %}
+{% comment %} <li class="dropdown active">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Home <span class="caret"></span></a>
+	<ul class="dropdown-menu multi-level">
+		<li><a href="index-main.html">Main</a></li>
+		<li><a href="index-design.html">Design</a></li>
+		<li><a href="index-interiors.html">Interiors</a></li>
+		<li><a href="index-business.html">Business</a></li>
+		<li><a href="index-construction.html">Construction</a></li>
+		<li><a href="index-fullpage.html">Fullpage</a></li>
+		<li><a href="index-company.html">Company</a></li>
+		<li><a href="index-young.html">Young</a></li>
+		<li><a href="index.html">Intro</a></li>
+	</ul>
+</li> {% endcomment %}

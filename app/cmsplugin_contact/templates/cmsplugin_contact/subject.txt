@@ -1,1 +1,0 @@
-[{{ form_name|default:_("Contact Form") }}] {{ data.subject|safe }}

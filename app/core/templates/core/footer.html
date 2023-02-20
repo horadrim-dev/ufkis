@@ -1,5 +1,5 @@
-{% load cms_tags menu_tags %}
-<div class="row mb-5">
+{% load static cms_tags menu_tags sekizai_tags %}
+{% comment %} <div class="row mb-5">
   <div class="col">
     <div class="ftco-footer-widget mb-5 ml-md-4">
       <h2 class="ftco-heading-2">Меню</h2>
@@ -14,4 +14,74 @@
   <div class="col-12 col-lg-3">
     {% static_placeholder 'footer_3_column' %}
   </div>
-</div>
+</div> {% endcomment %}
+
+<i class="scroll-top scroll-top-mobile show fa fa-sort-asc"></i>
+<footer class="footer-base">
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-center text-left">
+                    <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" />
+                    <hr class="space m" />
+                    <p class="text-s">Collins Street West 8007, San Fransico, United States.</p>
+                    <div class="tag-row text-s">
+                        <span>support@company.com</span>
+                        <span>+02 3205550678</span>
+                    </div>
+                    <hr class="space m" />
+                    <div class="btn-group social-group btn-group-icons">
+                        <a target="_blank" href="#" data-social="share-facebook">
+                            <i class="fa fa-facebook text-xs circle"></i>
+                        </a>
+                        <a target="_blank" href="#" data-social="share-twitter">
+                            <i class="fa fa-twitter text-xs circle"></i>
+                        </a>
+                        <a target="_blank" href="#" data-social="share-google">
+                            <i class="fa fa-google-plus text-xs circle"></i>
+                        </a>
+                        <a target="_blank" href="#" data-social="share-linkedin">
+                            <i class="fa fa-linkedin text-xs circle"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-left text-left">
+                    <div class="row">
+                        <div class="col-md-6 text-s">
+                            <h3>Menu</h3>
+                            <a href="#">Home</a><br />
+                            <a href="#">Contacts</a><br />
+                            <a href="#">Future projects</a><br />
+                            <a href="#">Locations</a><br />
+                            <a href="#">Latest news</a><br />
+
+                        </div>
+                        <div class="col-md-6 text-s">
+                            <h3>Pages</h3>
+                            <a href="#">Support</a><br />
+                            <a href="#">Terms of services</a><br />
+                            <a href="#">RSS Feeds</a><br />
+                            <a href="#">Partnerships</a><br />
+                            <a href="#">Latest news</a><br />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-left text-left">
+                    <h3>You can trust us</h3>
+                    <p class="text-s">
+                        Utenim ad minim veniam quis nostrud exercitation ullamco lorem ipsum dolor sit ametullamco lorem ipsum dolor sit ametullamco lorem ipsum dolor sit amet consectetur adipiscing elitsed do eiusmo.
+                    </p>
+                    <hr class="space xs" />
+                    <img src="{% static 'core/template-images/cards-icon.png' %}" alt="" />
+                </div>
+            </div>
+        </div>
+        <div class="row copy-row">
+            <div class="col-md-12 copy-text">
+                © 2018 Yellow Business - Multipurpose & Construction Template Handmade by <a href="http://schiocco.io/">schiocco.io</a>
+            </div>
+        </div>
+    </div>
+
+    {% render_block "js" %}
+</footer>
