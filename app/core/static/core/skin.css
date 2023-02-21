@@ -226,6 +226,17 @@ header .input-group-btn .btn {
 .white :-moz-placeholder {
     color: #fff;
 }
+header .container {
+    width: 1300px;
+}
+.navbar-nav > li > a {
+    line-height: 21px;
+}
+header ul.root-level li a i {
+  position: relative;
+  top: .1em;
+  right: .1em;
+}
 /*
 -------------------------------------------------------------------
 CUSTOM CLASSES
@@ -1924,4 +1935,8 @@ RESPONSIVE
     .header-base .breadcrumb, .header-bootstrap .breadcrumb {
         text-align: left;
     }
+}
+/* CUSTOM */
+header ul.navbar-nav li a i {
+  color: #979797;
 }
