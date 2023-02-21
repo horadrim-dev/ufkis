@@ -21,6 +21,14 @@ Table of contents
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
+:root {
+    /* --main-color: #4d6ce6; 
+    --main-color-2: #0049f7; */
+    --main-color: #5576f9;
+    --main-color-2: #0049f7;
+    /* --main-color: #07ae59;
+    --main-color-2: #07c159; */
+}
 
 /*
 -------------------------------------------------------------------
@@ -34,17 +42,17 @@ COLORS
 .woocommerce .product span.onsale, .circle-button, .btn.circle-button, .btn, .header-bootstrap, .header-title hr, .advs-box.boxed, i.circle, .intro-box:after, .intro-box:before,
 .advs-box-side-img hr, .call-action-box, .title-base hr, .nav.inner.ms-mini, .bg-color, .header-title.white .title-base hr, .header-animation.white .title-base hr,
 .title-base .scroll-top, .title-modern .scroll-top, i.square, .header-base, .progress-bar, .tagbox span, .niche-box-post .block-infos .block-data, .header-base .title-base h1:before {
-    background-color: #F3B007;
+    background-color: var(--main-color);
 }
 
     .navbar-inner .nav.ms-minimal li a:before, .header-base.white, .advs-box-multiple.boxed .advs-box-content {
-        background-color: #F3B007 !important;
+        background-color: var(--main-color) !important;
     }
 
     .btn:not(.btn-border):hover, .btn-primary:focus, .boxed .btn, .btn-primary.focus, .side-menu .active,
     .white.circle-button:hover, .woocommerce #respond input#submit.alt:hover, .woocommerce a.button.alt:hover, .woocommerce button.button.alt:hover,
     .woocommerce input.button.alt:hover, .white .title-base.yellow-bar hr {
-        background-color: #f39f07 !important;
+        background-color: var(--main-color-2) !important;
     }
 
     i.icon, .fullpage-menu .active i, .navbar-default .navbar-toggle:hover i, .navbar-default .navbar-toggle:focus i, header .side-menu .active > a,
@@ -57,68 +65,68 @@ COLORS
     .niche-box-testimonails h5, .title-icon i, i, .fullpage-menu.white li.active a i, .timeline > li > .timeline-label h4, .anima-button i, .pricing-table .list-group-item.pricing-price,
     .footer-center .footer-title, .accordion-list .list-group-item > a.active, .btn-border, .btn.btn-border, .btn.circle-button.btn-border, footer a:hover, .block-quote.quote-1:before,
     .block-quote.quote-2:before, .breadcrumb > li + li:before, .adv-img-full-content p.sub {
-        color: #F3B007;
+        color: var(--main-color);
     }
 
 @media (max-width: 994px) {
     .navbar-nav .open .dropdown-menu > li > a[href="#"] {
-        color: #F3B007 !important;
+        color: var(--main-color) !important;
     }
 }
 
 .footer-minimal .footer-title, .advs-box-top-icon.boxed .btn, .advs-box-top-icon.boxed .circle-button, .sidebar-nav ul a:hover, header .mi-menu .sidebar-nav ul a:hover,
 .woocommerce div.product p.price, .woocommerce div.product span.price, .white .text-color, .accordion-list .list-group-item > a:hover, .boxed .circle-button:hover i,
 .boxed .btn:hover i, .pagination > .active > a, .pagination > li:not(.disabled):hover > a, .boxed .circle-button, header .btn-search:hover, .advs-box h2 a:hover, .nav.ms-minimal > li.active > a {
-    color: #F3B007 !important;
+    color: var(--main-color) !important;
 }
 
 .btn-border:hover, .btn.btn-border:hover, .btn.circle-button.btn-border:hover, .tag-row i {
-    color: #f39f07;
+    color: var(--main-color-2);
 }
 
     .btn-border:hover i, .white .btn i {
-        color: #f39f07 !important;
+        color: var(--main-color-2) !important;
     }
 
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus, .pagination > li:not(.disabled):hover > a i:before, .advs-box-multiple div.circle, .advs-box-multiple div.circle i {
-    border-color: #F3B007 !important;
-    color: #F3B007 !important;
+    border-color: var(--main-color) !important;
+    color: var(--main-color) !important;
 }
 
 .nav.inner.ms-rounded > li > a:hover, .nav.inner.ms-rounded > li.active a {
-    background-color: #F3B007 !important;
-    border-color: #F3B007 !important;
+    background-color: var(--main-color) !important;
+    border-color: var(--main-color) !important;
 }
 
 .circle-button, .btn-default, .white .btn:not(.btn-border), .btn-border, .bg-transparent .navbar-nav > li.active > a .caret:before, .bg-transparent .navbar-nav > li:hover > a .caret:before,
 .white .btn-text, .scroll-top-mobile:hover:before, .tab-box.left:not(.pills) .panel-box, .tab-box.right:not(.pills) .panel-box, .tab-box.right .nav-tabs {
-    border-color: #F3B007;
+    border-color: var(--main-color);
 }
 
 .boxed.advs-box-multiple .advs-box-content, .niche-box-post, .extra-content, .quote-author, .border-color, .border-color.boxed-border.boxed-border.white, .img-border, .timeline > li > .timeline-badge,
 body div.boxed-border.border-yellow, .pagination li.active a {
-    border-color: #F3B007 !important;
+    border-color: var(--main-color) !important;
 }
 
 .datepicker-top-left, .datepicker-top-right {
-    border-top-color: #F3B007;
+    border-top-color: var(--main-color);
 }
 
     .datepicker-top-left:before, .datepicker-top-right:before {
-        border-bottom-color: #F3B007;
+        border-bottom-color: var(--main-color);
     }
 
 .text-color {
-    color: #f39f07;
+    color: var(--main-color-2);
 }
 
 .circle-button:hover, .btn:hover {
-    border-color: #f39f07 !important;
+    border-color: var(--main-color-2) !important;
 }
 
 .btn-text, html .advs-box .btn-text:after {
-    color: #f39f07;
-    border-color: #f39f07;
+    color: var(--main-color-2);
+    border-color: var(--main-color-2);
 }
 
 .white.btn, .white .btn, .white .tag-row a, .header-bootstrap i.icon, .white .tag-row i, .white .advs-box-content h2 a, .white.advs-box-side-img h2 a, .advs-box-side-icon.boxed .icon-box i,

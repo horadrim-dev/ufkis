@@ -1,7 +1,7 @@
 {% load menu_tags %}
 
 {% for child in children %}
-<li class="nav-item active {% if child.children %}dropdown{% endif %} {% if child.selected %}active selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
+<li class="nav-item {% if child.children %}dropdown{% endif %} {% if child.selected %}active selected{% endif %}{% if child.ancestor %} ancestor{% endif %}{% if child.sibling %} sibling{% endif %}{% if child.descendant %} descendant{% endif %}">
 	<a class="nav-link {% if child.children %}dropdown-toggle{% endif %}" 
 		{% if child.children %} data-toggle="dropdown" {% endif %}
 		{% comment %} {% if child.children %} data-bs-auto-close="outside" aria-expanded="false"{%else%} aria-current="page"{% endif %} {% endcomment %}
