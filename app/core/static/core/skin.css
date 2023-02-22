@@ -226,9 +226,6 @@ header .input-group-btn .btn {
 .white :-moz-placeholder {
     color: #fff;
 }
-header .container {
-    width: 1300px;
-}
 .navbar-nav > li > a {
     line-height: 21px;
 }
@@ -555,7 +552,7 @@ HEADER AND MENUS
         left: 0px;
         bottom: 0px;
         width: 0%;
-        height: 1px;
+        height: 2px;
         transition: all 0.35s ease-out;
         -webkit-transition: all 0.35s ease-out;
     }
@@ -1937,6 +1934,38 @@ RESPONSIVE
     }
 }
 /* CUSTOM */
-header ul.navbar-nav li a i {
-  color: #979797;
+ul.navbar-nav li a i {
+    color: #979797;
+}
+ul.dropdown-menu:not(.side-menu.root-level) li a {
+    min-width: 200px;
+    white-space: unset;
+    line-height: 14px;
+    /* padding-left: 30px; */
+}
+
+ul.dropdown-menu:not(.side-menu.root-level) li.dropdown-submenu > a:after {
+  /* float: unset; */
+  /* margin-bottom: 2px; */
+    position: absolute;
+    right: 0;
+    top: 50%3
+    margin-top: -.5rem;
+    margin-right: 1.2rem;
+}
+ul.dropdown-menu:not(.side-menu.root-level) a.nav-link.has-icon {
+  padding-left: 35px;
+}
+ul.dropdown-menu:not(.side-menu.root-level) li a.has-icon i {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -1rem;
+    margin-left: 1rem;
+}
+
+@media (min-width: 1300px) {
+    header .container {
+        width: 1300px;
+    }
 }
