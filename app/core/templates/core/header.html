@@ -19,11 +19,9 @@
         <div class="navbar-mini scroll-hide">
             <div class="container">
                 <div class="nav navbar-nav navbar-left">
-                    <span><i class="fa fa-phone"></i>1-800-405-377</span>
-                    <hr />
-                    <span><i class="fa fa-envelope"></i>info@company.com</span>
-                    <hr />
-                    <span>  <i class="fa fa-map-marker"></i>Collins Street 8007, USA</span>
+                    {% if site_settings.phone %}<span><i class="fa fa-phone"></i>{{site_settings.phone}}</span><hr />{% endif %}
+                    {% if site_settings.email %}<span><i class="fa fa-envelope"></i>{{site_settings.email }}</span><hr />{% endif %}
+                    {% if site_settings.address %}<span><i class="fa fa-map-marker"></i>{{site_settings.address}}</span>{% endif %}
                     {% comment %} <hr />
                     <span><i class="fa fa-calendar"></i>Mon - Sat: 8.00 - 19:00</span> {% endcomment %}
                 </div>
@@ -46,8 +44,9 @@
                     <a class="navbar-brand" href="index.html">
                         <img class="navbar-brand-logo" src="{% static 'core/images/gerb-prk-small.png' %}" />
                         <div class="navbar-brand-title">
-                            <span>Управление физической культуры, спорта и молодежной политики</span>
-                            <span> администрации города Прокопьевска</span>
+                            {% comment %} <span>Управление физической культуры, спорта и молодежной политики</span> {% endcomment %}
+                            <span>{{ site_settings.title }}</span>
+                            <span>{{ site_settings.subtitle }}</span>
                         </div>
                     </a>
                 </div>

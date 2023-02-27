@@ -1,6 +1,7 @@
 from django.db import models, transaction
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
+from django.utils.translation import gettext_lazy as _
 
 class OrderedModel(models.Model):
     
@@ -54,3 +55,54 @@ class IconExtension(PageExtension):
 
 
 extension_pool.register(IconExtension)
+
+
+class SingletonModel(models.Model):
+    """Singleton Django Model
+    https://gist.github.com/senko/5028413
+
+    Ensures there's always only one entry in the database, and can fix the
+    table (by deleting extra entries) even if added via another mechanism.
+    Also has a static load() method which always returns the object - from
+    the database if possible, or a new empty (default) instance if the
+    database is still empty. If your instance has sane defaults (recommended),
+    you can use it immediately without worrying if it was saved to the
+    database or not.
+    Useful for things like system-wide user-editable settings.
+    """
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        """
+        Save object to the database. Removes all other entries if there
+        are any.
+        """
+        self.__class__.objects.exclude(id=self.id).delete()
+        super(SingletonModel, self).save(*args, **kwargs)
+
+    @classmethod
+    def load(cls):
+        """
+        Load object from the database. Failing that, create a new empty
+        (default) instance of the object and return it (without saving it
+        to the database).
+        """
+
+        try:
+            return cls.objects.get()
+        except cls.DoesNotExist:
+            return cls()
+
+
+class SiteSettings(SingletonModel):
+    # site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
+    title = models.CharField(verbose_name=_('Заголовок'), max_length=256)
+    subtitle = models.CharField(verbose_name=_('Подзаголовок'), max_length=256)
+    phone = models.CharField(verbose_name=_('Телефон'), max_length=256)
+    email = models.EmailField(verbose_name='E-mail')
+    address = models.CharField(verbose_name=_('Адрес'), max_length=256)
+ 
+    def __str__(self):
+        return 'Configuration'
