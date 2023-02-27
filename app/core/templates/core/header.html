@@ -27,10 +27,9 @@
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <div class="minisocial-group">
-                        <a target="_blank" href="#"><i class="fa fa-facebook first"></i></a>
-                        <a target="_blank" href="#"><i class="fa fa-instagram"></i></a>
-                        <a target="_blank" href="#"><i class="fa fa-youtube"></i></a>
-                        <a target="_blank" href="#"><i class="fa fa-linkedin"></i></a>
+                        {% for social in site_settings.socials %}
+                        <a target="_blank" href="{{social.url}}" alt="{{social.text}}"><i class="fa fa-{{social.icon}}"></i></a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

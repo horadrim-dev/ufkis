@@ -22,12 +22,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-center text-left">
-                    <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" />
+                    {% comment %} <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" /> {% endcomment %}
+                    <strong>{{ site_settings.title }}</strong>
+                    <span>{{ site_settings.subtitle }}</span>
                     <hr class="space m" />
-                    <p class="text-s">Collins Street West 8007, San Fransico, United States.</p>
+                    <p class="text-s">{{ site_settings.address }}</p>
                     <div class="tag-row text-s">
-                        <span>support@company.com</span>
-                        <span>+02 3205550678</span>
+                        <span>{{ site_settings.email }}</span>
+                        <span>{{ site_settings.phone }}</span>
                     </div>
                     <hr class="space m" />
                     <div class="btn-group social-group btn-group-icons">

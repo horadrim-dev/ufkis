@@ -98,11 +98,33 @@ class SingletonModel(models.Model):
 
 class SiteSettings(SingletonModel):
     # site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
-    title = models.CharField(verbose_name=_('Заголовок'), max_length=256)
-    subtitle = models.CharField(verbose_name=_('Подзаголовок'), max_length=256)
-    phone = models.CharField(verbose_name=_('Телефон'), max_length=256)
-    email = models.EmailField(verbose_name='E-mail')
-    address = models.CharField(verbose_name=_('Адрес'), max_length=256)
+    title = models.CharField(verbose_name=_('Заголовок'), max_length=256, default="")
+    subtitle = models.CharField(verbose_name=_('Подзаголовок'), max_length=256, default="")
+    phone = models.CharField(verbose_name=_('Телефон'), max_length=256, default="")
+    email = models.EmailField(verbose_name='E-mail', blank=True, null=True)
+    address = models.CharField(verbose_name=_('Адрес'), max_length=256, default="")
  
     def __str__(self):
-        return 'Configuration'
+        return 'Конфигурация сайта'
+
+    def socials(self):
+        return self.social_set.all()
+
+    class Meta:
+        verbose_name = "Конфигурация сайта"
+        verbose_name_plural = "Конфигурация сайта"
+
+class Social(models.Model):
+    sitesettings = models.ForeignKey(SiteSettings, on_delete=models.CASCADE,)
+    text = models.CharField(verbose_name='Текст', help_text="Примеры: \"ВК\", \"Мы в контакте\", \"Мы в ВК\"", max_length=256, default="")
+    url = models.URLField(verbose_name="Ссылка на страницу в соц.сети.")
+    icon = models.CharField(verbose_name="Иконка соц.сети",
+                                help_text='Названия иконок брать <a href="https://fontawesome.com/v4/icons/" target="blank">отсюда</a>', 
+                                max_length=32, default="")
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = "соц.сеть"
+        verbose_name_plural = "соц.сети"
