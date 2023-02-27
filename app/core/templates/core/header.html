@@ -28,7 +28,9 @@
                 <div class="nav navbar-nav navbar-right">
                     <div class="minisocial-group">
                         {% for social in site_settings.socials %}
-                        <a target="_blank" href="{{social.url}}" alt="{{social.text}}"><i class="fa fa-{{social.icon}}"></i></a>
+                        <a target="_blank" href="{{social.url}}" alt="{{social.text}}">
+                            <i class="fa fa-{{social.icon}}"></i>
+                        </a>
                         {% endfor %}
                     </div>
                 </div>

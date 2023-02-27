@@ -72,3 +72,4 @@ app/djangocms_slider/__pycache__
 app/news/__pycache__
 yellow-business
 app/core/static/core_old
+app/static

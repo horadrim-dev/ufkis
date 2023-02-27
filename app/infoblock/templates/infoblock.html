@@ -1,0 +1,154 @@
+{% load static sekizai_tags thumbnail %}
+
+{% comment %} {% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{% static 'infoblock/css/owl.carousel.min.css' %}">{% endaddtoblock %} {% endcomment %}
+{% comment %} {% addtoblock "css" %}<link rel="stylesheet" type="text/css" href="{% static 'infoblock/css/owl.theme.default.min.css' %}">{% endaddtoblock %} {% endcomment %}
+{% comment %} {% addtoblock "js" %}<script src="{% static 'infoblock/js/owl.carousel.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+{% comment %} {% addtoblock "js" %}
+<script type="text/javascript">
+    $(document).ready(function(){
+    $("#owl-slider-{{ id }}").owlCarousel({
+	    loop:true,
+	    autoplay: true,
+	    margin:0,
+	    animateOut: 'fadeOut',
+	    animateIn: 'fadeIn',
+      touchDrag: true,
+      mouseDrag: false,
+	    nav:false,
+	    autoplayHoverPause: false,
+	    items: 1,
+	    responsive:{
+	      0:{
+	        items:1
+	      },
+	      600:{
+	        items:1
+	      },
+	      1000:{
+	        items:1
+	      }
+	    }
+
+    });
+  });
+</script>
+{% endaddtoblock %} {% endcomment %}
+
+{% comment %} <div id="owl-slider-{{ id }}" class="owl-carousel">
+    {% for slide in slides %}
+    <div class="slider-item" style="background-image:url({% thumbnail slide.image "1800x600" upscale crop %});">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+                <div class="col text-center ftco-animate">
+                    {% if slide.title %}<h1 class="mb-4 text-light">{{slide.title}}</h1>{% endif %}
+                    {% if slide.subtitle %}<h2 class="mb-4 text-light">{{slide.subtitle}}</h2>{% endif %}
+                </div>
+                <div class="col">
+                    <img src="{% static 'core/images/logo.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div> {% endcomment %}
+
+
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+
+<div class="section-empty no-paddings">
+    <div class="section-slider row-18">
+        <div class="flexslider advanced-slider slider" data-options="animation:fade">
+            <ul class="slides">
+                <li data-slider-anima="fade-left" data-time="1000">
+                    <div class="section-slide">
+                        <div class="bg-cover" style="background-image:url('{% static 'core/template-images/bg-5.jpg' %}')">
+                        </div>
+                        <div class="container">
+                            <img class="pos-slider pos-bottom pos-right anima anima-fade-bottom hidden-xs" src="{% static 'core/template-images/mk-1.png' %}" alt="" />
+                            <div class="container-middle">
+                                <div class="container-inner text-left">
+                                    <hr class="space m visible-sm" />
+                                    <div class="row">
+                                        <div class="col-md-6 anima">
+                                            <h1 class="text-l text-normal text-m-xs">Architecture is a visual art and the buildings speak for themselves</h1>
+                                            <p class="text-s-xs">
+                                                I enjoy art and museums but also churches, anything that gives me insight into the history and soul of the place I'm in.
+                                                I can also be a beach bum - I like to laze in the shade of a palm tree with a good book or float in a warm sea at sundown.
+                                            </p>
+                                            <hr class="space s" />
+                                            <a href="#" class="btn btn-lg"><i class="fa fa-gears"></i> Services</a><span class="space"></span>
+                                            <a href="#" class="btn btn-lg btn-border"><i class="fa fa-folder-open"></i> Projects</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                    <hr class="space visible-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-slider-anima="fade-left" data-time="1000">
+                    <div class="section-slide">
+                        <div class="bg-cover" style="background-image:url('{% static 'core/template-images/bg-5.jpg' %}')">
+                        </div>
+                        <div class="container">
+                            <img class="pos-slider pos-bottom pos-right anima anima-fade-bottom hidden-xs" src="{% static 'core/template-images/mk-1.png' %}" alt="" />
+                            <div class="container-middle">
+                                <div class="container-inner text-left">
+                                    <hr class="space m visible-sm" />
+                                    <div class="row">
+                                        <div class="col-md-6 anima">
+                                            <h1 class="text-l text-normal text-m-xs">Architecture is a visual art and the buildings speak for themselves</h1>
+                                            <p class="text-s-xs">
+                                                I enjoy art and museums but also churches, anything that gives me insight into the history and soul of the place I'm in.
+                                                I can also be a beach bum - I like to laze in the shade of a palm tree with a good book or float in a warm sea at sundown.
+                                            </p>
+                                            <hr class="space s" />
+                                            <a href="#" class="btn btn-lg"><i class="fa fa-gears"></i> Services</a><span class="space"></span>
+                                            <a href="#" class="btn btn-lg btn-border"><i class="fa fa-folder-open"></i> Projects</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                    <hr class="space visible-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-slider-anima="fade-left" data-time="1000">
+                    <div class="section-slide">
+                        <div class="bg-cover" style="background-image:url('{% static 'core/template-images/bg-5.jpg' %}')">
+                        </div>
+                        <div class="container">
+                            <img class="pos-slider pos-bottom pos-right anima anima-fade-bottom hidden-xs" src="{% static 'core/template-images/mk-1.png' %}" alt="" />
+                            <div class="container-middle">
+                                <div class="container-inner text-left">
+                                    <hr class="space m visible-sm" />
+                                    <div class="row">
+                                        <div class="col-md-6 anima">
+                                            <h1 class="text-l text-normal text-m-xs">Architecture is a visual art and the buildings speak for themselves</h1>
+                                            <p class="text-s-xs">
+                                                I enjoy art and museums but also churches, anything that gives me insight into the history and soul of the place I'm in.
+                                                I can also be a beach bum - I like to laze in the shade of a palm tree with a good book or float in a warm sea at sundown.
+                                            </p>
+                                            <hr class="space s" />
+                                            <a href="#" class="btn btn-lg"><i class="fa fa-gears"></i> Services</a><span class="space"></span>
+                                            <a href="#" class="btn btn-lg btn-border"><i class="fa fa-folder-open"></i> Projects</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                        </div>
+                                    </div>
+                                    <hr class="space visible-sm" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

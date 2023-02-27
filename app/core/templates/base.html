@@ -11,56 +11,28 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       {% comment %} <meta name="description" content="Multipurpose HTML template."> {% endcomment %}
 
-      {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'core/images/icons/favicon.ico' %}"/>      {% endcomment %}
-
-      {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/bootstrap.min.css' %}" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">{% endaddtoblock %}
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/bootstrap-icons.css' %}">{% endaddtoblock %}
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animate.css' %}">{% endaddtoblock %}
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/magnific-popup.css' %}">{% endaddtoblock %}
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/aos.css' %}">{% endaddtoblock %}
-      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/style.min.css' %}">{% endaddtoblock %}
-
-      {% addtoblock "js" %}<script src="{% static 'core/js/jquery.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/jquery-migrate-3.0.1.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/bootstrap.min.js' %}" ></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/popper.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/jquery.easing.1.3.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/jquery.waypoints.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/aos.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/scrollax.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/js/main.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-
       <script src="{% static 'core/scripts/jquery.min.js' %}"></script>
-      <link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">{% endaddtoblock %}
       <script src="{% static 'core/scripts/script.js' %}"></script>
-      <link rel="stylesheet" href="{% static 'core/style.css' %}">
-      <link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">
-      <link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">
-      <link rel="stylesheet" href="{% static 'core/css/animations.css' %}">
-      <link rel="stylesheet" href="{% static 'core/css/components.css' %}">
-      <link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">
-      <link rel="stylesheet" href="{% static 'core/scripts/magnific-popup.css' %}">
-      <link rel="stylesheet" href="{% static 'core/scripts/php/contact-form.css' %}">
-      <link rel="stylesheet" href="{% static 'core/scripts/social.stream.css' %}">
-      <link rel="icon" href="{% static 'core/template-images/favicon.png' %}">
-      <link rel="stylesheet" href="{% static 'core/skin.css' %}">
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/style.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animations.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/components.css' %}">{% endaddtoblock %}
+      {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %} {% endcomment %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/magnific-popup.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/php/contact-form.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/social.stream.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="icon" href="{% static 'core/template-images/favicon.png' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/skin.css' %}">{% endaddtoblock %}
 
-      {# fix header for admin view #}
-      {% if request.user.is_authenticated %}
-      <style>
-        .navbar-fixed-top {
-          top: unset;
-        }
-      </style>
-      {% endif %}
 
       {% addtoblock "js" %}<link rel="stylesheet" href="{% static 'core/scripts/font-awesome/css/font-awesome.css' %}">{% endaddtoblock %}
       
       {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/scripts/imagesloaded.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+      {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script async  src="{% static 'core/scripts/php/contact-form.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %}
@@ -75,6 +47,16 @@
 
 
       {% render_block "css" %}
+
+      {# fix header for admin view #}
+      {% if request.user.is_authenticated %}
+      <style>
+        .navbar-fixed-top {
+          top: unset;
+        }
+      </style>
+      {% comment %} <div style="width:100%; height:46px;"></div> {% endcomment %}
+      {% endif %}
     </head>
     <body>
 

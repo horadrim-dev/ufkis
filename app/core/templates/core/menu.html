@@ -17,7 +17,7 @@
 		{% comment %} {% if child.children %} data-bs-auto-close="outside" aria-expanded="false"{%else%} aria-current="page"{% endif %} {% endcomment %}
 		href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
 		{% if child.attr.icon %}<i class="fa fa-{{child.attr.icon}} text-m"></i>{% endif %}
-		{% if child.get_menu_title != 'home' %}{{ child.get_menu_title }}{% endif %}
+		{% if child.get_menu_title != 'Главная' %}{{ child.get_menu_title }}{% endif %}
 		{% if child.children and child.level == 0 %}<span class="caret"></span>{% endif %}
 	</a>
 	{% if child.children %}
