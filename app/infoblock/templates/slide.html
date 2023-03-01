@@ -1,0 +1,23 @@
+{% load cms_tags thumbnail %}
+<li data-slider-anima="fade-right" data-time="1000">
+	<div class="section-slide">
+		<div class="bg-cover" style="background-color: {{instance.background_color}}">
+		</div>
+		{% comment %} <div class="{{instance.container_type}}"> {% endcomment %}
+		<div class="container">
+			<div class="container-middle">
+				<div class="container-inner">
+					<hr class="space m visible-sm" />
+					<div class="row">
+
+						{% for plugin in instance.child_plugin_instances %}
+								{% render_plugin plugin %}
+						{% endfor %}
+
+					</div>
+					<hr class="space visible-sm" />
+				</div>
+			</div>
+		</div>
+	</div>
+</li>

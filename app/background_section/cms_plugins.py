@@ -9,7 +9,7 @@ from .models import BackgroundSection
 class BackgroundSectionPlugin(CMSPluginBase):
     model = BackgroundSection
     render_template = 'background_section.html'
-    name = "Секция с фоном"   
+    name = "Секция"
     allow_children = True
 
     fieldsets = (
@@ -19,6 +19,7 @@ class BackgroundSectionPlugin(CMSPluginBase):
                 'text',
                 'text_bottom',
                 'css_classes',
+                'container_type',
                 'use_parallax',
                 'background_color',
             ]

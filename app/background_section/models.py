@@ -16,6 +16,11 @@ OVERLAY_OPACITY_CHOICES = [
     ('1', '100%'),
 ]
 
+CONTAINER_CHOICES = [
+    ('container', 'С отступами справа и слева'),
+    ('container-fluid no-paddings', 'Во всю ширину'),
+]
+
 class BackgroundSection(CMSPlugin):
 
     title = models.CharField("Заголовок", max_length=255, default="", blank=True, null=True, help_text="Не обязательно")
@@ -43,6 +48,12 @@ class BackgroundSection(CMSPlugin):
         verbose_name="Прозрачность оверлея",
         choices=OVERLAY_OPACITY_CHOICES,
         default='.5',
+    )
+    container_type = models.CharField(
+        max_length=64,
+        verbose_name="Расположение контента",
+        choices=CONTAINER_CHOICES,
+        default='container',
     )
 
     def generate_id(self):

@@ -730,9 +730,6 @@ HEADER AND MENUS
     background: #f5f5f5;
 }
 
-header {
-    margin-bottom: -22px;
-}
 header .navbar-main form.navbar-form {
     margin-top: 18px;
     padding: 0;
@@ -1933,7 +1930,20 @@ RESPONSIVE
         text-align: left;
     }
 }
+
+
+
+
+
 /* CUSTOM */
+
+
+
+
+
+/* header {
+    margin-bottom: -22px;
+} */
 ul.navbar-nav li a i {
     color: #979797;
 }

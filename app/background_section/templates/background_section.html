@@ -53,15 +53,16 @@
 
 <section 
   id="section-{{id}}" 
-  class="ftco-section img {% if instance.css_classes %} {{instance.css_classes}} {% endif %}" 
+  class=" {% if instance.css_classes %} {{instance.css_classes}} {% endif %}" 
   {% comment %} {% if instance.use_parallax %}data-stellar-background-ratio="0.5"{% endif %} {% endcomment %}
   >
   {% if instance.use_overlay %}
   <div class="overlay"></div>
   {% endif %}
 
-  <div class="container">
+  <div class="{{instance.container_type}}">
 
+    {% if instance.title or instance.text %}
     <div class="row justify-content-center pb-5">
       <div class="col-md-8 text-center heading-section ftco-animate">
         {% if instance.title %}
@@ -72,6 +73,7 @@
         {% endif %}
       </div>
     </div>
+    {% endif %}
 
     {% for plugin in instance.child_plugin_instances %}
         {% render_plugin plugin %}

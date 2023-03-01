@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 
 from .models import Infoblock, Slide
-
+from .forms import InfoblockForm
 
 class SlideInlineAdmin(admin.StackedInline):
     model = Slide
@@ -13,10 +13,14 @@ class SlideInlineAdmin(admin.StackedInline):
 @plugin_pool.register_plugin
 class InfoBlockPlugin(CMSPluginBase):
     model = Infoblock
+    module = "Инфоблок"
     name = "Инфоблок"
-    render_template = "infoblock.html"
+    render_template = "./infoblock.html"
     cache = True
-    inlines = (SlideInlineAdmin, )
+    # inlines = (SlideInlineAdmin, )
+    allow_children = True
+    child_classes = ["SlidePlugin"]
+    form = InfoblockForm
     # fieldsets = (
     #     (None, {
     #         'fields': [
@@ -27,11 +31,11 @@ class InfoBlockPlugin(CMSPluginBase):
     #             'pageThumbMarginHorizontal',),
     #         ]
     #     }),
-    #     (_('Toolbar Settings'), {
+    #     ('Фоновое изображение (если ширина и высота равны 0 - будет использоваться оригинальный размер)', {
     #         'fields': [
-    #             'zoomActualSize',
-    #             'fullscreen',
-    #             'zoom',
+    #             ('background_image',
+    #             'thumb_width',
+    #             'thumb_height'),
     #         ]
     #     }),
     # )
@@ -39,70 +43,24 @@ class InfoBlockPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({
             'id': instance.generate_id(),
-            'slides': instance.get_slides(),
-            # 'images': instance.get_folder_images(),
-            # 'pageThumbWidthHeight': instance.parse_page_thumb_width_height(),
-            # 'pageThumbMarginHorizontal': instance.pageThumbMarginHorizontal,
-            # 'pageThumbMarginVertical': instance.pageThumbMarginVertical,
-            # 'mode': instance.mode,
-            # 'cssEasing': instance.cssEasing,
-            # 'easing': instance.easing,
-            # 'speed': instance.speed,
-            # 'height': instance.height,
-            # 'width': instance.width,
-            # 'addClass': instance.addClass,
-            # 'startClass': instance.startClass,
-            # 'backdropDuration': instance.backdropDuration,
-            # 'hideBarsDelay': instance.hideBarsDelay,
-            # 'useLeft': instance.useLeft,
-            # 'closable': instance.closable,
-            # 'loop': instance.loop,
-            # 'escKey': instance.escKey,
-            # 'keyPress': instance.escKey,
-            # 'controls': instance.controls,
-            # 'slideEndAnimation': instance.slideEndAnimation,
-            # 'hideControlOnEnd': instance.hideControlOnEnd,
-            # 'mousewheel': instance.mousewheel,
-            # 'preload': instance.preload,
-            # 'showAfterLoad': instance.showAfterLoad,
-            # 'nextHtml': instance.nextHtml,
-            # 'index': instance.index,
-            # 'iframeMaxWidth': instance.iframeMaxWidth,
-            # 'download': instance.download,
-            # 'counter': instance.counter,
-            # 'appendCounterTo': instance.appendCounterTo,
-            # 'swipeThreshold': instance.swipeThreshold,
-            # 'enableDrag': instance.enableDrag,
-            # 'enableSwipe': instance.enableSwipe,
-            # 'thumbnails': instance.thumbnails,
-            # 'animateThumb': instance.animateThumb,
-            # 'currentPagerPosition': instance.currentPagerPosition,
-            # 'thumbWidth': instance.thumbWidth,
-            # 'thumbContHeight': instance.thumbContHeight,
-            # 'thumbMargin': instance.thumbMargin,
-            # 'showThumbByDefault': instance.showThumbByDefault,
-            # 'toggleThumb': instance.toggleThumb,
-            # 'pullCaptionUp': instance.pullCaptionUp,
-            # 'enableThumbDrag': instance.enableThumbDrag,
-            # 'enableThumbSwipe': instance.enableThumbSwipe,
-            # 'id': instance.generate_id(),
-            # 'fullscreen': instance.fullscreen,
-            # 'zoom': instance.zoom,
-            # 'zoomScale': instance.zoomScale,
-            # 'zoomEnableZoomAfter': instance.zoomEnableZoomAfter,
-            # 'zoomActualSize': instance.zoomActualSize,
-            # 'pager': instance.pager,
-            # 'hash': instance.hash,
-            # 'galleryId': instance.galleryId,
-            # 'share': instance.share,
-            # 'facebook': instance.facebook,
-            # 'facebookDropdownText': instance.facebookDropdownText,
-            # 'twitter': instance.twitter,
-            # 'twitterDropdownText': instance.twitterDropdownText,
-            # 'googlePlus': instance.googlePlus,
-            # 'googlePlusDropdownText': instance.googlePlusDropdownText,
-            # 'pinterest': instance.pinterest,
-            # 'pinterestDropdownText': instance.pinterestDropdownText,
+            # 'slides': instance.get_slides(),
+            'instance': instance,
         })
         return context
 
+
+@plugin_pool.register_plugin
+class SlidePlugin(CMSPluginBase):
+    model = Slide
+    module = "Инфоблок"
+    name = "Слайд"
+    render_template = "./slide.html"
+    parent_classes = ["InfoblockPlugin"]
+    allow_children = True
+
+    def render(self, context, instance, placeholder):
+        # assert False, dir(instance)
+        context.update({
+            'instance': instance,
+        })
+        return context
