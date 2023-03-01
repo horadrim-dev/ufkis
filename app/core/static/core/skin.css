@@ -1959,7 +1959,7 @@ ul.dropdown-menu:not(.side-menu.root-level) li.dropdown-submenu > a:after {
   /* margin-bottom: 2px; */
     position: absolute;
     right: 0;
-    top: 50%3
+    top: 50%;
     margin-top: -.5rem;
     margin-right: 1.2rem;
 }

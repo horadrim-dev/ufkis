@@ -2,6 +2,7 @@ from django.db import models, transaction
 from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
 from django.utils.translation import gettext_lazy as _
+from filer.fields.image import FilerImageField
 
 class OrderedModel(models.Model):
     
@@ -103,6 +104,12 @@ class SiteSettings(SingletonModel):
     phone = models.CharField(verbose_name=_('Телефон'), max_length=256, default="")
     email = models.EmailField(verbose_name='E-mail', blank=True, null=True)
     address = models.CharField(verbose_name=_('Адрес'), max_length=256, default="")
+
+    logo = FilerImageField(
+        verbose_name=_('Логотип'),
+        on_delete=models.CASCADE,
+        blank=True, null=True
+    )
  
     def __str__(self):
         return 'Конфигурация сайта'

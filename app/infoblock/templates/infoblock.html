@@ -56,9 +56,21 @@
 
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
 {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+{% addtoblock "css" %}
+<style>
+#slider-{{id}} {
+    height: {{instance.height}}px !important;
+}
+@media (max-width: 992px) {
+    #slider-{{id}}{
+        height: auto !important;
+    }
+}
+</style>
+{% endaddtoblock %}
 
 <div class="section-empty no-paddings">
-    <div class="section-slider row-18">
+    <div class="section-slider" id="slider-{{id}}">
         <div class="flexslider advanced-slider slider" data-options="animation:fade">
             <ul class="slides">
                 {% for plugin in instance.child_plugin_instances %}

@@ -15,6 +15,7 @@ CONTAINER_CHOICES = [
 
 class Infoblock(CMSPlugin):
 
+    height = models.PositiveSmallIntegerField("Высота слайдера", default=450)
     # def get_slides(self):
     #     return self.slide_set.all()
 
