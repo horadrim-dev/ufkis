@@ -1,0 +1,17 @@
+{% load static cms_tags thumbnail %}
+<div data-sort="1" class="maso-item col-md-3 {% for cat in instance.categories.all %}{{cat.slug}}{% endfor %}">
+	<div class="img-box adv-img adv-img-down-text boxed-inverse">
+		<a class="img-box img-scale-up lightbox i-center" href="#">
+			<div class="caption">
+				<i class="fa fa-plus"></i>
+			</div>
+			<img src="{% static 'core/template-images/gallery/image-1.jpg' %}" alt="" />
+		</a>
+		<div class="caption-bottom">
+			<h2><a href="{{instance.url}}">{{instance.title}}</a></h2>
+			<p>Tempor incididunt sedoumosuo<br>
+			{% for cat in instance.categories.all %}{{cat.slug}}{% endfor %}
+			</p>
+		</div>
+	</div>
+</div>

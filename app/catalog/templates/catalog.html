@@ -1,0 +1,224 @@
+{% load static sekizai_tags cms_tags %}
+
+{% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+{% addtoblock "css" %}
+<style>
+#slider-{{id}} {
+    height: {{instance.height}}px !important;
+}
+@media (max-width: 992px) {
+    #slider-{{id}}{
+        height: auto !important;
+    }
+}
+</style>
+{% endaddtoblock %} {% endcomment %}
+
+{% comment %} <div class="section-bg-color section-item">
+    <div class="container content"> {% endcomment %}
+        {% for cat in instance.categories %}
+        {{cat.slug}}
+        {% endfor %}
+        {% comment %} {{instance.categories}} {% endcomment %}
+        <div class="maso-list list-sm-6">
+            <div class="navbar navbar-inner">
+                <div class="navbar-toggle"><i class="fa fa-bars"></i><span>MENU</span><i class="fa fa-angle-down"></i></div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav over ms-minimal inner maso-filters nav-center">
+                        <li class="active"><a data-filter="maso-item">All</a></li>
+                        <li><a data-filter="cat1">Construction</a></li>
+                        <li><a data-filter="cat2">Renovation</a></li>
+                        <li><a data-filter="cat3">Outdoor</a></li>
+                        <li><a data-filter="cat4">Interiors</a></li>
+                        <li><a data-filter="cat5">Consulting</a></li>
+                        {% for cat in instance.categories %}
+                        <li><a data-filter="{{cat.slug}}">{{cat.title}}</a></li>
+                        {% endfor %}
+                        <li><a class="maso-order" data-sort="asc"><i class="fa fa-arrow-down"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="maso-box row" data-lightbox-anima="fade-top">
+                {% for plugin in instance.child_plugin_instances %}
+                    {% render_plugin plugin %}
+                {% endfor %}
+                {% comment %} <div data-sort="1" class="maso-item col-md-3 cat1 cat3 cat5 ">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-1.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Sporting research</a></h2>
+                            <p>Tempor incididunt sedoumosuo</p>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                {% comment %} <div data-sort="2" class="maso-item col-md-3 cat1 cat2 cat4">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-2.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Notebook softwares</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="3" class="maso-item col-md-3 cat2 cat3 cat4">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-3.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Power Units</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="4" class="maso-item col-md-3 cat1 cat3 cat5">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-4.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Server farms</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="5" class="maso-item col-md-3 cat2 cat3 cat5">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-5.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Boose speaker</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="6" class="maso-item col-md-3 cat1 cat3 cat4">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-6.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Drone consoles</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="7" class="maso-item col-md-3 cat1">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-7.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Realistic mockups</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="8" class="maso-item col-md-3 cat1 cat2">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-8.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Boose headphones</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="9" class="maso-item col-md-3 cat2 cat3">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-9.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Boose speaker</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="10" class="maso-item col-md-3 cat1 cat3">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-10.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Drone consoles</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="11" class="maso-item col-md-3 cat1 cat3  cat5">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-11.jpg' %}" alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Realistic mockups</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-sort="12" class="maso-item col-md-3 cat1 cat3">
+                    <div class="img-box adv-img adv-img-down-text boxed-inverse">
+                        <a class="img-box img-scale-up lightbox i-center" href="#">
+                            <div class="caption">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                            <img src="{% static 'core/template-images/gallery/image-12.jpg' %}"  alt="" />
+                        </a>
+                        <div class="caption-bottom">
+                            <h2><a href="#">Boose headphones</a></h2>
+                            <p>Tempor incididunt sed</p>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                <div class="clear"></div>
+            </div>
+            <div class="list-nav">
+                <a href="#" class="btn btn-sm load-more-maso" data-pagination-anima="fade-bottom" data-page-items="8">
+                    Load More
+                    <i class="fa fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    {% comment %} </div>
+</div> {% endcomment %}

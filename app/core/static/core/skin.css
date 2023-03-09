@@ -546,16 +546,18 @@ HEADER AND MENUS
     position: relative;
 }
 
-    .nav:not(.ms-rounded) li > a:before {
-        content: '';
-        position: absolute;
-        left: 0px;
-        bottom: 0px;
-        width: 0%;
-        height: 2px;
-        transition: all 0.35s ease-out;
-        -webkit-transition: all 0.35s ease-out;
-    }
+.nav:not(.ms-rounded) li > a:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    /* height: 100%; */
+    background-color: #4d4d4d0a;
+    transition: all 0.35s ease-out;
+    -webkit-transition: all 0.35s ease-out;
+}
 
 .navbar-brand {
     height: 70px;
@@ -1972,6 +1974,34 @@ ul.dropdown-menu:not(.side-menu.root-level) li a.has-icon i {
     top: 50%;
     margin-top: -1rem;
     margin-left: 1rem;
+}
+/* МЕНЮ */
+header ul.nav:not(.ms-rounded) li > a:before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 0%;
+    /* height: 2px; */
+    height: 100%;
+    background-color: #4d4d4d0a;
+    transition: all 0.35s ease-out;
+    -webkit-transition: all 0.35s ease-out;
+}
+ul.nav.root-level:not(.ms-rounded) > li.active > a::before, ul.nav.root-level:not(.ms-rounded) > li:hover > a::before {
+  height: 100%;
+}
+ul.nav.root-level:not(.ms-rounded) > li > a::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 0;
+  /* height: 100%; */
+  /* background-color: #4d4d4d0a; */
+  /* transition: all 0.35s ease-out;
+  -webkit-transition: all 0.35s ease-out; */
 }
 
 @media (min-width: 1300px) {

@@ -13,8 +13,8 @@ class SlideInlineAdmin(admin.StackedInline):
 @plugin_pool.register_plugin
 class InfoBlockPlugin(CMSPluginBase):
     model = Infoblock
-    module = "Инфоблок"
-    name = "Инфоблок"
+    module = "Инфослайдер"
+    name = "Инфослайдер"
     render_template = "./infoblock.html"
     cache = True
     # inlines = (SlideInlineAdmin, )
@@ -52,7 +52,7 @@ class InfoBlockPlugin(CMSPluginBase):
 @plugin_pool.register_plugin
 class SlidePlugin(CMSPluginBase):
     model = Slide
-    module = "Инфоблок"
+    module = "Инфослайдер"
     name = "Слайд"
     render_template = "./slide.html"
     parent_classes = ["InfoblockPlugin"]
