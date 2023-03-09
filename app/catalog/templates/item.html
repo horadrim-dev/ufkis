@@ -1,17 +1,28 @@
-{% load static cms_tags thumbnail %}
-<div data-sort="1" class="maso-item col-md-3 {% for cat in instance.categories.all %}{{cat.slug}}{% endfor %}">
+{% load static cms_tags easy_thumbnails_tags %}
+<div data-sort="{{item_number}}" class="maso-item col-md-3 {% for cat in instance.categories.all %}{{cat.slug}} {% endfor %}">
 	<div class="img-box adv-img adv-img-down-text boxed-inverse">
 		<a class="img-box img-scale-up lightbox i-center" href="#">
 			<div class="caption">
-				<i class="fa fa-plus"></i>
+				<i class="fa fa-external-link"></i>
 			</div>
+			{% if instance.image %}
+			<img src="{% thumbnail instance.image "270x135" upscale crop="0,0" %}" alt="" />
+			{% else %}
 			<img src="{% static 'core/template-images/gallery/image-1.jpg' %}" alt="" />
+			{% endif %}
 		</a>
 		<div class="caption-bottom">
 			<h2><a href="{{instance.url}}">{{instance.title}}</a></h2>
-			<p>Tempor incididunt sedoumosuo<br>
-			{% for cat in instance.categories.all %}{{cat.slug}}{% endfor %}
-			</p>
+			{% if instance.description %}
+			<p>{{instance.description}}</p>
+			{% endif %}
+			{% comment %} <p>Tempor incididunt sedoumosuo<br>
+			<ul> 
+			{% for cat in instance.categories.all %}
+			<li>{{cat.slug}}</li>
+			{% endfor %}
+			</ul>
+			</p> {% endcomment %}
 		</div>
 	</div>
 </div>

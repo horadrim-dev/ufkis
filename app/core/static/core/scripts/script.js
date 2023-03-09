@@ -500,7 +500,8 @@ function isScrollView(t) {
                 $(menu).find("li a:not(.maso-filter-auto)").each(function () {
                     var cat = $(this).attr("data-filter");
                     var current_len = $(m).find("." + cat).length;
-                    if ((current_len == len || current_len == 0) && (cat != "maso-item" && !isEmpty(cat))) {
+                    if ((/*(current_len == len ||*/ current_len == 0) && (cat != "maso-item" && !isEmpty(cat))) {
+                        // console.log(cat, ' (' , current_len == len, '||',current_len == 0, ') && (',cat != "maso-item", ' && ',!isEmpty(cat), ')' );
                         $(this).closest("li").remove();
                     }
                 });
