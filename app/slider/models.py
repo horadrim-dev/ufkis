@@ -1,6 +1,5 @@
 from tabnanny import verbose
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 from cms.models.pluginmodel import CMSPlugin
 from filer.fields.image import FilerImageField
 from filer.models.imagemodels import Image
@@ -34,10 +33,10 @@ class Slide(models.Model):
             Slider,
             on_delete=models.CASCADE,
         )
-    title = models.CharField("Заголовок", max_length=255, default="", blank=True, null=True)
-    subtitle = models.CharField("Подзаголовок", max_length=255, default="", blank=True, null=True)
+    title = models.CharField("Название", max_length=255, default="", blank=True, null=True)
+    # subtitle = models.CharField("Подзаголовок", max_length=255, default="", blank=True, null=True)
     image = FilerImageField(
-        verbose_name=_('Изображение'),
+        verbose_name='Изображение',
         on_delete=models.CASCADE,
     )
     def __str__(self):

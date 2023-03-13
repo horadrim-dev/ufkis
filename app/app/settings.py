@@ -32,8 +32,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
+print(DEBUG)
 
+# ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     'django.contrib.sites',
@@ -61,6 +64,7 @@ INSTALLED_APPS = [
     'infoblock',
     'columns',
     'catalog',
+    'slider',
 ]
 
 MIDDLEWARE = [
@@ -150,13 +154,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    # BASE_DIR / "static",
+    BASE_DIR / "static",
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
