@@ -19,6 +19,7 @@ class BackgroundSectionPlugin(CMSPluginBase):
                 'text',
                 'text_bottom',
                 'css_classes',
+                ('padding_top', 'padding_bottom'),
                 'container_type',
                 'use_parallax',
                 'background_color',

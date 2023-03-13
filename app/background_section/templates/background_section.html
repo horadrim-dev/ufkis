@@ -14,6 +14,8 @@
   {% else %}
     background-color: {{background_color}};
   {% endif %}
+    padding-top: {{instance.padding_top}}px;
+    padding-bottom: {{instance.padding_bottom}}px;
   }
   {% if instance.use_overlay %}
   #section-{{id}} > .overlay {
@@ -64,7 +66,7 @@
 
     {% if instance.title or instance.text %}
     <div class="row justify-content-center pb-5">
-      <div class="col-md-8 text-center heading-section ftco-animate">
+      <div class="col text-center heading-section ftco-animate">
         {% if instance.title %}
         <h2 class="mb-4"><span>{{instance.title}}</span></h2>
         {% endif %}

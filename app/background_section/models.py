@@ -55,6 +55,8 @@ class BackgroundSection(CMSPlugin):
         choices=CONTAINER_CHOICES,
         default='container',
     )
+    padding_top = models.PositiveSmallIntegerField("Отступ сверху (px)", default=50)
+    padding_bottom = models.PositiveSmallIntegerField("Отступ снизу (px)", default=50)
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]

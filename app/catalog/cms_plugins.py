@@ -18,7 +18,7 @@ class CatalogPlugin(CMSPluginBase):
     model = Catalog
     module = "Каталог"
     name = "Каталог"
-    render_template = "./catalog.html"
+    render_template = "./catalog/catalog.html"
     cache = True
     inlines = (CategoryInlineAdmin, )
     allow_children = True
@@ -56,7 +56,7 @@ class CatalogItemPlugin(CMSPluginBase):
     model = CatalogItem
     module = "Каталог"
     name = "Элемент каталога"
-    render_template = "./item.html"
+    render_template = "./catalog/item.html"
     parent_classes = ["CatalogPlugin"]
     allow_children = False
     form = CatalogItemPluginForm

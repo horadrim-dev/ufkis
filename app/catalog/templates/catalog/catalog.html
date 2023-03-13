@@ -1,7 +1,7 @@
 {% load static sekizai_tags cms_tags %}
 
-{% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
-{% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}"> {% endaddtoblock %}
+{% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %} 
 {% addtoblock "css" %}
 <style>
 #slider-{{id}} {
@@ -15,11 +15,11 @@
 </style>
 {% endaddtoblock %} {% endcomment %}
 
-<div class="maso-list list-sm-6">
+<div class="maso-list maso-30 list-sm-6">
     <div class="navbar navbar-inner">
         <div class="navbar-toggle"><i class="fa fa-bars"></i><span>Категории</span><i class="fa fa-angle-down"></i></div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav over ms-minimal inner maso-filters nav-center">
+            <ul class="nav navbar-nav over ms-minimal inner maso-filters">
                 <li class="active"><a data-filter="maso-item">Все</a></li>
 
                 {% for cat in instance.categories %}

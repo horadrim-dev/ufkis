@@ -56,18 +56,25 @@ class Category(models.Model):
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
 
-
+ITEM_LAYOUT_CHOICES = [
+    ('img_left', 'Картинка слева'),
+    ('img_full', 'Картинка во всю ширину'),
+]
 class CatalogItem(CMSPlugin):
 
     # parent_plugin = models.ForeignKey(
     #         Catalog,
     #         on_delete=models.CASCADE,
     # )
+    item_layout  = models.CharField(
+        max_length=64, verbose_name="Стиль отображения",
+        choices=ITEM_LAYOUT_CHOICES, default=ITEM_LAYOUT_CHOICES[0][0],
+    )
     categories = models.ManyToManyField(
             Category
         )
     title = models.CharField("Заголовок", max_length=1024, default="", blank=True, null=True)
-    description = HTMLField("Описание", default="", blank=True, null=True)
+    # description = HTMLField("Описание", default="", blank=True, null=True)
     url = models.URLField("Ссылка", blank=True, null=True)
     image = FilerImageField(
         verbose_name=_('Изображение'),
