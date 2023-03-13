@@ -55,7 +55,6 @@
 venv/
 Kiddos/
 app/db.sqlite3
-app/app/settings.py
 app/media
 app/db_.sqlite3
 app/app/__pycache__
@@ -73,3 +72,4 @@ app/news/__pycache__
 yellow-business
 app/core/static/core_old
 app/static
+app/app/.env
