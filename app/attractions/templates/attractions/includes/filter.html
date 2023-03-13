@@ -1,0 +1,36 @@
+{% load sekizai_tags %}
+
+<form action="" id="attraction-filter" method="get">
+    {% comment %} {{ filter.form }} {% endcomment %}
+    <div class="flex-grow row align-items-center gy-2">
+        <div class="col-12 col-xxl">
+            <div class="row align-items-center g-3">
+                <div class="col-8">
+                    {% for choice in filter.form.category %}
+                        {{choice.tag}}
+                        <label class="btn btn-outline-primary" for="{{ choice.id_for_label }}">{{ choice.choice_label|safe }}</label>
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end ">
+                        {% for choice in filter.form.season %}
+                            {{choice.tag}}
+                            <label class="btn btn-outline-success ms-1 " for="{{ choice.id_for_label }}">{{ choice.choice_label|safe }}</label>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="submit" value="=>" class="d-none" />
+</form>
+
+{% addtoblock "js" %}
+<script type="text/javascript">
+$( document ).ready(function() {
+    $('#attraction-filter input').on('change', function() {
+        $(this).closest("form").submit();
+    });
+});
+</script>
+{% endaddtoblock %}

@@ -1,0 +1,55 @@
+{% extends 'news/base.html' %}
+{% load cms_tags sekizai_tags static thumbnail %}
+
+{% block app_content %}
+
+  <div class="row">
+
+    <div class="col ftco-animate">
+
+      {% render_model_block object %}
+
+        <h2 class="mb-3">{{ object.title }}</h2>
+
+        {% if object.image and not object.image_position == 'hide' %}
+        <div class="object-image 
+                {% if object.image_position == 'left'%}
+                w-50 float-start me-3 mb-3
+                {% elif object.image_position == 'right'%}
+                w-50 float-end ms-3 mb-3
+                {% elif object.image_position == 'stretch' %}
+                w-100 mb-3
+                {% endif %}
+            " 
+            style="height:200px;">
+            <img src="{{object.image.url}}" alt="{{object.title}}" class="img-fluid w-100 h-100" style="object-fit:cover;" >
+        </div>
+        {% endif %}
+
+        {{ object.text | safe }}
+
+      {% endrender_model_block %}
+      {% comment %} <div class="tag-widget object-tag-container mb-5 mt-5">
+        <div class="tagcloud">
+          <a href="#" class="tag-cloud-link">Life</a>
+          <a href="#" class="tag-cloud-link">Sport</a>
+          <a href="#" class="tag-cloud-link">Tech</a>
+          <a href="#" class="tag-cloud-link">Travel</a>
+        </div>
+      </div>
+
+      <div class="about-author d-flex p-4 bg-light">
+        <div class="bio mr-5">
+          <img src="{% static 'core/images/teacher-1.jpg' %}" alt="Image placeholder" class="img-fluid mb-4">
+        </div>
+        <div class="desc">
+          <h3>George Washington</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+        </div>
+      </div>
+    </div> {% endcomment %}
+
+  </div>
+
+
+{% endblock %}
