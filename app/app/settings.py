@@ -32,11 +32,11 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
-print(DEBUG)
+# print(DEBUG)
 
 # ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-print(ALLOWED_HOSTS)
+# print(ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     'django.contrib.sites',
