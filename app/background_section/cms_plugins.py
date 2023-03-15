@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 
 from .models import BackgroundSection
+from .forms import SectionForm
 
 @plugin_pool.register_plugin
 class BackgroundSectionPlugin(CMSPluginBase):
@@ -11,6 +12,7 @@ class BackgroundSectionPlugin(CMSPluginBase):
     render_template = 'background_section.html'
     name = "Секция"
     allow_children = True
+    form = SectionForm
 
     fieldsets = (
         (None, {
