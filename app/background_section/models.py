@@ -23,9 +23,10 @@ CONTAINER_CHOICES = [
 
 class BackgroundSection(CMSPlugin):
 
+    name = models.CharField("Название", max_length=255, default="", help_text="Системное название секции (отображается только в панели администрирования)")
     title = models.CharField("Заголовок", max_length=255, default="", blank=True, null=True, help_text="Не обязательно")
-    text = HTMLField("Текст", default="", blank=True, null=True, help_text="Не обязательно")
-    text_bottom = HTMLField("Текст снизу секции", default="", blank=True, null=True, help_text="Не обязательно")
+    # text = HTMLField("Текст", default="", blank=True, null=True, help_text="Не обязательно")
+    # text_bottom = HTMLField("Текст снизу секции", default="", blank=True, null=True, help_text="Не обязательно")
 
     background_image = FilerImageField(
         verbose_name=_('Фоновое изображение'),
@@ -39,6 +40,7 @@ class BackgroundSection(CMSPlugin):
     )
     css_classes = models.CharField("CSS классы", max_length=256, help_text="указать классы через пробел", default="", blank=True, null=True)
     use_parallax = models.BooleanField(default=False, verbose_name="Использовать эффект параллакса")
+    use_blur = models.BooleanField(default=False, verbose_name="Использовать эффект размытия")
     use_overlay = models.BooleanField(default=False, verbose_name="Использовать оверлей")
     overlay_color = ColorField(default='#FFFFFF', verbose_name="Цвет оверлея", help_text="Этот цвет будет накладываться на изображение",
         blank=True, null=True
@@ -65,4 +67,4 @@ class BackgroundSection(CMSPlugin):
         return "{}x{}".format(self.thumb_width, self.thumb_height)
 
     def __str__(self):
-        return self.title if self.title else ''
+        return self.name if self.name else ''

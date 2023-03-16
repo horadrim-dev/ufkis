@@ -17,14 +17,12 @@ class BackgroundSectionPlugin(CMSPluginBase):
     fieldsets = (
         (None, {
             'fields': [
+                'name',
                 'title',
-                'text',
-                'text_bottom',
-                'css_classes',
                 ('padding_top', 'padding_bottom'),
                 'container_type',
-                'use_parallax',
                 'background_color',
+                'css_classes',
             ]
         }),
         ('Фоновое изображение (если ширина и высота равны 0 - будет использоваться оригинальный размер)', {
@@ -32,6 +30,8 @@ class BackgroundSectionPlugin(CMSPluginBase):
                 ('background_image',
                 'thumb_width',
                 'thumb_height'),
+                'use_parallax',
+                'use_blur',
             ]
         }),
         ('Настройки оверлея', {

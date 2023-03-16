@@ -2,18 +2,45 @@
 
 {% addtoblock "css" %}
 <style>
-  #section-{{id}}{
-  {% if background_image %}
-    {% if instance.thumb_width and instance.thumb_height %}
-      background-image: url({% thumbnail instance.background_image instance.get_width_height_thumb upscale crop %});
-    {% else %}
-      background-image: url({{ instance.background_image.url }});
+  #section-{{id}}::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    {% if instance.background_image and not instance.use_parallax %}
+      {% if instance.thumb_width and instance.thumb_height %}
+        background-image: url({% thumbnail instance.background_image instance.get_width_height_thumb upscale crop %});
+      {% else %}
+        background-image: url({{ instance.background_image.url }});
+      {% endif %}
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      overflow: hidden;
+      {% comment %} {% if instance.use_parallax %}background-attachment: fixed;{% endif %} {% endcomment %}
+    {% endif %}
+    {% if instance.background_color and not instance.background_image %}
+      background-color: {{background_color}};
     {% endif %}
 
-    {% if instance.use_parallax %}background-attachment: fixed;{% endif %}
-  {% else %}
-    background-color: {{background_color}};
-  {% endif %}
+    {% if instance.use_blur and instance.background_image %}
+      {% if instance.use_parallax %}
+        backdrop-filter: blur(5px);
+      {% else %}
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+      {% endif %}
+    {% endif %}
+  }
+  #section-{{id}} > div {
     padding-top: {{instance.padding_top}}px;
     padding-bottom: {{instance.padding_bottom}}px;
   }
@@ -38,7 +65,7 @@
 {% if instance.use_parallax and instance.background_image %}
 
 {% comment %} {% addtoblock "js" %}<script src="{% static 'background_section/js/jquery.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-  {% addtoblock "js" %}<script src="{% static 'background_section/js/jquery.stellar.min.js' %}"></script>{% endaddtoblock %}
+  {% comment %} {% addtoblock "js" %}<script src="{% static 'background_section/js/jquery.stellar.min.js' %}"></script>{% endaddtoblock %}
   {% addtoblock "js" %}
   <script type="text/javascript">
     $(document).ready(function(){
@@ -52,20 +79,41 @@
         });
     });
   </script>
-  {% endaddtoblock %}
+  {% endaddtoblock %} {% endcomment %}
 
 {% endif %}
 
-<section 
+{% comment %} <section 
   id="section-{{id}}" 
   class=" {% if instance.css_classes %} {{instance.css_classes}} {% endif %}" 
-  {% comment %} {% if instance.use_parallax %}data-stellar-background-ratio="0.5"{% endif %} {% endcomment %}
-  >
+  {% if instance.use_parallax %}data-stellar-background-ratio="0.5"{% endif %} 
+  > {% endcomment %}
+<section 
+  id="section-{{id}}" 
+  class=" 
+    {% if instance.background_image or instance.background_color %}section-bg-image{% endif %}
+    {% if instance.use_parallax %}parallax-window{% endif %}
+    {% if instance.css_classes %} {{instance.css_classes}} {% endif %}
+  " 
+  {% if instance.use_parallax %}
+    data-natural-height="850" 
+    data-natural-width="1980" 
+    data-parallax="scroll" 
+    data-image-src="{% spaceless %}
+      {% if instance.thumb_width and instance.thumb_height %}
+        {% thumbnail instance.background_image instance.get_width_height_thumb upscale crop %}
+      {% else %}
+        {{ instance.background_image.url }}
+      {% endif %}
+    {% endspaceless %}"
+  {% endif %}
+>
   {% if instance.use_overlay %}
   <div class="overlay"></div>
   {% endif %}
 
   <div class="{{instance.container_type}}">
+
 
     {% if instance.title or instance.text %}
     <div class="row justify-content-center pb-5">
