@@ -1,11 +1,11 @@
-<div class="col-md-6 col-lg-4 ftco-animate">
+{% comment %} <div class="col-md-6 col-lg-4 ftco-animate">
     <div class="blog-entry">
         <a href="{{ obj.get_absolute_url }}" 
             class="block-20 d-flex align-items-end" 
             style="background-image: url({{obj.image.url}});"
         >
                         <div class="meta-date text-center p-2">
-            <span class="day">{{obj.published_at}}</span>
+            <span class="day"></span>
         </div>
         </a>
         <div class="text bg-white p-4">
@@ -17,11 +17,31 @@
                 Читать далее <span class="ion-ios-arrow-round-forward"></span>
             </a>
             </p>
-            {% comment %} <p class="ml-auto mb-0">
-                <a href="#" class="mr-2">Admin</a>
-                <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-            </p> {% endcomment %}
         </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<div class="grid-item col-md-6">
+    <div class="advs-box advs-box-top-icon-img niche-box-post boxed-inverse" data-anima="scale-rotate" data-trigger="hover">
+        <div class="block-infos">
+            <div class="block-data">
+                <p class="bd-day">{{obj.published_at}}</p>
+                <p class="bd-month">July 2018</p>
+            </div>
+            <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a>
+        </div>
+        <a class="img-box" href="{{ obj.get_absolute_url }}">
+            <img class="anima" src="{{obj.image.url}}" alt="" />
+        </a>
+        <div class="advs-box-content">
+            <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
+            <div class="tag-row">
+                <span><i class="fa fa-bookmark"></i> <a href="#">Travel</a></span>
+                <span><i class="fa fa-pencil"></i><a href="#">Admin</a></span>
+            </div>
+            <p class="niche-box-content">
+                {{ obj.text|safe|truncatechars_html:150}}
+            </p>
         </div>
     </div>
 </div>

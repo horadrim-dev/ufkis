@@ -74,7 +74,10 @@ class NewsPlugin(CMSPlugin):
     num_objects = models.PositiveIntegerField("Количество новостей", default=3)
 
     def get_objects(self, limit):
-        return Post.objects.published()[:limit]
+        posts = Post.objects.published()[:limit]
+        assert False, posts
+
+        return 
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]

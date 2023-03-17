@@ -8,6 +8,10 @@ class PostListView(ListView):
     model = Post
     paginate_by = 12
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+        # assert False, context['object_list']
+
 class PostDetailView(DetailView):
     template_name = 'news/post_detail.html'
     slug_field = 'alias'

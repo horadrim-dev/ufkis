@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'columns',
     'catalog',
     'slider',
+    'news'
 ]
 
 MIDDLEWARE = [

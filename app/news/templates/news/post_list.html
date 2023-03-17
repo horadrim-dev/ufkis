@@ -3,20 +3,27 @@
 
 {% block app_content %}
 
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and object_list %}
   <div class="row d-flex justify-content-end pb-4 pe-3">
     {% render_model_add object_list.0 %}
   </div>
   {% endif %}
 
   <div class="row pb-5">
-    {% for obj in object_list %}
-      {% render_model_block obj %}
-        {% include 'news/includes/post_item.html' %}
-      {% endrender_model_block %}
-    {% empty %}
-      <p> Записей не найдено.</p>
-    {% endfor %}
+    <div class="col-md-9 col-sm-12">
+        <div class="grid-list grid-layout grid-15">
+            <div class="grid-box row">
+                {% for obj in object_list %}
+                {% render_model_block obj %}
+                    {% include 'news/includes/post_item.html' %}
+                {% endrender_model_block %}
+                {% empty %}
+                <p> Записей не найдено.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% include 'news/includes/sidebar.html' %}
   </div>
 
   {% if page_obj.has_other_pages %}

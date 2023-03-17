@@ -3,10 +3,18 @@
 
 {% block content %}
 
-  {% include 'core/breadcrumbs.html' %}
-
-  <section class="ftco-section bg-light pt-5">
-    <div class="container">
+  {% comment %} {% include 'core/breadcrumbs.html' %} {% endcomment %}
+    <div class="header-title ken-burn-center white" data-parallax="scroll" data-position="top" data-natural-height="650" data-natural-width="1920" data-image-src="{% static 'core/template-images/sport.jpg' %}">
+        <div class="container">
+            <div class="title-base">
+                <hr class="anima" />
+                <h1>Новости</h1>
+                <p>Все самое интересное из мира спорта в Кузбассе.</p>
+            </div>
+        </div>
+    </div>
+  <section class="section-bg-color">
+    <div class="container content">
       {% block app_content %}
       {% endblock %}
     </div>
