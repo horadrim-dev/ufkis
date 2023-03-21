@@ -2,9 +2,9 @@
 <li class="list-inline-item">
 	{% comment %} {% if not forloop.last %} {% endcomment %}
 	<a href="{{ ance.get_absolute_url }}">{{ ance.get_menu_title }}</a> 
-	{% if not forloop.last %} 
+	{% comment %} {% if not forloop.last %} 
 	<span class="separator">&raquo;</span>
-	{% endif %}
+	{% endif %} {% endcomment %}
 	{% comment %} {% else %}
 	<span class="active">{{ ance.get_menu_title }}</span>
 	{% endif %} {% endcomment %}

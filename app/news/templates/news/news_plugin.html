@@ -1,12 +1,12 @@
 {% load cms_tags sekizai_tags thumbnail static %}
 
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and object_list %}
   <div class="row d-flex justify-content-end pb-4 pe-3">
     {% render_model_add object_list.0 %}
   </div>
   {% endif %}
 
-  <div class="row">
+  {% comment %} <div class="row">
     {% for obj in object_list %}
       {% include 'news/includes/post_item.html' %}
     {% empty %}
@@ -19,4 +19,46 @@
         Больше новостей
       </a>
     </div>
-  </div>
+  </div> {% endcomment %}
+
+<div class="row">
+  {% for obj in object_list %}
+
+    {% if forloop.counter <= 2 %}
+    <div class="col-md-4 col-sm-6">
+    {% include 'news/includes/post_item.html' %}
+    </div>
+
+      {% if forloop.counter == 2 %}
+        <div class="col-md-4 col-sm-12">
+          <hr class="space visible-sm" />
+          <div class="scroll-content scroll-mobile-disabled" data-height="550">
+      {% endif %}
+
+    {% else %}
+
+      <div class="advs-box advs-box-side-icon">
+          <div class="caption-box">
+              <h2 class="text-m"><a href="#">{{ obj.title }}</a></h2>
+              <span class="extra-content">{{ obj.published_at }}</span>.
+              <p>
+                {{ obj.text |safe|truncatechars_html:150 }}
+              </p>
+          </div>
+      </div>
+      <hr class="space m" />
+
+      {% if forloop.last %}
+          </div>
+          <hr class="space m" />
+          <a href="{% url 'news:index' %}" class="btn btn-lg">Больше новостей</a>
+        </div>
+      {% endif %}
+
+    {% endif %}
+
+  {% empty %}
+    <p> Записей не найдено.</p>
+  {% endfor %}
+
+</div>

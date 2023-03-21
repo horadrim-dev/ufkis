@@ -14,9 +14,11 @@
         <div class="grid-list grid-layout grid-15">
             <div class="grid-box row">
                 {% for obj in object_list %}
-                {% render_model_block obj %}
-                    {% include 'news/includes/post_item.html' %}
-                {% endrender_model_block %}
+                <div class="grid-item col-md-6">
+                    {% render_model_block obj %}
+                        {% include 'news/includes/post_item.html' %}
+                    {% endrender_model_block %}
+                </div>
                 {% empty %}
                 <p> Записей не найдено.</p>
                 {% endfor %}

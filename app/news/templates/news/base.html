@@ -3,18 +3,9 @@
 
 {% block content %}
 
-  {% comment %} {% include 'core/breadcrumbs.html' %} {% endcomment %}
-    <div class="header-title ken-burn-center white" data-parallax="scroll" data-position="top" data-natural-height="650" data-natural-width="1920" data-image-src="{% static 'core/template-images/sport.jpg' %}">
-        <div class="container">
-            <div class="title-base">
-                <hr class="anima" />
-                <h1>Новости</h1>
-                <p>Все самое интересное из мира спорта в Кузбассе.</p>
-            </div>
-        </div>
-    </div>
+  {% include 'core/breadcrumbs.html' %}
   <section class="section-bg-color">
-    <div class="container content">
+    <div class="container">
       {% block app_content %}
       {% endblock %}
     </div>

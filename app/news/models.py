@@ -28,7 +28,7 @@ class Post(models.Model):
 
     text = HTMLField("Содержимое", default="", blank=True, null=True)
 
-    image = FilerImageField(verbose_name="Изображение", on_delete=models.CASCADE)
+    image = FilerImageField(verbose_name="Изображение", on_delete=models.CASCADE, blank=True, null=True)
 
     IMAGE_POSITION_CHOICES = [
         ('left', 'Слева'),
@@ -74,10 +74,7 @@ class NewsPlugin(CMSPlugin):
     num_objects = models.PositiveIntegerField("Количество новостей", default=3)
 
     def get_objects(self, limit):
-        posts = Post.objects.published()[:limit]
-        assert False, posts
-
-        return 
+        return Post.objects.published()[:limit]
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]

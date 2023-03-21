@@ -1,5 +1,5 @@
 {% load static cms_tags menu_tags %}
-<section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'core/images/breadcrumbs_bg.jpg' %});">
+{% comment %} <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'core/images/breadcrumbs_bg.jpg' %});">
     <div class="overlay"></div>
     <div class="container">
     <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -12,11 +12,6 @@
             {% endif %}
         </h2>
         <div class="breadcrumbs">
-            {% comment %} <span class="mr-2">
-                <a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a>
-            </span> 
-            <span>Courses <i class="ion-ios-arrow-forward"></i>
-            </span> {% endcomment %}
             <ul class="list-inline">
             {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
             {% if added_breadcrumbs %}
@@ -35,4 +30,55 @@
         </div>
     </div>
     </div>
-</section>
+</section> {% endcomment %}
+
+<div class="breadcrumbs header-base " 
+    data-parallax="scroll" 
+    data-position="top" 
+    data-natural-height="375" 
+    data-natural-width="938" 
+    data-image-src="{% static 'core/template-images/sport_3.jpg' %}"
+    >
+    <div class="overlay" style="position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-color: #fff;
+        opacity: .8;">
+    </div>
+    <div class="container">
+            <div class="title-base">
+                <hr class="anima" />
+                <h1>
+                    {% if page_title %}
+                        {{ page_title }}
+                    {% else %}
+                        {% page_attribute "page_title" %}
+                    {% endif %}
+                </h1>
+                {% comment %} <p>Все самое интересное из мира спорта в Кузбассе.</p> {% endcomment %}
+                <hr class="space s" />
+                <ol class="breadcrumb b">
+                    {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
+                </ol>
+            </div>
+            <{% comment %} ol class="breadcrumb b">
+                {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Blog</a></li>
+                <li class="active">Vodafone India</li> {% endcomment %}
+                {% comment %} {% if added_breadcrumbs %}
+                    {% for bc in added_breadcrumbs %}
+                    <li>
+                        <a href="{{ bc.url }}">{{ bc.title }}</a> 
+                        {% if not forloop.last %} 
+                        <span class="separator">&raquo;</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                {% endif %}
+            </ol> {% endcomment %}
+        </div>
+    </div>
+</div>

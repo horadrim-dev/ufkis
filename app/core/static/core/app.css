@@ -96,3 +96,11 @@ footer {
         width: 1300px;
     }
 }
+
+.breadcrumbs .breadcrumb.b {
+    text-align: left;
+    margin-top:40px;
+}
+.header-base { 
+    padding-bottom: 0;
+}

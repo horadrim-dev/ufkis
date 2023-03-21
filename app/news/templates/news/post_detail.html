@@ -1,7 +1,7 @@
 {% extends 'news/base.html' %}
 {% load cms_tags sekizai_tags static thumbnail %}
 
-{% block app_content %}
+{% comment %} {% block app_content %}
 
   <div class="row">
 
@@ -29,27 +29,101 @@
         {{ object.text | safe }}
 
       {% endrender_model_block %}
-      {% comment %} <div class="tag-widget object-tag-container mb-5 mt-5">
-        <div class="tagcloud">
-          <a href="#" class="tag-cloud-link">Life</a>
-          <a href="#" class="tag-cloud-link">Sport</a>
-          <a href="#" class="tag-cloud-link">Tech</a>
-          <a href="#" class="tag-cloud-link">Travel</a>
-        </div>
-      </div>
+  </div> {% endcomment %}
 
-      <div class="about-author d-flex p-4 bg-light">
-        <div class="bio mr-5">
-          <img src="{% static 'core/images/teacher-1.jpg' %}" alt="Image placeholder" class="img-fluid mb-4">
+
+
+{% block app_content %}
+{% comment %} <div class="header-base">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="title-base text-left">
+                        <h1>{{ page_title }}</h1>
+                        <p>
+                            Per viverra incididunt voluptate quisque mattis deserunt velit mauris cursus vitae.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <ol class="breadcrumb b">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li class="active">Vodafone India</li>
+                    </ol>
+                </div>
+            </div>
         </div>
-        <div class="desc">
-          <h3>George Washington</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
-        </div>
-      </div>
     </div> {% endcomment %}
-
-  </div>
-
-
+    {% render_model_block object %}
+    <div class="row">
+        <div class="col-md-6 hidden-xs">
+            <hr class="space s" />
+            <div class="tag-row">
+                <span><i class="fa fa-calendar"></i> <a href="#">25 / 05 / 2025</a></span>
+                <span><i class="fa fa-bookmark"></i> <a href="#">Travel</a></span>
+                <span><i class="fa fa-pencil"></i><a href="#">Admin</a></span>
+            </div>
+        </div>
+        <div class="col-md-6 text-right text-left-sm">
+            <div class="btn-group social-group social-colors">
+                <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
+                <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
+                <a target="_blank" href="#" data-social="share-google" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus text-s circle"></i></a>
+                <a target="_blank" href="#" data-social="share-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn"><i class="fa fa-linkedin text-s circle"></i></a>
+            </div>
+        </div>
+    </div>
+    <hr class="space m" />
+    <p>{{ object.text | safe }}</p>
+    {% endrender_model_block %}
+    <div  id="comments" class="section-bg-color">
+        <div class="container content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="comment-list">
+                        <h4>Comments</h4>
+                        <div class="item row">
+                            <img src="../images/users/user-2.jpg" class="col-md-1" alt="" />
+                            <div class="col-md-10">
+                                <p class="name">Federico Schiocchet <span>25 feb, 2018</span></p>
+                                <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmad minim ve nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium</p>
+                            </div>
+                        </div>
+                        <div class="item row">
+                            <img src="../images/users/user-4.jpg" class="col-md-1" alt="" />
+                            <div class="col-md-10">
+                                <p class="name">Vaky Yo <span>25 feb, 2018</span></p>
+                                <p class="msg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Leave a comment</h4>
+                    <hr class="space s" />
+                    <div class="form-box">   
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <hr class="space xs" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Website">
+                                <hr class="space xs" />
+                                <textarea name="messagge" class="form-control" placeholder="Messagge"></textarea>
+                                <hr class="space s" />
+                                <button class="btn btn-sm" type="button">Send comment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

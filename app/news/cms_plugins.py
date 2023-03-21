@@ -17,6 +17,5 @@ class NewsPlugin(CMSPluginBase):
             'instance': instance,
             'object_list' : instance.get_objects(limit=instance.num_objects),
         })
-        assert False, context['object_list']
         return context
 
