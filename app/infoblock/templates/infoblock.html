@@ -2,7 +2,7 @@
 
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
 {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
-{% addtoblock "dynamic-css" %}
+{% addtoblock "css" %}
 <style>
 #slider-{{id}} {
     height: {{instance.height}}px !important;

@@ -37,6 +37,7 @@ class Catalog(CMSPlugin):
             cat.save()
 
 
+
 class Category(models.Model):
     plugin = models.ForeignKey(
             Catalog,
@@ -103,6 +104,7 @@ class CatalogItem(CMSPlugin):
         #     cat.plugin = self
         #     cat.save()
         self.categories.set(oldinstance.categories.all())
+        # assert False, (oldinstance.categories.all(), self.categories.all())
 
     class Meta:
         verbose_name = "элемент каталога"

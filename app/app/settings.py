@@ -281,3 +281,20 @@ CKEDITOR_SETTINGS_POST = {
         ['Maximize', 'ShowBlocks']
     ]
 }
+
+# COMPRESSOR
+COMPRESS_ENABLED = True
+COMPRESS_CSS_HASHING_METHOD = None
+COMPRESS_FILTERS = {
+    'css':[
+        'compressor.filters.css_default.CssAbsoluteFilter',
+        'compressor.filters.cssmin.rCSSMinFilter',
+    ],
+    'js':[
+        'compressor.filters.jsmin.JSMinFilter',
+        # 'compressor.filters.jsmin.CalmjsFilter',
+    ]
+}
+HTML_MINIFY = True
+KEEP_COMMENTS_ON_MINIFYING = False
+############

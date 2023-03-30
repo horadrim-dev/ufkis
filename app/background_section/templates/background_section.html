@@ -1,6 +1,6 @@
 {% load static cms_tags sekizai_tags easy_thumbnails_tags %}
 
-{% addtoblock "dynamic-css" %}
+{% addtoblock "css" %}
 <style>
   #section-{{id}}::before {
     content: "";
@@ -61,28 +61,10 @@
 </style>
 {% endaddtoblock %}
 
-
 {% if instance.use_parallax and instance.background_image %}
-
   {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %}
-{% comment %} {% addtoblock "js" %}<script src="{% static 'background_section/js/jquery.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-  {% comment %} {% addtoblock "js" %}<script src="{% static 'background_section/js/jquery.stellar.min.js' %}"></script>{% endaddtoblock %}
-  {% addtoblock "js" %}
-  <script type="text/javascript">
-    $(document).ready(function(){
-        $.stellar({
-          responsive: true,
-          parallaxBackgrounds: true,
-          parallaxElements: true,
-          horizontalScrolling: false,
-          hideDistantElements: false,
-          scrollProperty: 'scroll'
-        });
-    });
-  </script>
-  {% endaddtoblock %} {% endcomment %}
-
 {% endif %}
+
 
 {% comment %} <section 
   id="section-{{id}}" 
