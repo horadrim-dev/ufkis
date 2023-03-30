@@ -14,6 +14,13 @@ from pathlib import Path
 import os
 import environ  # pip install django-environ
 
+import django
+# fix smart_text
+django.utils.encoding.smart_text = django.utils.encoding.smart_str
+# fix ugettext_lazy
+django.utils.translation.ugettext_lazy = django.utils.translation.gettext_lazy
+django.utils.translation.ugettext = django.utils.translation.gettext
+
 # Initialise environment variables
 env = environ.Env(
     # set casting, default value
@@ -57,7 +64,32 @@ INSTALLED_APPS = [
     'djangocms_text_ckeditor',
     'djangocms_picture',
     'djangocms_link',
+    'djangocms_video',
+    'compressor',
 
+    # #### ALDRYN  you will probably need to add these
+    # 'aldryn_apphooks_config',
+    # 'aldryn_categories',
+    # 'aldryn_common',
+    # 'aldryn_newsblog',
+    # 'aldryn_people',
+    # 'aldryn_translation_tools',
+    # 'parler',
+    # 'sortedm2m',
+    # 'taggit',
+    ####
+
+    ### DJANGOCMS BLOG
+    # 'filer',
+    # 'easy_thumbnails',
+    # 'aldryn_apphooks_config',
+    # 'parler',
+    # 'taggit',
+    # 'taggit_autosuggest',
+    # 'meta',
+    # 'sortedm2m',
+    # 'djangocms_blog',
+    ############
     'core',
     'background_section',
     'colorfield',
@@ -65,7 +97,7 @@ INSTALLED_APPS = [
     'columns',
     'catalog',
     'slider',
-    'news'
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -157,9 +189,15 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    # BASE_DIR / "static",
 ]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+    'compressor.finders.CompressorFinder',
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -171,6 +209,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ####### django-cms requires
 LANGUAGES = [
+    #  ('ru', 'Russian') ,
      ('ru-ru', 'Russian') 
 ]
 SITE_ID = 1
@@ -192,8 +231,53 @@ THUMBNAIL_PROCESSORS = (
 META_SITE_PROTOCOL = 'http'  # set 'http' for non ssl enabled websites
 META_USE_SITES = True
 
-# CKEDITOR_SETTINGS = {
-#     'language': '{{ language }}',
-#     'toolbar': 'CMS',
-#     'skin': 'moono-lisa',
-# }
+META_USE_OG_PROPERTIES=True
+META_USE_TWITTER_PROPERTIES=True
+META_USE_GOOGLEPLUS_PROPERTIES=True # django-meta 1.x+
+META_USE_SCHEMAORG_PROPERTIES=True  # django-meta 2.x+
+
+PARLER_LANGUAGES = {
+    1: (
+        {'code': 'ru-ru',},
+        # {'code': 'en',},
+        # {'code': 'it',},
+        # {'code': 'fr',},
+    ),
+    'default': {
+        'fallbacks': ['ru-ru'],
+        # 'fallbacks': ['en', 'it', 'fr'],
+    }
+}
+CKEDITOR_SETTINGS = {
+    'language': '{{ language }}',
+    'toolbar': 'CMS',
+    'skin': 'moono-lisa',
+}
+CKEDITOR_SETTINGS_POST = {
+    'toolbar_HTMLField': [
+        [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'],
+        ['Undo', 'Redo'],
+        ['cmsplugins', 'cmswidget'],
+        ['Find', 'Replace'],
+        ['SelectAll'], 
+        ['Scayt'],
+        ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'HiddenField'],
+        ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates'],
+        '/',
+        ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'], 
+        ['CopyFormatting', 'RemoveFormat'],
+        ['NumberedList', 'BulletedList'],
+        ['Outdent', 'Indent'],
+        ['Blockquote', 'CreateDiv'],
+        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+        ['BidiLtr', 'BidiRtl', 'Language'],
+        ['Link', 'Unlink', 'Anchor'],
+        ['CodeSnippet', 'Image2'],
+        ['Html5audio', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'],
+        '/',
+        ['Styles', '-', 'Format', '-', 'Font', '-', 'FontSize'],
+        ['TextColor', 'BGColor'],
+        ['About'],
+        ['Maximize', 'ShowBlocks']
+    ]
+}

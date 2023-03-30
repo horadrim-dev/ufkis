@@ -26,7 +26,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
 
-    text = HTMLField("Содержимое", default="", blank=True, null=True)
+    text = HTMLField("Содержимое", configuration='CKEDITOR_SETTINGS_POST', default="", blank=True, null=True)
+
+    # placeholder = PlaceholderField('post', related_name="news_post")
 
     image = FilerImageField(verbose_name="Изображение", on_delete=models.CASCADE, blank=True, null=True)
 
@@ -39,8 +41,8 @@ class Post(models.Model):
     image_position = models.CharField(max_length=64, choices=IMAGE_POSITION_CHOICES, default=IMAGE_POSITION_CHOICES[0][0],
         verbose_name="Расположение изображения")
 
-    placeholder_top = PlaceholderField('top', related_name="post_top")
-    placeholder_bottom = PlaceholderField('bottom', related_name="post_bottom")
+    # placeholder_top = PlaceholderField('top', related_name="post_top")
+    # placeholder_bottom = PlaceholderField('bottom', related_name="post_bottom")
 
     objects = ContentManager()
 

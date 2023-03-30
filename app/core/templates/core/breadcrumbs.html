@@ -1,38 +1,8 @@
-{% load static cms_tags menu_tags %}
-{% comment %} <section class="hero-wrap hero-wrap-2" style="background-image: url({% static 'core/images/breadcrumbs_bg.jpg' %});">
-    <div class="overlay"></div>
-    <div class="container">
-    <div class="row no-gutters slider-text align-items-center justify-content-center">
-        <div class="col-md-9 ftco-animate text-center heading-section">
-        <h2 class="mb-2">
-            {% if page_title %}
-                {{ page_title }}
-            {% else %}
-                {% page_attribute "page_title" %}
-            {% endif %}
-        </h2>
-        <div class="breadcrumbs">
-            <ul class="list-inline">
-            {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
-            {% if added_breadcrumbs %}
-                {% for bc in added_breadcrumbs %}
-                <li class="list-inline-item">
-                    <a href="{{ bc.url }}">{{ bc.title }}</a> 
-                    {% if not forloop.last %} 
-                    <span class="separator">&raquo;</span>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            {% endif %}
-            </ul>
+{% load static cms_tags sekizai_tags menu_tags %}
 
-        </div>
-        </div>
-    </div>
-    </div>
-</section> {% endcomment %}
+{% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
 
-<div class="breadcrumbs header-base " 
+<div class="breadcrumbs header-base" 
     data-parallax="scroll" 
     data-position="top" 
     data-natural-height="375" 
@@ -63,7 +33,7 @@
                     {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
                 </ol>
             </div>
-            <{% comment %} ol class="breadcrumb b">
+            {% comment %} <ol class="breadcrumb b">
                 {% show_breadcrumb 0 'core/breadcrumb.html' 0 %}
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Blog</a></li>

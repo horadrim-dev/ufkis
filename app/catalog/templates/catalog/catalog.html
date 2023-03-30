@@ -1,8 +1,16 @@
 {% load static sekizai_tags cms_tags %}
 
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animations.css' %}">{% endaddtoblock %}
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %}
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'catalog/css/catalog.css' %}"> {% endaddtoblock %}
+
+{% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script src="{% static 'core/scripts/imagesloaded.min.js' %}"></script>{% endaddtoblock %}
+{% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %}
+{% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.twbsPagination.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
 {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %} 
-{% addtoblock "css" %}
+{% addtoblock "dynamic-css" %}
 <style>
 #slider-{{id}} {
     height: {{instance.height}}px !important;
