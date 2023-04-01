@@ -1,5 +1,8 @@
 from cms.toolbar_pool import toolbar_pool
+from cms.toolbar_base import CMSToolbar
 from cms.extensions.toolbar import ExtensionToolbar
+from cms.utils.urlutils import admin_reverse
+from cms.cms_toolbars import ADMIN_MENU_IDENTIFIER, HELP_MENU_IDENTIFIER, LANGUAGE_MENU_IDENTIFIER
 from django.utils.translation import gettext_lazy as _
 from .models import IconExtension
 
@@ -21,3 +24,23 @@ class IconExtensionToolbar(ExtensionToolbar):
                 # adds a toolbar item in position 0 (at the top of the menu)
                 current_page_menu.add_modal_item(_('Иконка страницы'), url=url,
                     disabled=not self.toolbar.edit_mode_active, position=0)
+
+@toolbar_pool.register
+class MyToolbarClass(CMSToolbar):
+    def populate(self):
+
+        admin_menu = self.toolbar.get_menu(ADMIN_MENU_IDENTIFIER)
+        admin_menu.name = "Сайт"
+
+        # removing standart menus "LANGUAGE_MENU" and "HELP_MENU" 
+        self.toolbar.last_left_items = []
+
+        self.toolbar.add_modal_button(
+            name='Добавить новость', 
+            url=admin_reverse('news_post_add'),
+            )
+
+        self.toolbar.add_sideframe_button(
+            name='Новости', 
+            url=admin_reverse('news_post_changelist'),
+            )

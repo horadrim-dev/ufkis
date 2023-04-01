@@ -4,7 +4,7 @@
 {% block app_content %}
 
   {% if user.is_authenticated and object_list %}
-  <div class="row d-flex justify-content-end pb-4 pe-3">
+  <div class="row d-flex justify-content-end pb-4 pe-3" style="height:50px;">
     {% render_model_add object_list.0 %}
   </div>
   {% endif %}

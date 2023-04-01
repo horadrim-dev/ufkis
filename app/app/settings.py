@@ -219,6 +219,9 @@ CMS_TEMPLATES = [
     ('base.html', 'Home page template'),
 ]
 
+# CMS_ENABLE_HELP = False # off help menu from toolbar
+##################
+
 THUMBNAIL_HIGH_RESOLUTION = True
 
 THUMBNAIL_PROCESSORS = (
