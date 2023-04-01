@@ -29,13 +29,18 @@
         </div>
         <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a>
     </div>
-    {% if obj.image %}
+    {% comment %} {% if obj.image %}
     <a class="img-box" href="{{ obj.get_absolute_url }}">
         <img class="anima" src="{{obj.image.url}}" alt="" />
     </a>
-    {% endif %}
+    {% endif %} {% endcomment %}
     <div class="advs-box-content">
         <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
+        {% if obj.image %}
+        <a class="img-box" href="{{ obj.get_absolute_url }}">
+            <img class="anima" src="{{obj.image.url}}" alt="" />
+        </a>
+        {% endif %}
         <div class="tag-row">
             <span><i class="fa fa-bookmark"></i> <a href="#">Travel</a></span>
             <span><i class="fa fa-pencil"></i><a href="#">Admin</a></span>
@@ -43,5 +48,11 @@
         <p class="niche-box-content">
             {{ obj.text|safe|truncatechars_html:150}}
         </p>
+        <div class="text-right">
+            <a href="{{ obj.get_absolute_url }}" class="btn btn-lg btn-border">
+                <i class="fa fa-chevron-circle-right"></i> Читать
+            </a>
+        </div>
+        <div class="clear"></div>
     </div>
 </div>

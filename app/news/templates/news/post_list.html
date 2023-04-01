@@ -11,10 +11,11 @@
 
   <div class="row pb-5">
     <div class="col-md-9 col-sm-12">
-        <div class="grid-list grid-layout grid-15">
-            <div class="grid-box row">
+
+        <div class="maso-list">
+            <div class="maso-box row">
                 {% for obj in object_list %}
-                <div class="grid-item col-md-6">
+                <div class="maso-item col-md-6">
                     {% render_model_block obj %}
                         {% include 'news/includes/post_item.html' %}
                     {% endrender_model_block %}
@@ -25,7 +26,9 @@
             </div>
         </div>
     </div>
-    {% include 'news/includes/sidebar.html' %}
+    <div class="col-md-3 col-sm-12 widget">
+        {% include 'news/includes/sidebar.html' %}
+    </div>
   </div>
 
   {% if page_obj.has_other_pages %}
