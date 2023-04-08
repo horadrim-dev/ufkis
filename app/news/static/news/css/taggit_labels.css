@@ -1,0 +1,25 @@
+.taggit-labels.taggit-list {
+  background-color: transparent;
+}
+.taggit-labels.taggit-list .taggit-tag {
+  display: inline-block;
+  margin: 0 5px 10px 5px;
+  padding: 5px 10px;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--main-color) !important;
+  font-weight: 500;
+  border: 1px solid var(--main-color) !important;
+  border-radius: 20px !important;
+}
+.taggit-labels.taggit-list .taggit-tag:first-child {
+  margin-left: 0;
+}
+.taggit-labels.taggit-list .taggit-tag:hover {
+  opacity: 0.8;
+}
+.taggit-labels.taggit-list .taggit-tag.selected {
+  background-color: var(--main-color);
+  color: #FFFFFF !important;
+  border-color: var(--main-color);
+}

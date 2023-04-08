@@ -5,6 +5,8 @@ from djangocms_text_ckeditor.fields import HTMLField
 from django.urls import reverse
 from cms.models.pluginmodel import CMSPlugin
 from cms.models.fields import PlaceholderField
+from taggit.managers import TaggableManager
+# from taggit.models import TagBase
 import uuid
 import datetime
 from core.utils import slugify_rus
@@ -15,11 +17,33 @@ class ContentManager(models.Manager):
     def published(self):
         return self.filter(published=True, published_at__lte=datetime.date.today())
 
+
+class Category(models.Model):
+    title = models.CharField("Название", max_length=256)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
+
+    def get_absolute_url(self):
+        return reverse("news:index", kwargs={"category": self.id})
+    
+# class TagPost(TagBase):
+
+#     class Meta:
+#         verbose_name = "тег"
+#         verbose_name_plural = "теги"
+
 class Post(models.Model):
     title = models.CharField(
         default="", max_length=1000, verbose_name="Заголовок")
+
     alias = models.SlugField(default="", blank=True, unique=True,
                              max_length=1000, help_text="Краткое название транслитом через тире (пример: 'kratkoe-nazvanie-translitom'). Чем короче тем лучше. Для автоматического заполнения - оставьте пустым.")
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
     published = models.BooleanField(default=True, verbose_name='Опубликовано')
     published_at = models.DateField(default=datetime.date.today, 
                                     verbose_name="Дата публикации")
@@ -31,6 +55,8 @@ class Post(models.Model):
     # placeholder = PlaceholderField('post', related_name="news_post")
 
     image = FilerImageField(verbose_name="Изображение", on_delete=models.CASCADE, blank=True, null=True)
+
+    tags = TaggableManager()
 
     IMAGE_POSITION_CHOICES = [
         ('left', 'Слева'),

@@ -66,7 +66,9 @@ INSTALLED_APPS = [
     'djangocms_link',
     'djangocms_video',
     'compressor',
-
+    'django_filters',
+    'taggit',
+    'taggit_labels',
     # #### ALDRYN  you will probably need to add these
     # 'aldryn_apphooks_config',
     # 'aldryn_categories',
@@ -301,3 +303,7 @@ COMPRESS_FILTERS = {
 HTML_MINIFY = True
 KEEP_COMMENTS_ON_MINIFYING = False
 ############
+
+# TAGGIT
+TAGGIT_CASE_INSENSITIVE = True
+#######

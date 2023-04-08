@@ -10,7 +10,7 @@
   {% endif %}
 
   <div class="row pb-5">
-    <div class="col-md-9 col-sm-12">
+    <div class="col-md-10 col-sm-12">
 
         <div class="maso-list">
             <div class="maso-box row">
@@ -25,65 +25,12 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="clear"></div>
+        {% include './includes/pagination.html' %}
     </div>
-    <div class="col-md-3 col-sm-12 widget">
-        {% include 'news/includes/sidebar.html' %}
+    <div class="col-md-2 col-sm-12 widget">
+        {% include './includes/filter.html' %}
     </div>
   </div>
-
-  {% if page_obj.has_other_pages %}
-      <nav>
-          <ul class="pagination pagination-lg justify-content-center">
-              {% if page_obj.has_previous %}
-                  <li class="page-item">
-                      <a class="page-link" href="?page=1">В начало </a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                        Предыдущая
-                      </a>
-                  </li>
-              {% endif %}
-
-              {% for page_number in page_obj.paginator.page_range %}
-                  {% comment %}
-                      This conditional allows us to display up to 3 pages before and after the current page
-                      If you decide to remove this conditional, all the pages will be displayed
-
-                      You can change the 3 to any number you want e.g
-                      To display only 5 pagination items, change the 3 to 2 (2 before and 2 after the current page)
-                  {% endcomment %}
-                  {% if page_number <= page_obj.number|add:3 and page_number >= page_obj.number|add:-3 %}
-                      {% if page_obj.number == page_number %}
-                          <li class="page-item active">
-                              <a class="page-link" href="?page={{ page_number }}">
-                                  {{ page_number }}
-                              </a>
-                          </li>
-                      {% else %}
-                          <li class="page-item">
-                              <a class="page-link" href="?page={{ page_number }}">
-                                  {{ page_number }}
-                              </a>
-                          </li>
-                      {% endif %}
-                  {% endif %}
-              {% endfor %}
-
-              {% if page_obj.has_next %}
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                          Следующая
-                      </a>
-                  </li>
-                  <li class="page-item">
-                      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
-                          В конец
-                      </a>
-                  </li>
-              {% endif %}
-          </ul>
-      </nav>
-  {% endif %}
 
 {% endblock %}

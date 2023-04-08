@@ -1,0 +1,20 @@
+#news-filter label {
+    font-weight: inherit;
+    width: 100%;
+    cursor: pointer;
+}
+#news-filter input[type="radio"]:checked + label::before {
+  content: "\f054";
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  padding-right: 10px;
+}
+
+#news-filter .tagbox span {
+    color: var(--main-color) !important;
+    background: none;
+    font-weight: 500;
+    border: 1px solid var(--main-color) !important;
+    border-radius: 20px !important;
+}

@@ -35,6 +35,11 @@
               <p>
                 {{ obj.text |safe|truncatechars_html:150 }}
               </p>
+              <div class="text-right">
+                  <a href="{{ obj.get_absolute_url }}" class="btn-text no-margins">
+                      <i class="fa fa-chevron-circle-right"></i> Читать
+                  </a>
+              </div>
           </div>
       </div>
       {% endrender_model_block %}
@@ -42,7 +47,7 @@
 
       {% if forloop.last %}
           </div>
-          <hr class="space m" />
+          {% comment %} <hr class="space m" /> {% endcomment %}
           <a href="{% url 'news:index' %}" class="btn btn-lg">Больше новостей</a>
         </div>
       {% endif %}

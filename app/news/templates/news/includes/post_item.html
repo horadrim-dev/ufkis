@@ -42,14 +42,16 @@
         </a>
         {% endif %}
         <div class="tag-row">
-            <span><i class="fa fa-bookmark"></i> <a href="#">Travel</a></span>
-            <span><i class="fa fa-pencil"></i><a href="#">Admin</a></span>
+            <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ obj.category.id }}">{{ obj.category.title }}</a></span>
+            {% for tag in obj.tags.all %}
+            <span><i class="fa fa-tag"></i><a href="{% url "news:index" %}?tags={{ tag }}">{{tag}}</a></span>
+            {% endfor %}
         </div>
         <p class="niche-box-content">
             {{ obj.text|safe|truncatechars_html:150}}
         </p>
         <div class="text-right">
-            <a href="{{ obj.get_absolute_url }}" class="btn btn-lg btn-border">
+            <a href="{{ obj.get_absolute_url }}" class="btn btn-border">
                 <i class="fa fa-chevron-circle-right"></i> Читать
             </a>
         </div>
