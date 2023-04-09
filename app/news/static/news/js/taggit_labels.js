@@ -1,6 +1,4 @@
-// РЕПЛИКА ОРИГИНАЛЬНОГО СКРИПТА taggit_labels.js с небольшой правкой
-// изза функции split() значние input выглядело так ", Тег1, Тег2"
-// добавлена строка "if (tagList.length <= 1) tagList = [];" исправляющая это
+// РЕПЛИКА ОРИГИНАЛЬНОГО СКРИПТА taggit_labels.js с доработками
 // --------
 // on click of a tag, it should be toggled - either added to or removed from an internal tracking
 // array and its style changed.
@@ -38,6 +36,7 @@
 
                 // Refresh the tag list
                 $(inputs).attr("value", tagList.join(", "));
+                $(this).closest("form").submit();
             });
         });
     });

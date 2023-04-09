@@ -13,6 +13,7 @@
   font-size: inherit;
   text-rendering: auto;
   padding-right: 10px;
+  color: var(--main-color-2);
 }
 
 #news-filter .tagbox span {

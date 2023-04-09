@@ -10,26 +10,26 @@
   {% endif %}
 
   <div class="row pb-5">
+    <div class="col-md-2 col-sm-12">
+        {% include './includes/filter.html' %}
+    </div>
     <div class="col-md-10 col-sm-12">
 
         <div class="maso-list">
             <div class="maso-box row">
                 {% for obj in object_list %}
-                <div class="maso-item col-md-6">
+                <div class="maso-item col-lg-4 col-md-6">
                     {% render_model_block obj %}
                         {% include 'news/includes/post_item.html' %}
                     {% endrender_model_block %}
                 </div>
                 {% empty %}
-                <p> Записей не найдено.</p>
+                <p> По заданным критериям ничего не найдено.</p>
                 {% endfor %}
             </div>
         </div>
         <div class="clear"></div>
         {% include './includes/pagination.html' %}
-    </div>
-    <div class="col-md-2 col-sm-12 widget">
-        {% include './includes/filter.html' %}
     </div>
   </div>
 

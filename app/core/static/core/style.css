@@ -49,17 +49,35 @@ body, .adv-img p, .caption-bottom p, .adv-circle .caption p, .advs-box p, .list-
 
     #preloader:after {
         content: '';
-        width: 200px;
-        height: 200px;
+        /* width: 200px;
+        height: 200px; */
         position: absolute;
         left: 50%;
         top: 50%;
-        background-image: url(images/assets/loader.gif);
+        /* background-image: url(images/assets/loader.gif);
         background-repeat: no-repeat;
-        background-position: center;
-        margin: -100px 0 0 -100px;
+        background-position: center; */
+        width: 4px;
+        height: 4px;
+        margin: -2px 0 0 -2px;
         z-index: 999999999999;
+        --d:22px;
+        border-radius: 50%;
+        color: #766DF4;
+        box-shadow: 
+            calc(1*var(--d))      calc(0*var(--d))     0 0,
+            calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+            calc(0*var(--d))      calc(1*var(--d))     0 2px,
+            calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+            calc(-1*var(--d))     calc(0*var(--d))     0 4px,
+            calc(-0.707*var(--d)) calc(-0.707*var(--d))0 5px,
+            calc(0*var(--d))      calc(-1*var(--d))    0 6px;
+        animation: s7 1s infinite steps(8);
     }
+
+@keyframes s7 {
+  100% {transform: rotate(1turn)}
+}
 
 .scroll-top-mobile {
     position: fixed;
@@ -555,7 +573,7 @@ VARIOUS
 
 .text-m {
     font-size: 18px !important;
-    line-height: 25px;
+    line-height: 20px;
 }
 
 .text-l {

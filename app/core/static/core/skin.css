@@ -1351,8 +1351,8 @@ div.adv-img p {
 }
 
 .niche-box-post .text-m {
-    font-size: 23px !important;
-    line-height: 30px;
+    font-size: 18px !important;
+    line-height: 20px;
 }
 
 .niche-box-post h2 {
@@ -2134,8 +2134,8 @@ RESPONSIVE
 
     h2,
     .h2 {
-        font-size: 20px;
-        line-height: 30px;
+        font-size: 26px;
+        line-height: 26px;
     }
 
     h3 {

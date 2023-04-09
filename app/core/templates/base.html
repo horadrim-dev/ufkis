@@ -14,14 +14,15 @@
 
       {% addtoblock "css" %}<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Google+Sans:400,500,700|Google+Sans+Text:400&amp;lang=ru">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">{% endaddtoblock %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/bootstrap5_sup.css' %}">{% endaddtoblock %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/bootstrap5.3.0/css/bootstrap.min.css' %}">{% endaddtoblock %} {% endcomment %}
       
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/style.css' %}">{% endaddtoblock %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} {% endcomment %}
 
-    {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animations.css' %}">{% endaddtoblock %}
-    {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/components.css' %}">{% endaddtoblock %} {% endcomment %}
+    {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/animations.css' %}">{% endaddtoblock %}
+    {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/components.css' %}">{% endaddtoblock %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/magnific-popup.css' %}">{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/php/contact-form.css' %}">{% endaddtoblock %}
@@ -32,6 +33,7 @@
       
     {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %}
     {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
+    {% addtoblock "js" %}<script src="{% static 'core/scripts/navbar-collapsing.js' %}"></script>{% endaddtoblock %}
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/bootstrap5.3.0/js/bootstrap.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/imagesloaded.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
@@ -40,7 +42,7 @@
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/php/contact-form.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.twbsPagination.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-    {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+    {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %}
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/social.stream.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}

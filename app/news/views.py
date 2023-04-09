@@ -8,7 +8,7 @@ from .filtersets import PostFilterSet
 class PostListView(FilterView):
     template_name = 'news/post_list.html'
     # model = Post
-    paginate_by = 2
+    paginate_by = 12
     filterset_class = PostFilterSet
 
 # class PostListView(ListView):
