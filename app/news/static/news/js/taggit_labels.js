@@ -13,7 +13,7 @@
             var inputs = $(this).find(".taggit-labels + input")[0];
             var tagItems = $(this).find(".taggit-list .taggit-tag");
             var tagList = inputs.value.split(", ");
-            if (tagList.length <= 1) tagList = [];
+            if ((tagList.length <= 1) & (tagList[0] == "")) tagList = [];
 
             tagItems.click(function() {
                 // var tagList = inputs.value.split(", ");
