@@ -104,6 +104,8 @@
 
         {% comment %} {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %} {% endcomment %}
     {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+      <div class="blackout"></div>
+
 
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/skin.css' %}">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/app.css' %}">{% endaddtoblock %}

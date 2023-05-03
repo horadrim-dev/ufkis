@@ -3,59 +3,63 @@
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
 
-{% if user.is_authenticated and object_list %}
-<div class="row d-flex justify-content-end pb-4 pe-3">
-  {% render_model_add object_list.0 %}
-</div>
-{% endif %}
+<div class="news-container">
 
-<div class="row">
-  {% for obj in object_list %}
+  {% if user.is_authenticated and object_list %}
+  <div class="row d-flex justify-content-end pb-4 pe-3">
+    {% render_model_add object_list.0 %}
+  </div>
+  {% endif %}
 
-    {% if forloop.counter <= 2 %}
-    <div class="col-md-4 col-sm-6">
-    {% render_model_block obj %}
-    {% include 'news/includes/post_item.html' %}
-    {% endrender_model_block %}
-    </div>
+  <div class="row">
+    {% for obj in object_list %}
 
-      {% if forloop.counter == 2 %}
-        <div class="col-md-4 col-sm-12">
-          <hr class="space visible-sm" />
-          <div>
-      {% endif %}
-
-    {% else %}
-
+      {% if forloop.counter <= 2 %}
+      <div class="col-md-4 col-sm-6">
       {% render_model_block obj %}
-      <div class="advs-box advs-box-side-icon">
-          <div class="caption-box">
-              <h2 class="text-m"><a href="#">{{ obj.title }}</a></h2>
-              <span class="extra-content">{{ obj.published_at }}</span>.
-              <p>
-                {{ obj.text |safe|truncatechars_html:150 }}
-              </p>
-              <div class="text-right">
-                  <a href="{{ obj.get_absolute_url }}" class="btn-text no-margins">
-                      <i class="fa fa-chevron-circle-right"></i> Читать
-                  </a>
-              </div>
-          </div>
-      </div>
+      {% include 'news/includes/post_item.html' %}
       {% endrender_model_block %}
-      <hr class="space m" />
+      </div>
 
-      {% if forloop.last %}
-          </div>
-          {% comment %} <hr class="space m" /> {% endcomment %}
-          <a href="{% url 'news:index' %}" class="btn btn-lg">Больше новостей</a>
+        {% if forloop.counter == 2 %}
+          <div class="col-md-4 col-sm-12">
+            <hr class="space visible-sm" />
+            <div>
+        {% endif %}
+
+      {% else %}
+
+        {% render_model_block obj %}
+        <div class="advs-box advs-box-side-icon">
+            <div class="caption-box">
+                <h2 class="text-m"><a href="#">{{ obj.title }}</a></h2>
+                <span class="extra-content">{{ obj.published_at }}</span>.
+                <p>
+                  {{ obj.text |safe|truncatechars_html:150 }}
+                </p>
+                <hr class="space xs" />
+                <div class="text-right">
+                    <a href="{{ obj.get_absolute_url }}" class="read-more btn-border">
+                        <i class="fa fa-chevron-circle-right"></i> Читать
+                    </a>
+                </div>
+            </div>
         </div>
+        {% endrender_model_block %}
+        <hr class="space s" />
+
+        {% if forloop.last %}
+            </div>
+            {% comment %} <hr class="space m" /> {% endcomment %}
+            <a href="{% url 'news:index' %}" class="btn btn-lg w-100">Больше новостей</a>
+          </div>
+        {% endif %}
+
       {% endif %}
 
-    {% endif %}
+    {% empty %}
+      <p> Записей не найдено.</p>
+    {% endfor %}
 
-  {% empty %}
-    <p> Записей не найдено.</p>
-  {% endfor %}
-
+  </div>
 </div>

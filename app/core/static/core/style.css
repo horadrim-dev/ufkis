@@ -6211,7 +6211,7 @@ SECTIONS - RESPONSIVE
 MENU - RESPONSIVE
 ------------------------------
 */
-    .navbar-header {
+    /* .navbar-header {
         background-color: #FFF;
     }
 
@@ -6681,7 +6681,7 @@ MENU - RESPONSIVE
 
     .nav.ms-minimal li a {
         padding: 10px 15px;
-    }
+    } */
 
     /*
 ------------------------------

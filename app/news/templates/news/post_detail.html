@@ -75,7 +75,9 @@
         </div>
     </div>
     <hr class="space m" />
-    <p>{{ object.text | safe }}</p>
+    {% comment %} <p>{{ object.text | safe }}</p> {% endcomment %}
+    {% render_placeholder post.content "640" %}
+
     {% endrender_model_block %}
     <div  id="comments" class="section-bg-color">
         <div class="container content">
