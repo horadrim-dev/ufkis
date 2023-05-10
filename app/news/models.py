@@ -44,7 +44,7 @@ class Post(models.Model):
     alias = models.SlugField(default="", blank=True, unique=True,
                              max_length=1000, help_text="Краткое название транслитом через тире (пример: 'kratkoe-nazvanie-translitom'). Чем короче тем лучше. Для автоматического заполнения - оставьте пустым.")
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
-    published = models.BooleanField(default=True, verbose_name='Опубликовано')
+    published = models.BooleanField(default=False, verbose_name='Опубликовано')
     published_at = models.DateField(default=datetime.date.today, 
                                     verbose_name="Дата публикации")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
@@ -91,6 +91,14 @@ class Post(models.Model):
 
         super().save(*args, **kwargs)
 
+    def css_styles(self):
+        css = []
+        if self.published_at > datetime.date.today():
+            css.append('too-early-to-publish')
+        if not self.published:
+            css.append('not-published')
+        return ' '.join(css)
+
 
     class Meta:
         verbose_name = "Пост"
@@ -101,9 +109,6 @@ class Post(models.Model):
 class NewsPlugin(CMSPlugin):
 
     num_objects = models.PositiveIntegerField("Количество новостей", default=3)
-
-    def get_objects(self, limit):
-        return Post.objects.published()[:limit]
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]

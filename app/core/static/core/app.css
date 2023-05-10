@@ -158,15 +158,12 @@ footer {
 .news-container .advs-box-top-icon-img.boxed-inverse .advs-box-content {
     /* padding: 15px; */
     border: 1px solid #EEE6E6;
-    background: #fff;
-}
-.news-container {
-    background: #fff;
+    /* background: #fff; */
 }
 .news-container .advs-box .caption-box {
     padding: 15px;
     border: 1px solid #EEE6E6;
-    background: #fff;
+    /* background: #fff; */
 }
 .news-container .news-item .advs-box-content {
     padding: 30px 20px;

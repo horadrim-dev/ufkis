@@ -10,6 +10,7 @@ class PostAdmin( PlaceholderAdminMixin, admin.ModelAdmin):
     #     "alias" : ("title",)
     # 
     form = PostForm
+    exclude = ['published']
 
 @admin.register(Category)
 class PostAdmin( PlaceholderAdminMixin, admin.ModelAdmin):
