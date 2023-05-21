@@ -34,13 +34,3 @@ class MyToolbarClass(CMSToolbar):
 
         # removing standart menus "LANGUAGE_MENU" and "HELP_MENU" 
         self.toolbar.last_left_items = []
-
-        self.toolbar.add_modal_button(
-            name='Добавить новость', 
-            url=admin_reverse('news_post_add'),
-            )
-
-        self.toolbar.add_sideframe_button(
-            name='Новости', 
-            url=admin_reverse('news_post_changelist'),
-            )

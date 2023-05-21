@@ -19,7 +19,7 @@ class NewsPlugin(CMSPluginBase):
             'instance': instance,
         })
 
-        if context['request'].toolbar and context['request'].toolbar.edit_mode_active:
+        if context['request'].toolbar: # and context['request'].toolbar.edit_mode_active:
             context['object_list'] = Post.objects.all()[:instance.num_objects]
         else:
             context['object_list'] = Post.objects.published()[:instance.num_objects]

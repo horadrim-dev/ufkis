@@ -1,4 +1,4 @@
-{% load static cms_tags menu_tags sekizai_tags %}
+{% load static cms_tags menu_tags sekizai_tags easy_thumbnails_tags %}
 {% comment %} <div class="row mb-5">
   <div class="col">
     <div class="ftco-footer-widget mb-5 ml-md-4">
@@ -21,6 +21,9 @@
     <div class="content">
         <div class="container">
             <div class="row">
+                <div class="col-md-2 footer-left text-left">
+                    <img class="navbar-brand-logo" src="{% thumbnail site_settings.logo 200x250 upscale %}" />
+                </div>
                 <div class="col-md-4 footer-center text-left">
                     {% comment %} <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" /> {% endcomment %}
                     <strong>{{ site_settings.title }}</strong>
@@ -52,31 +55,11 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col-md-4 footer-left text-left">
-                    <div class="row">
-                        <div class="col-md-6 text-s">
-                            <h3>Меню</h3>
-                            <ul class="list-unstyled">
-                            {% show_menu 0 0 100 100 %}
-                            </ul>
-                        </div>
-                        <div class="col-md-6 text-s">
-                            <h3>Pages</h3>
-                            <a href="#">Support</a><br />
-                            <a href="#">Terms of services</a><br />
-                            <a href="#">RSS Feeds</a><br />
-                            <a href="#">Partnerships</a><br />
-                            <a href="#">Latest news</a><br />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 footer-left text-left">
-                    <h3>You can trust us</h3>
-                    <p class="text-s">
-                        Utenim ad minim veniam quis nostrud exercitation ullamco lorem ipsum dolor sit ametullamco lorem ipsum dolor sit ametullamco lorem ipsum dolor sit amet consectetur adipiscing elitsed do eiusmo.
-                    </p>
-                    <hr class="space xs" />
-                    <img src="{% static 'core/template-images/cards-icon.png' %}" alt="" />
+                <div class="col-md-6 footer-left text-center">
+                    <h3>Меню</h3>
+                    <ul class="list-unstyled">
+                    {% show_menu 0 0 100 100 %}
+                    </ul>
                 </div>
             </div>
         </div>

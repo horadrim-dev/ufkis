@@ -133,7 +133,7 @@ section .heading-section {
 footer {
     /* margin-top: -22px !important; */
     /* border-top: 2px dashed var(--main-color); */
-    background: #f3f6ff;
+    background: #fff;
 }
 @media (min-width: 1300px) {
     header .container {

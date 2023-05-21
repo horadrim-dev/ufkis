@@ -23,3 +23,9 @@
   color: #FFFFFF !important;
   border-color: var(--main-color);
 }
+.taggit-labels.taggit-list .item-tag {
+  padding: 0px 8px;
+}
+.taggit-labels.taggit-list .item-tag a {
+  color: var(--main-color-2) !important;
+}

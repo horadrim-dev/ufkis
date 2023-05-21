@@ -1,3 +1,4 @@
+{% load cms_tags %}
 {% comment %} <div class="col-md-6 col-lg-4 ftco-animate">
     <div class="blog-entry">
         <a href="{{ obj.get_absolute_url }}" 
@@ -28,6 +29,22 @@
             <p class="bd-month"></p>
         </div>
         <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a>
+        {% if EDIT_MODE %}
+            <div class="actions-panel">
+                <div class="status-panel">
+                    {% if obj.published %}
+                        <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
+                    {% else %}
+                        <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
+                    {% endif %}
+                </div>
+                <div class="actions">
+                {% render_model_block obj %}
+                    <i class="fa fa-gear"></i>
+                {% endrender_model_block %}
+                </div>
+            </div>
+        {% endif %}
     </div>
     {% comment %} {% if obj.image %}
     <a class="img-box" href="{{ obj.get_absolute_url }}">
@@ -42,13 +59,28 @@
         </a>
         {% endif %}
         <div class="tag-row">
+            {% if obj.category %}
             <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ obj.category.id }}">{{ obj.category.title }}</a></span>
-            {% for tag in obj.tags.all %}
-            <span><i class="fa fa-tag"></i><a href="{% url "news:index" %}?tags={{ tag }}">{{tag}}</a></span>
-            {% endfor %}
+            {% endif %}
+            <div class="taggit-labels taggit-list">
+                {% for tag in obj.tags.all %}
+                <span class="taggit-tag item-tag">
+                    {% comment %} <i class="fa fa-tag"></i> {% endcomment %}
+                    <a href="{% url "news:index" %}?tags={{ tag }}">
+                        {{tag}}
+                    </a>
+                </span>
+                {% endfor %}
+            </div>
         </div>
         <p class="niche-box-content">
-            {{ obj.text|safe|truncatechars_html:150}}
+            {% if obj.get_description %}
+                {{ obj.get_description|striptags|truncatechars_html:150}}
+            {% else %}
+                {% if EDIT_MODE %}
+                    <h4>[пусто]</h4>
+                {% endif %}
+            {% endif %}
         </p>
         <div class="text-right">
             <a href="{{ obj.get_absolute_url }}" class="btn btn-border">

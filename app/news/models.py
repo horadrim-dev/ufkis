@@ -99,6 +99,13 @@ class Post(models.Model):
             css.append('not-published')
         return ' '.join(css)
 
+    def has_content_plugins(self):
+        return CMSPlugin.objects.filter(placeholder_id=self.content_id).count()
+
+    def get_description(self):
+        text = CMSPlugin.objects.filter(placeholder_id=self.content_id, plugin_type="TextPlugin").first()
+        return text.djangocms_text_ckeditor_text.body if text else False 
+
 
     class Meta:
         verbose_name = "Пост"

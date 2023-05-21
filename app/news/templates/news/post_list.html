@@ -1,13 +1,13 @@
 {% extends 'news/base.html' %}
-{% load cms_tags sekizai_tags thumbnail static %}
+{% load sekizai_tags thumbnail static %}
 
 {% block app_content %}
 
-  {% if user.is_authenticated and object_list %}
+  {% comment %} {% if user.is_authenticated and object_list %}
   <div class="row d-flex justify-content-end pb-4 pe-3" style="height:50px;">
     {% render_model_add object_list.0 %}
   </div>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   <div class="row pb-5">
     <div class="col-md-3 col-sm-12">
@@ -19,9 +19,7 @@
             <div class="maso-box row">
                 {% for obj in object_list %}
                 <div class="maso-item col-lg-4 col-md-6">
-                    {% render_model_block obj %}
-                        {% include 'news/includes/post_item.html' %}
-                    {% endrender_model_block %}
+                  {% include 'news/includes/post_item.html' %}
                 </div>
                 {% empty %}
                 <p> По заданным критериям ничего не найдено.</p>
