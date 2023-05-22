@@ -35,9 +35,8 @@
   font-size: 20px;
 } */
 .actions-panel {
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: flex;
+  gap: 20px;
   padding: 7px 10px;
   font-size: 20px;
 }
