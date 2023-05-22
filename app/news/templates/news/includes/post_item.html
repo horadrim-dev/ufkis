@@ -32,11 +32,11 @@
         {% if EDIT_MODE %}
             <div class="actions-panel">
                 <div class="status-panel">
-                    {% if obj.published %}
+                    {% comment %} {% if obj.published %}
                         <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
                     {% else %}
                         <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                 </div>
                 <div class="actions">
                 {% render_model_block obj %}
@@ -76,15 +76,15 @@
         <p class="niche-box-content">
             {% if obj.get_description %}
                 {{ obj.get_description|striptags|truncatechars_html:150}}
-            {% else %}
+            {% comment %} {% else %}
                 {% if EDIT_MODE %}
                     <h4>[пусто]</h4>
-                {% endif %}
+                {% endif %} {% endcomment %}
             {% endif %}
         </p>
         <div class="text-right">
             <a href="{{ obj.get_absolute_url }}" class="btn btn-border">
-                <i class="fa fa-chevron-circle-right"></i> Читать
+                <i class="fa fa-chevron-circle-right"></i> Перейти
             </a>
         </div>
         <div class="clear"></div>

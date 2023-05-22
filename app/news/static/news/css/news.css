@@ -36,8 +36,11 @@
 } */
 .actions-panel {
   display: flex;
+  -webkit-box-pack: end !important;
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
   gap: 20px;
-  padding: 7px 10px;
+  padding: 7px 0px;
   font-size: 20px;
 }
 .actions-panel > div {
