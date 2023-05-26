@@ -15,7 +15,7 @@ from django.utils.decorators import method_decorator
 class PublishedObjectsMixin:
 
     def get_queryset(self):
-        if self.request.toolbar: # and self.request.toolbar.edit_mode_active:
+        if self.request.user.is_authenticated:
             return Post.objects.all() # [:instance.num_objects]
         else:
             return Post.objects.published() # [:instance.num_objects]
