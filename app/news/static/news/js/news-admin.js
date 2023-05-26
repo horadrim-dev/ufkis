@@ -19,14 +19,12 @@
         const csrftoken = getCookie('csrftoken');
 
         $("#publish-post button").click(function(){
-            // var post = $(this).attr("post");
             var url = $(this).attr("url");
             var data = $(this).attr("data");
             $.ajax({
                 url: url,
                 method: 'post',
                 headers: {'X-CSRFToken': csrftoken},
-                // mode: 'same-origin',
                 dataType: 'json',
                 data: data,
                 beforeSend: function () {

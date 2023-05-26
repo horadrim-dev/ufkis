@@ -57,10 +57,9 @@ class AdminView(View):
 
 
     def dispatch(self, request, *args, **kwargs):
-        # return JsonResponse({"result": "error", "message":request.META.get("HTTP_X_REQUESTED_WITH")})
+
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             return self.ajax_post(request, *args, **kwargs)
-        # return self.ajax_post(request, *args, **kwargs)
 
         return super().dispatch(request, *args, **kwargs)
     
