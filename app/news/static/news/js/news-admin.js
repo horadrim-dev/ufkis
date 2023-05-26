@@ -1,20 +1,41 @@
 (function($) {
     $(document).ready(function() {
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
         $("#publish-post button").click(function(){
             // var post = $(this).attr("post");
             var url = $(this).attr("url");
+            var data = $(this).attr("data");
             $.ajax({
                 url: url,
-                method: 'get',
+                method: 'post',
+                headers: {'X-CSRFToken': csrftoken},
+                // mode: 'same-origin',
                 dataType: 'json',
-                // data: {post: post},
+                data: data,
                 beforeSend: function () {
                     $("#publish-post button").css("display", "none");
                     $("#publish-post").append("<div class=\'loading\"><i class=\"fa fa-refresh fa-spin fa-1x fa-fw\"> Выполнение</i></div>");
                 },
                 success: function(data){
 
-                    switch (data.response) {
+                    switch (data.result) {
                         case "success":
                             $("#publish-post").html("<i class=\"fa fa-check\"> " + data.message + "<i>");
                             break;
@@ -22,19 +43,11 @@
                             alert(data.message);
                             $("#publish-post .loading").html("");
                             $("#publish-post button").css("display", "block");
-                            // $("#publish-post").html("<i class=\"fa fa-warning\"> " + data.message + "<i>");
                             break;
                         default:
                             $("#publish-post").html("<i class=\"fa fa-warning\"> Ошибка. Попробуйте обновить страницу.</i>");
                             break;
                     }
-                    // if (data.response === "success") {
-                    //     $("#publish-post").html("<i class=\"fa fa-check\"> " + data.message + "<i>");
-                    // } else if (data.response === "error") {
-                    //     $("#publish-post").html("<i class=\"fa fa-warning\"> " + data.message + "<i>");
-                    // } else {
-                    //     $("#publish-post").html("<span class=\"text-s\">Ошибка. Попробуйте обновить страницу.</span>");
-                    // }
                 }
             });
         });

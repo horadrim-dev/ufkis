@@ -4,10 +4,13 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404
 from django.views.generic import ListView, DetailView, View
+from django.core.exceptions import PermissionDenied
 from .models import Post
 from django_filters.views import FilterView
 from .filtersets import PostFilterSet
 from cms.models.pluginmodel import CMSPlugin
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
 class PublishedObjectsMixin:
 
@@ -19,7 +22,7 @@ class PublishedObjectsMixin:
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["ADMIN_MODE"] = True if self.request.toolbar else False
+        context["ADMIN_MODE"] = self.request.user.is_authenticated
         context["EDIT_MODE"] = True if self.request.toolbar.edit_mode_active else False
         return context
     
@@ -30,14 +33,6 @@ class PostListView(PublishedObjectsMixin, FilterView):
     paginate_by = 12
     filterset_class = PostFilterSet
 
-# class PostListView(ListView):
-#     template_name = 'news/post_list.html'
-#     model = Post
-#     paginate_by = 12
-
-    # def get_context_data(self, **kwargs):
-        # context = super().get_context_data(**kwargs)
-    #     assert False, (context['filter'].form['tags'], dir(context['filter'].form['tags']))
 
 class PostDetailView(PublishedObjectsMixin, DetailView):
     template_name = 'news/post_detail.html'
@@ -51,43 +46,63 @@ class PostDetailView(PublishedObjectsMixin, DetailView):
         return context
     
 
-# def publish_post(request):
-#     return HttpResponse("<h1>YEA</h1><h1> ",str(), " </h1>")
 
-ACTION_LIST = ("publish", "unpublish")
-RESPONSES = {
+ACTION_LIST = ("toggle-publish-state", )
+RESULTS = {
     0 : "error",
     1 : "success",
 }
 
 class AdminView(View):
 
-    def get(self, request):
-        # return JsonResponse({"response":1, "message": "Опубликовано"})
 
-        action = request.GET.get("action")
-        post = request.GET.get("post")
+    def dispatch(self, request, *args, **kwargs):
+        # return JsonResponse({"result": "error", "message":request.META.get("HTTP_X_REQUESTED_WITH")})
+        if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            return self.ajax_post(request, *args, **kwargs)
+        # return self.ajax_post(request, *args, **kwargs)
+
+        return super().dispatch(request, *args, **kwargs)
+    
+
+    def ajax_post(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            raise PermissionDenied
+
+        action = request.POST.get("action")
+        post = request.POST.get("post")
 
         if action not in ACTION_LIST:
-            raise Http404()
+            raise Http404
 
         try:
-            p = Post.objects.get(pk=post)
+            post = Post.objects.get(pk=post)
         except Post.DoesNotExist:
-            raise Http404()
+            raise Http404
         
-        if post and (action == "publish"):
+        if post and (action == 'toggle-publish-state'):
+            try:
+                return self.toggle_publish_state_post(request, post)
+            except PermissionDenied:
+                return JsonResponse({"result": RESULTS[0], "message": "Нет прав доступа для этой операции"})
+
+        raise Http404
+    
+
+    @method_decorator(permission_required("news.change_post", raise_exception=True))
+    def toggle_publish_state_post(self, request, post:Post):
+        '''Switching publish state of Post'''
+        if post.published:
+            post.published = False
+            post.save()
+            return JsonResponse({"result": RESULTS[1], "message": "Снято с публикации"})
+        else:
             # if post has child plugins
-            if CMSPlugin.objects.filter(placeholder_id=p.content_id).count() > 0:
-                p.published = True
-                p.save()
-                return JsonResponse({"response": RESPONSES[1], "message": "Опубликовано"})
+            if CMSPlugin.objects.filter(placeholder_id=post.content_id).count() > 0:
+                post.published = True
+                post.save()
+                return JsonResponse({"result": RESULTS[1], "message": "Опубликовано"})
             else: # no child plugins
                 message = "Новость пуста и поэтому не может быть опубликована. \n Добавьте плагинов на страницу."
-                return JsonResponse({"response": RESPONSES[0], "message": message})
-
-        if post and (action == "unpublish"):
-            p.published = False
-            p.save()
-            return JsonResponse({"response": RESPONSES[1], "message": "Снято с публикации"})
-        raise Http404()
+                return JsonResponse({"result": RESULTS[0], "message": message})

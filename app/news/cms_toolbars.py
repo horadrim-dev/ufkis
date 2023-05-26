@@ -14,30 +14,38 @@ class NewsToolbar(CMSToolbar):
         #     url=admin_reverse('news_post_changelist'),
         #     )
 
-        menu = self.toolbar.get_or_create_menu(
+        news_menu = self.toolbar.get_or_create_menu(
             key='news_cms_integration',
             verbose_name='Новости'
         )
-        menu.add_sideframe_item(
+        news_menu .add_sideframe_item(
             name='Новости',
             url=admin_reverse('news_post_changelist')
         )
-        menu.add_modal_item(
+        news_menu.add_modal_item(
             name='Добавить новость',
             url=admin_reverse('news_post_add'), 
             on_close=reverse('news:index')
         )
-        menu.add_modal_item(
+        news_menu.add_modal_item(
             name='Категории',
             url=admin_reverse('news_category_changelist')
         )
-        menu.add_modal_item(
+        news_menu.add_modal_item(
             name='Добавить категорию',
             url=admin_reverse('news_category_add')
         )
 
-        # self.toolbar.add_modal_button(
-        #     name='Добавить новость', 
-        #     url=admin_reverse('news_post_add'),
-        #     on_close=reverse('news:index')
-        #     )
+        tags_menu = self.toolbar.get_or_create_menu(
+            key='taggit_cms_integration',
+            verbose_name='Теги'
+        )
+        tags_menu .add_sideframe_item(
+            name='Теги',
+            url=admin_reverse('taggit_tag_changelist')
+        )
+        self.toolbar.add_modal_button(
+            name='Добавить новость', 
+            url=admin_reverse('news_post_add'),
+            on_close=reverse('news:index')
+            )
