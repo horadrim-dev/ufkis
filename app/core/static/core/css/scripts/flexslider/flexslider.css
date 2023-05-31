@@ -269,8 +269,7 @@ body .flex-direction-nav a.flex-next:before {
 
 .flex-control-nav {
     width: 100%;
-    position: absolute;
-    bottom: -40px;
+    position: relative;
     text-align: center;
     z-index: 9;
     height: auto !important;

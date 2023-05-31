@@ -9,7 +9,7 @@ from .models import NewsPlugin
 @plugin_pool.register_plugin
 class NewsPlugin(CMSPluginBase):
     model =  NewsPlugin
-    render_template = 'news/news_plugin.html'
+    render_template = 'news/news.plugin.html'
     name = "Новости"   
 
     def render(self, context, instance, placeholder):

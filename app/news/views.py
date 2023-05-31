@@ -11,6 +11,7 @@ from .filtersets import PostFilterSet
 from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
+from django.urls import reverse
 
 class PublishedObjectsMixin:
 
@@ -27,21 +28,44 @@ class PublishedObjectsMixin:
         return context
     
 
+NEWS_LIST_LAYOUTS = ("grid", "list")
+
 class PostListView(PublishedObjectsMixin, FilterView):
-    template_name = 'news/post_list.html'
+    template_name = 'news/post.list.html'
     # model = Post
     paginate_by = 12
     filterset_class = PostFilterSet
 
+    def get_news_list_layout(self):
+        layout = self.request.COOKIES.get('news_list_layout', None)
+        return layout if layout in NEWS_LIST_LAYOUTS else NEWS_LIST_LAYOUTS[0]
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['news_list_layout'] = self.get_news_list_layout()
+        return context
+
+    def render_to_response(self, context, **response_kwargs):
+        response = super().render_to_response(context, **response_kwargs)
+
+        # seting news list layout to cookie
+        response.set_cookie('news_list_layout', 
+                            self.get_news_list_layout(),
+                            path=reverse("news:index"),
+                            max_age=3600*24*7)
+        return response
+
 
 class PostDetailView(PublishedObjectsMixin, DetailView):
-    template_name = 'news/post_detail.html'
+    template_name = 'news/post.detail.html'
     slug_field = 'alias'
     model = Post
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
         context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.title}]
+        context['other_objects'] = self.get_queryset().exclude(id=context['object'].id)[:9]
         context['page_title'] = self.object.title
         return context
     

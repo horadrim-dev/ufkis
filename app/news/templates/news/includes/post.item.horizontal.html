@@ -1,0 +1,68 @@
+{% load cms_tags news_tags easy_thumbnails_tags %}
+
+<div class="news-item horizontal niche-box-blog {{ obj.css_styles }}">
+    <div class="advs-box advs-box-side-img advs-box-blog" >
+        <div class="row">
+        {% if obj.image %}
+            <div class="col-md-4">
+                <a class="img-box" href="{{ obj.get_absolute_url }}">
+                    <img class="anima" src="{% thumbnail obj.image "300x300" upscale crop %}" alt="" />
+                </a>
+            </div>
+            <div class="col-md-8">
+            {% else %}
+            <div class="col-md-12">
+            {% endif %}
+                <h2 class="text-m">
+                    <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+                </h2>
+                {% if EDIT_MODE %}
+                    <div class="actions-panel">
+                        <div class="status-panel">
+                            {% comment %} {% if obj.published %}
+                                <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
+                            {% else %}
+                                <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
+                            {% endif %} {% endcomment %}
+                        </div>
+                        <div class="actions">
+                        {% render_model_block obj %}
+                            <i class="fa fa-gear"></i>
+                        {% endrender_model_block %}
+                        </div>
+                    </div>
+                {% endif %}
+                <hr>
+                <div class="tag-row icon-row">
+                    <span><i class="fa fa-calendar"></i><a>{{obj.published_at}}</a></span>
+                    {% if obj.category %}
+                    <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ obj.category.id }}">{{ obj.category.title }}</a></span>
+                    {% endif %}
+                    {% comment %} <span><i class="fa fa-pencil"></i><a>Admin</a></span> {% endcomment %}
+                    <div class="tag-row">
+                        <div class="taggit-labels taggit-list">
+                            {% for tag in obj.tags.all %}
+                            <span class="taggit-tag item-tag">
+                                {% comment %} <i class="fa fa-tag"></i> {% endcomment %}
+                                <a href="{% url "news:index" %}?tags={{ tag.name | prepare_tag_name }}">
+                                    {{tag}}
+                                </a>
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    {% if obj.get_description %}
+                        {{ obj.get_description|striptags|truncatechars_html:300}}
+                    {% endif %}
+                </p>
+                <div class="text-right">
+                    <a href="{{ obj.get_absolute_url }}" class="btn btn-border">
+                        <i class="fa fa-chevron-circle-right"></i> Перейти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

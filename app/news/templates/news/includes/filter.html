@@ -13,14 +13,27 @@
         <p class="list-group-item active">Теги</p>
         <div class="tagbox">
             {{filter.form.tags}}
+            {% comment %} {% for choice in filter.form.tags %}
+                {{ choice.tag}}
+            {% endfor %} {% endcomment %}
             <div class="clear"></div>
+        </div>
+        <p class="list-group-item active">Дата</p>
+        <div class="row">
+            <div class="col-md-6">
+                {{filter.form.start_date.label}}{{filter.form.start_date}}
+            </div>
+            <div class="col-md-6">
+                {{filter.form.end_date.label}}
+                {{filter.form.end_date}}
+            </div>
         </div>
     </div>
     {% comment %} <input type="submit" value="Применить" class="btn w-100" /> {% endcomment %}
     {% comment %} <input type="reset" class="btn btn-border"> 
     <button id="filter-reset">...</button> {% endcomment %}
     {% comment %} <input type="reset" id="reset" onclick="this.form.reset();" class="btn btn-border"/> {% endcomment %}
-    {% comment %} <button type="reset" class="btn btn-border"><i class="fa fa-check"></i></button> {% endcomment %}
+    <a href="{% url "news:index" %}" class="btn btn-border w-100"><i class="fa fa-trash"></i> Сбросить</a>
     {% comment %} <input type="submit" value="Применить" class="hidden d-none" /> {% endcomment %}
 </form>
 
@@ -29,6 +42,7 @@
 $( document ).ready(function() {
     $('#news-filter input.autoapply').on('change', function() {
         $(this).closest("form").submit();
+        
     });
     $('#news-filter input#filter-reset').on('click', function() {
         $(this).closest("form").reset();

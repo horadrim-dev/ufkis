@@ -1,5 +1,8 @@
 (function($) {
-    $(document).ready(function() {
+    
+    var original_onPageLoad = $.fn.onPageLoad;
+    $.fn.onPageLoad = function () {
+        original_onPageLoad();
 
         function getCookie(name) {
             let cookieValue = null;
@@ -33,21 +36,22 @@
                 },
                 success: function(data){
 
+                    $("#publish-post .loading").html("");
+
                     switch (data.result) {
                         case "success":
-                            $("#publish-post").html("<i class=\"fa fa-check\"> " + data.message + "<i>");
+                            toastr.success(data.message);
                             break;
                         case "error":
-                            alert(data.message);
-                            $("#publish-post .loading").html("");
+                            toastr.warning(data.message);
                             $("#publish-post button").css("display", "block");
                             break;
                         default:
-                            $("#publish-post").html("<i class=\"fa fa-warning\"> Ошибка. Попробуйте обновить страницу.</i>");
+                            toastr.error("Ошибка. Попробуйте обновить страницу.")
                             break;
                     }
                 }
             });
         });
-    });
+    }
 })(jQuery || django.jQuery);

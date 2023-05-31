@@ -1,4 +1,4 @@
-{% load cms_tags %}
+{% load cms_tags news_tags %}
 {% comment %} <div class="col-md-6 col-lg-4 ftco-animate">
     <div class="blog-entry">
         <a href="{{ obj.get_absolute_url }}" 
@@ -22,13 +22,13 @@
         </div>
     </div>
 </div> {% endcomment %}
-<div class="news-item advs-box advs-box-top-icon-img niche-box-post boxed-inverse {{ obj.css_styles }}">
+<div class="news-item vertical advs-box advs-box-top-icon-img niche-box-post boxed-inverse {{ obj.css_styles }}">
     <div class="block-infos">
         <div class="block-data">
             <p class="bd-day">{{obj.published_at}}</p>
             <p class="bd-month"></p>
         </div>
-        <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a>
+        {% comment %} <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a> {% endcomment %}
         {% if EDIT_MODE %}
             <div class="actions-panel">
                 <div class="status-panel">
@@ -66,7 +66,7 @@
                 {% for tag in obj.tags.all %}
                 <span class="taggit-tag item-tag">
                     {% comment %} <i class="fa fa-tag"></i> {% endcomment %}
-                    <a href="{% url "news:index" %}?tags={{ tag }}">
+                    <a href="{% url "news:index" %}?tags={{ tag.name | prepare_tag_name }}">
                         {{tag}}
                     </a>
                 </span>
@@ -76,10 +76,6 @@
         <p class="niche-box-content">
             {% if obj.get_description %}
                 {{ obj.get_description|striptags|truncatechars_html:150}}
-            {% comment %} {% else %}
-                {% if EDIT_MODE %}
-                    <h4>[пусто]</h4>
-                {% endif %} {% endcomment %}
             {% endif %}
         </p>
         <div class="text-right">

@@ -1,7 +1,6 @@
-from unicodedata import category
 import django_filters
 from django import forms
-from .models import Post, Category #, SEASON_CHOICES
+from .models import Post, Category
 from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
@@ -28,6 +27,12 @@ class PostFilterSet(django_filters.FilterSet):
         field_name='tags__name',
         widget=LabelWidget(attrs={'class':'tags'})
         )
+    start_date = django_filters.filters.DateFilter(field_name='published_at',
+        widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
+        lookup_expr='gte', label='от')
+    end_date = django_filters.filters.DateFilter(field_name='published_at',
+        widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
+        lookup_expr='lte', label='до')
     # tags = django_filters.filters.ModelMultipleChoiceField(
     #     blank=True,
     #     # empty_label='Все новости',

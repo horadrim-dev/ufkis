@@ -1,0 +1,60 @@
+{% extends 'news/base.html' %}
+{% load sekizai_tags thumbnail static %}
+
+{% block app_content %}
+  {% addtoblock "js" %}<script src="{% static 'news/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
+
+  <div class="row pb-5">
+    <div class="col-md-3 col-sm-12">
+        {% include './includes/filter.html' %}
+    </div>
+    <div class="col-md-9 col-sm-12">
+        
+        <div class="text-right hidden-xs display-md">
+          <button class="layout-toggler btn-border btn-sm" data="grid" path="{% url "news:index" %}"
+            {% if news_list_layout == "grid" %}disabled{% endif %}
+            >
+            <i class="fa fa-th-large"></i>
+          </button>
+          <button class="layout-toggler btn-border btn-sm" data="list" path="{% url "news:index" %}"
+            {% if news_list_layout == "list" %}disabled{% endif %}
+            >
+            <i class="fa fa-th-list"></i>
+          </button>
+        </div>
+        <hr class="space m" />
+
+        {% if news_list_layout == "grid" %}
+        <div class="maso-list">
+            <div class="maso-box row">
+                {% for obj in object_list %}
+                <div class="maso-item col-lg-4 col-md-6">
+                  {% include 'news/includes/post.item.vertical.html' %}
+                </div>
+                {% empty %}
+                <p>Ничего не найдено.</p>
+                {% endfor %}
+            </div>
+        </div>
+        {% elif news_list_layout == "list" %}
+          <div class="grid-list one-row-list">
+            <div class="grid-box row">
+                {% for obj in object_list %}
+                <div class="grid-item col-md-12">
+                    {% include 'news/includes/post.item.horizontal.html' %}
+                </div>
+                {% comment %} <hr class="space m" /> {% endcomment %}
+                {% empty %}
+                <p>Ничего не найдено.</p>
+                {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        <div class="clear"></div>
+        {% include './includes/pagination.html' %}
+    </div>
+  </div>
+
+  
+
+{% endblock %}

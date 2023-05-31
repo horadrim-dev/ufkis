@@ -768,8 +768,7 @@ function isScrollView(t) {
         $(obj).flexslider(options);
     }
 
-    //DOCUMENT READY
-    $(document).ready(function () {
+    $.fn.onPageLoad = function () {
         //DEVICE SIZE
         var wh = $(window).width();
         var hh = $(window).height();
@@ -1617,5 +1616,9 @@ function isScrollView(t) {
                 if ($(this).attr("data-trigger") != "manual") $(this).initFlexSlider();
             });
         });
+    }
+    //DOCUMENT READY
+    $(document).ready(function () {
+        $(this).onPageLoad();
     });
 }(jQuery));

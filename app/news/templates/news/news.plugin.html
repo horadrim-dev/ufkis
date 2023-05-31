@@ -6,19 +6,13 @@
 
 <div class="news-container">
 
-  {% if user.is_authenticated and object_list %}
-  <div class="row d-flex justify-content-end pb-4 pe-3">
-    {% render_model_add object_list.0 %}
-  </div>
-  {% endif %}
-
   <div class="row">
     {% for obj in object_list %}
 
       {% if forloop.counter <= 2 %}
       <div class="col-md-4 col-sm-6">
       {% render_model_block obj %}
-      {% include 'news/includes/post_item.html' %}
+      {% include 'news/includes/post.item.vertical.html' %}
       {% endrender_model_block %}
       </div>
 
@@ -36,7 +30,9 @@
                 <h2 class="text-m"><a href="#">{{ obj.title }}</a></h2>
                 <span class="extra-content">{{ obj.published_at }}</span>.
                 <p>
-                  {{ obj.text |safe|truncatechars_html:150 }}
+                  {% if obj.get_description %}
+                      {{ obj.get_description|striptags|truncatechars_html:150}}
+                  {% endif %}
                 </p>
                 <hr class="space xs" />
                 <div class="text-right">

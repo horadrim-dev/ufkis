@@ -9,11 +9,11 @@
   {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'news/css/news.css' %}">{% endaddtoblock %} 
   {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'news/css/taggit_labels.css' %}">{% endaddtoblock %} 
 
-  {% addtoblock "js" %}<script src="{% static 'news/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
   {% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %}
   {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
+  {% addtoblock "js" %}<script src="{% static 'news/js/news.js' %}"></script>{% endaddtoblock %} 
 
-  {% if EDIT_MODE %}
+  {% if ADMIN_MODE %}
     {% addtoblock "js" %}<script src="{% static 'news/js/news-admin.js' %}"></script>{% endaddtoblock %} 
   {% endif %}
 

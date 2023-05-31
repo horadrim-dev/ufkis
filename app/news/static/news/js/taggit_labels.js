@@ -6,11 +6,16 @@
 // When the internal array changes, it should write out a new tag list to the hidden input
 
 (function($) {
-    $(document).ready(function() {
+    var original_onPageLoad = $.fn.onPageLoad;
+    $.fn.onPageLoad = function () {
+        original_onPageLoad();
+
         $(".taggit-labels").closest("div").each(function(i) {
-            var inputs = $(this).find(".taggit-labels + input")[0];
+            // var inputs = $(this).find(".taggit-labels input")[0];
+            var inputs = $("input[name=tags]");
             var tagItems = $(this).find(".taggit-list .taggit-tag");
-            var tagList = inputs.value.split(", ");
+            // var tagList = inputs.value.split(", ");
+            var tagList = inputs.attr("value").split(", ");
             if ((tagList.length <= 1) & (tagList[0] == "")) tagList = [];
 
             tagItems.click(function() {
@@ -39,5 +44,5 @@
                 $(this).closest("form").submit();
             });
         });
-    });
+    };
 })(jQuery || django.jQuery);
