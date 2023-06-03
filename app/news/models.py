@@ -6,6 +6,7 @@ from django.urls import reverse
 from cms.models.pluginmodel import CMSPlugin
 from cms.models.fields import PlaceholderField
 from taggit.managers import TaggableManager
+# from taggit_autosuggest.managers import TaggableManager
 # from taggit.models import TagBase
 import uuid
 import datetime
@@ -37,6 +38,8 @@ class Category(models.Model):
 #         verbose_name = "тег"
 #         verbose_name_plural = "теги"
 
+PLUGINS_WITH_IMAGES = ("PicturePlugin", "SliderItemPlugin", )
+
 class Post(models.Model):
     title = models.CharField(
         default="", max_length=1000, verbose_name="Заголовок")
@@ -55,7 +58,10 @@ class Post(models.Model):
 
     # placeholder = PlaceholderField('post', related_name="news_post")
 
-    image = FilerImageField(verbose_name="Изображение", on_delete=models.CASCADE, blank=True, null=True)
+    cover_image = FilerImageField(verbose_name="Обложка поста", 
+                                  on_delete=models.CASCADE, 
+                                  blank=True, null=True,
+                                  help_text="Если не задано - будет использовано первое изображение из содержимого поста")
 
     tags = TaggableManager()
 
@@ -65,8 +71,8 @@ class Post(models.Model):
         ('right', 'Справа'),
         ('hide', 'Скрыть'),
     ]
-    image_position = models.CharField(max_length=64, choices=IMAGE_POSITION_CHOICES, default=IMAGE_POSITION_CHOICES[0][0],
-        verbose_name="Расположение изображения")
+    # image_position = models.CharField(max_length=64, choices=IMAGE_POSITION_CHOICES, default=IMAGE_POSITION_CHOICES[0][0],
+    #     verbose_name="Расположение изображения")
 
     # placeholder_top = PlaceholderField('top', related_name="post_top")
     # placeholder_bottom = PlaceholderField('bottom', related_name="post_bottom")
@@ -101,8 +107,26 @@ class Post(models.Model):
 
     def has_content_plugins(self):
         return CMSPlugin.objects.filter(placeholder_id=self.content_id).count()
+    
+    @property
+    def image(self):
+        if self.cover_image:
+            return self.cover_image
+        else:
+            plugin = CMSPlugin.objects.filter(placeholder_id=self.content_id, 
+                                              plugin_type__in=PLUGINS_WITH_IMAGES) \
+                                        .order_by('position') \
+                                        .first()
+                                        
+            if not plugin:
+                return None
+            if plugin.plugin_type == "PicturePlugin":
+                return plugin.djangocms_picture_picture.picture
+            elif plugin.plugin_type == "SliderItemPlugin":
+                return plugin.slider_slide.image
 
-    def get_description(self):
+    @property
+    def description(self):
         text = CMSPlugin.objects.filter(placeholder_id=self.content_id, plugin_type="TextPlugin").first()
         return text.djangocms_text_ckeditor_text.body if text else False 
 

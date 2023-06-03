@@ -74,8 +74,8 @@
             </div>
         </div>
         <p class="niche-box-content">
-            {% if obj.get_description %}
-                {{ obj.get_description|striptags|truncatechars_html:150}}
+            {% if obj.description %}
+                {{ obj.description|striptags|truncatechars_html:150}}
             {% endif %}
         </p>
         <div class="text-right">

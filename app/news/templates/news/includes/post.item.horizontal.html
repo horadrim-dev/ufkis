@@ -53,8 +53,8 @@
                     </div>
                 </div>
                 <p>
-                    {% if obj.get_description %}
-                        {{ obj.get_description|striptags|truncatechars_html:300}}
+                    {% if obj.description %}
+                        {{ obj.description|striptags|truncatechars_html:300}}
                     {% endif %}
                 </p>
                 <div class="text-right">

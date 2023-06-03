@@ -55,7 +55,9 @@ class PostFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = Post
-        fields = ['category', 'tags']
+        # fields = ['category', 'tags']
+        # исключаем автоматическую генерацию фильтров для этих полей, заданы вручную в теле класса
+        exclude = ['category', 'tags', 'start_date', 'end_date']
         
         # filter_overrides = {
         #     TaggableManager: {
@@ -66,4 +68,3 @@ class PostFilterSet(django_filters.FilterSet):
         #         # }
         #     },
         # }
-        # exclude = []
