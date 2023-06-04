@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     ############
     'core',
     'background_section',
+    'breadcrumbs',
     'colorfield',
     'infoblock',
     'columns',
