@@ -34,7 +34,7 @@
                 {% endif %}
                 <hr>
                 <div class="tag-row icon-row">
-                    <span><i class="fa fa-calendar"></i><a>{{obj.published_at}}</a></span>
+                    <span class="date"><i class="fa fa-calendar"></i>{{obj.published_at}}</span>
                     {% if obj.category %}
                     <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ obj.category.id }}">{{ obj.category.title }}</a></span>
                     {% endif %}

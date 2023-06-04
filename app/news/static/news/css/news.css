@@ -20,6 +20,10 @@
 .news-item.too-early-to-publish .block-infos .block-data {
   background: #ff8a0e !important;
 }
+.news-item.horizontal.too-early-to-publish .date,
+.news-item.horizontal.too-early-to-publish .date i {
+  color: #ff8a0e;
+}
 .news-item .tag-row {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -96,4 +100,7 @@
   padding: 30px;
   z-index: 0;
   position: relative;
+}
+.tag-row.icon-row span:last-child:after{
+  content: none !important;
 }

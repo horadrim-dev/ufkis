@@ -49,3 +49,7 @@ class NewsToolbar(CMSToolbar):
             url=admin_reverse('news_post_add'),
             on_close=reverse('news:index')
             )
+        self.toolbar.add_modal_button(
+            name='Добавить тег', 
+            url=admin_reverse('taggit_tag_add'),
+            )
