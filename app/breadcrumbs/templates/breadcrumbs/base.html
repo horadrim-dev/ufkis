@@ -1,0 +1,44 @@
+{% load static cms_tags sekizai_tags menu_tags easy_thumbnails_tags %}
+
+{% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+
+{% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+
+
+
+{% comment %} <div class="section-bg-image parallax-window box-middle-container" style="height:600px;" data-natural-height="486" data-natural-width="1366" data-parallax="scroll" data-image-src="http://www.framework-y.com/images/thumb-large.png">
+     ...
+</div> {% endcomment %}
+{% addtoblock "css" %}
+<style>
+#block-{{id}} {
+    {% if instance.image %}
+        background-image:url({% thumbnail instance.image instance.get_width_height_thumb upscale crop %});
+        text-shadow: 2px 3px 2px rgba(0,0,0,0.9);
+    {% endif %}
+    height: {{instance.height}}px;
+}
+</style>
+{% endaddtoblock %}
+
+<div id="block-{{id}}" class="breadcrumbs header-title white">
+    <div class="container">
+        <div class="title-base">
+            <hr class="anima" />
+            <h1>
+                {% if instance and instance.title %}
+                    {{ instance.title }}
+                {% comment %} {% elif page_title %}
+                    {{ page_title }} {% endcomment %}
+                {% else %}
+                    {% page_attribute "page_title" %}
+                {% endif %}
+            </h1>
+            <hr class="space s" />
+            <ol class="breadcrumb b">
+                {% show_breadcrumb 0 'breadcrumbs/breadcrumb.html' 0 %}
+            </ol>
+        </div>
+    </div>
+</div>
+

@@ -19,15 +19,18 @@ class Breadcrumbs(CMSPlugin):
         on_delete=models.CASCADE,
         blank=True, null=True
     )
-    thumb_width = models.PositiveSmallIntegerField("Ширина", default=400)
-    thumb_height = models.PositiveSmallIntegerField("Высота", default=200)
+    height = models.PositiveSmallIntegerField("Высота", default=300)
 
     @property
     def title(self):
         return self._title if self._title.strip() else None
 
+    def generate_id(self):
+        return str(uuid.uuid4().fields[-1])[:7]
+
     def get_width_height_thumb(self):
-        return "{}x{}".format(self.thumb_width, self.thumb_height)
+        # return "{}x{}".format(self.thumb_width, self.thumb_height)
+        return "{}x{}".format(1000, self.height)
 
     def __str__(self):
-        return self.name if self.name else ''
+        return self.__class__.__name__
