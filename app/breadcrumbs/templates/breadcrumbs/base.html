@@ -10,25 +10,25 @@
      ...
 </div> {% endcomment %}
 
-<div class="breadcrumbs header-title {% if instance.image %}white{% endif %}"
+<div class="breadcrumbs header-title {% if image %}white{% endif %}"
     style="
-        {% if instance.image %}
-            background-image:url({% thumbnail instance.image instance.get_width_height_thumb upscale crop %});
+        {% if image %}
+            background-image:url({% thumbnail image width_height_thumb upscale crop %});
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
             text-shadow: 2px 3px 2px rgba(0,0,0,0.9);
         {% endif %}
-        height: {{instance.height}}px;
+        {% if block_height %}
+        height: {{ block_height }}px;
+        {% endif %}
     ">
     <div class="container">
         <div class="title-base">
             <hr class="anima" />
             <h1>
-                {% if instance and instance.title %}
-                    {{ instance.title }}
-                {% comment %} {% elif page_title %}
-                    {{ page_title }} {% endcomment %}
+                {% if page_title %}
+                    {{ page_title }}
                 {% else %}
                     {% page_attribute "page_title" %}
                 {% endif %}

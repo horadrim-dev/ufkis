@@ -23,9 +23,10 @@ class Breadcrumbs(CMSPlugin):
 
     @property
     def title(self):
-        return self._title if self._title.strip() else None
+        return self._title if self._title and self._title.strip() else None
 
-    def get_width_height_thumb(self):
+    @property
+    def width_height_thumb(self):
         # return "{}x{}".format(self.thumb_width, self.thumb_height)
         return "{}x{}".format(1200, self.height)
 
