@@ -19,11 +19,15 @@
 
   {% include 'core/breadcrumbs.html' %}
 
+  {% placeholder "news-top" %}
+
   <section class="news-container section-bg-color">
     <div class="container">
       {% block app_content %}
       {% endblock %}
     </div>
   </section>
+
+  {% placeholder "news-bottom" %}
 
 {% endblock %}

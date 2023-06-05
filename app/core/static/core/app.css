@@ -144,6 +144,9 @@ footer {
     text-align: left;
     margin-top:40px;
 }
+.breadcrumbs {
+    background: #fff;
+}
 .header-base { 
     padding-bottom: 0;
 }

@@ -14,7 +14,6 @@ class BreadcrumbsPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
-            'id': instance.generate_id()
         })
         return context
 
