@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load cms_tags sekizai_tags static %}
 
+{% comment %} {% block title %}
+
+{% endblock %} {% endcomment %}
+
 
 {% block content %}
 
@@ -17,9 +21,9 @@
     {% addtoblock "js" %}<script src="{% static 'news/js/news-admin.js' %}"></script>{% endaddtoblock %} 
   {% endif %}
 
-  {% include 'core/breadcrumbs.html' %}
+  {% static_placeholder '[news] top' %}
 
-  {% placeholder "news-top" %}
+  {% comment %} {% include 'core/breadcrumbs.html' %} {% endcomment %}
 
   <section class="news-container section-bg-color">
     <div class="container">
@@ -28,6 +32,6 @@
     </div>
   </section>
 
-  {% placeholder "news-bottom" %}
+  {% static_placeholder "[news] bottom" %}
 
 {% endblock %}

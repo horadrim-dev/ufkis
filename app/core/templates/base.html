@@ -5,7 +5,11 @@
 <html lang="ru">
 <!--<![endif]-->
     <head>
-      <title>{% page_attribute "page_title" %}</title>
+      <title>
+        {% block title %}
+          {% page_attribute "page_title" %}
+        {% endblock %}
+      </title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,11 +84,15 @@
 			{% comment %} <img id="specialButton" style="cursor:pointer;" src="https://lidrekon.ru/images/special.png" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" /> {% endcomment %}
     {% include 'core/header.html' %}
 		{% comment %} </header> {% endcomment %}
-  
+    
+    {% static_placeholder "[ALL] top" %}
+
 		{% block content %}
 			{% placeholder "content" %}
 		{% endblock content %}
    
+    {% static_placeholder "[ALL] bottom" %}
+
     {% include 'core/footer.html' %}
 		{% comment %} <footer class="ftco-footer ftco-bg-dark ftco-section pb-0">
 			<div class="container">

@@ -14,10 +14,11 @@ class BreadcrumbsPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
-            'page_title': instance.title,
             'block_height': instance.height,
             'image': instance.image,
             'width_height_thumb': instance.width_height_thumb
         })
+        if instance.title:
+            context['page_title'] = instance.title
         return context
 

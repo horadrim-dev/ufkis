@@ -31,7 +31,9 @@
       {% endrender_model_block %}
   </div> {% endcomment %}
 
-
+{% block title %}
+    {{ object.title }}
+{% endblock %}
 
 {% block app_content %}
 
