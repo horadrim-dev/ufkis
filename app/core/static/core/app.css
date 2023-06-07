@@ -112,11 +112,30 @@ ul.nav.root-level:not(.ms-rounded)>li>a::before {
 }
 
 .flexslider.outer-navs a.flex-prev {
-    width: 100px;
+    /* 
+    height: 100px;
+    line-height: 60px;
+    border: 1px solid #a4a4a4;
+    border-radius: 50px;
+    left: -50px !important; */
+    /* width: 100px; */
+    line-height: 200px;
+    margin-top: -100px;
+    border: 1px solid #ddd;
+    margin-left: 5px;
 }
-
+.flexslider .flex-direction-nav li a.flex-prev::before {
+  margin-left: 5px;
+}
 .flexslider.outer-navs a.flex-next {
-    width: 100px;
+    /* width: 100px; */
+    line-height: 200px;
+    margin-top: -10%;
+    border: 1px solid #ddd;
+    margin-right: 5px;
+}
+.flexslider .flex-direction-nav li a.flex-next::before {
+  margin-left: -5px;
 }
 
 .img-box.adv-img-side-content .caption {
@@ -180,6 +199,7 @@ footer {
 .flex-control-nav {
   position: relative;
   bottom: 0;
+  margin-top: 20px;
 }
 .img-box::before {
     background: #fff;
