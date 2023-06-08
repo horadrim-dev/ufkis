@@ -14,12 +14,14 @@ class Breadcrumbs(CMSPlugin):
                              blank=True, null=True, 
                              help_text="Не обязательно. Если не заполнено - будет использован заголовок страницы.")
 
+    white_mode = models.BooleanField("Текст белым цветом", default=False)
     image = FilerImageField(
         verbose_name=_('Изображение'),
         on_delete=models.CASCADE,
         blank=True, null=True
     )
-    height = models.PositiveSmallIntegerField("Высота", default=300)
+    thumb_width = models.PositiveSmallIntegerField("Ширина", default=400)
+    thumb_height = models.PositiveSmallIntegerField("Высота", default=300)
 
     @property
     def title(self):
@@ -27,8 +29,7 @@ class Breadcrumbs(CMSPlugin):
 
     @property
     def width_height_thumb(self):
-        # return "{}x{}".format(self.thumb_width, self.thumb_height)
-        return "{}x{}".format(1200, self.height)
+        return "{}x{}".format(self.thumb_width, self.thumb_height)
 
     def __str__(self):
         return self.__class__.__name__

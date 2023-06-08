@@ -87,7 +87,6 @@
                 {% if object.category %}
                     <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ object.category.id }}">{{ object.category.title }}</a></span>
                 {% endif %}
-                <hr class="space m" />
                 <div class="tag-row">
                     <div class="taggit-labels taggit-list">
                         {% for tag in object.tags.all %}

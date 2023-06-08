@@ -27,7 +27,7 @@
         {% render_model_block obj %}
         <div class="advs-box advs-box-side-icon">
             <div class="caption-box">
-                <h2 class="text-m"><a href="#">{{ obj.title }}</a></h2>
+                <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
                 <span class="extra-content">{{ obj.published_at }}</span>.
                 <p>
                   {% if obj.description %}
