@@ -9,14 +9,14 @@
   <div class="row">
     {% for obj in object_list %}
 
-      {% if forloop.counter <= 2 %}
+      {% comment %} {% if forloop.counter <= 2 %} {% endcomment %}
       <div class="col-md-4 col-sm-6">
       {% render_model_block obj %}
       {% include 'news/includes/post.item.vertical.html' %}
       {% endrender_model_block %}
       </div>
 
-        {% if forloop.counter == 2 %}
+        {% comment %} {% if forloop.counter == 2 %}
           <div class="col-md-4 col-sm-12">
             <hr class="space visible-sm" />
             <div>
@@ -47,16 +47,20 @@
 
         {% if forloop.last %}
             </div>
-            {% comment %} <hr class="space m" /> {% endcomment %}
             <a href="{% url 'news:index' %}" class="btn btn-lg w-100">Больше новостей</a>
           </div>
-        {% endif %}
+        {% endif %} 
 
-      {% endif %}
+      {% endif %}{% endcomment %}
 
     {% empty %}
       <p> Записей не найдено.</p>
     {% endfor %}
 
+    <hr class="space m" />
+
+    <div class="text-center">
+      <a href="{% url 'news:index' %}" class="btn btn-lg w-100">Больше новостей</a>
+    </div>
   </div>
 </div>
