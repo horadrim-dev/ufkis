@@ -15,5 +15,19 @@
             setCookie('news_list_layout', $(this).attr("data"), 7, path=$(this).attr("path"));
             window.location.reload();
         });
+
+        $('#news-filter input.autoapply').on('change', function() {
+            $(this).closest("form").submit();
+            
+        });
+        $('#news-filter input#filter-reset').on('click', function() {
+            $(this).closest("form").reset();
+            //$(this).closest("form").find('input:not([type="submit"])').val('');
+        });
+        $(".news-container #filter-toggler").click(function(){
+            // setCookie('news_list_layout', $(this).attr("data"), 7, path=$(this).attr("path"));
+            // window.location.reload();
+            $("#news-filter").animate({width: 'toggle'});
+        });
     };
 })(jQuery || django.jQuery);
