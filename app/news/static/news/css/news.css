@@ -48,12 +48,14 @@
   font-size: 20px;
 } */
 .actions-panel {
+  padding: 20px 40px;
   font-size: 20px;
-  padding: 7px 0px;
-  font-size: 20px;
-  position: absolute;
-  right: 20px;
-  top: 0;
+  display: flex;
+  justify-content: end;
+  border: 2px dashed #d2d2d2;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 .actions-panel > div {
   display: inline-block;
@@ -114,6 +116,9 @@
 }
 ul.slides li .news-item {
   margin: 5px 10px !important;
+}
+.news-item.detail p {
+  margin: 10px auto;
 }
 .tag-row.icon-row span:last-child:after{
   content: none !important;

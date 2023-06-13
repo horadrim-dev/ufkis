@@ -27,10 +27,12 @@
         <div class="navbar-toggle"><i class="fa fa-bars"></i><span>Категории</span><i class="fa fa-angle-down"></i></div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav over ms-minimal inner maso-filters">
-                <li class="active"><a data-filter="maso-item">Все</a></li>
+                {% comment %} <li class="active"><a data-filter="maso-item">Все</a></li> {% endcomment %}
 
                 {% for cat in instance.categories %}
-                <li><a data-filter="{{cat.slug}}" href="#">{{cat.title}}</a></li>
+                <li class="{% if forloop.first %}active{% endif %}">
+                    <a data-filter="{{cat.slug}}" href="#">{{cat.title}}</a>
+                </li>
                 {% endfor %}
 
                 <li><a class="maso-order" data-sort="asc"><i class="fa fa-arrow-down"></i></a></li>

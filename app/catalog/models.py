@@ -106,6 +106,9 @@ class CatalogItem(CMSPlugin):
         self.categories.set(oldinstance.categories.all())
         # assert False, (oldinstance.categories.all(), self.categories.all())
 
+    def __str__(self):
+        return self.title if hasattr(self, 'title') else super().__str__()
+
     class Meta:
         verbose_name = "элемент каталога"
         verbose_name_plural = "элементы каталога"

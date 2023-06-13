@@ -41,52 +41,48 @@
     {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
 
     <div class="news-item detail">
-        <div class="row">
-            <div class="col-md-4 col-md-push-8 text-right ">
-                    <div class="actions-panel">
-                        {% comment %} {% if ADMIN_MODE %}
-                        <div class="status-panel">
-                            {% if object.published %}
-                                <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
-                            {% else %}
-                                <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
-                            {% endif %}
-                        </div>
-                        {% endif %} {% endcomment %}
-                        {% if ADMIN_MODE %}
-                            <div id="publish-post">
-                            {% if object.published %}
-                                <button class="btn btn-border btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
-                                    <i class="fa fa-eye-slash"></i>Снять с публикации
-                                </button>
-                                {% csrf_token %}
-                            {% else %}
-                                <button class="btn btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
-                                    <i class="fa fa-eye"></i>Опубликовать
-                                </button>
-                            {% endif %}
-                            </div>
-                        {% endif %}
-                        {% if EDIT_MODE %}
-                            <div class="actions">
-                                {% render_model_block object %}
-                                    <i class="fa fa-gear"></i>
-                                {% endrender_model_block %}
-                            </div>
-                        {% endif %}
+        {% comment %} <div class="row"> {% endcomment %}
+            <div class="actions-panel">
+                {% comment %} {% if ADMIN_MODE %}
+                <div class="status-panel">
+                    {% if object.published %}
+                        <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
+                    {% else %}
+                        <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
+                    {% endif %}
+                </div>
+                {% endif %} {% endcomment %}
+                {% if ADMIN_MODE %}
+                    <div id="publish-post">
+                    {% if object.published %}
+                        <button class="btn btn-border btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
+                            <i class="fa fa-eye-slash"></i>Снять с публикации
+                        </button>
+                        {% csrf_token %}
+                    {% else %}
+                        <button class="btn btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
+                            <i class="fa fa-eye"></i>Опубликовать
+                        </button>
+                    {% endif %}
                     </div>
-                {% comment %} <div class="btn-group social-group social-colors">
-                    <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
-                    <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
-                    <a target="_blank" href="#" data-social="share-google" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus text-s circle"></i></a>
-                    <a target="_blank" href="#" data-social="share-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn"><i class="fa fa-linkedin text-s circle"></i></a>
-                </div> {% endcomment %}
+                {% endif %}
+                {% if EDIT_MODE %}
+                    <div class="actions">
+                        {% render_model_block object %}
+                            <i class="fa fa-gear"></i>
+                        {% endrender_model_block %}
+                    </div>
+                {% endif %}
             </div>
-            <div class="col-md-8 col-md-pull-4">
+        {% comment %} </div> {% endcomment %}
+        <div class="row">
+            <div class="col-md-6">
                 <span><i class="fa fa-calendar"></i> {{ object.published_at }}</span>
                 {% if object.category %}
                     <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ object.category.id }}">{{ object.category.title }}</a></span>
                 {% endif %}
+            </div>
+            <div class="col-md-6 text-right ">
                 <div class="tag-row">
                     <div class="taggit-labels taggit-list">
                         {% for tag in object.tags.all %}
@@ -99,6 +95,12 @@
                         {% endfor %}
                     </div>
                 </div>
+                {% comment %} <div class="btn-group social-group social-colors">
+                    <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
+                    <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
+                    <a target="_blank" href="#" data-social="share-google" data-toggle="tooltip" data-placement="top" title="Google+"><i class="fa fa-google-plus text-s circle"></i></a>
+                    <a target="_blank" href="#" data-social="share-linkedin" data-toggle="tooltip" data-placement="top" title="LinkedIn"><i class="fa fa-linkedin text-s circle"></i></a>
+                </div> {% endcomment %}
             </div>
         </div>
         <hr class="b space m" />
