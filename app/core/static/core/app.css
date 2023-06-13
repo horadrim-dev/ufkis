@@ -176,7 +176,8 @@ footer {
 .news-container .advs-box-top-icon-img.boxed .advs-box-content, 
 .news-container .advs-box-top-icon-img.boxed-inverse .advs-box-content {
     /* padding: 15px; */
-    border: 1px solid #EEE6E6;
+    /* border: 1px solid #EEE6E6; */
+    border: none;
     /* background: #fff; */
 }
 .news-container .advs-box .caption-box {

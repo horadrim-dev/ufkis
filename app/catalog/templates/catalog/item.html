@@ -1,5 +1,11 @@
 {% load static cms_tags easy_thumbnails_tags %}
-<div data-sort="{{item_number}}" class="maso-item col-md-6 {% for cat in instance.categories.all %}{{cat.slug}} {% endfor %}">
+<div data-sort="{{item_number}}" 
+	class="catalog-item  maso-item col-md-6 
+		{% comment %} {% if instance.item_layout == 'img_left' %}img-left{% endif %}
+		{% if instance.item_layout == 'img_full' %}img-left{% endif %} {% endcomment %}
+		{{instance.item_layout}}
+		{% for cat in instance.categories.all %}{{cat.slug}} {% endfor %}
+	">
 	{% if instance.item_layout == 'img_left' %}
 		{% include 'catalog/item.img_left.html' %}
 	{% elif instance.item_layout == 'img_full' %}

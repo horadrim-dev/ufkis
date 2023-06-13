@@ -3,6 +3,7 @@
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'news/css/news.css' %}">{% endaddtoblock %} 
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'news/css/taggit_labels.css' %}">{% endaddtoblock %} 
 
 <div class="news-container">
 
@@ -60,7 +61,7 @@
     <hr class="space m" />
 
     <div class="text-center">
-      <a href="{% url 'news:index' %}" class="btn btn-lg w-100">Больше новостей</a>
+      <a href="{% url 'news:index' %}" class="btn btn-lg btn-border">Больше новостей</a>
     </div>
   </div>
 </div>
