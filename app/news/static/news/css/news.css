@@ -47,7 +47,15 @@
   padding: 7px 10px;
   font-size: 20px;
 } */
-.actions-panel {
+.news-item .actions-panel{
+  font-size: 20px;
+  padding: 7px 0px;
+  font-size: 20px;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+.news-item.detail .admin-panel {
   padding: 20px 40px;
   font-size: 20px;
   display: flex;

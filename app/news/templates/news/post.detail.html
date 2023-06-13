@@ -42,7 +42,8 @@
 
     <div class="news-item detail">
         {% comment %} <div class="row"> {% endcomment %}
-            <div class="actions-panel">
+        {% if ADMIN_MODE or EDIT_MODE %}
+            <div class="admin-panel">
                 {% comment %} {% if ADMIN_MODE %}
                 <div class="status-panel">
                     {% if object.published %}
@@ -74,6 +75,7 @@
                     </div>
                 {% endif %}
             </div>
+        {% endif %}
         {% comment %} </div> {% endcomment %}
         <div class="row">
             <div class="col-md-6">
