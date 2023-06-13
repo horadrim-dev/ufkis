@@ -47,7 +47,7 @@
   padding: 7px 10px;
   font-size: 20px;
 } */
-.news-item .actions-panel{
+.news-item .actions-panel {
   font-size: 20px;
   padding: 7px 0px;
   font-size: 20px;
@@ -64,6 +64,10 @@
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+}
+.news-item.detail .post-attributes {
+  display: flex;
+  justify-content: space-between;
 }
 .actions-panel > div {
   display: inline-block;
