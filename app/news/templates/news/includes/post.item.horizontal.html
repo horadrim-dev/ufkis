@@ -1,6 +1,9 @@
 {% load cms_tags news_tags easy_thumbnails_tags %}
 
-<div class="news-item horizontal niche-box-blog {{ obj.css_styles }}">
+<div class="news-item horizontal niche-box-blog
+        {% if not obj.pubdate_has_arrived %} too-early-to-publish {% endif %}
+        {% if not obj.published %} not-published {% endif %}
+     ">
     <div class="advs-box advs-box-side-img advs-box-blog" >
         <div class="row">
         {% if obj.image %}
@@ -18,12 +21,12 @@
                 </h2>
                 {% if EDIT_MODE %}
                     <div class="actions-panel">
+                        {% if not obj.published %}
+                        <span class="label label-danger">Не опубликовано</span>
+                        {% elif not obj.pubdate_has_arrived %}
+                        <span class="label label-warning">Будет опубликовано {{ obj.published_at }}</span>
+                        {% endif %}
                         <div class="status-panel">
-                            {% comment %} {% if obj.published %}
-                                <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
-                            {% else %}
-                                <i class="fa fa-eye-slash" data-toggle="tooltip" data-placement="top" data-original-title="Не опубликовано"></i>
-                            {% endif %} {% endcomment %}
                         </div>
                         <div class="actions">
                         {% render_model_block obj %}

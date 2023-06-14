@@ -97,13 +97,8 @@ class Post(models.Model):
 
         super().save(*args, **kwargs)
 
-    def css_styles(self):
-        css = []
-        if self.published_at > datetime.date.today():
-            css.append('too-early-to-publish')
-        if not self.published:
-            css.append('not-published')
-        return ' '.join(css)
+    def pubdate_has_arrived(self):
+        return False if self.published_at > datetime.date.today() else True
 
     def has_content_plugins(self):
         return CMSPlugin.objects.filter(placeholder_id=self.content_id).count()

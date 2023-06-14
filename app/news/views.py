@@ -29,6 +29,7 @@ class PublishedObjectsMixin:
     
 
 NEWS_LIST_LAYOUTS = ("grid", "list")
+NEWS_FILTER_STATES = ("visible", "hidden")
 
 class PostListView(PublishedObjectsMixin, FilterView):
     template_name = 'news/post.list.html'
@@ -40,10 +41,14 @@ class PostListView(PublishedObjectsMixin, FilterView):
         layout = self.request.COOKIES.get('news_list_layout', None)
         return layout if layout in NEWS_LIST_LAYOUTS else NEWS_LIST_LAYOUTS[0]
 
+    def get_filter_state(self):
+        filter_state = self.request.COOKIES.get('news_filter_state', None)
+        return filter_state if filter_state in NEWS_FILTER_STATES else NEWS_FILTER_STATES[0]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['news_list_layout'] = self.get_news_list_layout()
+        context['news_filter_state'] = self.get_filter_state()
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -52,6 +57,11 @@ class PostListView(PublishedObjectsMixin, FilterView):
         # seting news list layout to cookie
         response.set_cookie('news_list_layout', 
                             self.get_news_list_layout(),
+                            path=reverse("news:index"),
+                            max_age=3600*24*7)
+        # seting news filter state to cookie
+        response.set_cookie('news_filter_state', 
+                            self.get_filter_state(),
                             path=reverse("news:index"),
                             max_age=3600*24*7)
         return response

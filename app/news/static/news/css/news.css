@@ -132,6 +132,11 @@ ul.slides li .news-item {
 .news-item.detail p {
   margin: 10px auto;
 }
+.news-list-controls {
+  display: flex;
+  justify-content: space-between;
+}
 .tag-row.icon-row span:last-child:after{
   content: none !important;
 }
+
