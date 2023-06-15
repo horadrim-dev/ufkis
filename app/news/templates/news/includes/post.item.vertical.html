@@ -32,13 +32,7 @@
             <p class="bd-month"></p>
         </div>
         {% comment %} <a class="block-comment" href="#">2 <i class="fa fa-comment-o"></i></a> {% endcomment %}
-        {% if EDIT_MODE %}
             <div class="actions-panel">
-                {% if not obj.published %}
-                <span class="label label-danger">Не опубликовано</span>
-                {% elif not obj.pubdate_has_arrived %}
-                <span class="label label-warning">Будет опубликовано {{ obj.published_at }}</span>
-                {% endif %}
                 <div class="status-panel">
                     {% comment %} {% if obj.published %}
                         <i class="fa fa-eye" data-toggle="tooltip" data-placement="top" data-original-title="Опубликовано"></i>
@@ -47,12 +41,13 @@
                     {% endif %} {% endcomment %}
                 </div>
                 <div class="actions">
-                {% render_model_block obj %}
-                    <i class="fa fa-gear"></i>
-                {% endrender_model_block %}
+                {% if EDIT_MODE %}
+                    {% render_model_block obj %}
+                        <i class="fa fa-gear"></i>
+                    {% endrender_model_block %}
+                {% endif %}
                 </div>
             </div>
-        {% endif %}
     </div>
     {% comment %} {% if obj.image %}
     <a class="img-box" href="{{ obj.get_absolute_url }}">
@@ -65,6 +60,15 @@
         <a class="img-box" href="{{ obj.get_absolute_url }}">
             <img class="anima" src="{% thumbnail obj.image 300x200 upscale crop %}" alt="" />
         </a>
+        {% endif %}
+        {% if ADMIN_MODE %}
+            <div class="post-status">
+                {% if not obj.published %}
+                <span class="label label-danger">Не опубликовано</span>
+                {% elif not obj.pubdate_has_arrived %}
+                <span class="label label-warning">Будет опубликовано {{ obj.published_at }}</span>
+                {% endif %}
+            </div>
         {% endif %}
         <div class="tag-row">
             {% if obj.category %}

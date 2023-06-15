@@ -19,23 +19,27 @@
                 <h2 class="text-m">
                     <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
                 </h2>
-                {% if EDIT_MODE %}
-                    <div class="actions-panel">
+                <div class="actions-panel">
+                    <div class="status-panel">
+                    </div>
+                    <div class="actions">
+                    {% if EDIT_MODE %}
+                        {% render_model_block obj %}
+                            <i class="fa fa-gear"></i>
+                        {% endrender_model_block %}
+                    {% endif %}
+                    </div>
+                </div>
+                <hr>
+                {% if ADMIN_MODE %}
+                    <div class="post-status">
                         {% if not obj.published %}
                         <span class="label label-danger">Не опубликовано</span>
                         {% elif not obj.pubdate_has_arrived %}
                         <span class="label label-warning">Будет опубликовано {{ obj.published_at }}</span>
                         {% endif %}
-                        <div class="status-panel">
-                        </div>
-                        <div class="actions">
-                        {% render_model_block obj %}
-                            <i class="fa fa-gear"></i>
-                        {% endrender_model_block %}
-                        </div>
                     </div>
                 {% endif %}
-                <hr>
                 <div class="tag-row icon-row">
                     <span class="date"><i class="fa fa-calendar"></i>{{obj.published_at}}</span>
                     {% if obj.category %}

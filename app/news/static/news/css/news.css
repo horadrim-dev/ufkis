@@ -136,6 +136,15 @@ ul.slides li .news-item {
   display: flex;
   justify-content: space-between;
 }
+.news-item .post-status {
+  margin-bottom: 5px;
+}
+.news-item .post-status span.label {
+  font-size: 14px;
+}
+.news-item.vertical .post-status span.label {
+  font-size: 12px;
+}
 .tag-row.icon-row span:last-child:after{
   content: none !important;
 }
