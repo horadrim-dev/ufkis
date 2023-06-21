@@ -62,9 +62,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'mptt',
     'djangocms_text_ckeditor',
-    'djangocms_picture',
     'djangocms_link',
-    'djangocms_video',
     'compressor',
     'django_filters',
     'taggit',
@@ -102,6 +100,9 @@ INSTALLED_APPS = [
     'catalog',
     'slider',
     'news',
+    # 'djangocms_picture', # использовано в medialer
+    # 'djangocms_video', # использовано в medialer
+    'medialer',
 ]
 
 MIDDLEWARE = [

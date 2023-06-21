@@ -1,0 +1,182 @@
+from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
+from cms.plugin_base import CMSPluginBase
+from cms.plugin_pool import plugin_pool
+
+from . import forms
+from . import models
+
+
+# enable nesting of plugins inside the picture plugin
+PICTURE_NESTING = getattr(settings, 'medialer_NESTING', False)
+
+
+@plugin_pool.register_plugin
+class PicturePlugin(CMSPluginBase):
+    model = models.Picture
+    form = forms.PictureForm
+    module = "Медиа"
+    name = _('Image')
+    allow_children = PICTURE_NESTING
+    text_enabled = True
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'picture',
+                'external_picture',
+            )
+        }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'template',
+                'use_responsive_image',
+                ('width', 'height'),
+                'alignment',
+                'caption_text',
+                'attributes',
+            )
+        }),
+        (_('Link settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ('link_url', 'link_page'),
+                'link_target',
+                'link_attributes',
+            )
+        }),
+        (_('Cropping settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                ('use_automatic_scaling', 'use_no_cropping'),
+                ('use_crop', 'use_upscale'),
+                'thumbnail_options',
+            )
+        })
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'medialer/{}/picture.html'.format(instance.template)
+
+    def render(self, context, instance, placeholder):
+        if instance.alignment:
+            classes = 'align-{} '.format(instance.alignment)
+            classes += instance.attributes.get('class', '')
+            # Set the class attribute to include the alignment html class
+            # This is done to leverage the attributes_str property
+            instance.attributes['class'] = classes
+        # assign link to a context variable to be performant
+        context['picture_link'] = instance.get_link()
+        context['picture_size'] = instance.get_size(
+            width=context.get('width') or 0,
+            height=context.get('height') or 0,
+        )
+        context['img_srcset_data'] = instance.img_srcset_data
+
+        return super().render(context, instance, placeholder)
+
+
+# =========================== VIDEO ====================================#
+
+@plugin_pool.register_plugin
+class VideoPlayerPlugin(CMSPluginBase):
+    model = models.VideoPlayer
+    name = _('Video player')
+    text_enabled = True
+    allow_children = True
+    module = "Медиа"
+    child_classes = ['VideoSourcePlugin', 'VideoTrackPlugin']
+    form = forms.VideoPlayerPluginForm
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'template',
+                'label',
+            )
+        }),
+        (_('Embed video'), {
+            'classes': ('collapse',),
+            'fields': (
+                'embed_link',
+                'parameters',
+            )
+        }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'poster',
+                'attributes',
+            )
+        })
+    ]
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['video_template'] = instance.template
+        return context
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'medialer/{}/video_player.html'.format(instance.template)
+
+
+
+@plugin_pool.register_plugin
+class VideoSourcePlugin(CMSPluginBase):
+    model = models.VideoSource
+    name = _('Source')
+    # module = _('Video player')
+    module = "Медиа"
+    require_parent = True
+    parent_classes = ['VideoPlayerPlugin']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'source_file',
+                'text_title',
+            )
+        }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'text_description',
+                'attributes',
+            )
+        })
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'medialer/{}/source.html'.format(context.get('video_template', 'default'))
+
+
+@plugin_pool.register_plugin
+class VideoTrackPlugin(CMSPluginBase):
+    model = models.VideoTrack
+    name = _('Track')
+    # module = _('Video player')
+    module = "Медиа"
+    require_parent = True
+    parent_classes = ['VideoPlayerPlugin']
+
+    fieldsets = [
+        (None, {
+            'fields': (
+                'kind',
+                'src',
+                'srclang',
+            )
+        }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'label',
+                'attributes',
+            )
+        })
+    ]
+
+    def get_render_template(self, context, instance, placeholder):
+        return 'medialer/{}/track.html'.format(context.get('video_template', 'default'))
