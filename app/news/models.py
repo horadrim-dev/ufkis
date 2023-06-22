@@ -116,7 +116,7 @@ class Post(models.Model):
             if not plugin:
                 return None
             if plugin.plugin_type == "PicturePlugin":
-                return plugin.medialer_picture.picture
+                return plugin.medialer_pluginpicture.picture
             elif plugin.plugin_type == "SliderItemPlugin":
                 return plugin.slider_slide.image
 

@@ -15,8 +15,8 @@ PICTURE_NESTING = getattr(settings, 'medialer_NESTING', False)
 
 @plugin_pool.register_plugin
 class PicturePlugin(CMSPluginBase):
-    model = models.Picture
-    form = forms.PictureForm
+    model = models.PluginPicture
+    form = forms.PluginPictureForm
     module = "Медиа"
     name = _('Image')
     allow_children = PICTURE_NESTING

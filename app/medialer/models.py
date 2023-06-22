@@ -16,6 +16,114 @@ from easy_thumbnails.files import get_thumbnailer
 from filer.fields.image import FilerImageField
 from filer.models import ThumbnailOption
 
+from django.urls import reverse
+
+class Album(models.Model):
+    title = models.CharField("Название", max_length=256)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "альбом"
+        verbose_name_plural = "альбомы"
+
+    # def get_absolute_url(self):
+    #     return reverse("medialer:index", kwargs={"category": self.id})
+    
+
+# class Photo(models.Model):
+#     title = models.CharField(
+#         default="", max_length=1000, verbose_name="Заголовок")
+
+#     alias = models.SlugField(default="", blank=True, unique=True,
+#                              max_length=1000, help_text="Краткое название транслитом через тире (пример: 'kratkoe-nazvanie-translitom'). Чем короче тем лучше. Для автоматического заполнения - оставьте пустым.")
+#     album = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+#                                     verbose_name="Дата публикации")
+#     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+#     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
+
+#     # text = HTMLField("Содержимое", configuration='CKEDITOR_SETTINGS_POST', default="", blank=True, null=True)
+#     content = PlaceholderField('content')
+
+#     # placeholder = PlaceholderField('post', related_name="news_post")
+
+#     cover_image = FilerImageField(verbose_name="Обложка поста", 
+#                                   on_delete=models.CASCADE, 
+#                                   blank=True, null=True,
+#                                   help_text="Если не задано - будет использовано первое изображение из содержимого поста")
+
+#     tags = TaggableManager()
+
+#     IMAGE_POSITION_CHOICES = [
+#         ('left', 'Слева'),
+#         ('stretch', 'Растянуть'),
+#         ('right', 'Справа'),
+#         ('hide', 'Скрыть'),
+#     ]
+#     # image_position = models.CharField(max_length=64, choices=IMAGE_POSITION_CHOICES, default=IMAGE_POSITION_CHOICES[0][0],
+#     #     verbose_name="Расположение изображения")
+
+#     # placeholder_top = PlaceholderField('top', related_name="post_top")
+#     # placeholder_bottom = PlaceholderField('bottom', related_name="post_bottom")
+
+#     objects = ContentManager()
+
+#     @property
+#     def gen_id(self):
+#         return str(uuid.uuid4().fields[-1])[:7]
+
+#     def get_absolute_url(self):
+#         return reverse("news:detail", kwargs={"slug": self.alias})
+
+#     def __str__(self):
+#         return self.title
+
+#     def save(self, lock_recursion=False, *args, **kwargs):
+#         # только при создании объекта, id еще не существует
+#         if not self.id or not self.alias:
+#             # заполняем алиас
+#             self.alias = slugify_rus(self.title)
+
+#         super().save(*args, **kwargs)
+
+#     def pubdate_has_arrived(self):
+#         return False if self.published_at > datetime.date.today() else True
+
+#     def has_content_plugins(self):
+#         return CMSPlugin.objects.filter(placeholder_id=self.content_id).count()
+    
+#     @property
+#     def image(self):
+#         if self.cover_image:
+#             return self.cover_image
+#         else:
+#             plugin = CMSPlugin.objects.filter(placeholder_id=self.content_id, 
+#                                               plugin_type__in=PLUGINS_WITH_IMAGES) \
+#                                         .order_by('position') \
+#                                         .first()
+                                        
+#             if not plugin:
+#                 return None
+#             if plugin.plugin_type == "PicturePlugin":
+#                 return plugin.medialer_picture.picture
+#             elif plugin.plugin_type == "SliderItemPlugin":
+#                 return plugin.slider_slide.image
+
+#     @property
+#     def description(self):
+#         text = CMSPlugin.objects.filter(placeholder_id=self.content_id, plugin_type="TextPlugin").first()
+#         return text.djangocms_text_ckeditor_text.body if text else False 
+
+
+#     class Meta:
+#         verbose_name = "Пост"
+#         verbose_name_plural = "Посты"
+#         ordering = ['-published_at']
+
+
+# =========================== PICTURE ====================================#
+
 
 # add setting for picture alignment, renders a class or inline styles
 # depending on your template setup
@@ -65,7 +173,7 @@ RESPONSIVE_IMAGE_CHOICES = (
 )
 
 
-class AbstractPicture(CMSPlugin):
+class AbstractPicture(models.Model):
     """
     Renders an image with the option of adding a link
     """
@@ -205,16 +313,6 @@ class AbstractPicture(CMSPlugin):
         on_delete=models.CASCADE,
     )
 
-    # Add an app namespace to related_name to avoid field name clashes
-    # with any other plugins that have a field with the same name as the
-    # lowercase of the class name of this model.
-    # https://github.com/divio/django-cms/issues/5030
-    cmsplugin_ptr = models.OneToOneField(
-        CMSPlugin,
-        related_name='%(app_label)s_%(class)s',
-        parent_link=True,
-        on_delete=models.CASCADE,
-    )
 
     class Meta:
         abstract = True
@@ -231,10 +329,6 @@ class AbstractPicture(CMSPlugin):
             return self.picture.label
         return gettext('<file is missing>')
 
-    def copy_relations(self, oldinstance):
-        # Because we have a ForeignKey, it's required to copy over
-        # the reference from the instance to the new plugin.
-        self.picture = oldinstance.picture
 
     def get_size(self, width=None, height=None):
         crop = self.use_crop
@@ -384,8 +478,32 @@ class AbstractPicture(CMSPlugin):
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
 
-class Picture(AbstractPicture):
+class PluginPicture(AbstractPicture, CMSPlugin):
 
+    # Add an app namespace to related_name to avoid field name clashes
+    # with any other plugins that have a field with the same name as the
+    # lowercase of the class name of this model.
+    # https://github.com/divio/django-cms/issues/5030
+    # ИЗНАЧАЛЬНО БЫЛО В КЛАССЕ AbstractPicture
+    # cmsplugin_ptr = models.OneToOneField(
+    #     CMSPlugin,
+    #     related_name='%(app_label)s_%(class)s',
+    #     parent_link=True,
+    #     on_delete=models.CASCADE,
+    # )
+
+    def copy_relations(self, oldinstance):
+        # Because we have a ForeignKey, it's required to copy over
+        # the reference from the instance to the new plugin.
+        self.picture = oldinstance.picture
+
+    class Meta:
+        abstract = False
+
+
+class AlbumPicture(AbstractPicture):
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, #blank=True, null=True)
+                                    verbose_name="Альбом")
     class Meta:
         abstract = False
 

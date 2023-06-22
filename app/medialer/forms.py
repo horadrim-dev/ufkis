@@ -1,12 +1,21 @@
 from django import forms
 
-from .models import Picture
+from . import models
 
 
-class PictureForm(forms.ModelForm):
+class AlbumPictureForm(forms.ModelForm):
 
     class Meta:
-        model = Picture
+        model = models.AlbumPicture
+        fields = '__all__'
+        widgets = {
+            'caption_text': forms.Textarea(attrs={'rows': 2}),
+        }
+
+class PluginPictureForm(forms.ModelForm):
+
+    class Meta:
+        model = models.PluginPicture
         fields = '__all__'
         widgets = {
             'caption_text': forms.Textarea(attrs={'rows': 2}),
@@ -20,7 +29,6 @@ import re
 from django import forms
 from django.conf import settings
 
-from . import models
 
 
 YOUTUBE_URL_RE = re.compile(r'(?:(?:http://|https://|//)?(?:www\.)?youtu\.?be.*).*')
