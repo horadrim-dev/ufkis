@@ -1,0 +1,15 @@
+{% extends 'medialer/base.html' %}
+{% load sekizai_tags thumbnail static %}
+
+{% block app_content %}
+
+  <h1>Последние фотографии</h1>
+  {% for obj in latest_pictures %}
+    {% with obj as instance %}
+      {% include './default/picture.html' %}
+    {% endwith %}
+  {% empty %}
+  <p>Ничего не найдено.</p>
+  {% endfor %}
+
+{% endblock %}
