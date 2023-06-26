@@ -18,9 +18,12 @@ class PostForm(forms.ModelForm):
         slug = cleaned_data.get("alias")
 
         try:
-            Post.objects.get(alias=slug)
+            post = Post.objects.get(alias=slug)
         except Post.DoesNotExist:
-            msg = "Пост с таким \"alias\" уже существует"
+            post = None
+
+        if post:
+            msg = "Пост с alias \"{}\" - уже существует".format(slug)
             self.add_error("alias", msg)
 
 class CategoryForm(forms.ModelForm):
