@@ -11,7 +11,7 @@ from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-from .models import PluginPicture
+from . import models
 
 # NEWS_FILTER_STATES = ("visible", "hidden")
 
@@ -23,7 +23,8 @@ class MediaView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['latest_pictures'] = PluginPicture.objects.all()
+        context['latest_pictures'] = models.PluginPicture.objects.all()[:8]
+        context['albums'] = models.Album.objects.all()
         # context['news_filter_state'] = self.get_filter_state()
         # assert False, context
         return context

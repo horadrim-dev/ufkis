@@ -2,14 +2,76 @@
 {% load sekizai_tags thumbnail static %}
 
 {% block app_content %}
+  <h1>Альбомы</h1>
+  <hr class="space m">
+  <div class="row">
+    {% for object in albums %}
+    <div class="col-lg-4 col-md-6">
 
-  <h1>Последние фотографии</h1>
-  {% for obj in latest_pictures %}
-    {% with obj as instance %}
-      {% include './default/picture.html' %}
-    {% endwith %}
-  {% empty %}
-  <p>Ничего не найдено.</p>
-  {% endfor %}
+      <div class="advs-box niche-box-team" data-anima="scale-up" data-trigger="hover">
+        <a class="img-box">
+            <img class="anima" src="{% static 'core_old/images_old/image_1.jpg' %}" alt="" style="position: relative; transition-duration: 500ms; animation-duration: 500ms; transition-timing-function: ease; transition-delay: 0ms;" aid="0.44475099686529684">
+        </a>
+        <div class="content-box">
+            <h2>{{ object }}</h2>
+            <h4>Collaboration</h4>
+            <hr class="e">
+            <div class="btn-group social-group">
+                <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-instagram"></i></a>
+            </div>
+            <p>Lorem Ipsum is simply dummy text of the printing and industry. Lorem has been the industry.</p>
+        </div>
+      </div>
+
+    </div>
+    {% empty %}
+    <p>Альбомов пока нет.</p>
+    {% endfor %}
+  </div>
+  <hr class="space m">
+  <h1>Последние фотоматериалы</h1>
+  <hr class="space m">
+
+  <div class="grid-list gallery">
+    <div class="grid-box row">
+      <div class="row">
+        {% for instance in latest_pictures %}
+          <div class="col-md-3">
+            <a class="img-box thumbnail" 
+              href="{{ instance.img_src }}"
+              data-options="mainClass:inner" 
+              title="This is the text caption of image" 
+              data-lightbox-anima="show-scale"
+            >
+              <span>
+                <img class="anima" 
+                  src="{% if instance.external_picture %}
+                        {{instance.img_src}}
+                      {% elif instance.picture %}
+                        {% thumbnail instance.picture 300x200 upscale crop %}
+                      {% endif %}"
+                  alt="{% if instance.attributes.alt %}
+                          {{ instance.attributes.alt }}
+                      {% elif instance.picture.default_alt_text %}
+                        {{ instance.picture.default_alt_text }}
+                      {% endif %}"
+                >
+                {% comment %} <img class="anima" src="{{ instance.img_src }}" alt="" /> {% endcomment %}
+                {% comment %} <a class="img-box thumbnail mfp-iframe" href="https://www.youtube.com/watch?v=bpqhStV2_rc">
+                    <span><img src="http://www.framework-y.com/images/thumb-wide.png"></span>
+                </a> {% endcomment %}
+              </span>
+            </a>
+          </div>
+        {% empty %}
+        <p>Ничего не найдено.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+
 
 {% endblock %}

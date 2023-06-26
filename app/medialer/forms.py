@@ -3,6 +3,12 @@ from django import forms
 from . import models
 
 
+class AlbumForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Album
+        fields = '__all__'
+
 class AlbumPictureForm(forms.ModelForm):
 
     class Meta:
@@ -11,6 +17,7 @@ class AlbumPictureForm(forms.ModelForm):
         widgets = {
             'caption_text': forms.Textarea(attrs={'rows': 2}),
         }
+
 
 class PluginPictureForm(forms.ModelForm):
 

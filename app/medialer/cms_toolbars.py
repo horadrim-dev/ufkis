@@ -20,10 +20,10 @@ class MedialerToolbar(CMSToolbar):
             key='medialer_cms_integration',
             verbose_name='Медиа'
         )
-        # media_menu .add_sideframe_item(
-        #     name='Альбомы',
-        #     url=admin_reverse('medialer_album_changelist')
-        # )
+        media_menu .add_sideframe_item(
+            name='Альбомы',
+            url=admin_reverse('medialer_album_changelist')
+        )
 
         self.toolbar.add_modal_button(
             name='+ фото в галерею', 
