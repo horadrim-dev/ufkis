@@ -26,7 +26,7 @@ class IconExtensionToolbar(ExtensionToolbar):
                     disabled=not self.toolbar.edit_mode_active, position=0)
 
 @toolbar_pool.register
-class MyToolbarClass(CMSToolbar):
+class CoreToolbarClass(CMSToolbar):
     def populate(self):
 
         admin_menu = self.toolbar.get_menu(ADMIN_MENU_IDENTIFIER)
@@ -34,3 +34,5 @@ class MyToolbarClass(CMSToolbar):
 
         # removing standart menus "LANGUAGE_MENU" and "HELP_MENU" 
         self.toolbar.last_left_items = []
+        # assert False, (dir(self.toolbar),(self.toolbar.toolbars))
+        # self.toolbar.get_or_create_menu()

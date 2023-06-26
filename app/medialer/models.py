@@ -20,6 +20,14 @@ from django.urls import reverse
 
 class Album(models.Model):
     title = models.CharField("Название", max_length=256)
+    description = models.CharField("Описание", max_length=1024, blank=True, null=True)
+    cover_image = FilerImageField(
+        verbose_name="Обложка",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
 
     def __str__(self):
         return self.title
