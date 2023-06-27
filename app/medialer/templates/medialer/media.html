@@ -5,23 +5,49 @@
   <h1>Альбомы</h1>
   <hr class="space m">
   <div class="row">
-    {% for object in albums %}
+    {% for album in albums %}
     <div class="col-lg-4 col-md-6">
 
       <div class="advs-box niche-box-team" data-anima="scale-up" data-trigger="hover">
+        {% if album.cover_image %}
         <a class="img-box">
-            <img class="anima" src="{% static 'core_old/images_old/image_1.jpg' %}" alt="" style="position: relative; transition-duration: 500ms; animation-duration: 500ms; transition-timing-function: ease; transition-delay: 0ms;" aid="0.44475099686529684">
+            <img class="anima" src="{% thumbnail album.cover_image 360x240 upscale crop %}" alt="" 
+              style="position: relative; 
+                    transition-duration: 500ms; 
+                    animation-duration: 500ms; 
+                    transition-timing-function: ease; 
+                    transition-delay: 0ms;" 
+              aid="0.44475099686529684">
         </a>
+        {% endif %}
         <div class="content-box">
-            <h2>{{ object }}</h2>
+            <h2>{{ album.title }}</h2>
             <h4>Collaboration</h4>
             <hr class="e">
             <div class="btn-group social-group">
-                <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
-                <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
-                <a target="_blank" href="#"><i class="fa fa-instagram"></i></a>
+                <a target="_blank" href="https://vk.com/share.php?url={% url 'medialer:album' album.id %}"><i class="fa fa-vk"></i></a>
+                <a target="_blank" href="#" 
+                  onclick="Share.vkontakte(
+                    '{{ album.get_absolute_url }}',
+                    '{{album.title}}',
+                    '{% thumbnail album.cover_image 360x240 upscale crop %}',
+                    '{{album.description}}')">
+                  <i class="fa fa-vk"></i>
+                </a>
+                <a target="_blank" href="#" 
+                  onclick="Share.facebook(
+                    '{{ album.get_absolute_url }}',
+                    '{{ album.title }}',
+                    '/{% thumbnail album.cover_image 360x240 upscale crop %}',
+                    '{{ album.description }}')">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                {% comment %} <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-instagram"></i></a> {% endcomment %}
             </div>
-            <p>Lorem Ipsum is simply dummy text of the printing and industry. Lorem has been the industry.</p>
+            {% if album.description %}
+            <p>{{ album.description }}</p>
+            {% endif %}
         </div>
       </div>
 

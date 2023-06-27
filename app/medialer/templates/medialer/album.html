@@ -1,0 +1,45 @@
+{% extends 'medialer/base.html' %}
+{% load sekizai_tags thumbnail static %}
+
+{% block app_content %}
+  <hr class="space m">
+  <div class="row">
+    {% for album in albums %}
+    <div class="col-lg-4 col-md-6">
+
+      <div class="advs-box niche-box-team" data-anima="scale-up" data-trigger="hover">
+        {% if album.cover_image %}
+        <a class="img-box">
+            <img class="anima" src="{% thumbnail album.cover_image 360x240 upscale crop %}" alt="" 
+              style="position: relative; 
+                    transition-duration: 500ms; 
+                    animation-duration: 500ms; 
+                    transition-timing-function: ease; 
+                    transition-delay: 0ms;" 
+              aid="0.44475099686529684">
+        </a>
+        {% endif %}
+        <div class="content-box">
+            <h2>{{ album.title }}</h2>
+            {% comment %} <h4>Collaboration</h4> {% endcomment %}
+            <hr class="e">
+            <div class="btn-group social-group">
+                <a target="_blank" href="https://vk.com/share.php?url={% url 'medialer:album' album.id %}"><i class="fa fa-vk"></i></a>
+                <a target="_blank" href="#"><i class="fa fa-facebook"></i></a>
+                {% comment %} <a target="_blank" href="#"><i class="fa fa-instagram"></i></a> {% endcomment %}
+            </div>
+            {% if album.description %}
+            <p>{{ album.description }}</p>
+            {% endif %}
+        </div>
+      </div>
+
+    </div>
+    {% empty %}
+    <p>Альбомов пока нет.</p>
+    {% endfor %}
+  </div>
+
+
+
+{% endblock %}

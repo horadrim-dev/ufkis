@@ -43,3 +43,9 @@ class MediaView(TemplateView):
         #                     path=reverse("news:index"),
         #                     max_age=3600*24*7)
         return response
+    
+
+class AlbumPictureListView(ListView):
+    template_name = 'medialer/album.html'
+    slug_field = 'album_id'
+    # model = Album
