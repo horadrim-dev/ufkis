@@ -794,21 +794,22 @@ function isScrollView(t) {
         }
 
         //SOCIAL
-        $("body").on("click", "[data-social]", function () {
-            var a = $(this).attr("data-social");
-            var link = $(this).attr("data-social-url");
-            var purl = link;
-            if (isEmpty(link)) purl = window.location.href;
+        // ФУНКЦИОНАЛ ДУБЛИРУЕТСЯ (core/templatetags/core_tags.py)
+        // $("body").on("click", "[data-social]", function () {
+        //     var a = $(this).attr("data-social");
+        //     var link = $(this).attr("data-social-url");
+        //     var purl = link;
+        //     if (isEmpty(link)) purl = window.location.href;
 
-            var url = 'https://www.facebook.com/sharer/sharer.php?u=' + purl;
-            if (a == 'share-twitter') {
-                url = 'https://twitter.com/intent/tweet?text=' + $('meta[name=description]').attr("content");
-                if (!isEmpty(link)) url = 'https://twitter.com/intent/tweet?url=' + link;
-            }
-            if (a == 'share-google') url = 'https://plus.google.com/share?url=' + purl;
-            if (a == 'share-linkedin') url = 'https://www.linkedin.com/shareArticle?url=' + purl;
-            openWindow(url);
-        });
+        //     var url = 'https://www.facebook.com/sharer/sharer.php?u=' + purl;
+        //     if (a == 'share-twitter') {
+        //         url = 'https://twitter.com/intent/tweet?text=' + $('meta[name=description]').attr("content");
+        //         if (!isEmpty(link)) url = 'https://twitter.com/intent/tweet?url=' + link;
+        //     }
+        //     if (a == 'share-google') url = 'https://plus.google.com/share?url=' + purl;
+        //     if (a == 'share-linkedin') url = 'https://www.linkedin.com/shareArticle?url=' + purl;
+        //     openWindow(url);
+        // });
 
         //MENU - MOBILE
         $(".navbar-toggle").toggleClick(function () {

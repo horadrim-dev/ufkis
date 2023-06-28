@@ -18,7 +18,8 @@
           <i class="fa fa-vk"></i>
         </a>
       </div> {% endcomment %}
-      {% render_social_buttons 'pohui' 'nahui'%}
+      {% render_share_buttons 'pohui' 'nahui'%}
+      {% render_share_buttons 'pohui' 'nahui' style='list' %}
     </div>
   <div class="grid-list gallery">
     <div class="grid-box row">
@@ -50,7 +51,6 @@
             </a> {% endcomment %}
           </span>
         </a>
-        {{ instance.id }}
       </div>
     {% empty %}
     <p>В альбоме пока ничего нет.</p>

@@ -104,6 +104,11 @@ class SiteSettings(SingletonModel):
     phone = models.CharField(verbose_name=_('Телефон'), max_length=256, default="")
     email = models.EmailField(verbose_name='E-mail', blank=True, null=True)
     address = models.CharField(verbose_name=_('Адрес'), max_length=256, default="")
+    share_vk = models.BooleanField(verbose_name="Вконтакте", default=True)
+    share_ok = models.BooleanField(verbose_name="Одноклассники", default=True)
+    share_fb = models.BooleanField(verbose_name="Facebook", default=False)
+    share_twitter = models.BooleanField(verbose_name="Twitter", default=True)
+    share_instagram = models.BooleanField(verbose_name="Instagram", default=False)
 
     logo = FilerImageField(
         verbose_name=_('Логотип'),

@@ -3,15 +3,27 @@ from django import template
 register = template.Library()
 
 
-STYLE_CHOICES = ('share-button', 'list')
+STYLE_CHOICES = ('all_in_one', 'list')
 SIZE_CHOICES = ('small', 'medium', 'large')
 BORDER_CHOICES = ('none', 'square', 'circle')
-@register.inclusion_tag("core/includes/share_buttons.html")
-def render_social_buttons(url, title, description=None, image_path=None, 
-                          size="medium", border="circle", style="share-button"):
+@register.inclusion_tag("core/includes/share_buttons.html", takes_context=True)
+def render_share_buttons(context, url, title, description=None, image_path=None, 
+                          size="medium", border="circle", style="all_in_one"):
     """
     Render social buttons for sharing
     """
+    socials = []
+    if context['site_settings'].share_vk:
+        socials.append(('vk', 'ВКонтакте'))
+    if context['site_settings'].share_ok:
+        socials.append(('odnoklassniki', 'Одноклассники'))
+    if context['site_settings'].share_fb:
+        socials.append(('facebook', 'Facebook'))
+    if context['site_settings'].share_twitter:
+        socials.append(('twitter', 'Twitter'))
+    if context['site_settings'].share_instagram:
+        socials.append(('instagram', 'Instagram'))
+
     return {
         "url": url,
         "title": title,
@@ -20,6 +32,7 @@ def render_social_buttons(url, title, description=None, image_path=None,
         'size': size if size in SIZE_CHOICES else None,
         'border': border if border in BORDER_CHOICES else None,
         'style': style if style in STYLE_CHOICES else None,
+        'socials': socials,
     }
 
 
