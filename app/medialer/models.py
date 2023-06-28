@@ -27,6 +27,7 @@ class Album(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
+        help_text="Если оставить пустым, будет использовано изображение из альбома"
     )
 
     def __str__(self):
@@ -36,9 +37,35 @@ class Album(models.Model):
         verbose_name = "альбом"
         verbose_name_plural = "альбомы"
 
-    # def get_absolute_url(self):
-    #     return reverse("medialer:index", kwargs={"category": self.id})
+    def get_absolute_url(self):
+        return reverse("medialer:album", kwargs={"pk": self.pk})
+
+    def get_cover_image(self):
+        if self.cover_image:
+            return self.cover_image
+
+        pic = AlbumPicture.objects.filter(album=self).first()
+        if pic and pic.picture:
+            return pic.picture
+
+        return None
+
+    def cover_image_src(self):
+        image = self.get_cover_image()
+        if not image:
+            return None
+
+        thumbnail_options = {
+            'size': (360, 240),
+            'crop': True,
+            'upscale': True,
+            'subject_location': image.subject_location,
+        }
+        thumbnailer = get_thumbnailer(image)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
     
+    def get_object_list(self):
+        return self.albumpicture_set.all()
 
 # class Photo(models.Model):
 #     title = models.CharField(

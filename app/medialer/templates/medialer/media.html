@@ -8,50 +8,65 @@
     {% for album in albums %}
     <div class="col-lg-4 col-md-6">
 
-      <div class="advs-box niche-box-team" data-anima="scale-up" data-trigger="hover">
-        {% if album.cover_image %}
-        <a class="img-box">
-            <img class="anima" src="{% thumbnail album.cover_image 360x240 upscale crop %}" alt="" 
+      {% comment %} <div class="advs-box niche-box-team"> {% endcomment %}
+      <div class="advs-box advs-box-top-icon-img boxed-inverse">
+        {% if album.cover_image_src %}
+        <a class="img-box img-scale-up" href="{% url 'medialer:album' album.id %}">
+            <span>
+              <img class="anima" src="{{ album.cover_image_src }}" alt="" 
               style="position: relative; 
                     transition-duration: 500ms; 
                     animation-duration: 500ms; 
                     transition-timing-function: ease; 
                     transition-delay: 0ms;" 
               aid="0.44475099686529684">
+            </span>
         </a>
         {% endif %}
-        <div class="content-box">
-            <h2>{{ album.title }}</h2>
-            <h4>Collaboration</h4>
+        <div class="advs-box-content">
+            <a href="{% url 'medialer:album' album.id %}">
+              <h3>{{ album.title }}</h3>
+            </a>
+            {% if album.description %}
+            <p>{{ album.description }}</p>
+            {% endif %}
             <hr class="e">
             <div class="btn-group social-group">
-                <a target="_blank" href="https://vk.com/share.php?url={% url 'medialer:album' album.id %}"><i class="fa fa-vk"></i></a>
                 <a target="_blank" href="#" 
+                  title="Поделиться"
                   onclick="Share.vkontakte(
                     '{{ album.get_absolute_url }}',
-                    '{{album.title}}',
-                    '{% thumbnail album.cover_image 360x240 upscale crop %}',
-                    '{{album.description}}')">
+                    '{{ album.title }}',
+                    '{{ album.cover_image_src }}',
+                    '{{ album.description }}')">
                   <i class="fa fa-vk"></i>
                 </a>
-                <a target="_blank" href="#" 
+                {% comment %} <a target="_blank" href="#" 
                   onclick="Share.facebook(
                     '{{ album.get_absolute_url }}',
                     '{{ album.title }}',
                     '/{% thumbnail album.cover_image 360x240 upscale crop %}',
                     '{{ album.description }}')">
                   <i class="fa fa-facebook"></i>
-                </a>
+                </a> {% endcomment %}
                 {% comment %} <a target="_blank" href="#"><i class="fa fa-twitter"></i></a>
                 <a target="_blank" href="#"><i class="fa fa-instagram"></i></a> {% endcomment %}
             </div>
-            {% if album.description %}
-            <p>{{ album.description }}</p>
-            {% endif %}
         </div>
       </div>
 
     </div>
+    {% comment %} <div class="advs-box advs-box-top-icon-img boxed-inverse">
+        <a class="img-box img-scale-up" href="#">
+            <span><img src="{% thumbnail album.cover_image 360x240 upscale crop %}" alt=""></span>
+        </a>
+        <div class="advs-box-content">
+            <h3>{{ album.title }}</h3>
+            <p>
+              {{ album.description }}
+            </p>
+        </div>
+    </div> {% endcomment %}
     {% empty %}
     <p>Альбомов пока нет.</p>
     {% endfor %}
@@ -97,7 +112,5 @@
       </div>
     </div>
   </div>
-
-
 
 {% endblock %}

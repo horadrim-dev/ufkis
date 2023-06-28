@@ -1,0 +1,52 @@
+{% if style=="share-button" %} 
+<div class="social-group-button bottom-icons">
+    <div class="social-button" 
+        style="position: relative; 
+                transition-duration: 500ms; 
+                animation-duration: 500ms; 
+                transition-timing-function: ease; 
+                transition-delay: 0ms;" 
+        aid="0.07744903547632487">
+        <i class="fa fa-share-alt circle text-s"></i>
+    </div>
+{% endif %}
+    <div class="btn-group social-group" 
+        style="{% if style=="share-button" %}display: none;{% endif %}"
+    >
+        <a target="_blank" href="#">
+            <i data-social="share-vk" 
+                class="fa fa-vk circle fade-left" 
+                style="transition-duration: 300ms; 
+                        animation-duration: 300ms; 
+                        transition-timing-function: ease; 
+                        transition-delay: 0ms; 
+                        opacity: 0;"
+            >
+            </i>
+        </a>
+        <a target="_blank" href="#">
+            <i data-social="share-facebook" 
+                class="fa fa-facebook 
+                circle 
+                fade-left" 
+                style="transition-duration: 300ms; 
+                        animation-duration: 300ms; 
+                        transition-timing-function: ease; 
+                        transition-delay: 0ms; 
+                        opacity: 0;"
+            >
+            </i>
+        </a>
+        {% comment %} <a target="_blank" href="#" 
+            title="Поделиться"
+            onclick="Share.vkontakte(
+            '{{ album.get_absolute_url }}',
+            '{{ album.title }}',
+            '{{ album.cover_image_src }}',
+            '{{ album.description }}')">
+            <i class="fa fa-vk"></i>
+        </a> {% endcomment %}
+    </div>
+{% if style=='share-button' %} 
+</div>
+{% endif %}

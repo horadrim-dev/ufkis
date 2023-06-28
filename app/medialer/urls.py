@@ -8,6 +8,6 @@ from .views import *
 
 urlpatterns = [
     path('', MediaView.as_view(), name='index'),
-    path('albums/<int:album_id>', AlbumPictureListView.as_view(), name='album'),
+    path('albums/<int:pk>', AlbumDetailView.as_view(), name='album'),
 ] 
 

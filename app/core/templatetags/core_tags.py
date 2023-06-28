@@ -3,6 +3,26 @@ from django import template
 register = template.Library()
 
 
+STYLE_CHOICES = ('share-button', 'list')
+SIZE_CHOICES = ('small', 'medium', 'large')
+BORDER_CHOICES = ('none', 'square', 'circle')
+@register.inclusion_tag("core/includes/share_buttons.html")
+def render_social_buttons(url, title, description=None, image_path=None, 
+                          size="medium", border="circle", style="share-button"):
+    """
+    Render social buttons for sharing
+    """
+    return {
+        "url": url,
+        "title": title,
+        "description": description,
+        "image_path": image_path,
+        'size': size if size in SIZE_CHOICES else None,
+        'border': border if border in BORDER_CHOICES else None,
+        'style': style if style in STYLE_CHOICES else None,
+    }
+
+
 @register.simple_tag(takes_context=True)
 def param_replace(context, **kwargs):
     """
@@ -32,3 +52,4 @@ def param_replace(context, **kwargs):
     for k in [k for k, v in d.items() if not v]:
         del d[k]
     return d.urlencode()
+

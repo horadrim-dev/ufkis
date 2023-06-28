@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from . import models
+from django.views.generic.list import MultipleObjectMixin
 
 # NEWS_FILTER_STATES = ("visible", "hidden")
 
@@ -45,7 +46,17 @@ class MediaView(TemplateView):
         return response
     
 
-class AlbumPictureListView(ListView):
-    template_name = 'medialer/album.html'
-    slug_field = 'album_id'
-    # model = Album
+class AlbumDetailView(MultipleObjectMixin, DetailView):
+    template_name = 'medialer/album_detail.html'
+    model = models.Album
+    paginate_by = 1
+
+    # def get_queryset(self):
+        # return models.AlbumPicture.objects.all()
+
+    def get_context_data(self, **kwargs):
+        object_list = self.object.get_object_list()
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context['page_title'] = "Альбом \"{}\"".format(self.object)
+        # context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.title}]
+        return context

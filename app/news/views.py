@@ -34,7 +34,7 @@ NEWS_FILTER_STATES = ("visible", "hidden")
 class PostListView(PublishedObjectsMixin, FilterView):
     template_name = 'news/post.list.html'
     # model = Post
-    paginate_by = 12
+    paginate_by = 4
     filterset_class = PostFilterSet
 
     def get_news_list_layout(self):
