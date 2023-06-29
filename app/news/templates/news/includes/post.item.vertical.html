@@ -58,7 +58,7 @@
         <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
         {% if obj.image %}
         <a class="img-box" href="{{ obj.get_absolute_url }}">
-            <img class="anima" src="{% thumbnail obj.image 300x200 upscale crop %}" alt="" />
+            <img class="anima" src="{{ obj.thumb_src }}" alt="" />
         </a>
         {% endif %}
         {% if ADMIN_MODE %}

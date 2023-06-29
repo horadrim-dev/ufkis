@@ -12,6 +12,7 @@ import uuid
 import datetime
 from core.utils import slugify_rus
 import locale
+from easy_thumbnails.files import get_thumbnailer
 
 class ContentManager(models.Manager):
 
@@ -119,6 +120,20 @@ class Post(models.Model):
                 return plugin.medialer_pluginpicture.picture
             elif plugin.plugin_type == "SliderItemPlugin":
                 return plugin.slider_slide.image
+            
+    def thumb_src(self):
+        image = self.image
+        if not image:
+            return ""
+
+        thumbnail_options = {
+            'size': (360, 240),
+            'crop': True,
+            'upscale': True,
+            'subject_location': image.subject_location,
+        }
+        thumbnailer = get_thumbnailer(image)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
 
     @property
     def description(self):

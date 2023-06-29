@@ -1,5 +1,5 @@
 {% extends 'news/base.html' %}
-{% load cms_tags sekizai_tags static thumbnail news_tags %}
+{% load cms_tags core_tags sekizai_tags static thumbnail news_tags %}
 
 {% comment %} {% block app_content %}
 
@@ -96,6 +96,8 @@
                     {% endfor %}
                 </div>
             </div>
+            
+            {% render_share_buttons url=object.get_absolute_url title=object.title image_src=object.thumb_src description=object.description|striptags|truncatechars_html:150 %}
                 {% comment %} <div class="btn-group social-group social-colors">
                     <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
                     <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
