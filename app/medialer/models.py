@@ -40,6 +40,7 @@ class Album(models.Model):
     def get_absolute_url(self):
         return reverse("medialer:album", kwargs={"pk": self.pk})
 
+
     def get_cover_image(self):
         if self.cover_image:
             return self.cover_image

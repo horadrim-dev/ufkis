@@ -108,7 +108,6 @@ class SiteSettings(SingletonModel):
     share_ok = models.BooleanField(verbose_name="Одноклассники", default=True)
     share_fb = models.BooleanField(verbose_name="Facebook", default=False)
     share_twitter = models.BooleanField(verbose_name="Twitter", default=True)
-    share_instagram = models.BooleanField(verbose_name="Instagram", default=False)
 
     logo = FilerImageField(
         verbose_name=_('Логотип'),

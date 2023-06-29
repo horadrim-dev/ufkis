@@ -18,8 +18,8 @@
           <i class="fa fa-vk"></i>
         </a>
       </div> {% endcomment %}
-      {% render_share_buttons 'pohui' 'nahui'%}
-      {% render_share_buttons 'pohui' 'nahui' style='list' %}
+      {% render_share_buttons url=object.get_absolute_url title=object.title image_src=object.cover_image_src description=object.description %}
+      {% comment %} {% render_share_buttons 'pohui' 'nahui' style='list' %} {% endcomment %}
     </div>
   <div class="grid-list gallery">
     <div class="grid-box row">

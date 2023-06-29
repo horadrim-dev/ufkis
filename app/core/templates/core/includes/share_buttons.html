@@ -6,23 +6,38 @@
                 animation-duration: 500ms; 
                 transition-timing-function: ease; 
                 transition-delay: 0ms;" 
+        title="Поделиться"
         aid="0.07744903547632487">
-        <i class="fa fa-share-alt circle text-s"></i>
+        <i class="fa fa-share-alt 
+                circle 
+                {% if size == 'micro' %} text-xs
+                {% elif size == 'small' %} text-s
+                {% elif size == 'medium' %} text-m
+                {% elif size == 'large' %} text-l
+                {% endif %}"
+        ></i>
     </div>
 {% endif %}
     <div class="btn-group social-group" 
         style="{% if style == 'all_in_one' %}display: none;{% endif %}"
     >
-        {% comment %} {% if site_settings.share_vk %} {% endcomment %}
-        {% for icon, tooltip in socials %}
+
+        {% for icon, tooltip, url in socials %}
         <a target="_blank" href="#"
-
-            onclick=""
-
-        >
+            onclick="window.open('{{ url }}', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600')"
+            >
             <i class="fa fa-{{ icon }} 
-                        text-s
-                        circle 
+
+                        {% if style == 'list' %}
+                            {% if size == 'micro' %} text-xs
+                            {% elif size == 'small' %} text-s
+                            {% elif size == 'medium' %} text-m
+                            {% elif size == 'large' %} text-l
+                            {% endif %}
+                        {% endif %}
+
+                        {% if border == 'circle' %} circle {% endif %}
+
                         {% if style == 'all_in_one' %} fade-left{% endif %}" 
 
                 {% if style == 'all_in_one' %}
@@ -37,32 +52,8 @@
             </i>
         </a>
         {% endfor %}
-        {% comment %} <a target="_blank" href="#" 
-            data-social="share-facebook" 
-            data-toggle="tooltip" 
-            data-placement="top" 
-            title="" 
-            data-original-title="Facebook"
-        >
-            <i class="fa fa-facebook text-s circle"></i>
-        </a> {% endcomment %}
-        {% comment %} {% endif %} {% endcomment %}
-        {% comment %} <a target="_blank" href="#" 
-            title="Поделиться"
-            onclick="Share.vkontakte(
-            '{{ album.get_absolute_url }}',
-            '{{ album.title }}',
-            '{{ album.cover_image_src }}',
-            '{{ album.description }}')">
-            <i class="fa fa-vk"></i>
-        </a> {% endcomment %}
+
     </div>
-    {% comment %} <div class="btn-group social-group">
-                        <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
-                        <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
-                        <a target="_blank" href="#" data-social="share-google" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google+"><i class="fa fa-google-plus text-s circle"></i></a>
-                        <a target="_blank" href="#" data-social="share-linkedin" data-toggle="tooltip" data-placement="top" title="" data-original-title="LinkedIn"><i class="fa fa-linkedin text-s circle"></i></a>
-                    </div> {% endcomment %}
 {% if style == 'all_in_one' %} 
 </div>
 {% endif %}

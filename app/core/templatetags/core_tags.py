@@ -1,34 +1,78 @@
 from django import template
-
+import urllib.parse
+from django.core.exceptions import ImproperlyConfigured
 register = template.Library()
 
 
 STYLE_CHOICES = ('all_in_one', 'list')
-SIZE_CHOICES = ('small', 'medium', 'large')
-BORDER_CHOICES = ('none', 'square', 'circle')
+SIZE_CHOICES = ('micro', 'small', 'medium', 'large')
+BORDER_CHOICES = ('none', 'circle')
 @register.inclusion_tag("core/includes/share_buttons.html", takes_context=True)
-def render_share_buttons(context, url, title, description=None, image_path=None, 
-                          size="medium", border="circle", style="all_in_one"):
+def render_share_buttons(context, url, title, description=None, image_src=None, 
+                          size="small", border="circle", style="all_in_one"):
     """
     Render social buttons for sharing
     """
+    if not url or not title:
+        msg = "Fields \"url\" and \"title\" must be filled.\n " + \
+                "Current values: url=\"{}\", title=\"{}\""  \
+                .format(url, title)
+        raise ImproperlyConfigured(msg)
+    
+    if not description:
+        description = ""
+    if not image_src:
+        description = ""
+
+    host = context['request']._current_scheme_host
+    absolute_image_src = host + image_src if image_src else ''
+    absolute_url = host + url
+
     socials = []
+
     if context['site_settings'].share_vk:
-        socials.append(('vk', 'ВКонтакте'))
+        social_url  = 'https://vk.com/share.php?';
+        params = {
+            'url' : absolute_url,
+            'title': title,
+            'description': description,
+            'image' : absolute_image_src,
+            'noparse':  'true'
+        }
+        endcoded_url = social_url + urllib.parse.urlencode(params)
+        socials.append(('vk', 'ВКонтакте', endcoded_url))
+
     if context['site_settings'].share_ok:
-        socials.append(('odnoklassniki', 'Одноклассники'))
+        social_url  = 'https://connect.ok.ru/offer?';
+        params = {
+            'url' : absolute_url,
+            'title': title,
+            'description': description,
+            'imageUrl' : absolute_image_src,
+        }
+        endcoded_url = social_url + urllib.parse.urlencode(params)
+        socials.append(('odnoklassniki', 'Одноклассники', endcoded_url))
+
     if context['site_settings'].share_fb:
-        socials.append(('facebook', 'Facebook'))
+        social_url  = 'http://www.facebook.com/sharer.php?';
+        params = {
+            'u' : absolute_url,
+            't': title,
+        }
+        endcoded_url = social_url + urllib.parse.urlencode(params)
+        socials.append(('facebook', 'Facebook', endcoded_url))
+
     if context['site_settings'].share_twitter:
-        socials.append(('twitter', 'Twitter'))
-    if context['site_settings'].share_instagram:
-        socials.append(('instagram', 'Instagram'))
+        social_url  = 'https://twitter.com/share?';
+        params = {
+            'text': title,
+            'url' : absolute_url,
+            'counturl' : absolute_url,
+        }
+        endcoded_url = social_url + urllib.parse.urlencode(params)
+        socials.append(('twitter', 'Twitter', endcoded_url))
 
     return {
-        "url": url,
-        "title": title,
-        "description": description,
-        "image_path": image_path,
         'size': size if size in SIZE_CHOICES else None,
         'border': border if border in BORDER_CHOICES else None,
         'style': style if style in STYLE_CHOICES else None,
