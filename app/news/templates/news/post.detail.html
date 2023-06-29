@@ -84,20 +84,8 @@
                     <span><i class="fa fa-bookmark"></i> <a href="{% url "news:index" %}?category={{ object.category.id }}">{{ object.category.title }}</a></span>
                 {% endif %}
             </div>
-            <div class="tag-row">
-                <div class="taggit-labels taggit-list">
-                    {% for tag in object.tags.all %}
-                    <span class="taggit-tag item-tag">
-                        {% comment %} <i class="fa fa-tag"></i> {% endcomment %}
-                        <a href="{% url "news:index" %}?tags={{ tag.name | prepare_tag_name }}">
-                            {{tag}}
-                        </a>
-                    </span>
-                    {% endfor %}
-                </div>
-            </div>
             
-            {% render_share_buttons url=object.get_absolute_url title=object.title image_src=object.thumb_src description=object.description|striptags|truncatechars_html:150 %}
+            {% render_share_buttons url=object.get_absolute_url title=object.title image_src=object.thumb_src description=object.description|striptags|truncatechars_html:150 style="list" %}
                 {% comment %} <div class="btn-group social-group social-colors">
                     <a target="_blank" href="#" data-social="share-facebook" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fa fa-facebook text-s circle"></i></a>
                     <a target="_blank" href="#" data-social="share-twitter" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="fa fa-twitter text-s circle"></i></a>
@@ -108,6 +96,21 @@
         <hr class="b space m" />
         
         {% render_placeholder post.content 640 %}
+            
+
+        <hr class="b space m" />
+        <div class="tag-row">
+            <div class="taggit-labels taggit-list">
+                {% for tag in object.tags.all %}
+                <span class="taggit-tag item-tag">
+                    {% comment %} <i class="fa fa-tag"></i> {% endcomment %}
+                    <a href="{% url "news:index" %}?tags={{ tag.name | prepare_tag_name }}">
+                        {{tag}}
+                    </a>
+                </span>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     {% comment %} <hr class="f-top"> {% endcomment %}
