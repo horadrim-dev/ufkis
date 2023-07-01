@@ -538,10 +538,12 @@ class PluginPicture(AbstractPicture, CMSPlugin):
 
 
 class AlbumPicture(AbstractPicture):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, #blank=True, null=True)
-                                    verbose_name="Альбом")
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, 
+                              blank=True, null=True,
+                              verbose_name="Альбом")
     class Meta:
         abstract = False
+
 
 
 # =========================== VIDEO ====================================#

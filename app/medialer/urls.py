@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('', MediaView.as_view(), name='index'),
+    # path('', MediaView.as_view(), name='index'),
+    path('', MediaFilterView.as_view(), name='index'),
     path('albums/<int:pk>', AlbumDetailView.as_view(), name='album'),
 ] 
 

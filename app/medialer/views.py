@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Dict
 from django.db import models
 from django.db.models.query import QuerySet
 from django.shortcuts import render
@@ -13,6 +13,8 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from . import models
 from django.views.generic.list import MultipleObjectMixin
+from django_filters.views import FilterView
+from .filtersets import MediaFilterSet
 
 # NEWS_FILTER_STATES = ("visible", "hidden")
 
@@ -25,6 +27,7 @@ class MediaView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_pictures'] = models.PluginPicture.objects.all()[:8]
+        context['non_cat_pictures'] = models.AlbumPicture.objects.filter(album=None)[:8]
         context['albums'] = models.Album.objects.all()
         # context['news_filter_state'] = self.get_filter_state()
         # assert False, context
@@ -60,3 +63,19 @@ class AlbumDetailView(MultipleObjectMixin, DetailView):
         context['page_title'] = "Альбом \"{}\"".format(self.object)
         # context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.title}]
         return context
+    
+
+class MediaFilterView(FilterView):
+    template_name = 'medialer/media_list.html'
+    filterset_class = MediaFilterSet
+    paginate_by = 3
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # assert False,type(context['filter'].form['album'][1].data['value'].instance)
+        # assert False, (dir(context['filter'].form['album']), context['filter'].form['album'].field)
+        # assert False, [choice for choice in context['filter'].form['album']]
+        return context
+
+    def get_queryset(self):
+        return models.AlbumPicture.objects.all()
