@@ -51,7 +51,7 @@ class Album(models.Model):
 
         return None
 
-    def cover_image_src(self):
+    def thumb_src(self):
         image = self.get_cover_image()
         if not image:
             return None
@@ -539,7 +539,7 @@ class PluginPicture(AbstractPicture, CMSPlugin):
 
 class AlbumPicture(AbstractPicture):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, 
-                              blank=True, null=True,
+                            #   blank=True, null=True,
                               verbose_name="Альбом")
     class Meta:
         abstract = False

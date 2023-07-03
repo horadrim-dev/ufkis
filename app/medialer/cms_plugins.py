@@ -1,4 +1,7 @@
+from typing import Any
 from django.conf import settings
+from django.db.models.query import QuerySet
+from django.http.request import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from cms.plugin_base import CMSPluginBase
@@ -8,10 +11,51 @@ from cms.plugin_pool import plugin_pool
 from . import forms
 from . import models
 
+@plugin_pool.register_plugin
+class AlbumPicturesPlugin(CMSPluginBase):
+    module = "Медиа"
+    name = "Последние фотографии (из галереи)"
+    allow_children = False
+    render_template = "medialer/plugins/latestpictures.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['object_list'] = models.AlbumPicture.objects.all()[:8]
+        return context
+
+@plugin_pool.register_plugin
+class PluginPicturesPlugin(CMSPluginBase):
+    module = "Медиа"
+    name = "Последние фотографии (из постов)"
+    allow_children = False
+    render_template = "medialer/plugins/latestpluginpictures.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['object_list'] = models.PluginPicture.objects.all()[:8]
+        return context
+ 
+
+@plugin_pool.register_plugin
+class AlbumsPlugin(CMSPluginBase):
+    # model = models.Album
+    # form = forms.PluginPictureForm
+    module = "Медиа"
+    name = "Список альбомов"
+    allow_children = False
+    render_template = "medialer/plugins/albums.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['album_list'] = models.Album.objects.all()
+        return context
+    
+
+
+
 
 # enable nesting of plugins inside the picture plugin
 PICTURE_NESTING = getattr(settings, 'medialer_NESTING', False)
-
 
 @plugin_pool.register_plugin
 class PicturePlugin(CMSPluginBase):

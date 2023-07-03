@@ -66,13 +66,21 @@ class AlbumDetailView(MultipleObjectMixin, DetailView):
     
 
 class MediaFilterView(FilterView):
-    template_name = 'medialer/media_list.html'
+    template_name = 'medialer/gallery.html'
     filterset_class = MediaFilterSet
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # assert False,type(context['filter'].form['album'][1].data['value'].instance)
+
+        if hasattr(context['filter'].form, 'cleaned_data'):
+            album = context['filter'].form.cleaned_data['album']
+            if album: # album was choosed
+                context['album'] = album
+                context['page_title'] = "Альбом \"{}\"".format(context['album'].title)
+                # context['added_breadcrumbs'] = [{'url':album.get_absolute_url, 'title':album.title}]
+        # assert False,(context['filter'].form['album'][0].data)
+        # assert False,(context['filter'].form['album'][1].data['value'].instance.description)
         # assert False, (dir(context['filter'].form['album']), context['filter'].form['album'].field)
         # assert False, [choice for choice in context['filter'].form['album']]
         return context
