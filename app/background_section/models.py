@@ -24,7 +24,7 @@ CONTAINER_CHOICES = [
 
 class BackgroundSection(CMSPlugin):
 
-    name = models.CharField("Название", max_length=255, default="", help_text="Системное название секции (отображается только в панели администрирования)")
+    # name = models.CharField("Название", max_length=255, default="", help_text="Системное название секции (отображается только в панели администрирования)")
     title = models.CharField("Заголовок", max_length=255, default="", blank=True, null=True, help_text="Не обязательно")
     # text = HTMLField("Текст", default="", blank=True, null=True, help_text="Не обязательно")
     # text_bottom = HTMLField("Текст снизу секции", default="", blank=True, null=True, help_text="Не обязательно")
@@ -68,4 +68,4 @@ class BackgroundSection(CMSPlugin):
         return "{}x{}".format(self.thumb_width, self.thumb_height)
 
     def __str__(self):
-        return self.name if self.name else ''
+        return self.title if self.title else ''
