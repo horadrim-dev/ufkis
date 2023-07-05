@@ -64,14 +64,18 @@ class AlbumDetailView(MultipleObjectMixin, DetailView):
         # context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.title}]
         return context
     
+PAGINATE_BY_CHOICES = ('2', '4', '8')
 
 class MediaFilterView(FilterView):
     template_name = 'medialer/gallery.html'
     filterset_class = MediaFilterSet
-    paginate_by = 3
+    paginate_by = PAGINATE_BY_CHOICES[0]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        context['PAGINATE_BY_CHOICES'] = PAGINATE_BY_CHOICES
+        context['active_paginate_by'] = self.get_paginate_by(self.queryset)
 
         if hasattr(context['filter'].form, 'cleaned_data'):
             album = context['filter'].form.cleaned_data['album']
@@ -87,3 +91,7 @@ class MediaFilterView(FilterView):
 
     def get_queryset(self):
         return models.AlbumPicture.objects.all()
+
+    def get_paginate_by(self, queryset):
+        paginate_by = self.request.GET.get('count', '')
+        return paginate_by if paginate_by in PAGINATE_BY_CHOICES else self.paginate_by

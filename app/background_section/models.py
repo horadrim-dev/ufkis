@@ -7,6 +7,11 @@ from colorfield.fields import ColorField
 from djangocms_text_ckeditor.fields import HTMLField
 import uuid
 
+TITLE_ALIGN_CHOICES = [
+    ('center', 'По центру'),
+    ('left', 'Слева'),
+    ('right', 'Справа')
+]
 OVERLAY_OPACITY_CHOICES = [
     ('0', '0'),
     ('.1', '10%'),
@@ -26,6 +31,12 @@ class BackgroundSection(CMSPlugin):
 
     # name = models.CharField("Название", max_length=255, default="", help_text="Системное название секции (отображается только в панели администрирования)")
     title = models.CharField("Заголовок", max_length=255, default="", blank=True, null=True, help_text="Не обязательно")
+    title_align = models.CharField(
+        max_length=16,
+        verbose_name="Расположение заголовка",
+        choices=TITLE_ALIGN_CHOICES,
+        default=TITLE_ALIGN_CHOICES[0][0],
+    )
     # text = HTMLField("Текст", default="", blank=True, null=True, help_text="Не обязательно")
     # text_bottom = HTMLField("Текст снизу секции", default="", blank=True, null=True, help_text="Не обязательно")
 
