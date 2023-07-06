@@ -31,10 +31,11 @@ class PublishedObjectsMixin:
 NEWS_LIST_LAYOUTS = ("grid", "list")
 NEWS_FILTER_STATES = ("visible", "hidden")
 
+PAGINATE_BY_CHOICES = ('2', '4', '8')
 class PostListView(PublishedObjectsMixin, FilterView):
     template_name = 'news/post.list.html'
     # model = Post
-    paginate_by = 4
+    paginate_by = PAGINATE_BY_CHOICES[0]
     filterset_class = PostFilterSet
 
     def get_news_list_layout(self):
@@ -49,6 +50,9 @@ class PostListView(PublishedObjectsMixin, FilterView):
         context = super().get_context_data(**kwargs)
         context['news_list_layout'] = self.get_news_list_layout()
         context['news_filter_state'] = self.get_filter_state()
+
+        context['PAGINATE_BY_CHOICES'] = PAGINATE_BY_CHOICES
+        context['active_paginate_by'] = self.get_paginate_by(self.queryset)
         return context
 
     def render_to_response(self, context, **response_kwargs):
@@ -66,6 +70,9 @@ class PostListView(PublishedObjectsMixin, FilterView):
                             max_age=3600*24*7)
         return response
 
+    def get_paginate_by(self, queryset):
+        paginate_by = self.request.GET.get('count', '')
+        return paginate_by if paginate_by in PAGINATE_BY_CHOICES else self.paginate_by
 
 class PostDetailView(PublishedObjectsMixin, DetailView):
     template_name = 'news/post.detail.html'

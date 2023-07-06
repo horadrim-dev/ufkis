@@ -1,5 +1,5 @@
 {% extends 'news/base.html' %}
-{% load sekizai_tags thumbnail static %}
+{% load sekizai_tags thumbnail static core_tags %}
 
 {% block app_content %}
 {% addtoblock "js" %}<script src="{% static 'news/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
@@ -20,6 +20,17 @@
         {% endif %}
       </button>
       <div class="text-right hidden-xs display-md">
+	  <ol class="list-inline">
+	    {% for choice in PAGINATE_BY_CHOICES %}
+	      <li class="">
+	        {% if choice == active_paginate_by %}
+	          {{ choice }}
+	        {% else %}
+	          <a href="{% url "news:index" %}?{% param_replace page="" count=choice %}">{{ choice }}</a>
+	        {% endif %}
+	      </li>
+	    {% endfor %}
+	  </ol>
         <button class="layout-toggler btn-border btn-sm" data="grid" path="{% url "news:index" %}"
           {% if news_list_layout == "grid" %}disabled{% endif %}
           >
@@ -30,7 +41,7 @@
           >
           <i class="fa fa-th-list"></i>
         </button>
-      </div>
+     </div>
     </div>
     <hr class="space m" />
 
