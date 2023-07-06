@@ -17,6 +17,7 @@ from django_filters.views import FilterView
 from .filtersets import MediaFilterSet
 
 # NEWS_FILTER_STATES = ("visible", "hidden")
+PAGINATE_BY_CHOICES = ('2', '4', '8')
 
 class MediaView(TemplateView):
     template_name = 'medialer/media.html'
@@ -64,7 +65,16 @@ class AlbumDetailView(MultipleObjectMixin, DetailView):
         # context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.title}]
         return context
     
-PAGINATE_BY_CHOICES = ('2', '4', '8')
+
+class PluginPictureListView(ListView):
+    template_name = 'medialer/pluginpicture.list.html'
+    model = models.PluginPicture
+    paginate_by = PAGINATE_BY_CHOICES[0]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['page_title'] = "Фотоматериалы"
+        return context
 
 class MediaFilterView(FilterView):
     template_name = 'medialer/gallery.html'
