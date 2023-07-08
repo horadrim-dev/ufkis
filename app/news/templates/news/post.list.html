@@ -20,17 +20,6 @@
         {% endif %}
       </button>
       <div class="text-right hidden-xs display-md">
-	  <ol class="list-inline">
-	    {% for choice in PAGINATE_BY_CHOICES %}
-	      <li class="">
-	        {% if choice == active_paginate_by %}
-	          {{ choice }}
-	        {% else %}
-	          <a href="{% url "news:index" %}?{% param_replace page="" count=choice %}">{{ choice }}</a>
-	        {% endif %}
-	      </li>
-	    {% endfor %}
-	  </ol>
         <button class="layout-toggler btn-border btn-sm" data="grid" path="{% url "news:index" %}"
           {% if news_list_layout == "grid" %}disabled{% endif %}
           >
@@ -41,6 +30,19 @@
           >
           <i class="fa fa-th-list"></i>
         </button>
+        {# PAGINATE_BY #}
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-border btn-sm btn-default dropdown-toggle demo" data-toggle="dropdown" aria-expanded="false">
+            {{ active_paginate_by }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            {% for choice in PAGINATE_BY_CHOICES %}
+              <li>
+                <a href="{% url "news:index" %}?{% param_replace page="" count=choice %}">{{ choice }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
      </div>
     </div>
     <hr class="space m" />

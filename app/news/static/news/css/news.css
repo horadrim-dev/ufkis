@@ -9,9 +9,9 @@
 .news-container .tag-row span{
   border-right: none;
 }
-.news-container span {
+/* .news-container span {
   margin-right: 10px;
-}
+} */
 .news-container span i {
   margin-right: 0px;
 }

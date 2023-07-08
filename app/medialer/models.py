@@ -38,7 +38,7 @@ class Album(models.Model):
         verbose_name_plural = "альбомы"
 
     def get_absolute_url(self):
-        return reverse("medialer:album", kwargs={"pk": self.pk})
+        return reverse("medialer:index") + "?album={}".format(self.pk)
 
 
     def get_cover_image(self):
