@@ -103,6 +103,7 @@ INSTALLED_APPS = [
     # 'djangocms_picture', # использовано в medialer
     # 'djangocms_video', # использовано в medialer
     'medialer',
+    'structure',
 ]
 
 MIDDLEWARE = [
