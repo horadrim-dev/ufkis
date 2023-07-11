@@ -71,7 +71,11 @@ from django.shortcuts import get_object_or_404
 
 
 class GetOtdelsView(View):
-
+    """
+    Возвращает список отделов в ответ на ajax запрос
+    Используется в форме SotrudnikForm
+    Обрабатывается в js/sotrudnik_form.js
+    """
     def get(self,request, *args, **kwargs):
 
         if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
