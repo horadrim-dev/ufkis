@@ -7,8 +7,6 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    # path('admin/', AdminView.as_view(), name='admin'),
     path('otdels/', GetOtdelsView.as_view(), name='get-otdels'),
-    # path('<slug:slug>/', PostDetailView.as_view(), name='detail'),
 ] 
 

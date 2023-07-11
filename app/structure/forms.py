@@ -40,11 +40,8 @@ class OtdelForm(forms.ModelForm):
 
 class SotrudnikForm(forms.ModelForm):
 
-    # organization = forms.CharField(widget=forms.Select(attrs={"data-otdels-url": reverse("get-otdels", kwargs={"org_id": 1})}))
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),
-        #   widget=forms.Select(attrs={"data-otdels-url": "/"}))
-
         # передаем в атрибут формы url для дальнейшей загрузки данных поля "otdel" через js
         # org_id=1 вставлен для того чтобы сработал reverse, далее будет отрезан в js
         widget=forms.Select(
@@ -62,15 +59,16 @@ class SotrudnikForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # assert False, reverse_lazy("get-otdels-for-org", kwargs={"org_id": 1})[:-1]
+
+        # обнуляем queryset отделов (иначе выведтся все отделы всех организаций)
         self.fields['otdel'].queryset = Otdel.objects.none()
-
-    # def clean(self):
-    #     cleaned_data = super().clean()
-    #     organization = cleaned_data.get("organization")
-    #     otdel = cleaned_data.get("otdel")
-
-    #     if organization and otdel:
-    #         assert False, (organization, otdel)
-    #         msg = "Пост с alias \"{}\" - уже существует".format(slug)
-    #         self.add_error("alias", msg)
+        
+        # если запись уже сохранена выводим queryset выбранной организации
+        if 'organization' in self.data:
+            try:
+                org_id = int(self.data.get('organization'))
+                self.fields['otdel'].queryset = Otdel.objects.filter(organization_id=org_id)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty queryset
+        elif self.instance.pk:
+            self.fields['otdel'].queryset = self.instance.organization.otdel_set
