@@ -22,6 +22,7 @@ class StructureBase(OrderedModel):
         abstract = True
 
 
+
 class Organization(StructureBase):
     parent = models.ForeignKey('Organization', verbose_name="Родительская организация",
                             on_delete=models.SET_NULL,
@@ -42,7 +43,12 @@ class Organization(StructureBase):
     class Meta:
         verbose_name = "организация"
         verbose_name_plural = "организации"
+
+    def __str__(self):
+        return self.name
     
+    def get_otdels(self):
+        return self.otdel_set.all()
 
 class Otdel(StructureBase):
     organization = models.ForeignKey(Organization, verbose_name="Организация",
@@ -53,6 +59,9 @@ class Otdel(StructureBase):
     class Meta:
         verbose_name = "отдел"
         verbose_name_plural = "отделы"
+
+    def __str__(self):
+        return "[{}] {}".format(self.organization.short_name, self.name)
 
 
 class Sotrudnik(StructureBase):
@@ -79,3 +88,6 @@ class Sotrudnik(StructureBase):
     class Meta:
         verbose_name = "сотрудник"
         verbose_name_plural = "сотрудники"
+
+    def __str__(self):
+        return " ".join([str(self.lastname), str(self.firstname), str(self.surname)])
