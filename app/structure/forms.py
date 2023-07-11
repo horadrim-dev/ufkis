@@ -39,6 +39,10 @@ class OtdelForm(forms.ModelForm):
 
 
 class SotrudnikForm(forms.ModelForm):
+    """
+    Форма сотрудник использует ajax подгрузку отделов выбранной организации
+    https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
+    """
 
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),

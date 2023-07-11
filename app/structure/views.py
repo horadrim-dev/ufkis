@@ -75,6 +75,8 @@ class GetOtdelsView(View):
     Возвращает список отделов в ответ на ajax запрос
     Используется в форме SotrudnikForm
     Обрабатывается в js/sotrudnik_form.js
+
+    https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
     """
     def get(self,request, *args, **kwargs):
 
