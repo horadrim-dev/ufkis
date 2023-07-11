@@ -25,7 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': {'cmspages': CMSSitemap}}),
     # re_path(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
-
+    path('core/', include('core.system_urls')),
     path('admin/', admin.site.urls),
     path('', include('cms.urls')),
 
