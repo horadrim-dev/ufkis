@@ -6,7 +6,7 @@ from filer.fields.image import FilerImageField
 
 class OrderedModel(models.Model):
     
-    order = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name="Порядковый номер", help_text="Если оставить равным 0 - добавится в конец.")
+    order = models.PositiveSmallIntegerField(default=0, blank=True, null=True, verbose_name="Порядок", help_text="Если оставить равным 0 - добавится в конец.")
 
     def update_order(self, list_of_objects):
             '''обновляет порядок элементов с общим родителем'''

@@ -47,7 +47,6 @@ class SotrudnikForm(forms.ModelForm):
     organization = forms.ModelChoiceField(
         queryset=Organization.objects.all(),
         # передаем в атрибут формы url для дальнейшей загрузки данных поля "otdel" через js
-        # org_id=1 вставлен для того чтобы сработал reverse, далее будет отрезан в js
         widget=forms.Select(
             attrs={"data-otdels-url": reverse_lazy("get-otdels")}
         )
