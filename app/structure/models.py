@@ -138,6 +138,7 @@ class Sotrudnik(StructureBase):
 
     def name(self):
         return "{} {} {}".format(self.lastname, self.firstname, self. surname)
+    name.short_description = "ФИО"
 
     def __str__(self):
         return " ".join([str(self.lastname), str(self.firstname), str(self.surname)])
