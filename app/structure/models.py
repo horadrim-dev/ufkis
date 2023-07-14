@@ -45,7 +45,9 @@ class Organization(StructureBase):
 
     leveled_name.short_description = "Название"
 
-    
+    def childs(self):
+        return Organization.objects.filter(parent=self)
+
     def get_otdels(self):
         return self.otdel_set.all()
     

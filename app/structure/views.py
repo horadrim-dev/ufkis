@@ -90,5 +90,5 @@ class GetOtdelsView(View):
         raise Http404
     
 class OrganizationListView(ListView):
-    template_name = "structure/base.html"
-    queryset = Organization.objects.none()
+    template_name = "structure/structure.html"
+    queryset = Organization.objects.filter(level=1)

@@ -2,5 +2,18 @@
 {% load cms_tags sekizai_tags static %}
 
 {% block content %}
-<h1>XYU</h1>
+
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'structure/css/structure.css' %}">{% endaddtoblock %}
+
+{% static_placeholder '[structure] top' %}
+
+<section class="structure-container">
+    <div class="container">
+        {% block app_content %}
+        {% endblock app_content %}
+    </div>
+</section>
+
+{% static_placeholder '[structure] bottom' %}
+
 {% endblock content %}

@@ -1,0 +1,11 @@
+.structure-container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.structure-container .structure-item {
+  padding: 20px 0;
+  margin: -20px 0;
+}
+.structure-container .structure-item .advs-box {
+  padding: 25px;
+}
