@@ -2,6 +2,7 @@ from django.db import models
 from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
 from core.models import OrderedModel
+from easy_thumbnails.files import get_thumbnailer
 
 
 
@@ -82,6 +83,20 @@ class Organization(StructureBase):
             )
             # обновляем номера в общем списке
             self.update_list_order()
+
+    def logo_thumb_src(self):
+        logo = self.logo
+        if not logo:
+            return ""
+
+        thumbnail_options = {
+            'size': (155, 200),
+            'crop': True,
+            'upscale': True,
+            'subject_location': logo.subject_location,
+        }
+        thumbnailer = get_thumbnailer(logo)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
 
     class Meta:
         ordering = ['list_order' ]
