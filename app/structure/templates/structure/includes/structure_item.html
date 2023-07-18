@@ -13,11 +13,19 @@
             <div class="col-md-10">
                 <h3>{{ object.name }}</h3>
                 <hr>
-                <p>
-                    Quis nonummy wisi taciti Dictumst sapiente aliquet elementum eveniet loremi. Lorem ipsum dolor sit amet consectetur adipiscing elitsed do eiusmod tempor incididunt utlabore et dolore magna aliqua.
-                    Utenim ad minim veniam quis nostrud exercitation ullamco.
-                </p>
-                <a class="btn btn-xs" href="#">Read more</a>
+                {% comment %} <div class="tag-row"> {% endcomment %}
+                <ul class="list-texts text-left">
+                    {% if object.address %}
+                    <li><i class="fa fa-map-marker"></i> {{ object.address }}</li>
+                    {% endif %}
+                    {% if object.site %}
+                    <li><a href="{{ object.site }}" target="_blank"><i class="fa fa-external-link "></i> {{ object.site }}</a></li>
+                    {% endif %}
+                </ul>
+                {% comment %} </div> {% endcomment %}
+                <div class="text-right">
+                    <a class="btn btn-border" href="#">Подробнее</a>
+                </div>
             </div>
         </div>
     </div>

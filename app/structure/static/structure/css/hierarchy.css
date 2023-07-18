@@ -1,15 +1,15 @@
 .tree,
-.tree ul {
+.tree ul.subtree {
   padding:0;
   list-style:none;
   color:#369;
   position:relative;
 }
-.tree ul {
+.tree ul.subtree {
   margin-left:2em;
 }
 .tree:before,
-.tree ul:before {
+.tree ul.subtree:before {
   content:"";
   display:block;
   width:0;
@@ -20,14 +20,16 @@
   /* border-left:3px solid #dcdcdc; */
   border-left:3px solid var(--main-color);
 }
-.tree li {
+.tree > li,
+.tree ul.subtree > li {
   margin:0;
   padding:0 0 0 1.5em;
   line-height:2em;
   font-weight:bold;
   position:relative;
 }
-.tree li:before {
+.tree > li:before,
+.tree ul.subtree > li:before {
   content:"";
   display:block;
   width:1.5em;
@@ -39,7 +41,8 @@
   top:3em;
   left:0;
 }
-.tree li:last-child:before {
+.tree > li:last-child:before ,
+.tree ul.subtree > li:last-child:before {
   background: #fff;
   height:auto;
   bottom:0;
