@@ -1,30 +1,34 @@
+{% load static %}
 <div class="structure-item">
     <div class="advs-box advs-box advs-box-side-icon boxed-inverse">
         <div class="row">
+            {% if object.logo %}
             <div class="col-md-2">
                 <div class="img-box">
-                    {% if object.logo %}
                     <img src="{{ object.logo_thumb_src }}" alt="">
-                    {% else %}
-                    <i class="fa fa-institution"></i>
-                    {% endif %}
                 </div>
             </div>
             <div class="col-md-10">
-                <h3>{{ object.name }}</h3>
+            {% else %}
+            <div class="col-sm-12">
+            {% endif %}
+                <h3><a href="{% url 'structure:org-detail' object.id %}">{{ object.name }}</a></h3>
                 <hr>
                 {% comment %} <div class="tag-row"> {% endcomment %}
                 <ul class="list-texts text-left">
                     {% if object.address %}
-                    <li><i class="fa fa-map-marker"></i> {{ object.address }}</li>
+                    <li><b>Адрес: </b><i class="fa fa-map-marker"></i> {{ object.address }}</li>
                     {% endif %}
                     {% if object.site %}
-                    <li><a href="{{ object.site }}" target="_blank"><i class="fa fa-external-link "></i> {{ object.site }}</a></li>
+                    <li><b>Сайт: </b><a href="{{ object.site }}" target="_blank"><i class="fa fa-external-link "></i> {{ object.site }}</a></li>
+                    {% endif %}
+                    {% if object.phone%}
+                    <li><b>Приемная: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
                     {% endif %}
                 </ul>
                 {% comment %} </div> {% endcomment %}
                 <div class="text-right">
-                    <a class="btn btn-border" href="#">Подробнее</a>
+                    <a class="btn btn-border" href="{% url 'structure:org-detail' object.id %}">Подробнее</a>
                 </div>
             </div>
         </div>

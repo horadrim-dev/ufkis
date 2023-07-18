@@ -1,3 +1,4 @@
+from typing import Any, Dict
 from django.shortcuts import render
 from django.views.generic import View
 from django.core.exceptions import PermissionDenied
@@ -5,7 +6,7 @@ from django.http import HttpResponse, JsonResponse, Http404
 from .models import Organization, Otdel
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 
@@ -92,3 +93,12 @@ class GetOtdelsView(View):
 class OrganizationListView(ListView):
     template_name = "structure/structure.html"
     queryset = Organization.objects.filter(level=1)
+
+class OrganizationDetailView(DetailView):
+    template_name = "structure/organization_detail.html"
+    model = Organization
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = context['object'].name
+        return context
