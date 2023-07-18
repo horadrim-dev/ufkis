@@ -4,6 +4,87 @@
 
 {% block app_content %}
 
-<h1>{{ object.name }}</h1>
+<div class="row">
+  <div class="col-md-4 text-center">
+    {% if object.logo %}
+    <div class="img-box">
+      <img src="{{ object.logo_thumb_src }}" alt="">
+    </div>
+    {% endif %}
+  </div>
+  <div class="col-md-8">
+    {% if object.short_description %}
+    <p>{{ object.short_description }}</p>
+    <hr class="space m">
+    {% endif %}
+    <ul class="list-texts list-texts-justified text-left">
+      {% if object.address %}
+      <li><b>Адрес: </b><span><i class="fa fa-map-marker"></i> {{ object.address }}</span></li>
+      {% endif %}
+      {% if object.site %}
+      <li><b>Сайт: </b><a href="{{ object.site }}" target="_blank">{{ object.site }} <i class="fa fa-external-link "></i></a></li>
+      {% endif %}
+      {% if object.phone%}
+      <li><b>Телефон приемной: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
+      {% endif %}
+      {% if object.email %}
+      <li><b>Электронная почта: </b><i class="fa fa-envelope-open-o"></i> {{ object.email }}</li>
+      {% endif %}
+      {% if object.shedule %}
+      <li><b>График работы: </b><i class="fa fa-calendar"></i> {{ object.shedule }}</li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+<hr class="space m">
+{{ object.description | safe }}
+<hr class="space m">
+<div class="title-modern st-icon text-left">
+  <h2>Отделы</h2>
+  <hr>
+</div>
+<hr class="space m">
+<table class="table table-striped">
+  <thead>
+      <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Department</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <th scope="row">1</th>
+          <td>Marketing</td>
+          <td>Euismod parturient curabitur, explicabo etiam quae cillum, sunt pariaturo.</td>
+          <td>New York, United States</td>
+      </tr>
+      <tr>
+          <th scope="row">2</th>
+          <td>Constructions</td>
+          <td>Officiis fermentum aut potenti eo nascetur incididunt labore ipsa quoss donec vivamus dictumst qui qui cras ligula.</td>
+          <td>Boston, United States</td>
+      </tr>
+      <tr>
+          <th scope="row">3</th>
+          <td>Renovation</td>
+          <td>Tenetur scelerisque omnis! Elementum! Laboriosam omnis lorem</td>
+          <td>Miami, United States</td>
+      </tr>
+      <tr>
+          <th scope="row">4</th>
+          <td>Outdoors</td>
+          <td>Aascetur incididunt labore ipsa quoss donec vivamu scelerisque omnis! Elementum! Laboriosam omnis lorem</td>
+          <td>Miami, United States</td>
+      </tr>
+      <tr>
+          <th scope="row">4</th>
+          <td>Indoor</td>
+          <td>Aascetur incididunt labore ipsa donec vivamu scelerisque omnis! Elementum! Laboriosam omnis lorem</td>
+          <td>Los Angeles, United States</td>
+      </tr>
+  </tbody>
+</table>
 
 {% endblock app_content %}

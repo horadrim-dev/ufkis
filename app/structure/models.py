@@ -24,10 +24,19 @@ class Organization(StructureBase):
     list_order = models.PositiveSmallIntegerField(default=0, blank=True, null=True)
     name = models.CharField(verbose_name="Полное название", max_length=256)
     short_name = models.CharField(verbose_name="Краткое название", max_length=128, )
-    address = models.CharField(verbose_name="Адрес", max_length=256)
+    address = models.CharField(verbose_name="Адрес", max_length=256,
+                             blank=True, null=True)
     phone = models.CharField(verbose_name="Телефон приемной", max_length=32,
                              blank=True, null=True)
+    email = models.EmailField(verbose_name='Электронная почта',
+                              blank=True, null=True)
     site = models.URLField(verbose_name="Сайт", blank=True, null=True)
+    shedule = models.CharField(verbose_name="График работы", max_length=256,
+                              blank=True, null=True)
+    phone = models.CharField(verbose_name="Телефон приемной", max_length=32,
+                             blank=True, null=True)
+    short_description = models.CharField(verbose_name="Краткое описание", max_length=512,
+                                         blank=True, null=True)
     description = HTMLField(verbose_name="Описание", blank=True, null=True)
     logo = FilerImageField(verbose_name="Логотип", 
                            on_delete=models.CASCADE, 
