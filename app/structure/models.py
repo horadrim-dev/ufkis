@@ -3,7 +3,7 @@ from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
 from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
-
+from django.urls import reverse
 
 
 class StructureBase(OrderedModel):
@@ -108,6 +108,10 @@ class Organization(StructureBase):
         }
         thumbnailer = get_thumbnailer(logo)
         return thumbnailer.get_thumbnail(thumbnail_options).url
+
+    def get_absolute_url(self):
+        return reverse("structure:org-detail", kwargs={"pk": self.pk})
+    
 
     class Meta:
         ordering = ['list_order' ]

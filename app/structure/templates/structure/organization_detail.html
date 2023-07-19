@@ -1,11 +1,17 @@
 {% extends 'structure/base.html' %}
-{% load cms_tags sekizai_tags static structure_tags %}
+{% load cms_tags core_tags sekizai_tags static structure_tags %}
 
 
 {% block app_content %}
 
+{% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %}
+
+<div class="text-right">
+  {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.logo_thumb_src description=object.short_description|striptags|truncatechars_html:150 %}
+</div>
+
 <div class="row">
-  <div class="col-md-4 text-center">
+<div class="col-md-4 text-center">
     {% if object.logo %}
     <div class="img-box">
       <img src="{{ object.logo_thumb_src }}" alt="">
@@ -42,6 +48,42 @@
 <div class="title-modern st-icon text-left">
   <h2>Отделы</h2>
   <hr>
+</div>
+<hr class="space m">
+
+<div class="list-group accordion-list" data-type="visible" data-time="200">
+  <div class="list-group-item">
+      <a href="#" class=""> Accordion item 1</a>
+      <div class="panel" style="display: none;">
+          <div class="inner">
+              Lorem ipsum dolor sitamet, Cras justo odio consectetur adipisicin elitsed do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem
+          </div>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <a href="#" class=""> Accordion item 2</a>
+      <div class="panel" style="display: none;">
+          <div class="inner">
+              Lorem ipsum dolor sitamet, Cras justo odio consectetur adipisicin elit do eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem.  Lorem ipsum dolor sitamet, Cras justo odio consectetur adipisicin elit
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem
+          </div>
+      </div>
+  </div>
+  <div class="list-group-item">
+      <a href="#" class=""> Accordion item 3</a>
+      <div class="panel" style="display: none;">
+          <div class="inner">
+              Lorem ipsum dolor sitamet, Cras justo odio consectetur adipisicin elitdo eiusmod tempor incididunt
+              ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem
+          </div>
+      </div>
+  </div>
 </div>
 <hr class="space m">
 <table class="table table-striped">
@@ -86,5 +128,4 @@
       </tr>
   </tbody>
 </table>
-
 {% endblock app_content %}
