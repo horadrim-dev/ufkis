@@ -25,7 +25,9 @@ django.utils.translation.ugettext = django.utils.translation.gettext
 env = environ.Env(
     # set casting, default value
     ALLOWED_HOSTS=(list, []),
+    CSRF_TRUSTED_ORIGINS=(list, []),
     DEBUG=(bool, False),
+
 )
 environ.Env.read_env()
 
@@ -44,7 +46,8 @@ DEBUG = env('DEBUG')
 # ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # print(ALLOWED_HOSTS)
-# CSRF_TRUSTED_ORIGINS = env('DOMAIN')
+if env('CSRF_TRUSTED_ORIGINS'):
+    CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS')
 
 DB_USERNAME=os.environ.get("POSTGRES_USER")
 DB_PASSWORD=os.environ.get("POSTGRES_PASSWORD")
