@@ -124,6 +124,8 @@ INSTALLED_APPS = [
     # 'djangocms_video', # использовано в medialer
     'medialer',
     'structure',
+
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
