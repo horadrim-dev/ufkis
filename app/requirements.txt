@@ -44,7 +44,6 @@ djangocms-video==3.0.0
 easy-thumbnails==2.8.5
 html5lib==1.1
 lxml==4.9.2
-mysql-client==0.0.1
 packaging==23.0
 Pillow==9.4.0
 ply==3.11
