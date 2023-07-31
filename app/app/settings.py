@@ -45,6 +45,21 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # print(ALLOWED_HOSTS)
 
+DB_USERNAME=os.environ.get("POSTGRES_USER")
+DB_PASSWORD=os.environ.get("POSTGRES_PASSWORD")
+DB_HOST=os.environ.get("POSTGRES_HOST")
+DB_PORT=os.environ.get("POSTGRES_PORT")
+DB_DATABASE=os.environ.get("POSTGRES_DB")
+DB_IS_AVAIL = all([
+        DB_USERNAME, 
+        DB_PASSWORD, 
+        DB_HOST,
+        DB_PORT,
+        DB_DATABASE
+])
+
+
+
 INSTALLED_APPS = [
     'django.contrib.sites',
     'cms',
@@ -152,12 +167,24 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DB_IS_AVAIL:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": DB_DATABASE,
+            "USER": DB_USERNAME,
+            "PASSWORD": DB_PASSWORD,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
