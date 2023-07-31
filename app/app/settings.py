@@ -214,7 +214,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru-ru'
+LANGUAGE_CODE = 'ru'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -248,7 +248,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ####### django-cms requires
 LANGUAGES = [
     #  ('ru', 'Russian') ,
-     ('ru-ru', 'Russian') 
+     ('ru', 'Russian') 
 ]
 SITE_ID = 1
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -279,13 +279,13 @@ META_USE_SCHEMAORG_PROPERTIES=True  # django-meta 2.x+
 
 PARLER_LANGUAGES = {
     1: (
-        {'code': 'ru-ru',},
+        {'code': 'ru',},
         # {'code': 'en',},
         # {'code': 'it',},
         # {'code': 'fr',},
     ),
     'default': {
-        'fallbacks': ['ru-ru'],
+        'fallbacks': ['ru'],
         # 'fallbacks': ['en', 'it', 'fr'],
     }
 }
