@@ -44,6 +44,7 @@ DEBUG = env('DEBUG')
 # ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 # print(ALLOWED_HOSTS)
+# CSRF_TRUSTED_ORIGINS = env('DOMAIN')
 
 DB_USERNAME=os.environ.get("POSTGRES_USER")
 DB_PASSWORD=os.environ.get("POSTGRES_PASSWORD")
@@ -137,6 +138,7 @@ MIDDLEWARE = [
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
 ]
+
 
 ROOT_URLCONF = 'app.urls'
 
@@ -264,7 +266,7 @@ THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.filters',
 )
 
-META_SITE_PROTOCOL = 'http'  # set 'http' for non ssl enabled websites
+META_SITE_PROTOCOL = env('SITE_PROTOCOL')  # set 'http' for non ssl enabled websites
 META_USE_SITES = True
 
 META_USE_OG_PROPERTIES=True
