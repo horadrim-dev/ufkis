@@ -127,7 +127,7 @@ INSTALLED_APPS = [
     'medialer',
     'structure',
 
-    'django.contrib.postgres',
+    # 'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
@@ -180,7 +180,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 if DB_IS_AVAIL:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
+            "ENGINE": "django.db.backends.mysql",
             "NAME": DB_DATABASE,
             "USER": DB_USERNAME,
             "PASSWORD": DB_PASSWORD,
