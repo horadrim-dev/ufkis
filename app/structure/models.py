@@ -63,6 +63,9 @@ class Organization(StructureBase):
     def get_otdels(self):
         return self.otdel_set.all()
     
+    def apparat(self):
+        return self.sotrudnik_set.filter(apparat=True)
+    
     def update_list_order(self, parent_id=None, start_order=1):
         '''обновляет порядок всех элементов при выводе списком'''
         # получаем соседние объекты
@@ -161,7 +164,7 @@ class Sotrudnik(StructureBase):
     photo = FilerImageField(verbose_name="Фото", 
                            on_delete=models.CASCADE, 
                            blank=True, null=True)
-    in_apparat = models.BooleanField(verbose_name="В аппарате управления",
+    apparat = models.BooleanField(verbose_name="В аппарате управления",
                                   default=False,
                                   help_text="Если отмечено, сотрудник будет выведен \
                                   в разделе \"Аппарат управления\" организации")
