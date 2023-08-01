@@ -180,7 +180,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 if DB_IS_AVAIL:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.mysql",
+            "ENGINE": "django.db.backends.postgresql",
+            'OPTIONS': {
+                'options': '-c search_path=ufkis_schema'
+            },
             "NAME": DB_DATABASE,
             "USER": DB_USERNAME,
             "PASSWORD": DB_PASSWORD,
