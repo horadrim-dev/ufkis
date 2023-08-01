@@ -208,3 +208,9 @@ footer {
 .nav > li.dropdown > a {
   padding-right: 20px;
 }
+.align-left {
+    float:left;
+}
+.align-right {
+    float:right;
+}
