@@ -21,20 +21,20 @@
     <div class="content">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 footer-left text-left">
-                    <img class="navbar-brand-logo" src="{% thumbnail site_settings.logo 200x250 upscale %}" />
-                </div>
-                <div class="col-md-4 footer-center text-left">
+                {% comment %} <div class="col-md-2 footer-left text-left"> {% endcomment %}
+                {% comment %} </div> {% endcomment %}
+                <div class="col-md-8 footer-center text-left">
                     {% comment %} <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" /> {% endcomment %}
+                    <img class="navbar-brand-logo" src="{% thumbnail site_settings.logo 200x250 upscale %}" />
                     <strong>{{ site_settings.title }}</strong>
                     <span>{{ site_settings.subtitle }}</span>
-                    <hr class="space m" />
+                    <br>
                     <p class="text-s">{{ site_settings.address }}</p>
                     <div class="tag-row text-s">
                         <span>{{ site_settings.email }}</span>
                         <span>{{ site_settings.phone }}</span>
                     </div>
-                    <hr class="space m" />
+                    <br>
                     <div class="btn-group social-group btn-group-icons">
                         {% comment %} <a target="_blank" href="#" data-social="share-facebook">
                             <i class="fa fa-facebook text-xs circle"></i>
@@ -54,8 +54,9 @@
                         </a>
                         {% endfor %}
                     </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="col-md-6 footer-left text-center">
+                <div class="col-md-4 footer-left text-center">
                     <h3>Меню</h3>
                     <ul class="list-unstyled">
                     {% show_menu 0 0 100 100 %}
