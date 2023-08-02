@@ -31,7 +31,7 @@ class PublishedObjectsMixin:
 NEWS_LIST_LAYOUTS = ("grid", "list")
 NEWS_FILTER_STATES = ("visible", "hidden")
 
-PAGINATE_BY_CHOICES = ('2', '4', '8')
+PAGINATE_BY_CHOICES = ('5', '10', '20')
 class PostListView(PublishedObjectsMixin, FilterView):
     template_name = 'news/post.list.html'
     # model = Post

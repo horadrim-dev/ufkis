@@ -17,7 +17,7 @@ from django_filters.views import FilterView
 from .filtersets import MediaFilterSet
 
 # NEWS_FILTER_STATES = ("visible", "hidden")
-PAGINATE_BY_CHOICES = ('2', '4', '8')
+PAGINATE_BY_CHOICES = ('5', '10', '20')
 
 class MediaView(TemplateView):
     template_name = 'medialer/media.html'
