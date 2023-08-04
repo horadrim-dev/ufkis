@@ -28,7 +28,7 @@ class PublishedObjectsMixin:
         return context
     
 
-NEWS_LIST_LAYOUTS = ("grid", "list")
+NEWS_LIST_LAYOUTS = ("list", "grid" )
 NEWS_FILTER_STATES = ("visible", "hidden")
 
 PAGINATE_BY_CHOICES = ('5', '10', '20')
