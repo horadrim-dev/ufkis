@@ -23,7 +23,7 @@ class MedialerToolbar(CMSToolbar):
             url=admin_reverse('medialer_album_changelist')
         )
         self.toolbar.add_modal_button(
-            name='+ фото в галерею', 
+            name='Фото в галерею', 
             url=admin_reverse('medialer_albumpicture_add'),
             # on_close=reverse('news:index')
             )
