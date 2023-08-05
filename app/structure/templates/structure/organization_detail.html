@@ -11,14 +11,14 @@
 </div>
 
 <div class="row">
-<div class="col-md-6 text-center">
+<div class="col-md-4 text-center">
     {% if object.logo %}
     <div class="img-box">
       <img src="{{ object.logo_thumb_src }}" alt="">
     </div>
     {% endif %}
   </div>
-  <div class="col-md-6">
+  <div class="col-md-8">
     {% if object.short_description %}
     <p>{{ object.short_description }}</p>
     <hr class="space m">
@@ -52,43 +52,101 @@
       <h3>Аппарат управления</h3>
       <hr>
     </div>
-    <table class="table table-striped">
-      <thead>
-          <tr>
-              <th>Должность</th>
-              <th>ФИО</th>
-          </tr>
-      </thead>
-      <tbody>
-        {% for sotrudnik in object.apparat %}
-          <tr>
-              <td>{{ sotrudnik.position }}</td>
-              <td>{{ sotrudnik.name }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="row">
+      {% for sotrudnik in object.apparat %}
+        <div class="col-md-12">
+
+          <div class="apparat-item">
+              <div class="advs-box advs-box advs-box-side-icon boxed-inverse">
+                  <div class="row">
+                      <div class="col-xs-2">
+                          <div class="photo img-box">
+                              {% if sotrudnik.photo %}
+                              <img src="{{ sotrudnik.photo_thumb_src }}" alt="">
+                              {% else %}
+                              <i class="fa fa-user-o"></i>
+                              {% endif %}
+                          </div>
+                      </div>
+                      <div class="col-xs-10">
+                          {% comment %} <h3><a href="{% url 'structure:org-detail' object.id %}">{{ object.name }}</a></h3> {% endcomment %}
+                          <h4><a href="#">{{ sotrudnik.name }}</a></h4>
+                          <hr>
+                          <p>{{ sotrudnik.position }}</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+        </div>
+      {% empty %}
+      Сведений по аппарату пока нет.
+      {% endfor %}
+    </div>
   </div>
   <div class="col-md-6">
     <div class="title-modern st-icon text-left">
       <h3>Отделы</h3>
       <hr>
     </div>
-    <hr class="space s">
-    <div class="list-group accordion-list" data-type="visible" data-time="200">
-      {% for otdel in object.get_otdels %}
-      <div class="list-group-item">
-          <a href="#" class="">{{ otdel.name }}</a>
-          <div class="panel" style="display: none;">
-              <div class="inner">
-                  Lorem ipsum dolor sitamet, Cras justo odio consectetur adipisicin elitsed do eiusmod tempor incididunt
-                  ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea coSed ut perspiciatis unde omnis iste natus error sit voluptatem
+    {% comment %} <div class="row">
+      {% for object in object.get_otdels %}
+        <div class="col-md-12">
+
+          <div class="apparat-item">
+              <div class="advs-box advs-box advs-box-side-icon boxed-inverse">
+                <h4><a href="#">{{ object.name }}</a></h4>
               </div>
           </div>
+
+        </div>
+      {% endfor %}
+    </div> {% endcomment %}
+
+
+
+    <div class="list-group accordion-list" data-type="visible" data-time="200">
+      {% for object in object.get_otdels %}
+      <div class="list-group-item">
+        <a href="#" class="">
+          <div class="row">
+            <div class="col-xs-8">
+              {{ object.name }}
+            </div>
+            <div class="col-xs-4">
+              <div class="text-right"><i class="fa fa-phone"></i> 7 65465 254</div>
+            </div>
+          </div>
+        </a>
+        <div class="panel" style="display: none;">
+          <div class="inner">
+
+            <div class="list-items text-left">
+              {% for sotrudnik in object.get_employees %}
+              <div class="list-item">
+                <div class="row">
+                  <div class="col-md-10">
+                      <h3>{{ sotrudnik.name }}</h3>
+                      <p>{{ sotrudnik.position }}</p>
+                  </div>
+                  <div class="col-md-2">
+                      <span>21$</span>
+                  </div>
+                </div>
+              </div>
+              {% empty %}
+                Сведений по сотрудникам пока нет.
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
       </div>
+      {% empty %}
+      Сведений по отделам пока нет.
       {% endfor %}
     </div>
+
   </div>
 </div>
 

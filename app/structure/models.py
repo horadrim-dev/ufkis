@@ -143,6 +143,9 @@ class Otdel(StructureBase):
                     )
             )
 
+    def get_employees(self):
+        return self.sotrudnik_set.all()
+
     class Meta:
         ordering = ['organization', 'order' ]
         verbose_name = "отдел"
@@ -188,8 +191,26 @@ class Sotrudnik(StructureBase):
                     Sotrudnik.objects.filter(organization=self.organization, otdel=self.otdel).exclude(id=self.id)
                     )
             )
+    def photo_thumb_src(self):
+        photo = self.photo
+        if not photo:
+            return ""
+
+        thumbnail_options = {
+            'size': (155, 200),
+            'crop': True,
+            'upscale': True,
+            'subject_location': photo.subject_location,
+        }
+        thumbnailer = get_thumbnailer(photo)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
 
     class Meta:
         ordering = ['organization', 'otdel', 'order' ]
         verbose_name = "сотрудник"
         verbose_name_plural = "сотрудники"
+
+
+# class Phone(models.Model):
+
+#     phone 

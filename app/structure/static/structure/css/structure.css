@@ -12,3 +12,22 @@
   padding: 25px ;
   box-shadow: 2px 2px 3px #eee;
 }
+.structure-container .apparat-item {
+  margin-bottom: 10px;
+}
+.structure-container .apparat-item .advs-box {
+  padding: 20px;
+}
+.structure-container .apparat-item .photo i {
+  position: relative !important;
+  font-size: 32px;
+  /* color: var(--main-color-2); */
+  margin-top: 22px;
+  margin-left: 22px;
+}
+.structure-container .otdel {
+  margin-bottom: 10px;
+}
+.structure-container .otdel .advs-box {
+  padding: 20px;
+}
