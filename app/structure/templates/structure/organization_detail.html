@@ -63,7 +63,7 @@
           <div class="apparat-item">
               <div class="advs-box advs-box advs-box-side-icon boxed-inverse">
                   <div class="row">
-                      <div class="col-xs-2">
+                      <div class="col-xs-3">
                           <div class="photo img-box">
                               {% if sotrudnik.photo %}
                               <img src="{{ sotrudnik.photo_thumb_src }}" alt="">
@@ -72,7 +72,7 @@
                               {% endif %}
                           </div>
                       </div>
-                      <div class="col-xs-10">
+                      <div class="col-xs-9">
                           {% comment %} <h3><a href="{% url 'structure:org-detail' object.id %}">{{ object.name }}</a></h3> {% endcomment %}
                           <h4><a href="#">{{ sotrudnik.name }}</a></h4>
                           <hr>
