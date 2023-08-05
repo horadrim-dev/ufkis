@@ -26,7 +26,8 @@ class Organization(StructureBase):
     short_name = models.CharField(verbose_name="Краткое название", max_length=128, )
     address = models.CharField(verbose_name="Адрес", max_length=256,
                              blank=True, null=True)
-    phone = models.CharField(verbose_name="Телефон приемной", max_length=32,
+    phone = PhoneNumberField(verbose_name="Телефон приемной")
+    fax = models.CharField(verbose_name="Факс приемной", max_length=32,
                              blank=True, null=True)
     email = models.EmailField(verbose_name='Электронная почта',
                               blank=True, null=True)

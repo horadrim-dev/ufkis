@@ -6,45 +6,49 @@
 
 {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %}
 
+
 <div class="text-right">
   {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.logo_thumb_src description=object.short_description|striptags|truncatechars_html:150 %}
 </div>
 
-<div class="row">
-<div class="col-md-4 text-center">
-    {% if object.logo %}
-    <div class="img-box">
-      <img src="{{ object.logo_thumb_src }}" alt="">
+{% render_model_block object %}
+  <div class="row">
+    <div class="col-md-4 text-center">
+      {% if object.logo %}
+      <div class="img-box">
+        <img src="{{ object.logo_thumb_src }}" alt="">
+      </div>
+      {% endif %}
     </div>
-    {% endif %}
+    <div class="col-md-8">
+      {% if object.short_description %}
+      <p>{{ object.short_description }}</p>
+      <hr class="space m">
+      {% endif %}
+      <ul class="list-texts list-texts-justified text-left">
+        {% if object.phone %}
+        <li><b>Телефон приемной: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
+        {% endif %}
+        {% if object.email %}
+        <li><b>Электронная почта: </b><i class="fa fa-envelope-open-o"></i> {{ object.email }}</li>
+        {% endif %}
+        {% if object.address %}
+        <li><b>Адрес: </b><span><i class="fa fa-map-marker"></i> {{ object.address }}</span></li>
+        {% endif %}
+        {% if object.site %}
+        <li><b>Сайт: </b><a href="{{ object.site }}" target="_blank">{{ object.site }} <i class="fa fa-external-link "></i></a></li>
+        {% endif %}
+        {% if object.shedule %}
+        <li><b>График работы: </b><i class="fa fa-calendar"></i> {{ object.shedule }}</li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
-  <div class="col-md-8">
-    {% if object.short_description %}
-    <p>{{ object.short_description }}</p>
-    <hr class="space m">
-    {% endif %}
-    <ul class="list-texts list-texts-justified text-left">
-      {% if object.phone %}
-      <li><b>Телефон приемной: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
-      {% endif %}
-      {% if object.email %}
-      <li><b>Электронная почта: </b><i class="fa fa-envelope-open-o"></i> {{ object.email }}</li>
-      {% endif %}
-      {% if object.address %}
-      <li><b>Адрес: </b><span><i class="fa fa-map-marker"></i> {{ object.address }}</span></li>
-      {% endif %}
-      {% if object.site %}
-      <li><b>Сайт: </b><a href="{{ object.site }}" target="_blank">{{ object.site }} <i class="fa fa-external-link "></i></a></li>
-      {% endif %}
-      {% if object.shedule %}
-      <li><b>График работы: </b><i class="fa fa-calendar"></i> {{ object.shedule }}</li>
-      {% endif %}
-    </ul>
-  </div>
-</div>
-<hr class="space m">
-{{ object.description | safe }}
-<hr class="space m">
+  <hr class="space m">
+  {{ object.description | safe }}
+  <hr class="space m">
+
+{% endrender_model_block %}
 
 <div class="row">
   <div class="col-md-6">
