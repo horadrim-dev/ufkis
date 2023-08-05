@@ -3,11 +3,11 @@ from django import forms
 from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
-from .models import Organization, Otdel, Sotrudnik
+from .models import Organization, Otdel, Sotrudnik, Phone
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 from django.urls import reverse_lazy
-
+from phonenumber_field.formfields import PhoneNumberField
 
 class OrganizationForm(forms.ModelForm):
 
@@ -75,3 +75,13 @@ class SotrudnikForm(forms.ModelForm):
                 pass  # invalid input from the client; ignore and fallback to empty queryset
         elif self.instance.pk:
             self.fields['otdel'].queryset = self.instance.organization.otdel_set
+
+
+
+class PhoneForm(forms.ModelForm):
+
+    phone = PhoneNumberField(region='RU')
+
+    class Meta:
+        model=Phone
+        exclude = []

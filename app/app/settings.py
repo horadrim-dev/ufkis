@@ -89,6 +89,7 @@ INSTALLED_APPS = [
     'django_filters',
     'taggit',
     'taggit_labels',
+    "phonenumber_field",
     # 'taggit_autosuggest',
     # #### ALDRYN  you will probably need to add these
     # 'aldryn_apphooks_config',

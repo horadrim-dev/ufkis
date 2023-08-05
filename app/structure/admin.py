@@ -3,6 +3,16 @@ from .models import *
 from .forms import *
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 
+class PhoneOtdelInline(admin.TabularInline):
+    model = Phone
+    exclude = ['sotrudnik']
+    extra = 0
+
+class PhoneSotrudnikInline(admin.TabularInline):
+    model = Phone
+    exclude = ['otdel']
+    extra = 0
+
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
     form = OrganizationForm
@@ -12,12 +22,17 @@ class OrganizationAdmin(admin.ModelAdmin):
 @admin.register(Otdel)
 class OtdelAdmin(admin.ModelAdmin):
     form = OtdelForm
+    inlines = (PhoneOtdelInline, )
     list_display = ('name', 'organization', 'order', )
     list_filter = ["organization" ]
-
 
 @admin.register(Sotrudnik)
 class SotrudnikAdmin(admin.ModelAdmin):
     form = SotrudnikForm
+    inlines = (PhoneSotrudnikInline, )
     list_display = ('name', 'organization', 'otdel', 'order', )
     list_filter = ["organization", "otdel"]
+
+# @admin.register(Phone)
+# class PhoneAdmin(admin.ModelAdmin):
+    # form = PhoneForm

@@ -4,7 +4,7 @@ from filer.fields.image import FilerImageField
 from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
 from django.urls import reverse
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 class StructureBase(OrderedModel):
 
@@ -146,6 +146,9 @@ class Otdel(StructureBase):
     def get_employees(self):
         return self.sotrudnik_set.all()
 
+    def phones(self):
+        return self.phone_set.all()
+
     class Meta:
         ordering = ['organization', 'order' ]
         verbose_name = "отдел"
@@ -205,12 +208,26 @@ class Sotrudnik(StructureBase):
         thumbnailer = get_thumbnailer(photo)
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
+    def phones(self):
+        return self.phone_set.all()
+
     class Meta:
         ordering = ['organization', 'otdel', 'order' ]
         verbose_name = "сотрудник"
         verbose_name_plural = "сотрудники"
 
 
-# class Phone(models.Model):
+class Phone(models.Model):
 
-#     phone 
+    sotrudnik = models.ForeignKey(Sotrudnik, on_delete=models.CASCADE, 
+                                  blank=True, null=True)
+    otdel = models.ForeignKey(Otdel, on_delete=models.CASCADE, 
+                                  blank=True, null=True)
+    number = PhoneNumberField(verbose_name="Номер")
+
+    def __str__(self):
+        return self.number.as_international
+
+    class Meta:
+        verbose_name = "телефон"
+        verbose_name_plural = "телефоны"
