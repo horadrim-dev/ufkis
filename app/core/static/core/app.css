@@ -78,6 +78,53 @@ ul.nav.root-level:not(.ms-rounded)>li>a::before {
     /* transition: all 0.35s ease-out;
   -webkit-transition: all 0.35s ease-out; */
 }
+.mega-menu .mega-dropdown-menu > .nav-item {
+  max-width: 24%;
+  display: inline-block;
+  min-width: 24%;
+}
+.mega-dropdown-menu .nav-link {
+    min-width: 200px;
+    white-space: unset;
+    line-height: 14px;
+    padding-left: 30px;
+    padding: 15px 20px;
+}
+.mega-dropdown-menu .nav-link::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -.5rem;
+    margin-right: 1.2rem;
+}
+.mega-dropdown-menu .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 0%;
+    height: 2px;
+    height: 100%;
+    background-color: #4d4d4d0a;
+    transition: all 0.35s ease-out;
+    -webkit-transition: all 0.35s ease-out;
+}
+.mega-menu {
+    padding: 10px 5px;
+    overflow: inherit !important;
+}
+.mega-menu a {
+  height: inherit;
+  margin-bottom: 0;
+}
+ul.mega-dropdown-menu ul.dropdown-menu {
+  left: 0;
+  top: 100%;
+  width: 100%;
+}
+ul.mega-dropdown-menu .nav-item > a::after {
+    transform: rotate(135deg) !important;
+}
 @media (max-width: 994px){
     header .navbar-collapse {
     /* #main-menu { */
@@ -101,6 +148,17 @@ ul.nav.root-level:not(.ms-rounded)>li>a::before {
         /* background: #ddd; */
         margin-left: 40px;
 
+    }
+    .mega-menu .mega-dropdown-menu > .nav-item {
+    max-width: 100%;
+    display:block;
+    /* min-width: 25%; */
+    }
+    .mega-menu-fullwidth .mega-dropdown {
+        position: relative !important;
+    }
+    ul.mega-dropdown-menu .nav-item > a::after {
+        display: none;
     }
 }
 .mobile-dropdown {

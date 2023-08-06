@@ -3,7 +3,10 @@
 {% for child in children %}
 <li class="nav-item 
 	{% if child.get_menu_title == 'Главная' %}home{% endif %}
-	{% if child.children %}dropdown{% endif %} 
+	{% if child.children %}
+		dropdown
+	 	{% if child.attr.dropdown_mega %}mega-dropdown{% endif %}
+	{% endif %} 
 	{% if child.children and child.level != 0  %}dropdown-submenu{% endif %} 
 	{% if child.selected %}active selected{% endif %}
 	{% if child.ancestor %} ancestor{% endif %}
@@ -18,17 +21,30 @@
 		{% comment %} {% if child.children %} data-bs-auto-close="outside" aria-expanded="false"{%else%} aria-current="page"{% endif %} {% endcomment %}
 		href="{{ child.attr.redirect_url|default:child.get_absolute_url }}">
 		{% if child.attr.icon %}<i class="fa fa-{{child.attr.icon}} text-m"></i>{% endif %}
-		{% if child.get_menu_title != 'Главная' %}{{ child.get_menu_title }}{% endif %}
+		{% if child.get_menu_title != 'Главная' %}{{ child.get_menu_title }}{% endif %} {{child.attr.dropdown_mega}} {{ child.children|length }}
 		{% if child.children and child.level == 0 %}<span class="caret hidden-sm"></span>{% endif %}
 	</a>
 	{% if child.children %}
-	<button type="button" class="btn btn-default dropdown-toggle mobile-dropdown visible-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		<span class="caret"></span>
-		<span class="sr-only">Toggle Dropdown</span>
-	</button>
-	<ul class="dropdown-menu multi-level">
-		{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
-	</ul>
+		<button type="button" class="btn btn-default dropdown-toggle mobile-dropdown visible-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="caret"></span>
+			<span class="sr-only">Toggle Dropdown</span>
+		</button>
+		{% if child.attr.dropdown_mega %}
+			<div class="mega-menu dropdown-menu multi-level row bg-menu fade-in"
+				style="transition-duration: 300ms; animation-duration: 300ms; transition-timing-function: ease; transition-delay: 0ms;"
+				>
+				
+				<ul class="mega-dropdown-menu fa-ul multi-level">
+					{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+				</ul>
+
+			</div>
+
+		{% else %}
+		<ul class="dropdown-menu multi-level">
+			{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}
+		</ul>
+		{% endif %}
 	{% endif %}
 </li>
 {% endfor %}

@@ -26,6 +26,7 @@ class MenuItemSettingsModifier(Modifier):
                 # put the changed_by attribute on the node
                 if hasattr(page, 'menuitemsettingsextension'):
                     node.attr["icon"] = page.menuitemsettingsextension.fa_icon
+                    node.attr["dropdown_mega"] = page.menuitemsettingsextension.dropdown_mega
 
         return nodes
 
