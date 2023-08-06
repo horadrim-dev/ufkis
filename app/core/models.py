@@ -43,7 +43,10 @@ class OrderedModel(models.Model):
         ordering = ['order']
 
 
-
+DROPDOWN_CHOICES = [
+    ('normal', 'Обычный'),
+    ('mega', 'Мега меню'),
+]
 class MenuItemSettingsExtension(PageExtension):
     ''' 
     Adding text font-awesome name icon to page 
@@ -53,7 +56,9 @@ class MenuItemSettingsExtension(PageExtension):
                                 help_text='Названия иконок брать <a href="https://fontawesome.com/v4/icons/" target="blank">отсюда</a>', 
                                 max_length=32, default="", 
                                 blank=True, )
-
+    dropdown = models.CharField(max_length=10, verbose_name="Стиль выпадающего меню",
+                                     choices=DROPDOWN_CHOICES,
+                                     default=DROPDOWN_CHOICES[0][0])
 
 extension_pool.register(MenuItemSettingsExtension)
 
