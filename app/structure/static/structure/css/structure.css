@@ -20,10 +20,10 @@
 }
 .structure-container .apparat-item .photo i {
   position: relative !important;
-  font-size: 32px;
+  font-size: 44px;
   /* color: var(--main-color-2); */
   margin-top: 22px;
-  margin-left: 22px;
+  margin-left: 40px;
 }
 .structure-container .otdel {
   margin-bottom: 10px;
