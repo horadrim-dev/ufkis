@@ -30,9 +30,9 @@
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
 		{% if child.attr.dropdown_mega %}
-			<div class="mega-menu dropdown-menu multi-level row bg-menu fade-in"
-				style="transition-duration: 300ms; animation-duration: 300ms; transition-timing-function: ease; transition-delay: 0ms;"
+			<div class="mega-menu dropdown-menu multi-level row bg-menu "
 				>
+				{% comment %} style="transition-duration: 300ms; animation-duration: 300ms; transition-timing-function: ease; transition-delay: 0ms;" {% endcomment %}
 				
 				<ul class="mega-dropdown-menu fa-ul multi-level">
 					{% show_menu from_level to_level extra_inactive extra_active template "" "" child %}

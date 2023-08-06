@@ -125,6 +125,28 @@ ul.mega-dropdown-menu ul.dropdown-menu {
 ul.mega-dropdown-menu .nav-item > a::after {
     transform: rotate(135deg) !important;
 }
+.navbar-nav > li:not(.active) > ul,
+.navbar-nav > li:not(.active) > .mega-menu {
+    display: flex;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform-origin: top center;
+    transform-origin: top center;
+    -webkit-transform: scaleY(0) translateZ(100px);
+    transform: scaleY(0) translateZ(100px);
+    -webkit-transition: opacity 500ms ease, visibility 500ms ease, -webkit-transform 700ms ease;
+    transition: opacity 500ms ease, visibility 500ms ease, -webkit-transform 700ms ease;
+    transition: opacity 500ms ease, visibility 500ms ease, transform 700ms ease;
+    transition: opacity 500ms ease, visibility 500ms ease, transform 700ms ease, -webkit-transform 700ms ease;
+}
+.navbar-nav > li:hover > ul,
+.navbar-nav > li.active > ul,
+.navbar-nav > li:hover > .mega-menu  {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: scaleY(1) translateZ(0px);
+    transform: scaleY(1) translateZ(0px);
+}
 @media (max-width: 994px){
     header .navbar-collapse {
     /* #main-menu { */
