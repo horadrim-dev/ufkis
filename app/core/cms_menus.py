@@ -3,7 +3,7 @@ from menus.menu_pool import menu_pool
 
 from cms.models import Page
 
-class IconModifier(Modifier):
+class MenuItemSettingsModifier(Modifier):
     """
     This modifier makes the fa_icon attribute of a page
     accessible for the menu system.
@@ -24,9 +24,9 @@ class IconModifier(Modifier):
                 # take the node referring to the page
                 node = page_nodes[page.id]
                 # put the changed_by attribute on the node
-                if hasattr(page, 'iconextension'):
-                    node.attr["icon"] = page.iconextension.fa_icon
+                if hasattr(page, 'menuitemsettingsextension'):
+                    node.attr["icon"] = page.menuitemsettingsextension.fa_icon
 
         return nodes
 
-menu_pool.register_modifier(IconModifier)
+menu_pool.register_modifier(MenuItemSettingsModifier)

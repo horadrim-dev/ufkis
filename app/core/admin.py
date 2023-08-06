@@ -1,13 +1,13 @@
 from django.contrib import admin
 from cms.extensions import PageExtensionAdmin
 
-from .models import IconExtension
+from .models import MenuItemSettingsExtension
 
 from django.db.utils import ProgrammingError
 from .models import SiteSettings, Social
 
 
-class IconExtensionAdmin(PageExtensionAdmin):
+class MenuItemSettingsExtensionAdmin(PageExtensionAdmin):
     pass
 
 class SocialInline(admin.StackedInline):
@@ -42,5 +42,5 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         return False
  
  
-admin.site.register(IconExtension, IconExtensionAdmin)
+admin.site.register(MenuItemSettingsExtension, MenuItemSettingsExtensionAdmin)
 admin.site.register(SiteSettings, SiteSettingsAdmin)

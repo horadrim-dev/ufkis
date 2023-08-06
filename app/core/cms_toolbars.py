@@ -4,13 +4,13 @@ from cms.extensions.toolbar import ExtensionToolbar
 from cms.utils.urlutils import admin_reverse
 from cms.cms_toolbars import ADMIN_MENU_IDENTIFIER, HELP_MENU_IDENTIFIER, LANGUAGE_MENU_IDENTIFIER
 from django.utils.translation import gettext_lazy as _
-from .models import IconExtension
+from .models import MenuItemSettingsExtension
 
 
 @toolbar_pool.register
-class IconExtensionToolbar(ExtensionToolbar):
+class MenuItemSettingsToolbar(ExtensionToolbar):
     # defines the model for the current toolbar
-    model = IconExtension
+    model = MenuItemSettingsExtension
 
     def populate(self):
         # setup the extension toolbar with permissions and sanity checks
@@ -22,7 +22,7 @@ class IconExtensionToolbar(ExtensionToolbar):
             page_extension, url = self.get_page_extension_admin()
             if url:
                 # adds a toolbar item in position 0 (at the top of the menu)
-                current_page_menu.add_modal_item(_('Иконка страницы'), url=url,
+                current_page_menu.add_modal_item(_('Настройки пункта меню'), url=url,
                     disabled=not self.toolbar.edit_mode_active, position=0)
 
 @toolbar_pool.register

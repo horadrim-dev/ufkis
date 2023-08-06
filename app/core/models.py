@@ -44,18 +44,18 @@ class OrderedModel(models.Model):
 
 
 
-class IconExtension(PageExtension):
+class MenuItemSettingsExtension(PageExtension):
     ''' 
     Adding text font-awesome name icon to page 
     for displaying in menu 
     '''
-    fa_icon = models.CharField(verbose_name="Иконка страницы",
+    fa_icon = models.CharField(verbose_name="Иконка пункта меню",
                                 help_text='Названия иконок брать <a href="https://fontawesome.com/v4/icons/" target="blank">отсюда</a>', 
                                 max_length=32, default="", 
                                 blank=True, )
 
 
-extension_pool.register(IconExtension)
+extension_pool.register(MenuItemSettingsExtension)
 
 
 class SingletonModel(models.Model):
