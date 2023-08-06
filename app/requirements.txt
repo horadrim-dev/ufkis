@@ -21,6 +21,7 @@ django-js-asset==2.0.0
 django-meta==2.1.0
 django-mptt==0.14.0
 django-parler==2.3
+django-phonenumber-field==7.1.0
 django-polymorphic==3.1.0
 django-sekizai==4.0.0
 django-sortedm2m==3.1.1
@@ -44,7 +45,9 @@ djangocms-video==3.0.0
 easy-thumbnails==2.8.5
 html5lib==1.1
 lxml==4.9.2
+numpy==1.25.2
 packaging==23.0
+phonenumberslite==8.13.18
 Pillow==9.4.0
 ply==3.11
 psycopg==3.1.9
