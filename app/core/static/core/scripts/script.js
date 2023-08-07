@@ -813,12 +813,14 @@ function isScrollView(t) {
 
         //MENU - MOBILE
         $(".navbar-toggle").toggleClick(function () {
-            $(this).closest('.navbar').find('.navbar-collapse').expandItem();
+            // $(this).closest('.navbar').find('.navbar-collapse').expandItem();
+            $(this).closest('.navbar').find('.navbar-collapse').addClass("open");
             $(this).find("i").removeClass("fa-bars").addClass("fa-close");
             $(".blackout").css("display", "block");
             $("body").css("overflow", "hidden");
         }, function () {
-            $(this).closest('.navbar').find('.navbar-collapse').collapseItem();
+            // $(this).closest('.navbar').find('.navbar-collapse').collapseItem();
+            $(this).closest('.navbar').find('.navbar-collapse').removeClass("open");
             $(this).find("i").removeClass("fa-close").addClass("fa-bars");
             $(".blackout").css("display", "none");
             $("body").css("overflow", "auto");
