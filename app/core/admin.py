@@ -43,4 +43,4 @@ class SiteSettingsAdmin(admin.ModelAdmin):
  
  
 admin.site.register(MenuItemSettingsExtension, MenuItemSettingsExtensionAdmin)
-# admin.site.register(SiteSettings, SiteSettingsAdmin)
+admin.site.register(SiteSettings, SiteSettingsAdmin)
