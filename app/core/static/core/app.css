@@ -125,9 +125,9 @@ ul.mega-dropdown-menu ul.dropdown-menu {
 ul.mega-dropdown-menu .nav-item > a::after {
     transform: rotate(135deg) !important;
 }
-.navbar-nav > li:not(.active) > ul,
-.navbar-nav > li:not(.active) > .mega-menu {
-    display: flex;
+.navbar-nav > li > ul,
+.navbar-nav > li > .mega-menu {
+    display: flex !important;
     opacity: 0;
     visibility: hidden;
     -webkit-transform-origin: top center;
@@ -140,7 +140,9 @@ ul.mega-dropdown-menu .nav-item > a::after {
     transition: opacity 500ms ease, visibility 500ms ease, transform 700ms ease, -webkit-transform 700ms ease;
 }
 .navbar-nav > li:hover > ul,
-.navbar-nav > li.active > ul,
+.navbar-nav > li.active:hover > ul,
+.navbar-nav > li.open > ul,
+.navbar-nav > li.open > .mega-menu,
 .navbar-nav > li:hover > .mega-menu  {
     opacity: 1;
     visibility: visible;
