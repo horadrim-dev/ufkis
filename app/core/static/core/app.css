@@ -128,6 +128,7 @@ ul.mega-dropdown-menu .nav-item > a::after {
 .navbar-nav > li > ul,
 .navbar-nav > li > .mega-menu {
     display: flex !important;
+    flex-direction: column;
     opacity: 0;
     visibility: hidden;
     -webkit-transform-origin: top center;
@@ -320,6 +321,10 @@ footer {
 }
 .align-right {
     float:right;
+}
+header .navbar-brand {
+    padding-right: 0;
+    margin-right: 0;
 }
 footer .navbar-brand-logo {
     max-height: 170px;
