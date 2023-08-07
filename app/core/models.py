@@ -97,7 +97,10 @@ class SingletonModel(models.Model):
         except cls.DoesNotExist:
             return cls()
 
-
+MENU_STYLE_CHOICES = [
+    ("1", "Стиль №1"),
+    ("2", "Стиль №2"),
+]
 class SiteSettings(SingletonModel):
     # site_url = models.URLField(verbose_name=_('Website url'), max_length=256)
     title = models.CharField(verbose_name=_('Заголовок'), max_length=256, default="")
@@ -109,6 +112,8 @@ class SiteSettings(SingletonModel):
     share_ok = models.BooleanField(verbose_name="Одноклассники", default=True)
     share_fb = models.BooleanField(verbose_name="Facebook", default=False)
     share_twitter = models.BooleanField(verbose_name="Twitter", default=True)
+    menu_style = models.CharField(max_length=10, verbose_name="Макет главного меню",
+                                  choices=MENU_STYLE_CHOICES, default=MENU_STYLE_CHOICES[0][0])
 
     logo = FilerImageField(
         verbose_name=_('Логотип'),
