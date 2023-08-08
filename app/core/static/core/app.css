@@ -231,6 +231,9 @@ header .navbar-header button > i {
         -webkit-transform: scaleY(1) translateZ(0px);
         transform: scaleY(1) translateZ(0px);
     }
+    header .navbar-header {
+        margin-bottom: 10px;
+    }
 }
 .mobile-dropdown {
   position: absolute;
