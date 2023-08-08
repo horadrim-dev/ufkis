@@ -160,9 +160,9 @@ ul.mega-dropdown-menu .nav-item > a::after {
     header .navbar-collapse {
     /* #main-menu { */
         /* height: 100vh; */
-        /* max-height:  500px !important; */
+        max-height:  500px !important;
         /* min-height: 300px; */
-        /* overflow-x: hidden; */
+        overflow: visible auto;
     }
     #main-menu li {
         /* text-align:center !important; */
