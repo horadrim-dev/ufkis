@@ -157,7 +157,6 @@ ul.mega-dropdown-menu .nav-item > a::after {
     transform: scaleY(1) translateZ(0px);
 }
 header .navbar-header {
-    margin-bottom: 10px;
     padding: 0 10px;
     display: flex;
     justify-content: space-around;
