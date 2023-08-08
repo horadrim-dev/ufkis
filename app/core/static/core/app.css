@@ -156,6 +156,22 @@ ul.mega-dropdown-menu .nav-item > a::after {
     -webkit-transform: scaleY(1) translateZ(0px);
     transform: scaleY(1) translateZ(0px);
 }
+header .navbar-header {
+    margin-bottom: 10px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-around;
+}
+header .navbar-header .search-box {
+    top: 70px;
+}
+header .navbar-header .search-box input {
+    height:50px;
+}
+header .navbar-header button,
+header .navbar-header button > i {
+    color: var(--main-color);
+}
 @media (max-width: 994px){
     header .navbar-collapse {
     /* #main-menu { */

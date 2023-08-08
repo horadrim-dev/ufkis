@@ -1132,7 +1132,8 @@ function isScrollView(t) {
 
         //MENU - SEARCH C
         $(".btn-search").toggleClick(function () {
-            $(this).closest(".search-box-menu").find(".search-box").css("opacity", 0).css("display", "block").showAnima("fade-bottom");
+            $(this).closest(".search-box-menu").find(".search-box").css("opacity", 0).css("display", "block").showAnima("fade-right");
+            $(this).closest(".search-box-menu").find(".search-box input").focus();
         },
          function () {
              $(this).closest(".search-box-menu").find(".search-box").css("display", "none");
