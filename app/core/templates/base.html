@@ -82,7 +82,12 @@
 		{% comment %} <header> {% endcomment %}
 			{% comment %} {% static_placeholder 'header' %} {% endcomment %}
 			{% comment %} <img id="specialButton" style="cursor:pointer;" src="https://lidrekon.ru/images/special.png" alt="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" title="ВЕРСИЯ ДЛЯ СЛАБОВИДЯЩИХ" /> {% endcomment %}
-    {% include 'core/header.html' %}
+    {% if site_settings.menu_style == "1" %}
+      {% include 'core/header_singlerow.html' %}
+    {% elif site_settings.menu_style == "2" %}
+      {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/header_multirow.css' %}">{% endaddtoblock %}
+      {% include 'core/header_multirow.html' %}
+    {% endif %}
 		{% comment %} </header> {% endcomment %}
     
     {% static_placeholder "[ALL] top" %}

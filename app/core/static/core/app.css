@@ -69,7 +69,9 @@ ul.nav.root-level:not(.ms-rounded)>li.active>a::before,
 ul.nav.root-level:not(.ms-rounded)>li:hover>a::before {
     height: 100%;
 }
-
+#main-menu {
+  background: #fff;
+}
 ul.nav.root-level:not(.ms-rounded)>li>a::before {
     content: '';
     position: absolute;
@@ -158,9 +160,9 @@ ul.mega-dropdown-menu .nav-item > a::after {
     header .navbar-collapse {
     /* #main-menu { */
         /* height: 100vh; */
-        min-height: 300px;
         /* max-height:  500px !important; */
-        overflow-x: hidden;
+        /* min-height: 300px; */
+        /* overflow-x: hidden; */
     }
     #main-menu li {
         /* text-align:center !important; */
