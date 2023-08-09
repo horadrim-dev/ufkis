@@ -28,6 +28,9 @@ class Category(OrderedModel):
                     )
             )
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
@@ -54,6 +57,9 @@ class DocumentType(OrderedModel):
                     )
             )
 
+    def __str__(self):
+        return self.name
+    
     class Meta:
         verbose_name = "тип документа"
         verbose_name_plural = "типы документов"
@@ -61,8 +67,10 @@ class DocumentType(OrderedModel):
 
 class Document(models.Model):
     
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,
+                                 verbose_name="Категория")
+    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
+                                 verbose_name="Тип документа")
 
     date = models.DateField("Дата", blank=True, null=True)
     number = models.CharField("Номер", max_length=32,
