@@ -148,4 +148,8 @@ ul.slides li .news-item {
 .tag-row.icon-row span:last-child:after{
   content: none !important;
 }
-
+#news-sidebar .block {
+  padding: 20px 30px 30px 30px;
+  margin-bottom: 20px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.10);
+}
