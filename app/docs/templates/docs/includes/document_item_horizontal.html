@@ -1,0 +1,49 @@
+{% load cms_tags easy_thumbnails_tags %}
+
+<div class="document-item horizontal niche-box-blog
+        {% if not obj.published %} not-published {% endif %}
+     ">
+    <div class="advs-box advs-box-side-img advs-box-blog" >
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-m">
+                    <a href="{{ obj.get_absolute_url }}">{{ obj.name}}</a>
+                </h2>
+                <div class="actions-panel">
+                    <div class="status-panel">
+                    </div>
+                    <div class="actions">
+                    {% if EDIT_MODE %}
+                        {% render_model_block obj %}
+                            <i class="fa fa-gear"></i>
+                        {% endrender_model_block %}
+                    {% endif %}
+                    </div>
+                </div>
+                <hr>
+                {% comment %} <div class="tag-row icon-row">
+                    <span class="date"><i class="fa fa-calendar"></i>{{obj.published_at}}</span>
+                    {% if obj.category %}
+                    <span><i class="fa fa-bookmark"></i> <a href="{% url "docs:index" %}?category={{ obj.category.id }}">{{ obj.category.title }}</a></span>
+                    {% endif %}
+                    <div class="tag-row">
+                        <div class="taggit-labels taggit-list">
+                            {% for tag in obj.tags.all %}
+                            <span class="taggit-tag item-tag">
+                                <a href="{% url "docs:index" %}?tags={{ tag.name | prepare_tag_name }}">
+                                    {{tag}}
+                                </a>
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+                <div class="text-right">
+                    <a href="{{ obj.get_absolute_url }}" class="btn btn-border readmore">
+                        <i class="fa fa-chevron-circle-right"></i> Перейти
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

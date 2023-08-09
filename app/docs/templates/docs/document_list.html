@@ -1,0 +1,50 @@
+{% extends 'docs/base.html' %}
+{% load sekizai_tags thumbnail static core_tags %}
+
+{% block app_content %}
+
+<div class="row pb-5">
+  <div id="docs-sidebar" class="col-md-3 col-sm-12">
+      {% include './includes/filter.html' %}
+  </div>
+  <div id="docs-content" class="col-md-8">
+    <div class="docs-list-controls">
+      <div class="text-right hidden-xs display-md">
+        {# PAGINATE_BY #}
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-border btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            {{ active_paginate_by }} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            {% for choice in PAGINATE_BY_CHOICES %}
+              <li>
+                <a href="{% url "docs:index" %}?{% param_replace page="" count=choice %}">{{ choice }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+     </div>
+    </div>
+    <hr class="space m" />
+
+    <div class="grid-list one-row-list">
+      <div class="grid-box row">
+          {% for obj in object_list %}
+          <div class="grid-item col-md-12">
+              {% include 'docs/includes/document_item_horizontal.html' %}
+          </div>
+          {% comment %} <hr class="space m" /> {% endcomment %}
+          {% empty %}
+          <p>Ничего не найдено.</p>
+          {% endfor %}
+      </div>
+    </div>
+
+    <div class="clear"></div>
+    {% include 'core/includes/pagination.html' %}
+  </div>
+</div>
+
+  
+
+{% endblock %}

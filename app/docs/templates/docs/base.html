@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags static %}
+
+{% comment %} {% block title %}
+
+{% endblock %} {% endcomment %}
+
+
+{% block content %}
+
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'docs/css/docs.css' %}">{% endaddtoblock %} 
+  {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'news/css/taggit_labels.css' %}">{% endaddtoblock %}  {% endcomment %}
+
+  {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+  {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
+  {% comment %} {% addtoblock "js" %}<script src="{% static 'news/js/news.js' %}"></script>{% endaddtoblock %}  {% endcomment %}
+
+  {% comment %} {% if ADMIN_MODE %}
+    {% addtoblock "js" %}<script src="{% static 'news/js/news-admin.js' %}"></script>{% endaddtoblock %} 
+  {% endif %} {% endcomment %}
+
+  {% static_placeholder '[docs] top' %}
+
+  {% comment %} {% include 'core/breadcrumbs.html' %} {% endcomment %}
+
+  <section class="docs-container">
+    <div class="container">
+      {% block app_content %}
+      {% endblock %}
+    </div>
+  </section>
+
+  {% static_placeholder "[docs] bottom" %}
+
+{% endblock %}
