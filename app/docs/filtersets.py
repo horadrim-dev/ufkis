@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from .models import Document, Category
+from .models import Document, Category, DocumentType
 from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
@@ -20,19 +20,34 @@ class DocumentFilterSet(django_filters.FilterSet):
     category = django_filters.filters.ModelChoiceFilter(
         queryset=Category.objects.all(), 
         blank=True,
-        empty_label='Все новости',
+        empty_label='Все документы',
         widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})
         )
+    number = django_filters.filters.NumberFilter(
+        widget= forms.DateInput(attrs={'class': 'form-control'}),
+    )
+    date = django_filters.filters.DateFilter(
+        widget= forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+    )
+    name = django_filters.CharFilter(lookup_expr='icontains',
+        widget= forms.TextInput(attrs={'class': 'form-control'}),
+    )
+    # document_type = django_filters.filters.ModelChoiceFilter(
+    #     queryset=DocumentType.objects.all(), 
+    #     blank=True,
+    #     empty_label='Все типы документов',
+    #     widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})
+    #     )
     # tags = TagFilter(
     #     field_name='tags__name',
     #     widget=LabelWidget(attrs={'class':'tags'})
     #     )
-    start_date = django_filters.filters.DateFilter(field_name='date',
-        widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
-        lookup_expr='gte', label='от')
-    end_date = django_filters.filters.DateFilter(field_name='date',
-        widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
-        lookup_expr='lte', label='до')
+    # start_date = django_filters.filters.DateFilter(field_name='date',
+    #     widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
+    #     lookup_expr='gte', label='от')
+    # end_date = django_filters.filters.DateFilter(field_name='date',
+    #     widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
+    #     lookup_expr='lte', label='до')
     # tags = django_filters.filters.ModelMultipleChoiceField(
     #     blank=True,
     #     # empty_label='Все новости',
@@ -57,7 +72,7 @@ class DocumentFilterSet(django_filters.FilterSet):
         model = Document
         # fields = ['category', 'tags']
         # исключаем автоматическую генерацию фильтров для этих полей, заданы вручную в теле класса
-        exclude = ['category', 'tags', 'start_date', 'end_date']
+        exclude = ['category', 'tags', 'date', 'name']
         
         # filter_overrides = {
         #     TaggableManager: {

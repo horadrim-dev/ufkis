@@ -2,6 +2,11 @@
   padding-top: 30px;
   padding-bottom: 30px;
 }
+/* .docs-container .content {
+  padding: 30px;
+  background-color: #fff !important;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+} */
 .docs-container .tag-row {
   white-space: unset;
 }
@@ -92,7 +97,7 @@
 }
 .docs-item.horizontal {
   background: #fff;
-  padding: 30px 20px 20px 20px;
+  padding: 20px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.10);
 }
 .docs-item.horizontal .img-box {
@@ -140,4 +145,17 @@ ul.slides li .docs-item {
   padding: 20px 30px 30px 30px;
   margin-bottom: 20px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.10);
+}
+.docs-item .download-container {
+  text-align: center;
+}
+.docs-item .hits {
+  color: #eaeaea;
+}
+.docs-item .hits i {
+  color: #eaeaea;
+}
+.docs-item .file-attributes {
+  text-align: center;
+  color: #d5d5d5;
 }

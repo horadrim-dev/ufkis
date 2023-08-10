@@ -2,7 +2,7 @@ from typing import Any
 from django.db import models
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, Http404
+from django.http import HttpResponse, JsonResponse, Http404, FileResponse
 from django.views.generic import ListView, DetailView, View
 from django.core.exceptions import PermissionDenied
 from .models import Document
@@ -12,6 +12,7 @@ from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
+import os
 
 # NEWS_LIST_LAYOUTS = ("list", "grid" )
 # NEWS_FILTER_STATES = ("visible", "hidden")
@@ -70,3 +71,25 @@ class DocumentDetailView(DetailView):
         context['page_title'] = self.object.name
         return context
     
+
+def document_download(request, id, *args, **kwargs):
+    # media_root = settings.MEDIA_ROOT
+    try:
+        # document = Attachment.objects.get(uuid=uuid)
+        document = Document.objects.get(id=id)
+    except:
+        raise Http404('Файл не найден.')
+
+    if os.path.isfile(document.document_file.path):
+        document.hits += 1
+        document.save()
+        return FileResponse(
+            open(document.document_file.path, 'rb'),
+            as_attachment=True,
+            filename=document.filename
+        )
+    else:
+        raise Http404(
+            'Файл "{}" в хранилище не найден.'.format(
+                document.document_file.path)
+        )

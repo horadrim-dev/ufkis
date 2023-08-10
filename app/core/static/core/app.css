@@ -354,3 +354,16 @@ footer .navbar-brand-logo {
     max-height: 170px;
     margin-right: 40px;
 }
+a {
+    color: var(--main-color-2)
+}
+a:hover {
+    color: var(--main-color)
+}
+a.dashed {
+    border-bottom: dashed 1px var(--main-color-2);
+    text-decoration: none;
+}
+a.dashed:hover {
+    border-bottom: dashed 1px var(--main-color);
+}

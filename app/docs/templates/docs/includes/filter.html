@@ -9,16 +9,34 @@
             <label class="list-item" for="{{ choice.id_for_label }}">{{ choice.choice_label|safe }}</label>
         {% endfor %}
     </div>
+    {% comment %} <div class="list-items">
+        <p class="list-group-item active">Типы документов</p>
+        
+        {% for choice in filter.form.document_type %}
+            {{choice.tag}}
+            <label class="list-item" for="{{ choice.id_for_label }}">{{ choice.choice_label|safe }}</label>
+        {% endfor %}
+    </div> {% endcomment %}
     <div class="list-group list-blog">
-        <p class="list-group-item active">Теги</p>
+        {% comment %} <p class="list-group-item active">Теги</p>
         <div class="tagbox">
             {{filter.form.tags}}
-            {% comment %} {% for choice in filter.form.tags %}
-                {{ choice.tag}}
-            {% endfor %} {% endcomment %}
             <div class="clear"></div>
+        </div> {% endcomment %}
+
+        <p class="list-group-item active">Ключевое слово</p>
+        {{ filter.form.name }}
+        <div class="row">
+            <div class="col-xs-6">
+                <p class="list-group-item active">Номер документа</p>
+                {{ filter.form.number }}
+            </div>
+            <div class="col-xs-6">
+                <p class="list-group-item active">Дата документа</p>
+                {{ filter.form.date }}
+            </div>
         </div>
-        <p class="list-group-item active">Дата</p>
+        {% comment %} <p class="list-group-item active">Дата</p>
         <div class="row">
             <div class="col-md-6">
                 {{filter.form.start_date.label}}{{filter.form.start_date}}
@@ -27,9 +45,9 @@
                 {{filter.form.end_date.label}}
                 {{filter.form.end_date}}
             </div>
-        </div>
+        </div> {% endcomment %}
     </div>
-    {% comment %} <input type="submit" value="Применить" class="btn w-100" /> {% endcomment %}
+    <input type="submit" value="Применить" class="btn w-100" />
     {% comment %} <input type="reset" class="btn btn-border"> 
     <button id="filter-reset">...</button> {% endcomment %}
     {% comment %} <input type="reset" id="reset" onclick="this.form.reset();" class="btn btn-border"/> {% endcomment %}

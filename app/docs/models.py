@@ -1,9 +1,11 @@
 from django.db import models
-from filer.fields.file import FilerFileField
+from filer.fields.file import FilerFileField, File
 from django.urls import reverse
 from core.models import OrderedModel
 import datetime
-
+import uuid
+from django.dispatch import receiver
+import os
 
 class ContentManager(models.Manager):
 
@@ -66,7 +68,7 @@ class DocumentType(OrderedModel):
 
 
 class Document(models.Model):
-    
+    # uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  verbose_name="Категория")
     document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
@@ -79,6 +81,8 @@ class Document(models.Model):
                             blank=True, null=True)
     document_file = FilerFileField(verbose_name="Файл документа", on_delete=models.CASCADE,
                                blank=True, null=True)
+    extension = models.CharField(default="", max_length=16, blank=True, null=True,
+                                verbose_name="Расширение файла")
     document_url = models.URLField("Ссылка на документ", 
                                     blank=True, null=True)
 
@@ -86,10 +90,74 @@ class Document(models.Model):
                                     verbose_name="Дата публикации")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
+    hits = models.PositiveIntegerField(default=0, verbose_name="Кол-во загрузок")
 
     objects = ContentManager()
+
+    def save(self,  *args, **kwargs):
+        # считываем расширение файла
+        if self.document_file:
+            self.extension = self.document_file.path.split('.')[-1].lower()
+
+        super().save(*args, **kwargs)
+
+    def url(self):
+        '''Формирует url для скачивания'''
+        # return reverse('document_download', kwargs={'uuid': self.uuid})
+        if self.document_url:
+            return self.document_url
+        
+        return reverse('docs:document_download', kwargs={'id': self.id})
+
+    @property
+    def full_name(self):
+        return " ".join([
+            str(self.document_type) if self.document_type else "",
+            "№" + str(self.number) if self.number else "",
+            "от " + str(self.date) if self.date else "",
+            str(self.name) if self.name else ""
+        ])
+
+    @property
+    def filename(self):
+        return "{}.{}".format(self.full_name, self.extension)
+
+    # @property
+    # def extension(self):
+    #     return self.document_file.path.split('.')[-1].lower() if self.document_file else ""
+
+    def fa_icon(self):
+        """Возвращает название иконки (font awesome 4.7) для файла документа """
+
+        ARCHIVE = { "ext" : ("rar", "zip", "7z"),  "icon": "fa-file-archive-o"}
+        WORD = {"ext": ("doc", "docx"), "icon": "fa-file-word-o"}
+        EXCEL = {"ext": ("xls", "xlsx"), "icon": "fa-file-excel-o"}
+        VIDEO = {"ext": ("mp4", "avi", "mkv"), "icon": "fa-file-video-o"}
+        PDF = {"ext" : ("pdf", ), "icon": "fa-file-pdf-o"}
+
+        file_types = [ARCHIVE, WORD, EXCEL, VIDEO, PDF]
+        for file_type in file_types:
+            if self.extension in file_type["ext"]:
+                return file_type["icon"]
+
+        return "fa-file-o"
+
 
     class Meta:
         verbose_name = "документ"
         verbose_name_plural = "документы"
         ordering = ["-published_at"]
+
+
+
+@receiver(models.signals.post_delete, sender=Document)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Удаляет файл при удалении объекта
+    """
+    if instance.document_file:
+        if os.path.isfile(instance.document_file.path):
+            # delete file from file system
+            os.remove(instance.document_file.path)
+            # delete Filer File object
+            File.objects.filter(id=instance.document_file_id).delete()
