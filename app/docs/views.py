@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404, FileResponse
 from django.views.generic import ListView, DetailView, View
 from django.core.exceptions import PermissionDenied
-from .models import Document
+from .models import Document, Category
 from django_filters.views import FilterView
 from .filtersets import DocumentFilterSet
 from cms.models.pluginmodel import CMSPlugin
@@ -40,6 +40,15 @@ class DocumentListView(FilterView):
         # context['news_list_layout'] = self.get_news_list_layout()
         # context['news_filter_state'] = self.get_filter_state()
 
+        # меняем заголовок страницы
+        category = self.request.GET.get("category", None)
+        if category and isinstance(category, str) and category.isdigit():
+            try:
+                c = Category.objects.get(id=category)
+                context['page_title'] = c.name
+            except:
+                pass
+            
         context['PAGINATE_BY_CHOICES'] = PAGINATE_BY_CHOICES
         context['active_paginate_by'] = self.get_paginate_by(self.queryset)
         return context

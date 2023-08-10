@@ -15,7 +15,7 @@
 
   {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
   {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
-  {% comment %} {% addtoblock "js" %}<script src="{% static 'news/js/news.js' %}"></script>{% endaddtoblock %}  {% endcomment %}
+  {% addtoblock "js" %}<script src="{% static 'docs/js/docs.js' %}"></script>{% endaddtoblock %} 
 
   {% comment %} {% if ADMIN_MODE %}
     {% addtoblock "js" %}<script src="{% static 'news/js/news-admin.js' %}"></script>{% endaddtoblock %} 
