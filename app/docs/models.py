@@ -32,6 +32,10 @@ class Category(OrderedModel):
 
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return "{}?category={}".format(reverse("docs:index"), self.id)
+    
 
     class Meta:
         verbose_name = "категория"
@@ -42,7 +46,8 @@ class DocumentType(OrderedModel):
 
     name = models.CharField("Название типа документа", max_length=64,
                             help_text="Распоряжение, постановление, приказ и т.д.")
-
+    show_document_type = models.BooleanField("Отображать тип документа, номер и дату (если они заданы) в названии",
+                                             default=True)
     # todo: ПОЛЯ ТИПА ДОКУМЕНТА или не надо?
     # простой документ (без нихуя, только название)
 
@@ -111,6 +116,9 @@ class Document(models.Model):
 
     @property
     def full_name(self):
+        if not self.document_type.show_document_type:
+            return self.name
+
         return " ".join([
             str(self.document_type) if self.document_type else "",
             "№" + str(self.number) if self.number else "",

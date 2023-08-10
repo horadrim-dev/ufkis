@@ -5,6 +5,7 @@ from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
+from django.db.models import Q
 
 # class TagFilter(django_filters.CharFilter):
 #     field_class = TagField
@@ -13,7 +14,6 @@ from taggit_labels.widgets import LabelWidget
 #         kwargs.setdefault('lookup_expr', 'in')
 #         super().__init__(*args, **kwargs)
 
-    
 
 class DocumentFilterSet(django_filters.FilterSet):
 
@@ -29,9 +29,16 @@ class DocumentFilterSet(django_filters.FilterSet):
     date = django_filters.filters.DateFilter(
         widget= forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
     )
-    name = django_filters.CharFilter(lookup_expr='icontains',
+    q = django_filters.filters.CharFilter(method='document_filter', label="Найти",
         widget= forms.TextInput(attrs={'class': 'form-control'}),
     )
+    def document_filter(self, queryset, name, value):
+        # icontains почемуто не работает с регистрами, используем iregex
+        return queryset.filter(
+            Q(name__iregex=value) |
+            Q(number__iregex=value) | 
+            Q(date__iregex=value)
+        )
     # document_type = django_filters.filters.ModelChoiceFilter(
     #     queryset=DocumentType.objects.all(), 
     #     blank=True,
@@ -70,9 +77,9 @@ class DocumentFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = Document
-        # fields = ['category', 'tags']
+        fields = ['q']
         # исключаем автоматическую генерацию фильтров для этих полей, заданы вручную в теле класса
-        exclude = ['category', 'tags', 'date', 'name']
+        # exclude = ['category', 'tags', 'date']
         
         # filter_overrides = {
         #     TaggableManager: {

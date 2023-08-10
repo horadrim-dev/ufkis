@@ -14,7 +14,7 @@ class MenuItemSettingsModifier(Modifier):
             # assert False, nodes
             # only consider nodes that refer to cms pages
             # and put them in a dict for efficient access
-            page_nodes = {n.id: n for n in nodes if n.attr["is_page"]}
+            page_nodes = {n.id: n for n in nodes if "is_page" in n.attr and n.attr["is_page"]}
             # retrieve the attributes of interest from the relevant pages
             pages = Page.objects.filter(id__in=page_nodes.keys())#.values('id', 'iconextension')
             # loop over all relevant pages
