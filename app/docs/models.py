@@ -89,7 +89,7 @@ class Document(models.Model):
                             help_text="Укажите дату документа (если она есть)")
     subname = models.CharField("Содержание документа", max_length=512,
                             blank=True, null=True,
-                            help_text="Пример: \"Об утверждении правил перевозки детей\"")
+                            help_text="Пример: \"Об утверждении правил перевозки детей\". Без внешних кавычек.")
     document_file = FilerFileField(verbose_name="Файл документа", on_delete=models.CASCADE,
                                blank=True, null=True)
     extension = models.CharField(default="", max_length=16, blank=True, null=True,
@@ -97,7 +97,7 @@ class Document(models.Model):
     document_url = models.URLField("Ссылка на документ", 
                                     blank=True, null=True)
 
-    published_at = models.DateField(default=datetime.datetime.now, 
+    published_at = models.DateTimeField(default=datetime.datetime.now, 
                                     verbose_name="Дата публикации")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
@@ -122,14 +122,13 @@ class Document(models.Model):
 
     @property
     def full_name(self):
-        if not self.document_type.show_document_type:
-            return self.name
+        # if not self.document_type.show_document_type:
+        #     return self.name
 
         return " ".join([
-            str(self.document_type) if self.document_type else "",
+            str(self.name),
             "№" + str(self.number) if self.number else "",
             "от " + str(self.date) if self.date else "",
-            str(self.name) if self.name else ""
         ])
 
     @property
