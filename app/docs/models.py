@@ -82,7 +82,7 @@ class Document(models.Model):
     # document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
     #                              verbose_name="Тип документа")
 
-    name = models.CharField("Название документа", max_length=256, default="Документ",
+    name = models.CharField("Название документа", max_length=512, default="Документ",
                             help_text="Примеры: \"Приказ Минспорта РФ\" , \"Уставной документ\", и т.д.   Номер и дату в этом поле не указывайте")
     number = models.CharField("Номер", max_length=32,
                               blank=True, null=True,
