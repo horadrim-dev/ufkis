@@ -81,7 +81,7 @@ class Document(models.Model):
     #                              verbose_name="Тип документа")
 
     name = models.CharField("Название документа", max_length=256, default="Документ",
-                            help_text="Примеры: \"Приказ Минспорта РФ\" , \"Уставной документ\", и т.д.")
+                            help_text="Примеры: \"Приказ Минспорта РФ\" , \"Уставной документ\", и т.д.   Номер и дату в этом поле не указывайте")
     number = models.CharField("Номер", max_length=32,
                               blank=True, null=True,
                               help_text="Укажите номер документа (если он есть)")
@@ -89,7 +89,7 @@ class Document(models.Model):
                             help_text="Укажите дату документа (если она есть)")
     subname = models.CharField("Содержание документа", max_length=512,
                             blank=True, null=True,
-                            help_text="Пример: \"Об утверждении правил перевозки детей\". Без внешних кавычек.")
+                            help_text="Без внешних кавычек. Пример: Об утверждении правил перевозки детей. ")
     document_file = FilerFileField(verbose_name="Файл документа", on_delete=models.CASCADE,
                                blank=True, null=True)
     extension = models.CharField(default="", max_length=16, blank=True, null=True,

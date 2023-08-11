@@ -35,10 +35,10 @@ class DocsToolbar(CMSToolbar):
             name='Категории',
             url=admin_reverse('docs_category_changelist')
         )
-        news_menu.add_modal_item(
-            name='Типы документов',
-            url=admin_reverse('docs_documenttype_changelist')
-        )
+        # news_menu.add_modal_item(
+        #     name='Типы документов',
+        #     url=admin_reverse('docs_documenttype_changelist')
+        # )
 
         self.toolbar.add_modal_button(
             name='Документ', 
