@@ -17,11 +17,11 @@ class CategoryForm(forms.ModelForm):
         exclude = []
 
 
-class DocumentTypeForm(forms.ModelForm):
-    class Meta:
-        model = DocumentType
-        # fields = []
-        exclude = []
+# class DocumentTypeForm(forms.ModelForm):
+#     class Meta:
+#         model = DocumentType
+#         # fields = []
+#         exclude = []
 
 class DocumentForm(forms.ModelForm):
     class Meta:

@@ -43,30 +43,30 @@ class Category(OrderedModel):
         ordering = ["order"]
 
 
-class DocumentType(OrderedModel):
+# class DocumentType(OrderedModel):
 
-    name = models.CharField("Название типа документа", max_length=64,
-                            help_text="Распоряжение, постановление, приказ и т.д.")
-    show_document_type = models.BooleanField("Отображать тип документа, номер и дату (если они заданы) в названии",
-                                             default=True)
-    # todo: ПОЛЯ ТИПА ДОКУМЕНТА или не надо?
-    # простой документ (без нихуя, только название)
+#     name = models.CharField("Название типа документа", max_length=64,
+#                             help_text="Распоряжение, постановление, приказ и т.д.")
+#     show_document_type = models.BooleanField("Отображать тип документа, номер и дату (если они заданы) в названии",
+#                                              default=True)
+#     # todo: ПОЛЯ ТИПА ДОКУМЕНТА или не надо?
+#     # простой документ (без нихуя, только название)
 
-    def save(self, lock_recursion=False, *args, **kwargs):
+#     def save(self, lock_recursion=False, *args, **kwargs):
 
-        super().save(*args, **kwargs)
+#         super().save(*args, **kwargs)
 
-        # save method для OrderedModel
-        if not lock_recursion:
-            self.update_order(
-                list_of_objects = list(
-                    DocumentType.objects.all().exclude(id=self.id)
-                    # Category.objects.filter(parent=self.parent).exclude(id=self.id)
-                    )
-            )
+#         # save method для OrderedModel
+#         if not lock_recursion:
+#             self.update_order(
+#                 list_of_objects = list(
+#                     DocumentType.objects.all().exclude(id=self.id)
+#                     # Category.objects.filter(parent=self.parent).exclude(id=self.id)
+#                     )
+#             )
 
-    def __str__(self):
-        return self.name
+#     def __str__(self):
+#         return self.name
     
     class Meta:
         verbose_name = "тип документа"
@@ -77,8 +77,8 @@ class Document(models.Model):
     # uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  verbose_name="Категория")
-    document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
-                                 verbose_name="Тип документа")
+    # document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
+    #                              verbose_name="Тип документа")
 
     name = models.CharField("Название документа", max_length=256, default="Документ",
                             help_text="Примеры: \"Приказ Минспорта РФ\" , \"Уставной документ\", и т.д.")

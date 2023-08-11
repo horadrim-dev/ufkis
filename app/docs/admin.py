@@ -9,14 +9,14 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'order', )
     exclude = []
 
-@admin.register(DocumentType)
-class DocumentTypeAdmin(admin.ModelAdmin):
-    form = DocumentTypeForm
-    list_display = ('name', 'order', )
+# @admin.register(DocumentType)
+# class DocumentTypeAdmin(admin.ModelAdmin):
+#     form = DocumentTypeForm
+#     list_display = ('name', 'order', )
     # list_filter = ["organization" ]
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     form = DocumentForm
-    list_display = ('name', 'category', 'document_type', )
-    list_filter = ["category", "document_type"]
+    list_display = ('name', 'category', )
+    list_filter = ["category",]

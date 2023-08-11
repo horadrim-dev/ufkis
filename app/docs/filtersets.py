@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from .models import Document, Category, DocumentType
+from .models import Document, Category
 from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
@@ -37,14 +37,9 @@ class DocumentFilterSet(django_filters.FilterSet):
         return queryset.filter(
             Q(name__iregex=value) |
             Q(number__iregex=value) | 
-            Q(date__iregex=value)
+            Q(date__iregex=value) |
+            Q(subname__iregex=value)
         )
-    # document_type = django_filters.filters.ModelChoiceFilter(
-    #     queryset=DocumentType.objects.all(), 
-    #     blank=True,
-    #     empty_label='Все типы документов',
-    #     widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})
-    #     )
     # tags = TagFilter(
     #     field_name='tags__name',
     #     widget=LabelWidget(attrs={'class':'tags'})
