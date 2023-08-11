@@ -40,6 +40,7 @@ class Category(OrderedModel):
     class Meta:
         verbose_name = "категория"
         verbose_name_plural = "категории"
+        ordering = ["order"]
 
 
 class DocumentType(OrderedModel):
