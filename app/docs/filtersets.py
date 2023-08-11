@@ -24,13 +24,22 @@ class DocumentFilterSet(django_filters.FilterSet):
         widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})
         )
     number = django_filters.filters.NumberFilter(
-        widget= forms.DateInput(attrs={'class': 'form-control'}),
+        widget= forms.DateInput(
+            attrs={'class': 'form-control', 
+                   'placeholder':'Номер'}
+        ),
     )
     date = django_filters.filters.DateFilter(
-        widget= forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+        widget= forms.DateInput(
+            attrs={'class': 'form-control', 
+                   'type': 'date',
+                   }
+        ),
     )
     q = django_filters.filters.CharFilter(method='document_filter', label="Найти",
-        widget= forms.TextInput(attrs={'class': 'form-control'}),
+        widget= forms.TextInput(
+            attrs={'class': 'form-control', 'placeholder':'Ключевое слово'}
+        ),
     )
     def document_filter(self, queryset, name, value):
         # icontains почемуто не работает с регистрами, используем iregex
