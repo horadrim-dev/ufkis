@@ -7,12 +7,12 @@ from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 from django.db.models import Q
 
-# class TagFilter(django_filters.CharFilter):
-#     field_class = TagField
+class TagFilter(django_filters.CharFilter):
+    field_class = TagField
 
-#     def __init__(self, *args, **kwargs):
-#         kwargs.setdefault('lookup_expr', 'in')
-#         super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('lookup_expr', 'in')
+        super().__init__(*args, **kwargs)
 
 
 class DocumentFilterSet(django_filters.FilterSet):
@@ -40,10 +40,10 @@ class DocumentFilterSet(django_filters.FilterSet):
             Q(date__iregex=value) |
             Q(subname__iregex=value)
         )
-    # tags = TagFilter(
-    #     field_name='tags__name',
-    #     widget=LabelWidget(attrs={'class':'tags'})
-    #     )
+    tags = TagFilter(
+        field_name='tags__name',
+        widget=LabelWidget(attrs={'class':'tags'})
+        )
     # start_date = django_filters.filters.DateFilter(field_name='date',
     #     widget= forms.DateInput(attrs={'class': 'form-control autoapply', 'type': 'date'}),
     #     lookup_expr='gte', label='от')

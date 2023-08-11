@@ -3,6 +3,8 @@
 
 {% block app_content %}
 
+{% addtoblock "js" %}<script src="{% static 'core/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
+
 <div class="docs-list-controls">
   <div class="text-right hidden-xs display-md">
     {# PAGINATE_BY #}

@@ -38,11 +38,13 @@
             <label class="list-item" for="{{ choice.id_for_label }}">{{ choice.choice_label|safe }}</label>
         {% endfor %}
     </div> {% endcomment %}
-        {% comment %} <p class="list-group-item active">Теги</p>
+    <div class="block">
+        <p class="list-group-item active">Теги</p>
         <div class="tagbox">
             {{filter.form.tags}}
             <div class="clear"></div>
-        </div> {% endcomment %}
+        </div>
+    </div>
         {% comment %} <p class="list-group-item active">Дата</p>
         <div class="row">
             <div class="col-md-6">

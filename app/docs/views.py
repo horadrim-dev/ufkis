@@ -16,7 +16,7 @@ import os
 
 # NEWS_LIST_LAYOUTS = ("list", "grid" )
 # NEWS_FILTER_STATES = ("visible", "hidden")
-PAGINATE_BY_CHOICES = ('5', '10', '20')
+PAGINATE_BY_CHOICES = ('10', '25', '50')
 class DocumentListView(FilterView):
     template_name = 'docs/document_list.html'
     # model = Post

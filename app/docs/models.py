@@ -6,6 +6,8 @@ import datetime
 import uuid
 from django.dispatch import receiver
 import os
+from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase
 
 class ContentManager(models.Manager):
 
@@ -102,6 +104,8 @@ class Document(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
     hits = models.PositiveIntegerField(default=0, verbose_name="Кол-во загрузок")
+
+    tags = TaggableManager()
 
     objects = ContentManager()
 

@@ -2,7 +2,7 @@
 {% load sekizai_tags thumbnail static core_tags %}
 
 {% block app_content %}
-{% addtoblock "js" %}<script src="{% static 'news/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
+{% addtoblock "js" %}<script src="{% static 'core/js/taggit_labels.js' %}"></script>{% endaddtoblock %} 
 
 <div class="news-list-controls">
   <button id="filter-toggler" class="btn-border btn-sm" path="{% url "news:index" %}">

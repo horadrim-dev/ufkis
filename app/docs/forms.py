@@ -16,7 +16,6 @@ class CategoryForm(forms.ModelForm):
         # fields = []
         exclude = []
 
-
 # class DocumentTypeForm(forms.ModelForm):
 #     class Meta:
 #         model = DocumentType
@@ -24,6 +23,9 @@ class CategoryForm(forms.ModelForm):
 #         exclude = []
 
 class DocumentForm(forms.ModelForm):
+
+    tags = TagField(required=False, widget=LabelWidget)
+
     class Meta:
         model = Document
         # fields = []
