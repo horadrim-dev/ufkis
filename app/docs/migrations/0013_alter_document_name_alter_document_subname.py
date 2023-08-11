@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='document',
             name='name',
-            field=models.CharField(default='Документ', help_text='Примеры: "Приказ Минспорта РФ" , "Уставной документ", и т.д.   Номер и дату в этом поле не указывайте', max_length=256, verbose_name='Название документа'),
+            field=models.CharField(default='Документ', help_text='Примеры: "Приказ Минспорта РФ" , "Уставной документ", и т.д.   Номер и дату в этом поле не указывайте', max_length=512, verbose_name='Название документа'),
         ),
         migrations.AlterField(
             model_name='document',
