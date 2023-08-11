@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='document',
             name='name',
-            field=models.CharField(blank=True, help_text='Пример: "Приказ №159 от 01.01.2001"', max_length=256, null=True, verbose_name='Название'),
+            field=models.CharField(blank=True, help_text='Пример: "Приказ №159 от 01.01.2001"', max_length=512, null=True, verbose_name='Название'),
         ),
     ]
