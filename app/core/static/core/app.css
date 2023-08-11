@@ -370,6 +370,7 @@ a.dashed:hover {
 .form-control {
     border: 1px solid #ddd;
     border-radius: 10px;
+    color: #999;
 }
 .form-control:focus {
     border-color: var(--main-color);
