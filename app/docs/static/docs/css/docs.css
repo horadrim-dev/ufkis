@@ -91,6 +91,9 @@
     border: 1px solid var(--main-color) !important;
     border-radius: 20px !important;
 }
+#docs-filter input[type="submit"] {
+  margin-bottom: 10px;
+}
 
 .docs-container .layout-toggler[disabled] {
   opacity: .5;
