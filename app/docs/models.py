@@ -17,7 +17,7 @@ class ContentManager(models.Manager):
 
 class Category(OrderedModel):
 
-    name = models.CharField("Название категории", max_length=64)
+    name = models.CharField("Название категории", max_length=256)
 
     def save(self, lock_recursion=False, *args, **kwargs):
 
