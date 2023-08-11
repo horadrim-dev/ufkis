@@ -80,11 +80,16 @@ class Document(models.Model):
     document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
                                  verbose_name="Тип документа")
 
-    date = models.DateField("Дата", blank=True, null=True)
+    name = models.CharField("Название документа", max_length=256, default="Документ",
+                            help_text="Примеры: \"Приказ Минспорта РФ\" , \"Уставной документ\", и т.д.")
     number = models.CharField("Номер", max_length=32,
-                              blank=True, null=True)
-    name = models.CharField("Название", max_length=512,
-                            blank=True, null=True)
+                              blank=True, null=True,
+                              help_text="Укажите номер документа (если он есть)")
+    date = models.DateField("Дата", blank=True, null=True,
+                            help_text="Укажите дату документа (если она есть)")
+    subname = models.CharField("Содержание документа", max_length=512,
+                            blank=True, null=True,
+                            help_text="Пример: \"Об утверждении правил перевозки детей\"")
     document_file = FilerFileField(verbose_name="Файл документа", on_delete=models.CASCADE,
                                blank=True, null=True)
     extension = models.CharField(default="", max_length=16, blank=True, null=True,
@@ -92,7 +97,7 @@ class Document(models.Model):
     document_url = models.URLField("Ссылка на документ", 
                                     blank=True, null=True)
 
-    published_at = models.DateField(default=datetime.date.today, 
+    published_at = models.DateField(default=datetime.datetime.now, 
                                     verbose_name="Дата публикации")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
