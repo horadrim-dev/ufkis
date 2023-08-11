@@ -115,6 +115,11 @@
 .docs-container .layout-toggler[disabled] {
   opacity: .5;
 }
+.docs-container .reset,
+.docs-container .paginate-button,
+.docs-container .submit {
+  border-radius: 10px;
+}
 .docs-container .reset i ,
 .docs-container .submit i {
   margin-right: 0;
