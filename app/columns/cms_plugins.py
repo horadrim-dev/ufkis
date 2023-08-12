@@ -21,13 +21,16 @@ class ColumnsPlugin(CMSPluginBase):
         response = super().save_model(
             request, obj, form, change
         )
+        bootstrap_col = "col-md-{}".format( 
+            str(12 // int(form.cleaned_data['create']))
+        )
         for _x in range(int(form.cleaned_data['create'])):
             col = Column(
                 parent=obj,
                 placeholder=obj.placeholder,
                 language=obj.language,
                 # width=form.cleaned_data['create_width'],
-                classes="",
+                classes=bootstrap_col,
                 position=CMSPlugin.objects.filter(parent=obj).count(),
                 plugin_type=ColumnPlugin.__name__
             )
