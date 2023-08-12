@@ -4,14 +4,17 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from news.models import Post
 
-from .models import DocumentsPlugin
+from .models import DocumentsPlugin, DocumentPlugin
 
 @plugin_pool.register_plugin
 class DocumentsPlugin(CMSPluginBase):
+    """Выводит документы определенной категории"""
+
     model =  DocumentsPlugin
     render_template = 'docs/documents.plugin.html'
     name = "Документы"   
     module = "Документы"
+
     def render(self, context, instance, placeholder):
 
         context.update({
@@ -26,12 +29,27 @@ class DocumentsPlugin(CMSPluginBase):
             'BOOTSTRAP_COL': instance.bootstrap_col
         })
 
-        # if context['request'].user.is_authenticated:
-        #     context['object_list'] = Post.objects.all()[:instance.num_objects]
-        # else:
-        #     context['object_list'] = Post.objects.published()[:instance.num_objects]
-
         return context
 
+@plugin_pool.register_plugin
+class DocumentPlugin(CMSPluginBase):
+    """Выводит один выбранный документ"""
 
-#
+    model =  DocumentPlugin
+    render_template = 'docs/document.plugin.html'
+    name = "Документ"   
+    module = "Документы"
+    raw_id_fields = ('document')
+
+    def render(self, context, instance, placeholder):
+        context.update({
+            'id': instance.generate_id(),
+            'instance': instance,
+            'obj': instance.document,
+            'SHOW_DESCRIPTION': instance.show_description,
+            'SHOW_ICON': instance.show_icon,
+            'SHOW_FILE_ATTRS': instance.show_file_attrs,
+            'SHOW_TAGS': instance.show_tags,
+        })
+
+        return context

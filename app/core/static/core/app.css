@@ -357,8 +357,9 @@ footer .navbar-brand-logo {
 a {
     color: var(--main-color-2)
 }
-a:hover {
-    color: var(--main-color)
+a:not(.nav-link):hover {
+    color: var(--main-color);
+    /* border-bottom: 1px solid var(--main-color); */
 }
 a.dashed {
     border-bottom: dashed 1px var(--main-color-2);

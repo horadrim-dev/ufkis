@@ -119,17 +119,13 @@ class Document(models.Model):
 
     def url(self):
         '''Формирует url для скачивания'''
-        # return reverse('document_download', kwargs={'uuid': self.uuid})
+        
         if self.document_url:
             return self.document_url
-        
         return reverse('docs:document_download', kwargs={'id': self.id})
 
     @property
     def full_name(self):
-        # if not self.document_type.show_document_type:
-        #     return self.name
-
         return " ".join([
             str(self.name),
             "№" + str(self.number) if self.number else "",
@@ -139,10 +135,6 @@ class Document(models.Model):
     @property
     def filename(self):
         return "{}.{}".format(self.full_name, self.extension)
-
-    # @property
-    # def extension(self):
-    #     return self.document_file.path.split('.')[-1].lower() if self.document_file else ""
 
     def fa_icon(self):
         """Возвращает название иконки (font awesome 4.7) для файла документа """
@@ -184,6 +176,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
 # LAYOUT_CHOICES = [("small", 'Маленький'), ("medium", "Средний"), ("large", "Большой")]
 BOOTSTRAP_COL_CHOICES = [ ("12", 1), ("6", 2), ("4", 3), ("3", 4), ("2", 6) ] # (ширина колонки, кол-во элементов)
 class DocumentsPlugin(CMSPlugin):
+    """Модель для плагина выводящего документы выбранной категории"""
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, 
                                  verbose_name="Категория")
@@ -192,12 +185,28 @@ class DocumentsPlugin(CMSPlugin):
     # show_link = models.BooleanField("Отображать кнопку ссылки на документ", default=True)
     show_file_attrs = models.BooleanField("Отображать атрибуты файла", default=True)
     show_tags = models.BooleanField("Отображать теги документа", default=False)
+
     bootstrap_col = models.CharField("Количество элементов в строке", max_length=8,
                                      choices=BOOTSTRAP_COL_CHOICES, default=BOOTSTRAP_COL_CHOICES[3][0])
-    # num_objects_in_row = models.PositiveIntegerField("Количество объектов в строке", default=3)
+    # num_objects = models.PositiveIntegerField("Количество объектов", default=0)
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]
     
     def related_documents(self):
         return self.category.document_set.all()
+
+class DocumentPlugin(CMSPlugin):
+    """Модель для плагина выводящего выбранный документ"""
+
+    document = models.ForeignKey(Document, on_delete=models.CASCADE, 
+                                 verbose_name="Документ")
+    show_description = models.BooleanField("Отображать описание документа", default=False)
+    show_icon = models.BooleanField("Отображать иконку документа", default=True)
+    # show_link = models.BooleanField("Отображать кнопку ссылки на документ", default=True)
+    show_file_attrs = models.BooleanField("Отображать атрибуты файла", default=True)
+    show_tags = models.BooleanField("Отображать теги документа", default=False)
+
+    def generate_id(self):
+        return str(uuid.uuid4().fields[-1])[:7]
+    
