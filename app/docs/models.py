@@ -182,6 +182,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
 
 
 # LAYOUT_CHOICES = [("small", 'Маленький'), ("medium", "Средний"), ("large", "Большой")]
+BOOTSTRAP_COL_CHOICES = [ ("12", 1), ("6", 2), ("4", 3), ("3", 4), ("2", 6) ] # (ширина колонки, кол-во элементов)
 class DocumentsPlugin(CMSPlugin):
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, 
@@ -191,7 +192,8 @@ class DocumentsPlugin(CMSPlugin):
     # show_link = models.BooleanField("Отображать кнопку ссылки на документ", default=True)
     show_file_attrs = models.BooleanField("Отображать атрибуты файла", default=True)
     show_tags = models.BooleanField("Отображать теги документа", default=False)
-    # layout = models.CharField("Размер элементов", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[-1][0])
+    bootstrap_col = models.CharField("Количество элементов в строке", max_length=8,
+                                     choices=BOOTSTRAP_COL_CHOICES, default=BOOTSTRAP_COL_CHOICES[3][0])
     # num_objects_in_row = models.PositiveIntegerField("Количество объектов в строке", default=3)
 
     def generate_id(self):

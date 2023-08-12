@@ -13,7 +13,7 @@
     {% for obj in object_list %}
 
       {% comment %} {% if forloop.counter <= 2 %} {% endcomment %}
-        <div class="grid-item col-md-4">
+        <div class="grid-item col-md-{{ BOOTSTRAP_COL }}">
       {% comment %} <div class="col-md-2 col-sm-6"> {% endcomment %}
           {% render_model_block obj %}
           {% include 'docs/includes/document_item_vertical.html' %}
@@ -30,7 +30,9 @@
     <hr class="space m" />
 
     <div class="text-center">
-      <a href="{% url 'docs:index' %}" class="btn btn-lg">Все документы</a>
+      <a href="{% url 'docs:index' %}" class="btn btn-m btn-border "><i class="fa fa-book"></i> {{ instance.category }}</a>
+
+
     </div>
   {% comment %} </div> {% endcomment %}
 </div>
