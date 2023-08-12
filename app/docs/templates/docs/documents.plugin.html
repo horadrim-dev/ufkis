@@ -1,0 +1,36 @@
+{% load cms_tags sekizai_tags thumbnail static %}
+
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'docs/css/docs.css' %}">{% endaddtoblock %} 
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/taggit_labels.css' %}">{% endaddtoblock %} 
+
+<div class="news-container">
+
+  {% comment %} <div class="row"> {% endcomment %}
+    <div class="grid-list ">
+      <div class="grid-box row">
+    {% for obj in object_list %}
+
+      {% comment %} {% if forloop.counter <= 2 %} {% endcomment %}
+        <div class="grid-item col-md-4">
+      {% comment %} <div class="col-md-2 col-sm-6"> {% endcomment %}
+          {% render_model_block obj %}
+          {% include 'docs/includes/document_item_vertical.html' %}
+          {% endrender_model_block %}
+      {% comment %} </div> {% endcomment %}
+        </div>
+
+        {% empty %}
+          <p> Документов пока нет.</p>
+        {% endfor %}
+
+      </div>
+    </div>
+    <hr class="space m" />
+
+    <div class="text-center">
+      <a href="{% url 'docs:index' %}" class="btn btn-lg">Все документы</a>
+    </div>
+  {% comment %} </div> {% endcomment %}
+</div>

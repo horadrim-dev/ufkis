@@ -1236,6 +1236,7 @@ function isScrollView(t) {
             //SCROLL FUNCTIONS
             if (scroll > 100 && go) {
                 go = false;
+                // $(scroll_1).animate({height: "0",}, "fast", function() {$(scroll_1).addClass("hidden");});
                 $(scroll_1).addClass('hidden');
                 $(scroll_2).addClass("scroll-css");
                 $(scroll_3).addClass('showed');
@@ -1250,6 +1251,8 @@ function isScrollView(t) {
             if (scroll < 100) {
                 go = true;
                 $(scroll_1).removeClass("hidden");
+                // $(scroll_1).animate({height: "100px",}, "fast");
+                // $(scroll_1).removeClass("hidden");
                 if (!scroll_len) $(scroll_2).removeClass("scroll-css");
                 $(scroll_3).removeClass('showed');
                 $(scroll_4).addClass("bg-transparent");

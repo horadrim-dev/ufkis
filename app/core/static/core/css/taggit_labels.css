@@ -1,5 +1,6 @@
 .taggit-labels.taggit-list {
   background-color: transparent;
+  white-space: normal;
 }
 .taggit-labels.taggit-list .taggit-tag {
   display: inline-block;

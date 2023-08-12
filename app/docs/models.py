@@ -8,6 +8,7 @@ from django.dispatch import receiver
 import os
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase
+from cms.models.pluginmodel import CMSPlugin
 
 class ContentManager(models.Manager):
 
@@ -89,7 +90,7 @@ class Document(models.Model):
                               help_text="Укажите номер документа (если он есть)")
     date = models.DateField("Дата", blank=True, null=True,
                             help_text="Укажите дату документа (если она есть)")
-    subname = models.CharField("Содержание документа", max_length=512,
+    subname = models.CharField("Описание документа", max_length=512,
                             blank=True, null=True,
                             help_text="Без внешних кавычек. Пример: Об утверждении правил перевозки детей. ")
     document_file = FilerFileField(verbose_name="Файл документа", on_delete=models.CASCADE,
@@ -178,3 +179,23 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
             os.remove(instance.document_file.path)
             # delete Filer File object
             File.objects.filter(id=instance.document_file_id).delete()
+
+
+# LAYOUT_CHOICES = [("small", 'Маленький'), ("medium", "Средний"), ("large", "Большой")]
+class DocumentsPlugin(CMSPlugin):
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, 
+                                 verbose_name="Категория")
+    show_description = models.BooleanField("Отображать описание документов", default=False)
+    show_icon = models.BooleanField("Отображать иконку документов", default=True)
+    # show_link = models.BooleanField("Отображать кнопку ссылки на документ", default=True)
+    show_file_attrs = models.BooleanField("Отображать атрибуты файла", default=True)
+    show_tags = models.BooleanField("Отображать теги документа", default=False)
+    # layout = models.CharField("Размер элементов", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[-1][0])
+    # num_objects_in_row = models.PositiveIntegerField("Количество объектов в строке", default=3)
+
+    def generate_id(self):
+        return str(uuid.uuid4().fields[-1])[:7]
+    
+    def related_documents(self):
+        return self.category.document_set.all()
