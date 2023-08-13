@@ -14,6 +14,7 @@
 }
 .navbar-middle .navbar-brand {
     margin-top: 0;
+    display: contents;
 }
 .navbar-middle form.search-input .search-button {
     display: inline-block;

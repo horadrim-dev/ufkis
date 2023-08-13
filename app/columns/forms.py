@@ -6,8 +6,8 @@ from .models import Columns
 
 class ColumnsForm(forms.ModelForm):
     NUM_COLUMNS = (
-        # (0, "0"),
-        # (1, "1"),
+        # оставлены только варианты на которые делится 12 
+        # для облегчения bootstrap верстки
         (2, "2"),
         (3, "3"),
         (4, "4"),

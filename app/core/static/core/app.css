@@ -376,3 +376,18 @@ a.dashed:hover {
 .form-control:focus {
     border-color: var(--main-color);
 }
+.special header .navbar-fixed-top {
+  margin-top: 64px;
+}
+/* .special-font-family-1 *, #special .special-font-family button[value="1"] {
+  font-family: Arial,sans-serif !important;
+} */
+/* .fa, .icon-android-contact, .icon-android-folder, .icon-bookmark, .icon-calendar {
+  font: normal normal normal 14px/1 FontAwesome;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1;
+  font-size: inherit;
+  text-rendering: auto;
+  font-family: inherit;
+} */

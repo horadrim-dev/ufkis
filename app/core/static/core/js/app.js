@@ -21,6 +21,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         };
-
+        // запускаем событие resize, для перерисовки страницы (в частности для меню схлопывания navbar-collapsing.js)
+        // $(window).trigger('resize');
     };
 })(jQuery || django.jQuery);
