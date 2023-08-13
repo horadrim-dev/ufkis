@@ -128,7 +128,7 @@ INSTALLED_APPS = [
     'medialer',
     'structure',
     'docs',
-
+    # 'cmsplugin_contact'
     # 'django.contrib.postgres',
 ]
 
