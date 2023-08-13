@@ -26,7 +26,7 @@
         });
 
         $(".news-container #filter-toggler").click(function(){
-            $("#news-content").toggleClass("col-md-9");
+            $("#news-content").toggleClass("col-md-8");
             $("#news-sidebar").toggleClass("hidden"); 
 
             if ($("#news-sidebar").hasClass("hidden")) {
