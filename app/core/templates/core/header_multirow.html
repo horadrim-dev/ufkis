@@ -15,16 +15,14 @@
     </div>
 </nav> {% endcomment %}
 
-<header class="fixed-top scroll-change" data-menu-height="186" >{% comment "" %}data-menu-anima="fade-in"{% endcomment %}
+<header class="fixed-top scroll-change" data-menu-height="153" >{% comment "" %}data-menu-anima="fade-in"{% endcomment %}
     <div class="navbar navbar-default mega-menu-fullwidth navbar-fixed-top" role="navigation">
-        <div class="navbar-mini scroll-hide">
+        {% comment %} <div class="navbar-mini scroll-hide">
             <div class="container">
                 <div class="nav navbar-nav navbar-left">
                     {% if site_settings.phone %}<span><i class="fa fa-phone"></i>{{site_settings.phone}}</span><hr />{% endif %}
                     {% if site_settings.email %}<span><i class="fa fa-envelope"></i>{{site_settings.email }}</span><hr />{% endif %}
                     {% if site_settings.address %}<span><i class="fa fa-map-marker"></i>{{site_settings.address}}</span>{% endif %}
-                    {% comment %} <hr />
-                    <span><i class="fa fa-calendar"></i>Mon - Sat: 8.00 - 19:00</span> {% endcomment %}
                 </div>
                 <div class="nav navbar-nav navbar-right">
                     <div class="minisocial-group">
@@ -36,7 +34,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <div class="navbar-middle scroll-hide ">
             <div class="container">
                 <div class="row vertical-row">
