@@ -60,7 +60,7 @@ header ul.nav:not(.ms-rounded) li>a:before {
     width: 0%;
     /* height: 2px; */
     height: 100%;
-    background-color: #4d4d4d0a;
+    background-color: #b7b7b72b;
     transition: all 0.35s ease-out;
     -webkit-transition: all 0.35s ease-out;
 }
@@ -69,9 +69,9 @@ ul.nav.root-level:not(.ms-rounded)>li.active>a::before,
 ul.nav.root-level:not(.ms-rounded)>li:hover>a::before {
     height: 100%;
 }
-#main-menu {
+/* #main-menu {
   background: #fff;
-}
+} */
 ul.nav.root-level:not(.ms-rounded)>li>a::before {
     content: '';
     position: absolute;
@@ -391,3 +391,17 @@ a.dashed:hover {
   text-rendering: auto;
   font-family: inherit;
 } */
+.navbar-mini {
+    background-color: var(--menu-bg-color);
+    color: var(--menu-font-color);
+}
+.navbar-main, .nav.inner {
+    background-color: var(--menu-bg-color);
+}
+#main-menu > li > a.nav-link {
+    color: var(--menu-font-color);
+    font-weight: 500;
+}
+.minisocial-group i {
+  color: #fff;
+}
