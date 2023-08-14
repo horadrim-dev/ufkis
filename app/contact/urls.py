@@ -5,9 +5,11 @@ from django.urls import path, re_path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import *
+from .views import ContactWizard
 
 urlpatterns = [
-    path('', ContactTemplateView.as_view(), name='index'),
+    # path('', ContactTemplateView.as_view(), name='index'),
+    path('', ContactWizard.as_view(), name='index'),
     # path('<int:id>', DocumentDetailView.as_view(), name='detail'),
     # path('download/<int:id>/', document_download, name='document_download' ),
 ] 

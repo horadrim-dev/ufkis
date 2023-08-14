@@ -5,31 +5,20 @@ from .models import MenuItemSettingsExtension
 
 from django.db.utils import ProgrammingError
 from .models import SiteSettings, Social
+from django.core.exceptions import ImproperlyConfigured
 
 
-class MenuItemSettingsExtensionAdmin(PageExtensionAdmin):
-    pass
-
-class SocialInline(admin.StackedInline):
-    model = Social
-    exclude = []
-    extra = 0
-    # formset = ModuleContentInlineFormSet
-    # raw_id_fields = ("content_post", )
-    # class Media:
-    #     js = ('grid/js/modulecontent_inline.js',)
-
-class SiteSettingsAdmin(admin.ModelAdmin):
-
-    inlines = (SocialInline, )
+class SingletonModelAdmin(admin.ModelAdmin):
 
     # Create a default object on the first page of SiteSettingsAdmin with a list of settings
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
         # be sure to wrap the loading and saving SiteSettings in a try catch,
         # so that you can create database migrations
+        if not self.model:
+            raise ImproperlyConfigured("Не задана модель для Singleton")
         try:
-            SiteSettings.load().save()
+            self.model.load().save()
         except ProgrammingError:
             pass
  
@@ -40,6 +29,22 @@ class SiteSettingsAdmin(admin.ModelAdmin):
     # as well as deleting existing
     def has_delete_permission(self, request, obj=None):
         return False
+
+class MenuItemSettingsExtensionAdmin(PageExtensionAdmin):
+    pass
+
+class SocialInline(admin.TabularInline):
+    model = Social
+    exclude = []
+    extra = 0
+    # formset = ModuleContentInlineFormSet
+    # raw_id_fields = ("content_post", )
+    # class Media:
+    #     js = ('grid/js/modulecontent_inline.js',)
+
+class SiteSettingsAdmin(SingletonModelAdmin):
+    # model = SiteSettings
+    inlines = (SocialInline, )
  
  
 admin.site.register(MenuItemSettingsExtension, MenuItemSettingsExtensionAdmin)

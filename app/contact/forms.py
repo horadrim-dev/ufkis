@@ -7,6 +7,39 @@ from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 from django.urls import reverse_lazy
 from phonenumber_field.formfields import PhoneNumberField
+from .models import ContactSettings
+
+class ContactForm(forms.Form):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # загружаем модель с настройками приложения
+        self.settings = ContactSettings.load()
+
+class AgreementForm(ContactForm):
+    agree = forms.BooleanField(
+        # label=self.settings
+        widget=forms.CheckboxInput()
+    )
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.html_before_form = self.settings.agreement
+        self.fields['agree'].label = self.settings.valid_file_extensions
+
+class UserDataForm(ContactForm):
+    subject = forms.CharField(max_length=100)
+    sender = forms.EmailField()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.html_before_form = self.settings.userdata_form_text
+
+class MessageForm(ContactForm):
+    message = forms.CharField(widget=forms.Textarea)
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.html_before_form = self.settings.message_form_text
 
 # class DocumentForm(forms.ModelForm):
 

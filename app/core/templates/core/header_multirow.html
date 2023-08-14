@@ -97,9 +97,12 @@
                 <div class="clear"></div>
                 <div class="collapse navbar-collapse">
                     <div class="nav navbar-nav navbar-right">
-                        <button class="priem-button btn btn-lg btn-border hidden-sm" type="button">
+                        {% url 'contact:index' as contact_url %}
+                        {% if contact_url %} {# Если вьюха еще не зарегистрирована - кнопка не будет показана #}
+                        <a href="{% url 'contact:index' %}" class="priem-button btn btn-lg btn-border hidden-sm" type="button">
                             Виртуальная приемная
-                        </button>
+                        </a>
+                        {% endif %}
                         {% comment %} <div class="search-box-menu">
                             <div class="search-box scrolldown">
                                 <input type="text" class="form-control" placeholder="ПОИСК ПОКА НЕ РАБОТАЕТ">

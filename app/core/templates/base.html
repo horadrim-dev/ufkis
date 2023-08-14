@@ -61,6 +61,9 @@
 
       {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
 
+      {% block head %}
+      {% endblock head %}
+
 
       {# fix header for admin view #}
       {% if request.user.is_authenticated %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load cms_tags sekizai_tags static i18n %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block content %}
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'contact/css/contact.css' %}">{% endaddtoblock %} 
+
+  {% static_placeholder '[priem] top' %}
+
+  <section class="contact-container">
+    <div class="container">
+        <div class="row box-steps">
+            <div class="step-item col-md-4">
+                <span class="step-number">1</span>
+                <h3>...</h3>
+                <p>
+                    ...
+                </p>
+            </div>
+            <div class="step-item col-md-4">
+                <span class="step-number">2</span>
+                <h3>...</h3>
+                <p>
+                    ...
+                </p>
+            </div>
+            <div class="step-item col-md-4">
+                <span class="step-number">3</span>
+                <h3>...</h3>
+                <p>
+                    ...
+                </p>
+            </div>
+        </div>
+        <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+
+        <form action="" method="post" class="formbox">{% csrf_token %}
+        <table>
+        {{ wizard.management_form }}
+        {% if wizard.form.forms %}
+            {{ wizard.form.management_form }}
+            {% for form in wizard.form.forms %}
+                {{ form.as_table }}
+            {% endfor %}
+        {% else %}
+            {% if wizard.form.html_before_form %}
+            {{ wizard.form.html_before_form | safe }}
+            {% endif %}
+            {{ wizard.form }}
+        {% endif %}
+        </table>
+        {% if wizard.steps.prev %}
+        {% comment %} <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button> {% endcomment %}
+        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+        {% endif %}
+        <input type="submit" value="{% translate "submit" %}"/>
+        </form>
+
+    </div>
+  </section>
+
+  {% static_placeholder "[priem] bottom" %}
+{% endblock %}

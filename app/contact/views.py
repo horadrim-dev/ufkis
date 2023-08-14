@@ -1,28 +1,29 @@
 from typing import Any
 from django.db import models
-from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404, FileResponse
 from django.views.generic import ListView, DetailView, View, TemplateView
 from django.core.exceptions import PermissionDenied
-from django_filters.views import FilterView
-from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-import os
+from formtools.wizard.views import CookieWizardView
+from .forms import AgreementForm, UserDataForm, MessageForm
+from .models import ContactSettings
 
-class ContactTemplateView(TemplateView):
-    template_name = "contact/base.html"
+class ContactWizard(CookieWizardView):
 
-# class DocumentDetailView(DetailView):
-#     template_name = 'docs/document_detail.html'
-#     slug_field = 'id'
-#     model = Document
+    form_list = [AgreementForm, UserDataForm, MessageForm]
+    template_name = 'contact/form.html'
 
-#     def get_context_data(self, **kwargs):
-#         context =  super().get_context_data(**kwargs)
-#         context['added_breadcrumbs'] = [{'url':self.object.get_absolute_url, 'title':self.object.name}]
-#         context['page_title'] = self.object.name
-#         return context
-    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # загружаем модель с настройками приложения
+        self.settings = ContactSettings.load()
+        
+
+    def done(self, form_list, **kwargs):
+        return render(self.request, 'contact/success.html', {
+            'form_data': [form.cleaned_data for form in form_list],
+            'SUCCESS_TEXT': self.settings.success_text,
+        })
