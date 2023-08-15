@@ -1,0 +1,14 @@
+{% extends 'contact/form.html' %}
+{% load cms_tags sekizai_tags static i18n %}
+
+{% block form_content %}
+    {{ wizard.form }}
+{% endblock %}
+
+{% block form_bottom %}
+    {% if wizard.steps.prev %}
+    {% comment %} <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button> {% endcomment %}
+    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
+    {% endif %}
+    <input type="submit" value="{% translate "submit" %}"/>
+{% endblock %}

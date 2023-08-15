@@ -17,25 +17,39 @@ class ContactForm(forms.Form):
 
 class AgreementForm(ContactForm):
     agree = forms.BooleanField(
-        # label=self.settings
-        widget=forms.CheckboxInput()
+        widget=forms.CheckboxInput(attrs={
+            "class": "form-control form-value checkbox"
+        })
     )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.html_before_form = self.settings.agreement
-        self.fields['agree'].label = self.settings.valid_file_extensions
+        self.fields['agree'].label = self.settings.agreement_checkbox_text
 
 class UserDataForm(ContactForm):
-    subject = forms.CharField(max_length=100)
-    sender = forms.EmailField()
+    sender = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "class": "form-control"
+        })
+    )
+    agree = forms.BooleanField(
+        widget=forms.CheckboxInput(attrs={
+            "class": "form-control"
+        })
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.html_before_form = self.settings.userdata_form_text
+        self.fields['agree'].label = self.settings.userdata_checkbox_text
 
 class MessageForm(ContactForm):
-    message = forms.CharField(widget=forms.Textarea)
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={
+            "class": "form-control"
+        })
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

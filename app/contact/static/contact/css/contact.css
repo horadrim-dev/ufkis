@@ -2,3 +2,12 @@
     padding-top: 30px;
     padding-bottom: 30px;
 }
+.form-control.checkbox {
+    display: inline-block;
+    width: 50px;
+}
+.checkbox-label {
+    position: absolute;
+    margin-left: 15px;
+    margin-top: 10px;
+}
