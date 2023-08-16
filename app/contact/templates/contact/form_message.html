@@ -2,13 +2,53 @@
 {% load cms_tags sekizai_tags static i18n %}
 
 {% block form_content %}
-    {{ wizard.form }}
+    <hr class="space m">
+    <div class="grid-list ">
+        <div class="grid-box row">
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right">{{ form.subject.label_tag }}</div>
+                    <div class="col-xs-10"> {{ form.subject}}{{ form.subject.errors }} </div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.message.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.message }}{{ form.message.errors }}</div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.attachments.label_tag }}</p></div>
+                    <div class="col-xs-10">
+                        {{ form.attachment_1 }}{{ form.attachments.errors }}
+                        {{ form.attachment_2 }}{{ form.attachments.errors }}
+                        {{ form.attachment_3 }}{{ form.attachments.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p></p></div>
+                    <div class="col-xs-10">
+                        {{ form.captcha }} {{ form.captcha.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="space m">
 {% endblock %}
 
 {% block form_bottom %}
-    {% if wizard.steps.prev %}
-    {% comment %} <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button> {% endcomment %}
-    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
-    {% endif %}
-    <input type="submit" value="{% translate "submit" %}"/>
+    <div class="row">
+        <div class="col-xs-4">
+            {% if wizard.steps.prev %}
+            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn btn-border btn-lg w-100">Назад</button>
+            {% endif %}
+        </div>
+        <div class="col-xs-8">
+            <input type="submit" value="Отправить обращение" class="btn btn-lg w-100" />
+        </div>
+    </div>
 {% endblock %}

@@ -2,13 +2,65 @@
 {% load cms_tags sekizai_tags static i18n %}
 
 {% block form_content %}
-    {{ wizard.form }}
+    {% comment %} {{ wizard.form }} {% endcomment %}
+    <hr class="space m">
+    <div class="grid-list ">
+        <div class="grid-box row">
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.lastname.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.lastname }}{{ form.lastname.errors }}</div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.firstname.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.firstname }}{{ form.firstname.errors }}</div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.middlename.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.middlename }}{{ form.middlename.errors }}</div>
+                </div>
+            </div>
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.email.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.email }}{{ form.email.errors }}</div>
+                </div>
+            </div>
+            <hr class="space m">
+            <div class="grid-item col-md-12">
+                <div class="row vertical-row">
+                    <div class="col-xs-2 text-right"><p>{{ form.phone.label_tag }}</p></div>
+                    <div class="col-xs-10">{{ form.phone }} {{ form.phone.errors }}</div>
+                </div>
+            </div>
+            <hr class="space m">
+            <div class="grid-item col-md-12">
+                <div class="col-xs-2 text-right"><p></p></div>
+                <div class="col-xs-10">
+                    {{ form.agree }}
+                    <span class="checkbox-label">{{ form.agree.label_tag }}</span>
+                    {{ form.agree.errors }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="space m">
 {% endblock %}
 
 {% block form_bottom %}
-    {% if wizard.steps.prev %}
+    <div class="row">
+        <div class="col-xs-4">
+            {% if wizard.steps.prev %}
+            <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}" class="btn btn-border btn-lg w-100">Назад</button>
+            {% endif %}
+        </div>
+        <div class="col-xs-8">
+            <input type="submit" value="Далее" class="btn btn-lg w-100" />
+        </div>
+    </div>
     {% comment %} <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button> {% endcomment %}
-    <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
-    {% endif %}
-    <input type="submit" value="{% translate "submit" %}"/>
 {% endblock %}

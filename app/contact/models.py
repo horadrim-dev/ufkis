@@ -27,6 +27,9 @@ class ContactSettings(SingletonModel):
     valid_file_extensions = models.CharField("Разрешенные форматы файлов (через запятую)", max_length=512,
                                              default="pdf, txt, doc, docx, xls, xlsx, ppt, pptx, odt, ods, odp, jpg, png, gif, tiff, zip")
 
+    @property
+    def valid_extensions(self):
+        return self.valid_file_extensions.replace(" ", "").split(',')
 
     def __str__(self):
         return 'Конфигурация виртуальной приемной'

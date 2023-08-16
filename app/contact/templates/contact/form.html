@@ -16,24 +16,21 @@
   <section class="contact-container">
     <div class="container">
         <div class="row box-steps">
+            {% for step_title in STEP_TITLES %}
             <div class="step-item col-md-4 
-                {% if wizard.steps.step1 == 1 %}active{% elif wizard.steps.step1 > 1 %}done{% endif %}
+                {% if forloop.counter == wizard.steps.step1 %}active
+                {% comment %} {% elif forloop.counter < wizard.steps.step1 %}done {% endcomment %}
+                {% endif %}
                 ">
-                <span class="step-number">1</span>
-                <h3>{{ STEP_1 }}</h3>
+                <span class="step-number">{{ forloop.counter }}</span>
+                <h3>{{ step_title }}</h3>
             </div>
-            <div class="step-item col-md-4">
-                <span class="step-number">2</span>
-                <h3>{{ STEP_2 }}</h3>
-            </div>
-            <div class="step-item col-md-4">
-                <span class="step-number">3</span>
-                <h3>{{ STEP_3 }}</h3>
-            </div>
+            {% endfor %}
         </div>
+        <hr class="space m">
         {% comment %} <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p> {% endcomment %}
 
-        <form action="" method="post" class="form-box">{% csrf_token %}
+        <form action="" method="post" class="form-box" enctype="multipart/form-data">{% csrf_token %}
         {% comment %} <table> {% endcomment %}
         {{ wizard.management_form }}
         {% if wizard.form.forms %}

@@ -90,6 +90,7 @@ INSTALLED_APPS = [
     'taggit',
     'taggit_labels',
     "phonenumber_field",
+    "captcha",
     # 'taggit_autosuggest',
     # #### ALDRYN  you will probably need to add these
     # 'aldryn_apphooks_config',
@@ -354,3 +355,6 @@ KEEP_COMMENTS_ON_MINIFYING = False
 # TAGGIT
 TAGGIT_CASE_INSENSITIVE = True
 #######
+
+RECAPTCHA_PUBLIC_KEY = env('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = env('RECAPTCHA_PRIVATE_KEY')
