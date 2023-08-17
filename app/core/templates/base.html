@@ -66,16 +66,17 @@
 
 
       {# fix header for admin view #}
-      {% if request.user.is_authenticated %}
+      {% if request.user.is_authenticated or "edit" in request.GET %}
         {% addtoblock "css" %}
         <style>
           .navbar-fixed-top {
-            top: unset;
+            top: 46px;
           }
         </style>
         {% endaddtoblock %}
         {% comment %} <div style="width:100%; height:46px;"></div> {% endcomment %}
       {% endif %}
+      
     </head>
     <body>
 

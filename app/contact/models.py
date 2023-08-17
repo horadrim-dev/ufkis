@@ -18,7 +18,7 @@ class ContactSettings(SingletonModel):
     #                                  help_text="Через запятую! На эти адреса будут приходить обращения из виртуальной приемной")
     userdata_form_text = HTMLField("Текст на форме данных пользователя", configuration='CKEDITOR_SETTINGS_POST', default="")
     userdata_checkbox_text = models.CharField("Текст галочки на форме данных пользователя", max_length=256,
-        default="Я соглашаюсь на обработку моих персональны данных")
+        default="Я соглашаюсь на обработку моих персональных данных")
     message_title = models.CharField("Название этапа заполнения обращение", max_length=256,
         default="Заполните и отправьте обращение")
     message_form_text = HTMLField("Текст на форме заполнения обращения ", configuration='CKEDITOR_SETTINGS_POST', default="")
@@ -45,6 +45,7 @@ class ContactSettings(SingletonModel):
 
     class Meta:
         verbose_name = "Конфигурация виртуальной приемной"
+        verbose_name_plural = "Конфигурация виртуальной приемной"
 
     
 
