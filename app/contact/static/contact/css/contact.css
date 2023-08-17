@@ -1,6 +1,6 @@
 .contact-container {
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 .form-control.checkbox {
     display: inline-block;
@@ -30,4 +30,7 @@ ul.errorlist {
     font-size: 12px;
     margin-left: 5px;
     margin-right: 5px;
+}
+.form-box:not(.form-inline) .g-recaptcha {
+  margin-bottom: 0;
 }

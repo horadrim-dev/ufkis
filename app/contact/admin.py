@@ -1,6 +1,6 @@
 from django.contrib import admin
 from core.admin import SingletonModelAdmin
-from .models import ContactSettings
+from .models import ContactSettings, Appeal
 # Register your models here.
 
 @admin.register(ContactSettings)

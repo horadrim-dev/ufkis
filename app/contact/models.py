@@ -1,7 +1,7 @@
 from django.db import models
 from core.models import SingletonModel
 from djangocms_text_ckeditor.fields import HTMLField
-
+import datetime
 # Create your models here.
 
 class ContactSettings(SingletonModel):
@@ -13,8 +13,9 @@ class ContactSettings(SingletonModel):
         default="Я прочитал(а) правила пользования виртуальной приемной")
     userdata_title = models.CharField("Название этапа ввода пользовательских данных", max_length=256,
         default="Укажите данные о себе")
-    target_email = models.EmailField(verbose_name='E-mail', blank=True, null=True,
-                                     help_text="На этот адрес будут приходить обращения из виртуальной приемной")
+    # recipient_list не работает по невыясненным причинам, поэтому поле удалено
+    # recipient_emails = models.EmailField(verbose_name='Email адреса', blank=True, null=True,
+    #                                  help_text="Через запятую! На эти адреса будут приходить обращения из виртуальной приемной")
     userdata_form_text = HTMLField("Текст на форме данных пользователя", configuration='CKEDITOR_SETTINGS_POST', default="")
     userdata_checkbox_text = models.CharField("Текст галочки на форме данных пользователя", max_length=256,
         default="Я соглашаюсь на обработку моих персональны данных")
@@ -31,11 +32,38 @@ class ContactSettings(SingletonModel):
     def valid_extensions(self):
         return self.valid_file_extensions.replace(" ", "").split(',')
 
+    # recipient_list не работает по невыясненным причинам, поэтому свойство удалено
+    # @property
+    # def recipient_list(self):
+    #     if self.recipient_emails:
+    #         return self.recipient_emails.replace(" ", "").split(',')
+    #     else:
+    #         return []
+
     def __str__(self):
         return 'Конфигурация виртуальной приемной'
 
     class Meta:
-        verbose_name = "Конфигурация"
-        verbose_name_plural = "Конфигурация"
+        verbose_name = "Конфигурация виртуальной приемной"
 
     
+
+class Appeal(models.Model):
+
+    subject = models.TextField("Тема обращения", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    # Принято решение не хранить персональные данные в БД, поэтому эти полей тут нет
+    # LASTNAME
+    # MIDDLENAME
+    # FIRSTNAME
+    # PHONE
+    # EMAIL
+    # text = models.TextField("Текст обращения", blank=True, null=True)
+
+    @property
+    def register_id(self):
+        return "{}{}".format(self.created_at.strftime('%y%m%d'), str(self.id))
+
+    class Meta:
+        verbose_name = "обращение"
+        verbose_name_plural = "обращения"

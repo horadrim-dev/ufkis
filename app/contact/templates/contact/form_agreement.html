@@ -7,10 +7,8 @@
     <hr class="space m">
     <div class="row">
         <div class="col-md-12">
-            {{ form.agree }}
-            <span class="checkbox-label {% if form.agree.field.required %}required{% endif %}">{{ form.agree.label_tag }}</span>
-                {% comment %} <label for="{{ form.message.id_for_label }}">Your message:</label> {% endcomment %}
-            {% comment %} <input id="name" name="name" placeholder="name" type="text" class="form-control form-value" required> {% endcomment %}
+            {{ form.accept_terms}}
+            <span class="checkbox-label {% if form.agree.field.required %}required{% endif %}">{{ form.accept_terms.label_tag }}</span>
         </div>
     </div>
     <hr class="space m">
@@ -19,7 +17,6 @@
 
 {% block form_bottom %}
     {% if wizard.steps.prev %}
-    {% comment %} <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% translate "first step" %}</button> {% endcomment %}
     <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% translate "prev step" %}</button>
     {% endif %}
     <input type="submit" value="Далее" class="btn btn-lg w-100"/>

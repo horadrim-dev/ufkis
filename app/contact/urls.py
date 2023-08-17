@@ -8,9 +8,6 @@ from .views import *
 from .views import ContactWizard
 
 urlpatterns = [
-    # path('', ContactTemplateView.as_view(), name='index'),
     path('', ContactWizard.as_view(), name='index'),
-    # path('<int:id>', DocumentDetailView.as_view(), name='detail'),
-    # path('download/<int:id>/', document_download, name='document_download' ),
 ] 
 

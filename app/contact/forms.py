@@ -21,7 +21,7 @@ class ContactForm(forms.Form):
         self.settings = ContactSettings.load()
 
 class AgreementForm(ContactForm):
-    agree = forms.BooleanField(
+    accept_terms = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={
             "class": "form-control form-value checkbox"
         })
@@ -30,7 +30,7 @@ class AgreementForm(ContactForm):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.html_before_form = self.settings.agreement
-        self.fields['agree'].label = self.settings.agreement_checkbox_text
+        self.fields['accept_terms'].label = self.settings.agreement_checkbox_text
 
 class UserDataForm(ContactForm):
     lastname = forms.CharField(label="Фамилия",
@@ -59,7 +59,7 @@ class UserDataForm(ContactForm):
     )
     phone = PhoneNumberField(label="Телефон")
 
-    agree = forms.BooleanField(
+    agree_pd = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={
             "class": "form-control form-value checkbox",
             "placeholder": "+7 1112223344"
@@ -69,7 +69,7 @@ class UserDataForm(ContactForm):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.html_before_form = self.settings.userdata_form_text
-        self.fields['agree'].label = self.settings.userdata_checkbox_text
+        self.fields['agree_pd'].label = self.settings.userdata_checkbox_text
 
 class MessageForm(ContactForm):
     subject = forms.CharField(
@@ -102,30 +102,3 @@ class MessageForm(ContactForm):
         self.fields['attachment_1'].validators = validators_list
         self.fields['attachment_2'].validators = validators_list
         self.fields['attachment_3'].validators = validators_list
-
-        
-    # class DocumentForm(forms.ModelForm):
-
-#     tags = TagField(required=False, widget=LabelWidget)
-
-#     class Meta:
-#         model = Document
-#         # fields = []
-#         exclude = ["extension"]
-
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         doc_file = cleaned_data.get("document_file")
-#         doc_url = cleaned_data.get("document_url")
-
-#         # try:
-#         #     post = Post.objects.get(alias=slug)
-#         # except Post.DoesNotExist:
-#         #     post = None
-
-#         if doc_file and doc_url:
-#             msg = "Поля \"Файл документа\" и \"Ссылка на документ\" не должны быть заполнены одновременно."
-#             self.add_error("document_url", msg)
-#         if not doc_file and not doc_url:
-#             msg = "Загрузите файл документа или введите ссылку на него."
-#             self.add_error("document_file", msg)
