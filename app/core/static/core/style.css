@@ -1292,6 +1292,9 @@ header .dropdown-submenu > .dropdown-menu {
 
 .dropdown .caret {
     border: none;
+    margin-top: -30px;
+}
+html.special .dropdown .caret {
     margin-top: -26px;
 }
 

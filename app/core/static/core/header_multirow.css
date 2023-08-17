@@ -46,4 +46,6 @@
 }
 header .priem-button {
     margin-top: 15px;
+    color: var(--menu-font-color) !important;
+    border-color: var(--menu-font-color);
 }
