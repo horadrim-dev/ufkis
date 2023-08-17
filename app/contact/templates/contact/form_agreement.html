@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             {{ form.agree }}
-            <span class="checkbox-label">{{ form.agree.label_tag }}</span>
+            <span class="checkbox-label {% if form.agree.field.required %}required{% endif %}">{{ form.agree.label_tag }}</span>
                 {% comment %} <label for="{{ form.message.id_for_label }}">Your message:</label> {% endcomment %}
             {% comment %} <input id="name" name="name" placeholder="name" type="text" class="form-control form-value" required> {% endcomment %}
         </div>

@@ -22,3 +22,12 @@ ul.errorlist {
     color: #f00;
     padding: 5px 0px;
 }
+.field-label.required::after,
+.checkbox-label.required::before{
+    content: "\f069";
+    color: #f00;
+    font-family: FontAwesome;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
