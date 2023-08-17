@@ -24,8 +24,8 @@ Table of contents
 :root {
     /* --main-color: #4d6ce6; 
     --main-color-2: #0049f7; */
-    --main-color: #5576f9;
-    --main-color-2: #0049f7;
+    --main-color: #2d73bc;
+    --main-color-2: #3d80c6;
     --menu-bg-color:#2d73bc;
     --menu-font-color:#fff;
     /* --main-color: #07ae59;
@@ -73,7 +73,7 @@ i.square,
 .tagbox span,
 .niche-box-post .block-infos .block-data,
 .header-base .title-base h1:before {
-    background-color: var(--main-color);
+    background-color: #2d73bc;
 }
 
 .navbar-inner .nav.ms-minimal li a:before,
@@ -251,7 +251,7 @@ body div.boxed-border.border-yellow,
 
 .circle-button:hover,
 .btn:hover {
-    border-color: var(--main-color-2) !important;
+    border-color: var(--main-color-3) !important;
 }
 
 .btn-text,

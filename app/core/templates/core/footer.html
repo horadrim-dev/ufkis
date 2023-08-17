@@ -26,11 +26,10 @@
                 <div class="col-md-8 footer-center text-left">
                     {% comment %} <img width="120" src="{% static 'core/template-images/logo.png' %}" alt="" /> {% endcomment %}
                     <img class="navbar-brand-logo" src="{% thumbnail site_settings.logo 200x250 upscale %}" />
-                    <strong>{{ site_settings.title }}</strong>
-                    <span>{{ site_settings.subtitle }}</span>
+                    <span class="text-l">{{ site_settings.title }} {{ site_settings.subtitle }}</span>
                     <br><br>
-                    <p class="text-s">{{ site_settings.address }}</p>
-                    <div class="tag-row text-s">
+                    <p class="text-m">{{ site_settings.address }}</p>
+                    <div class="tag-row text-m">
                         <span>{{ site_settings.email }}</span>
                         <span>{{ site_settings.phone }}</span>
                     </div>

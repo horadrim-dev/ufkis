@@ -41,8 +41,8 @@
     text-decoration: none;
 }
 .navbar-middle ul.navbar-links li a:hover {
-    border-bottom-color: var(--main-color-2);
-    color: var(--main-color-2);
+    border-bottom-color: var(--main-color-3);
+    color: var(--main-color-3);
 }
 header .priem-button {
     margin-top: 15px;
