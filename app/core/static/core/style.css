@@ -972,7 +972,7 @@ header .social-group a i.fa {
 header > .navbar {
     margin-bottom: 0;
     border: none;
-    border-bottom: 1px solid var(--main-color-3);
+    border-bottom: 1px solid var(--main-color);
     transform: translate3d(0px, 0px, 0px);
 }
 
