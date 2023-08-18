@@ -92,6 +92,8 @@ INSTALLED_APPS = [
     'taggit_labels',
     "phonenumber_field",
     "captcha",
+    'haystack',  # search engine
+
     # 'taggit_autosuggest',
     # #### ALDRYN  you will probably need to add these
     # 'aldryn_apphooks_config',
@@ -370,3 +372,14 @@ EMAIL_USE_TLS = env('EMAIL_USE_TLS')
 
 RECIPIENTS_EMAIL = env('RECIPIENTS_EMAIL')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
