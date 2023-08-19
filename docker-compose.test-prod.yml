@@ -1,0 +1,40 @@
+version: '3.2'
+services:
+  ufkis-db:
+    image: postgres:15.3-alpine
+    container_name: ufkis-db
+    networks:
+      - default
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+      - /etc/localtime:/etc/localtime:ro
+      #- ./my_db_scripts:/docker-entrypoint-initdb.d:ro
+    env_file:
+      - environment/test-prod.env
+    restart: unless-stopped
+
+  ufkis-app:
+    build: .
+    entrypoint: /entrypoint.sh
+    container_name: ufkis-app
+    networks:
+      - default
+      - proxy
+    working_dir: /app
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./app:/app:rw
+        #- /etc/hosts:/etc/hosts:ro
+    env_file:
+      - environment/test-prod.env
+    command: python manage.py runserver 0.0.0.0:80
+    restart: unless-stopped
+    depends_on:
+      - ufkis-db
+
+networks:
+  proxy:
+    external:
+      name: 'proxy'
+  default:
+    name: ufkis

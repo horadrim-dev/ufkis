@@ -21,6 +21,13 @@ django.utils.encoding.smart_text = django.utils.encoding.smart_str
 django.utils.translation.ugettext_lazy = django.utils.translation.gettext_lazy
 django.utils.translation.ugettext = django.utils.translation.gettext
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Initialise environment variables
 env = environ.Env(
     # set casting, default value
@@ -30,13 +37,8 @@ env = environ.Env(
     RECIPIENTS_EMAIL=(list, []),
     EMAIL_USE_TLS=(bool, True),
 )
+# environ.Env.read_env(env_file=os.path.join(BASE_DIR, '.env'))
 environ.Env.read_env()
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -46,26 +48,22 @@ DEBUG = env('DEBUG')
 
 # ALLOWED_HOSTS = ['localhost']
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-print('ALLOWED_HOSTS: ', ALLOWED_HOSTS)
-# print(ALLOWED_HOSTS)
+
 if env('CSRF_TRUSTED_ORIGINS'):
     CSRF_TRUSTED_ORIGINS = env('CSRF_TRUSTED_ORIGINS')
-    print('CSRF_TRUSTED_ORIGINS: ', CSRF_TRUSTED_ORIGINS)
 
-DB_USERNAME=env("DATABASE_USER")
-DB_PASSWORD=env("DATABASE_PASSWORD")
-DB_HOST=env("DATABASE_HOST")
-DB_PORT=env("DATABASE_PORT")
-DB_DATABASE=env("DATABASE_NAME")
-DB_IS_AVAIL = all([
-        DB_USERNAME, 
-        DB_PASSWORD, 
-        DB_HOST,
-        DB_PORT,
-        DB_DATABASE
+POSTGRES_USER=env("POSTGRES_USER")
+POSTGRES_PASSWORD=env("POSTGRES_PASSWORD")
+POSTGRES_HOST=env("POSTGRES_HOST")
+POSTGRES_PORT=env("POSTGRES_PORT")
+POSTGRES_DB=env("POSTGRES_DB")
+POSTGRES_IS_AVAIL = all([
+        POSTGRES_USER, 
+        POSTGRES_PASSWORD, 
+        POSTGRES_HOST,
+        POSTGRES_PORT,
+        POSTGRES_DB
 ])
-print('============>',DB_IS_AVAIL, DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT)
-
 
 
 INSTALLED_APPS = [
@@ -184,18 +182,18 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if DB_IS_AVAIL:
+if POSTGRES_IS_AVAIL:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
             'OPTIONS': {
                 'options': '-c search_path=ufkis_schema'
             },
-            "NAME": DB_DATABASE,
-            "USER": DB_USERNAME,
-            "PASSWORD": DB_PASSWORD,
-            "HOST": DB_HOST,
-            "PORT": DB_PORT,
+            "NAME": POSTGRES_DB,
+            "USER": POSTGRES_USER,
+            "PASSWORD": POSTGRES_PASSWORD,
+            "HOST": POSTGRES_HOST,
+            "PORT": POSTGRES_PORT,
         }
     }
 else:

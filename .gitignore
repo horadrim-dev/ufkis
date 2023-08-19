@@ -69,4 +69,7 @@ app/news/__pycache__
 yellow-business
 app/core/static/core_old
 app/static
-app/app/.env
+app/.env
+postgres_data
+environment/test-prod.env
+environment/dev.env
