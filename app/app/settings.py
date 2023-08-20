@@ -91,6 +91,8 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "captcha",
     'haystack',  # search engine
+    # 'cms_search', 
+    # 'aldryn_search', NOT WORKING WITH DJANGO > 4.0 ANYMORE
 
     # 'taggit_autosuggest',
     # #### ALDRYN  you will probably need to add these
@@ -374,10 +376,11 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-        'URL': 'http://127.0.0.1:9200/',
+        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        'URL': 'es-dev:9200/',
         'INDEX_NAME': 'haystack',
     },
 }
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
+# HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]

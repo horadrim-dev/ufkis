@@ -46,7 +46,7 @@ djangocms-text-ckeditor==5.1.2
 djangocms-video==3.0.0
 easy-thumbnails==2.8.5
 elastic-transport==8.4.0
-elasticsearch==8.9.0
+elasticsearch==7.17.9
 html5lib==1.1
 lxml==4.9.2
 numpy==1.25.2

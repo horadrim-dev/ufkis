@@ -33,6 +33,15 @@ services:
     restart: unless-stopped
     depends_on:
       - ufkis-db-dev
+      - es-dev
+
+  es-dev:
+    image: elasticsearch:7.8.1
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
 
 networks:
   proxy:

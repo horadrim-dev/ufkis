@@ -122,3 +122,7 @@ def prepare_tag_name(tagname:str):
         return tagname
     else:
         return "\"{}\"".format('+'.join(arr))
+    
+@register.filter
+def get_type(value):
+    return type(value)
