@@ -1,2 +1,4 @@
-{{ object.name }} {{ object.number }} {{object.date}} 
+{{ object.name }}
+{{ object.number }}
+{{ object.date }} 
 {{ object.subname }}

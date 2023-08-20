@@ -3,6 +3,7 @@ from cms.extensions import PageExtension
 from cms.extensions.extension_pool import extension_pool
 from django.utils.translation import gettext_lazy as _
 from filer.fields.image import FilerImageField
+from cms.models.pagemodel import Page
 
 class OrderedModel(models.Model):
     
@@ -145,3 +146,10 @@ class Social(models.Model):
     class Meta:
         verbose_name = "соц.сеть"
         verbose_name_plural = "соц.сети"
+
+
+# class ExtendedPage(models.Model):   
+#     # https://stackoverflow.com/questions/10293641/how-to-add-some-extra-fields-to-the-page-in-django-cms-in-django-admin-panel
+#     page = models.OneToOneField(Page, unique=True, verbose_name=_("Page"), editable=False, related_name='extended_fields',
+#                              on_delete=models.CASCADE)
+#     test_field = models.CharField("TEST_FIELD", blank=True, null=True)

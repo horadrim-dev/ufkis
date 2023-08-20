@@ -6,6 +6,8 @@ from .models import MenuItemSettingsExtension
 from django.db.utils import ProgrammingError
 from .models import SiteSettings, Social
 from django.core.exceptions import ImproperlyConfigured
+# from cms.admin.pageadmin import PageAdmin
+# from cms.models.pagemodel import Page
 
 
 class SingletonModelAdmin(admin.ModelAdmin):
@@ -49,3 +51,15 @@ class SiteSettingsAdmin(SingletonModelAdmin):
  
 admin.site.register(MenuItemSettingsExtension, MenuItemSettingsExtensionAdmin)
 admin.site.register(SiteSettings, SiteSettingsAdmin)
+
+
+# class ExtendedPageAdmin(admin.StackedInline):
+#     model = ExtendedPage
+#     can_delete = False
+
+# PageAdmin.inlines.append(ExtendedPageAdmin)
+# try:
+#     admin.site.unregister(Page)
+# except:
+#     pass
+# admin.site.register(Page, PageAdmin)
