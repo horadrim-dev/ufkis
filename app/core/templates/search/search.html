@@ -4,12 +4,10 @@
 {% block content %}
   <section class="search-container">
     <div class="container">
-        <div class="page-header">
-            <h3>
-                Результаты поиска
-            </h3>
+        <div class="title-base text-left">
+            <hr>
+            <h1>Результаты поиска</h1>
         </div>
-
         <div class="row">
             {% for result in page.object_list %}
             {{ result.object|get_type}}
