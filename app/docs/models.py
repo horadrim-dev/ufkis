@@ -16,7 +16,7 @@ class ContentManager(models.Manager):
         return self.filter(published=True, published_at__lte=datetime.date.today())
     
 
-class Category(OrderedModel):
+class DocumentCategory(OrderedModel):
 
     name = models.CharField("Название категории", max_length=256)
 
@@ -28,8 +28,8 @@ class Category(OrderedModel):
         if not lock_recursion:
             self.update_order(
                 list_of_objects = list(
-                    Category.objects.all().exclude(id=self.id)
-                    # Category.objects.filter(parent=self.parent).exclude(id=self.id)
+                    DocumentCategory.objects.all().exclude(id=self.id)
+                    # DocumentCategory.objects.filter(parent=self.parent).exclude(id=self.id)
                     )
             )
 
@@ -64,7 +64,7 @@ class Category(OrderedModel):
 #             self.update_order(
 #                 list_of_objects = list(
 #                     DocumentType.objects.all().exclude(id=self.id)
-#                     # Category.objects.filter(parent=self.parent).exclude(id=self.id)
+#                     # DocumentCategory.objects.filter(parent=self.parent).exclude(id=self.id)
 #                     )
 #             )
 
@@ -78,7 +78,7 @@ class Category(OrderedModel):
 
 class Document(models.Model):
     # uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,
+    category = models.ForeignKey(DocumentCategory, on_delete=models.CASCADE,
                                  verbose_name="Категория")
     # document_type = models.ForeignKey(DocumentType, on_delete=models.CASCADE,
     #                              verbose_name="Тип документа")
@@ -178,7 +178,7 @@ BOOTSTRAP_COL_CHOICES = [ ("12", 1), ("6", 2), ("4", 3), ("3", 4), ("2", 6) ] # 
 class DocumentsPlugin(CMSPlugin):
     """Модель для плагина выводящего документы выбранной категории"""
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, 
+    category = models.ForeignKey(DocumentCategory, on_delete=models.CASCADE, 
                                  verbose_name="Категория")
     show_description = models.BooleanField("Отображать описание документов", default=False)
     show_icon = models.BooleanField("Отображать иконку документов", default=True)

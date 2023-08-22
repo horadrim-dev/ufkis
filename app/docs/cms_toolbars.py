@@ -33,7 +33,7 @@ class DocsToolbar(CMSToolbar):
         )
         news_menu.add_modal_item(
             name='Категории',
-            url=admin_reverse('docs_category_changelist')
+            url=admin_reverse('docs_documentcategory_changelist')
         )
         # news_menu.add_modal_item(
         #     name='Типы документов',

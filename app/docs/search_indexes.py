@@ -1,9 +1,9 @@
 from haystack import indexes
-from .models import Document, Category
+from .models import Document, DocumentCategory
 
 
 class DocumentIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
+    text = indexes.EdgeNgramField(document=True, use_template=True)
     subname = indexes.CharField(model_attr='subname', null=True)
     number = indexes.CharField(model_attr='number', null=True)
     date = indexes.DateTimeField(model_attr='date', null=True)
@@ -11,8 +11,9 @@ class DocumentIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Document
 
-class CategoryIndex(indexes.SearchIndex, indexes.Indexable):
+class DocumentCategoryIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    name = indexes.CharField(model_attr='name', null=True)
 
     def get_model(self):
-        return Category
+        return DocumentCategory

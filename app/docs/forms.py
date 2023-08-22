@@ -9,10 +9,10 @@ from taggit_labels.widgets import LabelWidget
 from django.urls import reverse_lazy
 from phonenumber_field.formfields import PhoneNumberField
 
-class CategoryForm(forms.ModelForm):
+class DocumentCategoryForm(forms.ModelForm):
 
     class Meta:
-        model = Category
+        model = DocumentCategory
         # fields = []
         exclude = []
 

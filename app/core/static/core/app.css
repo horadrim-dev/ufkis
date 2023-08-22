@@ -448,3 +448,6 @@ html.special .caret::before {
 .cms-update-message {
     display: none !important;
 }
+.search-container {
+    padding: 30px 0 50px 0;
+}

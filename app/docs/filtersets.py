@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from .models import Document, Category
+from .models import Document, DocumentCategory
 from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
@@ -18,7 +18,7 @@ class TagFilter(django_filters.CharFilter):
 class DocumentFilterSet(django_filters.FilterSet):
 
     category = django_filters.filters.ModelChoiceFilter(
-        queryset=Category.objects.all(), 
+        queryset=DocumentCategory.objects.all(), 
         blank=True,
         empty_label='Все документы',
         widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})

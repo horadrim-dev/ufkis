@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, Http404, FileResponse
 from django.views.generic import ListView, DetailView, View
 from django.core.exceptions import PermissionDenied
-from .models import Document, Category
+from .models import Document, DocumentCategory
 from django_filters.views import FilterView
 from .filtersets import DocumentFilterSet
 from cms.models.pluginmodel import CMSPlugin
@@ -44,7 +44,7 @@ class DocumentListView(FilterView):
         category = self.request.GET.get("category", None)
         if category and isinstance(category, str) and category.isdigit():
             try:
-                c = Category.objects.get(id=category)
+                c = DocumentCategory.objects.get(id=category)
                 context['page_title'] = c.name
             except:
                 pass

@@ -3,9 +3,9 @@ from .models import *
 from .forms import *
 from cms.admin.placeholderadmin import PlaceholderAdminMixin
 
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    form = CategoryForm
+@admin.register(DocumentCategory)
+class DocumentCategoryAdmin(admin.ModelAdmin):
+    form = DocumentCategoryForm
     list_display = ('name', 'order', )
     exclude = []
 

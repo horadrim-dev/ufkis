@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from menus.base import NavigationNode
 from menus.menu_pool import menu_pool
 
-from .models import Category
+from .models import DocumentCategory
 
 
 class DocsMenu(CMSAttachMenu):
@@ -13,7 +13,7 @@ class DocsMenu(CMSAttachMenu):
   def get_nodes(self, request):
 
     nodes = []
-    for obj in Category.objects.all():
+    for obj in DocumentCategory.objects.all():
 
         node = NavigationNode(
             obj.name,

@@ -1,28 +1,41 @@
 {% extends 'base.html' %}
-{% load core_tags %}
+{% load core_tags sekizai_tags static %}
 
 {% block content %}
+
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
+
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'docs/css/docs.css' %}">{% endaddtoblock %} 
+
   <section class="search-container">
     <div class="container">
         <div class="title-base text-left">
             <hr>
             <h1>Результаты поиска</h1>
         </div>
-        <div class="row">
-            {% for result in page.object_list %}
-            {{ result.object|get_type}}
-            {{ result.model_name }} <a href="{{result.object.get_absolute_url }}">{{ result.object.get_title}}</a>
-            {% empty %}
-            No results found.</tr>
-            {% endfor %}
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                </div>
-            {% endif %}
+
+        <div class="grid-list">
+            <div class="grid-box row">
+                {% for result in page.object_list %}
+                    <div class="grid-item col-md-12">
+                        {% with object=result.object %}
+                            {% if result.model_name == "document" %}
+                                {% include "docs/search_document_item.html" %}
+                            {% elif result.model_name == "documentcategory" %}
+                                {% include "docs/search_documentcategory_item.html" %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                {% empty %}
+                Нет результатов.</tr>
+                {% endfor %}
+            </div>
         </div>
+        <hr class="space m">
+        {% if page.has_previous or page.has_next %}
+            {% include 'core/includes/pagination.html' with page_obj=page %}
+        {% endif %}
     </div>
   </section>
 

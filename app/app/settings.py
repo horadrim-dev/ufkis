@@ -91,6 +91,13 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "captcha",
     'haystack',  # search engine
+    # приложение обеспечивающее фоновое обновление 
+    # индексов при получении сигналов create/delete объектов
+    # https://github.com/django-haystack/celery-haystack
+    # НЕ УДАЛОСЬ СОВМЕСТИТЬ С HAYSTACK v3 (а v2 требует джанго меньшей версии)
+    # 'celery_haystack',
+
+
     # 'cms_search', 
     # 'aldryn_search', NOT WORKING WITH DJANGO > 4.0 ANYMORE
 
@@ -377,10 +384,12 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
-        'URL': 'es-dev:9200/',
+        'URL': 'ufkis-es-dev:9200/',
         'INDEX_NAME': 'haystack',
     },
 }
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+# HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
 # HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
