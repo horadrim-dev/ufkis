@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from .models import Post, Category
+from .models import Post, PostCategory
 from taggit.models import Tag
 from taggit.managers import TaggableManager
 from taggit.forms import TagField
@@ -18,7 +18,7 @@ class TagFilter(django_filters.CharFilter):
 class PostFilterSet(django_filters.FilterSet):
 
     category = django_filters.filters.ModelChoiceFilter(
-        queryset=Category.objects.all(), 
+        queryset=PostCategory.objects.all(), 
         blank=True,
         empty_label='Все новости',
         widget=forms.RadioSelect(attrs={'class':'hidden autoapply'})

@@ -37,11 +37,11 @@ class NewsToolbar(CMSToolbar):
         )
         news_menu.add_modal_item(
             name='Категории',
-            url=admin_reverse('news_category_changelist')
+            url=admin_reverse('news_postcategory_changelist')
         )
         news_menu.add_modal_item(
             name='Добавить категорию',
-            url=admin_reverse('news_category_add')
+            url=admin_reverse('news_postcategory_add')
         )
 
         tags_menu = self.toolbar.get_or_create_menu(

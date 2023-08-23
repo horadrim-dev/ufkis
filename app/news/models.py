@@ -20,7 +20,7 @@ class ContentManager(models.Manager):
         return self.filter(published=True, published_at__lte=datetime.date.today())
 
 
-class Category(models.Model):
+class PostCategory(models.Model):
     title = models.CharField("Название", max_length=256)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Category(models.Model):
         verbose_name_plural = "категории"
 
     def get_absolute_url(self):
-        return reverse("news:index", kwargs={"category": self.id})
+        return "{}?category={}".format(reverse("news:index"), self.id) 
     
 # class TagPost(TagBase):
 
@@ -47,7 +47,7 @@ class Post(models.Model):
 
     alias = models.SlugField(default="", blank=True, unique=True,
                              max_length=1000, help_text="Краткое название транслитом через тире (пример: 'kratkoe-nazvanie-translitom'). Чем короче тем лучше. Для автоматического заполнения - оставьте пустым.")
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    category = models.ForeignKey(PostCategory, on_delete=models.SET_NULL, blank=True, null=True)
     published = models.BooleanField(default=False, verbose_name='Опубликовано')
     published_at = models.DateField(default=datetime.date.today, 
                                     verbose_name="Дата публикации")

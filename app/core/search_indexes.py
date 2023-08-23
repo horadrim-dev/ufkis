@@ -3,6 +3,7 @@ from haystack import indexes
 from cms.models.managers import PageManager
 from cms.models.pagemodel import Page
 from cms.models.pluginmodel import CMSPlugin
+from taggit.models import Tag
 # from .models import ExtendedPage
 
 
@@ -33,6 +34,13 @@ class PageIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         return Page.objects.published().filter(publisher_is_draft=False).distinct()
+
+
+# class TagIndex(indexes.SearchIndex, indexes.Indexable):
+#     text = indexes.CharField(document=True, use_template=False)
+#     name = indexes.CharField(model_attr='name')
+#     slug = indexes.CharField(model_attr='slug')
+
 
 # class ExtendedPageIndex(indexes.SearchIndex, indexes.Indexable):
 #     text = indexes.CharField(document=True, use_template=True, model_attr='text')

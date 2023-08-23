@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Category
+from .models import Post, PostCategory
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 
@@ -26,8 +26,8 @@ class PostForm(forms.ModelForm):
             msg = "Пост с alias \"{}\" - уже существует".format(slug)
             self.add_error("alias", msg)
 
-class CategoryForm(forms.ModelForm):
+class PostCategoryForm(forms.ModelForm):
     class Meta:
-        model = Category
+        model = PostCategory
         # fields = []
         exclude = []
