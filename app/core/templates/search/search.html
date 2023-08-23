@@ -7,6 +7,7 @@
   {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
 
   {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'docs/css/docs.css' %}">{% endaddtoblock %} 
+  {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'structure/css/structure.css' %}">{% endaddtoblock %}
 
   <section class="search-container">
     <div class="container">
@@ -14,6 +15,8 @@
             <hr>
             <h1>Результаты поиска</h1>
         </div>
+        
+        <hr class="space s">
 
         <div class="grid-list">
             <div class="grid-box row">
@@ -24,6 +27,10 @@
                                 {% include "docs/search_document_item.html" %}
                             {% elif result.model_name == "documentcategory" %}
                                 {% include "docs/search_documentcategory_item.html" %}
+                            {% elif result.model_name == "page" %}
+                                {% include "core/search_page_item.html" %}
+                            {% elif result.model_name == "organization" %}
+                                {% include "structure/search_organization_item.html" %}
                             {% endif %}
                         {% endwith %}
                     </div>

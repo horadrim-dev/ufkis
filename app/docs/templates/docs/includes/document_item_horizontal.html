@@ -13,7 +13,7 @@
                 {% if obj.category %}
                 <span class="category"><i class="fa fa-bookmark"></i> <a href="{% url "docs:index" %}?category={{ obj.category.id }}">{{ obj.category.name }}</a></span>
                 {% endif %}
-                <a href="{{ obj.get_absolute_url }}">
+                <a href="{{ obj.url }}">
                     {% comment %} <h4>{% if obj.document_type %}{{ obj.document_type }}{% endif %} {% if obj.number %}№{{ obj.number }}{% endif %} {% if obj.date %}от {{ obj.date }}{% endif %}</h4> {% endcomment %}
                     <h4>{{ obj.full_name }}</h4>
                 </a>
