@@ -383,7 +383,8 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        # 'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        'ENGINE': 'core.backends.ElasticsearchCustomSearchEngine',
         'URL': 'ufkis-es-dev:9200/',
         'INDEX_NAME': 'haystack',
     },
@@ -392,4 +393,3 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
-# HAYSTACK_ROUTERS = ['aldryn_search.router.LanguageRouter',]
