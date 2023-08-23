@@ -53,7 +53,7 @@
                             <div class="nav navbar-nav"> {% endcomment %}
                                 <form action="/search" method="get" class="navbar-form search-input" role="search">
                                     <div class="form-group">
-                                        <input type="text" name="q" class="form-control" placeholder="Найти...">
+                                        <input type="text" name="q" class="form-control" placeholder="Найти..." {% if "q" in request.GET %}value={{request.GET.q}}{% endif %}>
                                     </div>
                                     <button type="submit" class="search-button btn btn-default btn-border"><span class="fa fa-search"></span></button>
                                 </form>
@@ -80,7 +80,7 @@
                         </button>
                         <form action="/search" method="get" class="navbar-form search-input" role="search">
                             <div class="search-box scrolldown">
-                                <input type="text" name="q" class="form-control" placeholder="Найти...">
+                                <input type="text" name="q" class="form-control" placeholder="Найти..." {% if "q" in request.GET %}value={{request.GET.q}}{% endif %}>
                             </div>
                         </form>
                     </div>

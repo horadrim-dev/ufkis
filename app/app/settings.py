@@ -384,9 +384,22 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 HAYSTACK_CONNECTIONS = {
     'default': {
         # 'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
+        # 'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
         'ENGINE': 'core.backends.ElasticsearchCustomSearchEngine',
         'URL': env('ELASTICSEARCH_HOST'),
         'INDEX_NAME': 'haystack',
+    },
+    # 'default': {
+    #     'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+    #     'URL': env('SOLR_HOST') + '/solr/tester',                 # Assuming you created a core named 'tester' as described in installing search engines.
+    #     'ADMIN_URL': env('SOLR_HOST') + '/solr/admin/cores'
+    #     # ...or for multicore...
+    #     # 'URL': 'http://127.0.0.1:8983/solr/mysite',
+    # },
+}
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': env('ELASTICSEARCH_DSL_HOSTS')
     },
 }
 # HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'

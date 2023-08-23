@@ -33,20 +33,42 @@ services:
     restart: unless-stopped
     depends_on:
       - ufkis-db-dev
-      - es-dev
+      - ufkis-es-dev
+      # - ufkis-solr-dev
 
-  es-dev:
+  ufkis-es-dev:
     container_name: ufkis-es-dev
-    image: elasticsearch:7.8.1
+    image: elasticsearch:7.17.10
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
+      # - "es_data:/usr/share/elasticsearch/data"
     ports:
       - "9200:9200"
+    networks:
+      - default
+  # ufkis-solr-dev:
+  #   container_name: ufkis-solr-dev
+  #   image: solr:6.6.6
+  #   # environment:
+  #     # - discovery.type=single-node
+  #     # - xpack.security.enabled=false
+  #   # volumes:
+  #   #   - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
+  #   ports:
+  #     - "8983:8983"
+  #   networks:
+  #     - default
+  #   command: #/opt/solr/bin/solr create -c tester -n basic_config
+  #     - solr-precreate
+  #     - tester
 
 networks:
   proxy:
-    external:
-      name: 'proxy'
+    name: 'proxy'
+    external: true
   default:
     name: ufkis

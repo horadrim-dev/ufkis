@@ -6,7 +6,7 @@ from haystack.constants import DJANGO_CT, DJANGO_ID
 # https://silentsokolov.github.io/django-haystack-elasticsearch-prombiemy-avtodopolnieniia
 
 
-FIELD_MAPPINGS['edge_ngram'] = {'type': 'string', 'index_analyzer': 'edgengram_analyzer', 'search_analyzer': 'standard'}
+FIELD_MAPPINGS['edge_ngram'] = {'type': 'text', 'index_analyzer': 'edgengram_analyzer', 'search_analyzer': 'standard'}
 
 
 class ElasticsearchCustomBackend(Elasticsearch7SearchBackend):
@@ -15,52 +15,64 @@ class ElasticsearchCustomBackend(Elasticsearch7SearchBackend):
             "analysis": {
                 "analyzer": {
                     "default": {
-                    #  добавляем удаление html тегов 
-                    "char_filter": ["html_strip"],
-                    "tokenizer":  "standard",
-                    "filter": [
-                        "lowercase",
-                        "ru_stop",
-                        "ru_stemmer"
-                    ]
-                    }
+                        #  добавляем удаление html тегов 
+                        "char_filter": ["html_strip"],
+                        "tokenizer":  "keyword",
+                        "filter": [
+                            "lowercase",
+                            "ru_RU",
+                            "snowball",
+                            "elision"
+                            # "ru_stop",
+                            # "ru_stemmer"
+                        ]
+                    },
+                    # "ru": {
+                    #     "tokenizer": "standard",
+                    #     # "filter": [ "my_ru_RU_dict_stemmer" ]
+                    #     "filter": [
+                    #         "lowercase",
+                    #         # "ru_stop",
+                    #         # "ru_stemmer",
+                    #         "ru_RU"
+                    #     ]
+                    # }
+                    # "ngram_analyzer": {
+                    #     "type": "custom",
+                    #     "tokenizer": "lowercase",
+                    #     "filter": ["haystack_ngram"]
+                    # },
+                    # "edgengram_analyzer": {
+                    #     "type": "custom",
+                    #     "tokenizer": "lowercase",
+                    #     "filter": ["haystack_edgengram"]
+                    # },
                 },
                 "filter": {
-                    "ru_stop": {
-                    "type":       "stop",
-                    "stopwords":  "_russian_"
-                    },
-                    "ru_stemmer": {
-                    "type":       "stemmer",
-                    "language":   "russian"
+                    # "ru_stop": {
+                    # "type":       "stop",
+                    # "stopwords":  "_russian_"
+                    # },
+                    # "ru_stemmer": {
+                    # "type":       "stemmer",
+                    # "language":   "russian"
+                    # },
+                    "ru_RU": {
+                        "type": "hunspell",
+                        "locale": "ru_RU",
+                        "dedup": "false"
                     }
-                }
-                # "analyzer": {
-                #     "russian": {
-                #         "tokenizer":  "standard",
-                #         "filter": [
-                #             "lowercase",
-                #             "russian_stop",
-                #             "russian_keywords",
-                #             "russian_stemmer"
-                #         ]
-                #     },
-                #     # "ngram_analyzer": {
-                #     #     "type": "custom",
-                #     #     "tokenizer": "lowercase",
-                #     #     "filter": ["haystack_ngram"]
-                #     # },
-                #     # "edgengram_analyzer": {
-                #     #     "type": "custom",
-                #     #     "tokenizer": "lowercase",
-                #     #     "filter": ["haystack_edgengram"]
-                #     # },
-                #     # 'russian_and_english': {
-                #     #     'type': 'custom',
-                #     #     'tokenizer': 'standard',
-                #     #     "filter": ['lowercase', 'russian_morphology', 'english_morphology', 'ru_stopwords'],
-                #     # }
-                # },
+                    # "haystack_ngram": {
+                    #     "type": "ngram",
+                    #     "min_gram": 3,
+                    #     "max_gram": 15
+                    # },
+                    # "haystack_edgengram": {
+                    #     "type": "edge_ngram",
+                    #     "min_gram": 2,
+                    #     "max_gram": 15
+                    # },
+                },
                 # "tokenizer": {
                 #     "haystack_ngram_tokenizer": {
                 #         "type": "ngram",
@@ -74,17 +86,23 @@ class ElasticsearchCustomBackend(Elasticsearch7SearchBackend):
                 #         "side": "front"
                 #     }
                 # },
+                # "analyzer": {
+                #     "russian": {
+                #         "tokenizer":  "standard",
+                #         "filter": [
+                #             "lowercase",
+                #             "russian_stop",
+                #             "russian_keywords",
+                #             "russian_stemmer"
+                #         ]
+                #     },
+                #     # 'russian_and_english': {
+                #     #     'type': 'custom',
+                #     #     'tokenizer': 'standard',
+                #     #     "filter": ['lowercase', 'russian_morphology', 'english_morphology', 'ru_stopwords'],
+                #     # }
+                # },
                 # # "filter": {
-                # #     "haystack_ngram": {
-                # #         "type": "ngram",
-                # #         "min_gram": 3,
-                # #         "max_gram": 15
-                # #     },
-                # #     "haystack_edgengram": {
-                # #         "type": "edge_ngram",
-                # #         "min_gram": 2,
-                # #         "max_gram": 15
-                # #     },
                 # #     'ru_stopwords': {
                 # #         'type': 'stop',
                 # #         'stopwords': u'а,без,более,бы,был,была,были,было,быть,в,вам,вас,весь,во,вот,все,всего,всех,вы,где,да,даже,для,до,его,ее,если,есть,еще,же,за,здесь,и,из,или,им,их,к,как,ко,когда,кто,ли,либо,мне,может,мы,на,надо,наш,не,него,нее,нет,ни,них,но,ну,о,об,однако,он,она,они,оно,от,очень,по,под,при,с,со,так,также,такой,там,те,тем,то,того,тоже,той,только,том,ты,у,уже,хотя,чего,чей,чем,что,чтобы,чье,чья,эта,эти,это,я,a,an,and,are,as,at,be,but,by,for,if,in,into,is,it,no,not,of,on,or,such,that,the,their,then,there,these,they,this,to,was,will,with',
@@ -115,8 +133,12 @@ class ElasticsearchCustomBackend(Elasticsearch7SearchBackend):
     def build_schema(self, fields):
         content_field_name = ''
         mapping = {
-            DJANGO_CT: {'type': 'string', 'index': 'not_analyzed', 'include_in_all': False},
-            DJANGO_ID: {'type': 'string', 'index': 'not_analyzed', 'include_in_all': False},
+            # DJANGO_CT: {'type': 'text', 'index': 'not_analyzed', 'include_in_all': False},
+            # DJANGO_ID: {'type': 'text', 'index': 'not_analyzed', 'include_in_all': False},
+            # DJANGO_CT: {'type': 'text', 'index': False, 'include_in_all': False},
+            # DJANGO_ID: {'type': 'text', 'index': False, 'include_in_all': False},
+            DJANGO_CT: {'type': 'text'},
+            DJANGO_ID: {'type': 'text'},
         }
 
         for field_name, field_class in fields.items():
@@ -128,9 +150,9 @@ class ElasticsearchCustomBackend(Elasticsearch7SearchBackend):
                 content_field_name = field_class.index_fieldname
 
             # Do this last to override `text` fields.
-            if field_mapping['type'] == 'string':
+            if field_mapping['type'] == 'text':
                 if field_class.indexed is False or hasattr(field_class, 'facet_for'):
-                    field_mapping['index'] = 'not_analyzed'
+                    field_mapping['index'] = 'keyword'
                     del field_mapping['analyzer']
 
             mapping[field_class.index_fieldname] = field_mapping
