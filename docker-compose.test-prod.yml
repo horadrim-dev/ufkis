@@ -15,8 +15,8 @@ services:
 
   ufkis-app:
     build: .
-    entrypoint: /entrypoint.sh
     container_name: ufkis-app
+    entrypoint: /entrypoint.sh
     networks:
       - default
       - proxy
@@ -31,6 +31,16 @@ services:
     restart: unless-stopped
     depends_on:
       - ufkis-db
+      - ufkis-es
+
+    ufkis-es:
+      container_name: ufkis-es
+      image: elasticsearch:7.8.1
+      environment:
+        - discovery.type=single-node
+        - xpack.security.enabled=false
+      ports:
+        - "9200:9200"
 
 networks:
   proxy:

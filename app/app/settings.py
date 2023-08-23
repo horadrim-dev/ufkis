@@ -385,7 +385,7 @@ HAYSTACK_CONNECTIONS = {
     'default': {
         # 'ENGINE': 'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine',
         'ENGINE': 'core.backends.ElasticsearchCustomSearchEngine',
-        'URL': 'ufkis-es-dev:9200/',
+        'URL': env('ELASTICSEARCH_HOST'),
         'INDEX_NAME': 'haystack',
     },
 }
