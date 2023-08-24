@@ -12,6 +12,24 @@ services:
     env_file:
       - environment/test-prod.env
     restart: unless-stopped
+    healthcheck:
+      test: "exit 0"
+
+  ufkis-es:
+    container_name: ufkis-es
+    image: elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      # - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
+    ports:
+      - "9200:9200"
+    networks:
+      - default
+    healthcheck:
+      test: "exit 0"
 
   ufkis-app:
     build: .
@@ -27,24 +45,17 @@ services:
         #- /etc/hosts:/etc/hosts:ro
     env_file:
       - environment/test-prod.env
-    command: python manage.py runserver 0.0.0.0:80
+    command: sh -c "python manage.py rebuild_index --noinput && python manage.py runserver 0.0.0.0:80"
     restart: unless-stopped
     depends_on:
-      - ufkis-db
-      - ufkis-es
-
-  ufkis-es:
-    container_name: ufkis-es
-    image: elasticsearch:7.8.1
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-    ports:
-      - "9200:9200"
+      ufkis-db:
+        condition: service_healthy
+      ufkis-es:
+        condition: service_healthy
 
 networks:
   proxy:
-    external:
-      name: 'proxy'
+    name: 'proxy'
+    external: true
   default:
     name: ufkis

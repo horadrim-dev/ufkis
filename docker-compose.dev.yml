@@ -12,6 +12,26 @@ services:
     env_file:
       - environment/dev.env
     restart: unless-stopped
+    healthcheck:
+      test: "exit 0"
+
+
+  ufkis-es-dev:
+    container_name: ufkis-es-dev
+    image: elasticsearch:7.17.10
+    environment:
+      - discovery.type=single-node
+      # - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    volumes:
+      - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
+      # - ./es_data:/usr/share/elasticsearch/data:rw
+    ports:
+      - "9200:9200"
+    networks:
+      - default
+    healthcheck:
+      test: "exit 0"
 
   ufkis-app-dev:
     build: .
@@ -29,27 +49,15 @@ services:
         #- /etc/hosts:/etc/hosts:ro
     env_file:
       - environment/dev.env
-    command: python manage.py runserver 0.0.0.0:80
+    command: sh -c "python manage.py rebuild_index --noinput && python manage.py runserver 0.0.0.0:80"
     restart: unless-stopped
     depends_on:
-      - ufkis-db-dev
-      - ufkis-es-dev
+      ufkis-db-dev:
+        condition: service_healthy
+      ufkis-es-dev:
+        condition: service_healthy
       # - ufkis-solr-dev
 
-  ufkis-es-dev:
-    container_name: ufkis-es-dev
-    image: elasticsearch:7.17.10
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-    volumes:
-      - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
-      # - "es_data:/usr/share/elasticsearch/data"
-    ports:
-      - "9200:9200"
-    networks:
-      - default
   # ufkis-solr-dev:
   #   container_name: ufkis-solr-dev
   #   image: solr:6.6.6
@@ -71,4 +79,4 @@ networks:
     name: 'proxy'
     external: true
   default:
-    name: ufkis
+    name: ufkis-dev
