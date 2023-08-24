@@ -55,6 +55,7 @@ djangocms-video==3.0.0
 easy-thumbnails==2.8.5
 elastic-transport==8.4.0
 elasticsearch==7.17.9
+gunicorn==21.2.0
 html5lib==1.1
 idna==3.4
 kombu==3.0.37
