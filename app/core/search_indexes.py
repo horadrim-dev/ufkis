@@ -14,6 +14,7 @@ class PageIndex(indexes.SearchIndex, indexes.Indexable):
     login_required = indexes.BooleanField(model_attr='login_required')
     url = indexes.CharField(model_attr='get_absolute_url')
     title = indexes.CharField(model_attr='get_title')
+    menu_title = indexes.CharField(model_attr='get_menu_title')
 
     def prepare(self, obj):    
         self.prepared_data = super(PageIndex, self).prepare(obj)
@@ -23,9 +24,12 @@ class PageIndex(indexes.SearchIndex, indexes.Indexable):
             instance, _ = plugin.get_plugin_instance()
             if hasattr(instance, 'search_fields'):
                 text += ''.join(getattr(instance, field) for field in instance.search_fields)
-        text += obj.get_meta_description() or u''
-        text += obj.get_title() or u''
-        text += obj.get_meta_keywords() if hasattr(obj, 'get_meta_keywords') and obj.get_meta_keywords() else u''
+        text += " ".join([
+            obj.get_title() or u'',
+            obj.get_menu_title() or u'',
+            obj.get_meta_description() or u'',
+            obj.get_meta_keywords() if hasattr(obj, 'get_meta_keywords') and obj.get_meta_keywords() else u''
+        ])
         self.prepared_data['text'] = text
         return self.prepared_data       
 

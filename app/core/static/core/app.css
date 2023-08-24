@@ -451,3 +451,6 @@ html.special .caret::before {
 .search-container {
     padding: 30px 0 50px 0;
 }
+.highlighted {
+  font-weight: bold !important;
+}
