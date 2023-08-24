@@ -36,15 +36,13 @@ services:
     entrypoint: /entrypoint.sh
     networks:
       - default
-      # - proxy
     working_dir: /app
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./app:/app:rw
     env_file:
       - environment/prod.env
-    # command: sh -c "python manage.py rebuild_index --noinput && python manage.py runserver 0.0.0.0:80"
-    command: sh -c "python manage.py rebuild_index --noinput && gunicorn app.wsgi:application --bind 0.0.0.0:80"
+    command: gunicorn app.wsgi:application --bind 0.0.0.0:80
     restart: unless-stopped
     depends_on:
       db:
