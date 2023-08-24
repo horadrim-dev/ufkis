@@ -50,7 +50,7 @@ services:
         #- /etc/hosts:/etc/hosts:ro
     env_file:
       - environment/dev.env
-    command: sh -c "python manage.py rebuild_index --noinput && python manage.py runserver 0.0.0.0:80"
+    command: python manage.py runserver 0.0.0.0:80
     restart: unless-stopped
     depends_on:
       ufkis-db-dev:
