@@ -13,6 +13,20 @@ then
 	echo "PostgreSQL started"
 fi
 
+# If called very early the curl will receive an "empty" response and a failing status
+# As soon as Elasticsearch can process the command, it will return a success status
+# as soon as the cluster is yellow or green
+# echo "Waiting for es..."
+# until curl $ELASTICSEARCH_HOST'/_cluster/health?wait_for_status=green&timeout=1s'; do
+#   >&2 sleep 1
+# done
+
+# while ! nc -z $POSTGRES_HOST $POSTGRES_PORT; do
+# 		sleep 0.1
+# done
+
+echo "Elasticsearch started"
+
 python manage.py migrate
 python manage.py collectstatic --noinput
 python manage.py rebuild_index --noinput

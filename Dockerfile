@@ -8,7 +8,9 @@ WORKDIR /app
 # install psycopg2 dependencies
 RUN apk update && apk add --update py3-pip \
 	&& apk add postgresql-dev gcc freetype-dev python3-dev musl-dev jpeg-dev zlib-dev \
-	graphviz-dev
+	graphviz-dev \
+	curl
+
 	#python3-setuptools
 	
  

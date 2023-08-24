@@ -27,7 +27,7 @@ services:
       - ./hunspell:/usr/share/elasticsearch/config/hunspell:ro
       # - ./es_data:/usr/share/elasticsearch/data:rw
     ports:
-      - "9200:9200"
+      - "9500:9200"
     networks:
       - default
     healthcheck:
@@ -43,6 +43,7 @@ services:
     working_dir: /app
     ports:
       - "8001:80"
+      - "9500"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./app:/app:rw
