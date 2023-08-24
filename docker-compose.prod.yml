@@ -36,7 +36,7 @@ services:
     entrypoint: /entrypoint.sh
     networks:
       - default
-      - proxy
+      # - proxy
     working_dir: /app
     volumes:
       - /etc/localtime:/etc/localtime:ro
