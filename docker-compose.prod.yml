@@ -36,6 +36,7 @@ services:
     entrypoint: /entrypoint.sh
     networks:
       - default
+      - proxy
     working_dir: /app
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -51,5 +52,8 @@ services:
         condition: service_healthy
 
 networks:
+  proxy:
+    name: proxy
+    external: true
   default:
     name: net
