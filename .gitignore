@@ -73,3 +73,5 @@ app/.env
 postgres_data
 environment/test-prod.env
 environment/dev.env
+app/mediafiles
+app/staticfiles

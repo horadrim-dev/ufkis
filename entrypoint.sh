@@ -29,10 +29,10 @@ echo "Elasticsearch started"
 
 python manage.py migrate
 python manage.py collectstatic --noinput
-chmod 755 $(find ./static -type d)
-chmod 755 $(find ./media -type d)
-chmod 644 $(find ./static -type f)
-chmod 644 $(find ./media -type f)
+chmod 755 $(find ./staticfiles -type d)
+chmod 755 $(find ./mediafiles -type d)
+chmod 644 $(find ./staticfiles -type f)
+chmod 644 $(find ./mediafiles -type f)
 python manage.py rebuild_index --noinput
 
 exec "$@"
