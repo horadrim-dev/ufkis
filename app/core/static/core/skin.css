@@ -663,7 +663,7 @@ LAYOUT & TYPOGRAPHY
 */
 body,
 p {
-    font-size: 14px;
+    font-size: 18px;
     line-height: 23px;
 }
 
@@ -756,7 +756,7 @@ h4+p {
 
 h1,
 .h1 {
-    line-height: 50px;
+    line-height: 36px;
 }
 
 h2,
@@ -857,7 +857,7 @@ header.scroll-css .navbar-brand {
     }
 }
 .navbar-main .btn-search {
-    margin-top: 12px;
+    margin-top: 10px;
     border: none;
     background: none;
     font-size: 24px;
@@ -1008,7 +1008,7 @@ header.scroll-css .navbar-brand {
 }
 
 header .navbar-main form.navbar-form {
-    margin-top: 18px;
+    /* margin-top: 18px; */
     padding: 0;
 }
 
@@ -1214,7 +1214,7 @@ COMPONENTS
 .btn-lg,
 .btn-group-lg>.btn {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .btn-sm i {
@@ -1971,8 +1971,8 @@ CONTAINERS
 
 .flex-control-paging li a.flex-active,
 .header-slider .flex-control-paging li a.flex-active {
-    background: #949494;
-    border-color: #949494;
+    background: var(--main-color);
+    border-color: var(--main-color);
 }
 
 .box-transparent .overlaybox-inner {

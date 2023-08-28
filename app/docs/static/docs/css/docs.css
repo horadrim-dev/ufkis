@@ -36,6 +36,7 @@
 }
 .docs-item .category a {
   color: #ddd;
+  font-size: 14px;
 }
 .docs-item .category:hover a {
   color: var(--main-color);
@@ -88,6 +89,7 @@
     font-weight: inherit;
     width: 100%;
     cursor: pointer;
+    text-align: left;
 }
 #docs-filter input[type="radio"]:checked + label::before {
   content: "\f054";

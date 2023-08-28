@@ -12,6 +12,7 @@
   font-weight: 500;
   border: 1px solid var(--main-color) !important;
   border-radius: 20px !important;
+  font-size: 14px;
 }
 .taggit-labels.taggit-list .taggit-tag:first-child {
   margin-left: 0;

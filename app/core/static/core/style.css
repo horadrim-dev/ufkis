@@ -24,9 +24,9 @@ GENERAL
 
 body, .adv-img p, .caption-bottom p, .adv-circle .caption p, .advs-box p, .list-blog p {
     font-family: "Roboto",Helvetica,Arial,sans-serif;
-    font-size: 13px;
-    line-height: 1.42857143;
+    font-size: 16px;
     color: #4C4C4C;
+    line-height: 20px;
 }
 
 .text-color, .mi-menu ul li > a:before, .sidebar-nav .panel-item > span:before, i.icon, .block-infos .bd-day {
@@ -972,7 +972,7 @@ header .social-group a i.fa {
 header > .navbar {
     margin-bottom: 0;
     border: none;
-    /* border-bottom: 1px solid var(--main-color); */
+    border-bottom: 1px solid var(--main-color);
     transform: translate3d(0px, 0px, 0px);
 }
 
@@ -6060,8 +6060,8 @@ button.navbar-toggle {
 
 @media (max-width: 992px) {
     [class*="col-md"] {
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding-top: 15px;
+        padding-bottom: 15px;
     }
 
     .scroll-top-mobile {

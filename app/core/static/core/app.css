@@ -162,6 +162,7 @@ ul.mega-dropdown-menu .nav-item > a::after {
     visibility: visible;
     -webkit-transform: scaleY(1) translateZ(0px);
     transform: scaleY(1) translateZ(0px);
+    border-top-color: var(--menu-bg-color);
 }
 header .navbar-header {
     padding: 0 10px;
@@ -241,6 +242,10 @@ header .navbar-header button > i {
     header .navbar-header {
         margin-bottom: 10px;
     }
+    .container {
+        padding-left: 45px !important;
+        padding-right: 45px !important;
+    }
 }
 .mobile-dropdown {
   position: absolute;
@@ -260,7 +265,7 @@ header .navbar-header button > i {
     /* width: 100px; */
     line-height: 200px;
     margin-top: -100px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--main-color-3);
     margin-left: 5px;
 }
 .flexslider .flex-direction-nav li a.flex-prev::before {
@@ -270,11 +275,15 @@ header .navbar-header button > i {
     /* width: 100px; */
     line-height: 200px;
     margin-top: -10%;
-    border: 1px solid #ddd;
+    border: 1px solid var(--main-color-3);
     margin-right: 5px;
 }
 .flexslider .flex-direction-nav li a.flex-next::before {
   margin-left: -5px;
+}
+.flexslider .flex-direction-nav li a::before {
+    border-color: var(--main-color);
+    border-width: 3px;
 }
 
 .img-box.adv-img-side-content .caption {
@@ -384,7 +393,7 @@ footer .navbar-brand-logo {
 a {
     color: var(--main-color-2)
 }
-a:not(.nav-link):hover {
+a:not(.nav-link,.btn-lg):hover {
     color: var(--main-color);
     /* border-bottom: 1px solid var(--main-color); */
 }
