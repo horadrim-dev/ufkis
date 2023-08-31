@@ -1,0 +1,19 @@
+{% load sekizai_tags easy_thumbnails_tags static %}
+
+<ul class="list-texts list-texts-justified text-left">
+  {% if object.phone %}
+  <li><b>Телефон приемной: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
+  {% endif %}
+  {% if object.email %}
+  <li><b>Электронная почта: </b><i class="fa fa-envelope-open-o"></i> {{ object.email }}</li>
+  {% endif %}
+  {% if object.address %}
+  <li><b>Адрес: </b><span><i class="fa fa-map-marker"></i> {{ object.address }}</span></li>
+  {% endif %}
+  {% if object.site %}
+  <li><b>Сайт: </b><a href="{{ object.site }}" target="_blank">{{ object.site }} <i class="fa fa-external-link text-s"></i></a></li>
+  {% endif %}
+  {% if object.shedule %}
+  <li><b>График работы: </b><i class="fa fa-calendar"></i> {{ object.shedule }}</li>
+  {% endif %}
+</ul>

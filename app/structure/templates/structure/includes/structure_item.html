@@ -13,7 +13,7 @@
             {% else %}
             <div class="col-sm-12">
             {% endif %}
-                <h3><a href="{% url 'structure:org-detail' object.id %}">{{ object.name }}</a></h3>
+                <h3><a href="{% url 'org-detail' object.id %}">{{ object.name }}</a></h3>
                 <hr>
                 {% comment %} <div class="tag-row"> {% endcomment %}
                 <ul class="list-texts text-left">
@@ -29,7 +29,7 @@
                 </ul>
                 {% comment %} </div> {% endcomment %}
                 <div class="text-right">
-                    <a class="btn btn-border" href="{% url 'structure:org-detail' object.id %}">Об организации</a>
+                    <a class="btn btn-border" href="{% url 'org-detail' object.id %}">Об организации</a>
                 </div>
             </div>
         </div>

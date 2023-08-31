@@ -21,12 +21,20 @@
 .structure-container .apparat-item .photo i {
   position: relative !important;
   font-size: 44px;
-  margin-top: 22px;
-  margin-left: 40px;
 }
 .structure-container .otdel {
   margin-bottom: 10px;
 }
 .structure-container .otdel .advs-box {
   padding: 20px;
+}
+.structure-container .accordion-list.otdel-list .list-group-item {
+  line-height: 5rem;
+}
+.structure-container .accordion-list.otdel-list .list-group-item a::before{
+  top: 3.2rem;
+  border-color: var(--main-color);
+}
+.sotrudnik-list .grid-item .advs-box {
+  margin-top: 0 !important;
 }

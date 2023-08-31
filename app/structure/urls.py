@@ -8,6 +8,6 @@ from .views import *
 
 urlpatterns = [
     path('', OrganizationListView.as_view(), name='index'),
-    path('orgs/<int:pk>', OrganizationDetailView.as_view(), name='org-detail'),
+    # path('orgs/<int:pk>', OrganizationDetailView.as_view(), name='org-detail'),
 ] 
 

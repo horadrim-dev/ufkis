@@ -3,7 +3,7 @@ from django import forms
 from django.core.files.base import File
 from django.db.models.base import Model
 from django.forms.utils import ErrorList
-from .models import Organization, Otdel, Sotrudnik, Phone
+from .models import Organization, Otdel, Sotrudnik, Phone, SotrudnikOrganizationPlugin
 from taggit.forms import TagField
 from taggit_labels.widgets import LabelWidget
 from django.urls import reverse_lazy
@@ -85,3 +85,15 @@ class PhoneForm(forms.ModelForm):
     class Meta:
         model=Phone
         exclude = []
+
+
+class SotrudnikOrganizationPluginForm(SotrudnikForm):
+
+    class Meta:
+        model = SotrudnikOrganizationPlugin
+        exclude = []
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['otdel'].help_text = "Не обязательно"
+        # assert False, dir(self.fields['otdel'])

@@ -8,5 +8,6 @@ from .views import *
 
 urlpatterns = [
     path('otdels/', GetOtdelsView.as_view(), name='get-otdels'),
+    path('orgs/<int:pk>', OrganizationDetailView.as_view(), name='org-detail'),
 ] 
 

@@ -5,6 +5,8 @@ from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
+from cms.models.fields import PlaceholderField
+from cms.models.pluginmodel import CMSPlugin
 
 class StructureBase(OrderedModel):
 
@@ -36,12 +38,10 @@ class Organization(StructureBase):
                               blank=True, null=True)
     phone = models.CharField(verbose_name="Телефон приемной", max_length=32,
                              blank=True, null=True)
-    short_description = models.CharField(verbose_name="Краткое описание", max_length=512,
-                                         blank=True, null=True)
-    description = HTMLField(verbose_name="Описание", blank=True, null=True)
     logo = FilerImageField(verbose_name="Логотип", 
                            on_delete=models.CASCADE, 
                            blank=True, null=True)
+    content = PlaceholderField('content')
 
     # PRIEM?
     # DOCUMENT (основной документ, положение, устав)?
@@ -114,7 +114,7 @@ class Organization(StructureBase):
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
     def get_absolute_url(self):
-        return reverse("structure:org-detail", kwargs={"pk": self.pk})
+        return reverse("org-detail", kwargs={"pk": self.pk})
     
 
     class Meta:
@@ -232,3 +232,38 @@ class Phone(models.Model):
     class Meta:
         verbose_name = "телефон"
         verbose_name_plural = "телефоны"
+
+
+
+class AttributesPlugin(CMSPlugin):
+    """Модель для плагина выводящего атрибуты оргнизации"""
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, 
+                                 verbose_name="Организация")
+
+class LogoPlugin(CMSPlugin):
+    """Модель для плагина выводящего логотип оргнизации"""
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, 
+                                 verbose_name="Организация")
+
+class OtdelOrganizationPlugin(CMSPlugin):
+    """Модель для плагина выводящего сотрудников по отделам"""
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, 
+                                 verbose_name="Организация")
+
+LAYOUT_CHOICES = [
+    ("rows", "Построчно"),
+    ("blocks", "Блоки"),
+]
+class SotrudnikOrganizationPlugin(CMSPlugin):
+    """Модель для плагина выводящего сотрудников"""
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, 
+                                 verbose_name="Организация")
+    otdel = models.ForeignKey(Otdel, verbose_name="Отдел",
+                            on_delete=models.SET_NULL,
+                            blank=True, null=True,
+                            help_text="Если не заполнено, сотрудник будет \
+                                отображаться в разделе \"Прочие сотрудники\" организации")
+    apparat = models.BooleanField(verbose_name="Только аппарат управления",
+                                  default=False,
+                                  help_text="Оставить только сотрудников аппарата (поле \"Отдел\" будет проигнорировано)" )
+    layout = models.CharField("Макет", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[0][0])
