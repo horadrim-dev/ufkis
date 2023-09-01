@@ -26,7 +26,8 @@ class DocumentsPlugin(CMSPluginBase):
             # 'SHOW_LINK': instance.show_link,
             'SHOW_FILE_ATTRS': instance.show_file_attrs,
             'SHOW_TAGS': instance.show_tags,
-            'BOOTSTRAP_COL': instance.bootstrap_col
+            'BOOTSTRAP_COL': instance.bootstrap_col,
+            'HIDE_MORE_BUTTON': instance.hide_more_button
         })
 
         return context

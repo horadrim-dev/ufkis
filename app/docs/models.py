@@ -188,6 +188,7 @@ class DocumentsPlugin(CMSPlugin):
 
     bootstrap_col = models.CharField("Количество элементов в строке", max_length=8,
                                      choices=BOOTSTRAP_COL_CHOICES, default=BOOTSTRAP_COL_CHOICES[3][0])
+    hide_more_button = models.BooleanField("Скрыть кнопку перехода к документам", default=False)
     # num_objects = models.PositiveIntegerField("Количество объектов", default=0)
 
     def generate_id(self):

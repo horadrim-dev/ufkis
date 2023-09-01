@@ -25,9 +25,10 @@
     </div>
 
     <hr class="space m" />
-
+    {% if not HIDE_MORE_BUTTON %}
     <div class="text-center">
-      <a href="{% url 'docs:index' %}" class="btn btn-m btn-border "><i class="fa fa-book"></i> {{ instance.category }}</a>
+      <a href="{{ instance.category.get_absolute_url }}" class="btn btn-m btn-border "><i class="fa fa-book"></i> {{ instance.category }}</a>
     </div>
+    {% endif %}
 
 </div>
