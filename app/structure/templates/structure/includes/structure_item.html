@@ -13,7 +13,13 @@
             {% else %}
             <div class="col-sm-12">
             {% endif %}
-                <h3><a href="{% url 'org-detail' object.id %}">{{ object.name }}</a></h3>
+                <h3>
+                    {% if object.get_absolute_url %}
+                    <a href="{{ object.get_absolute_url }}">{{ object.name }}</a>
+                    {% else %}
+                    {{ object.name }}
+                    {% endif %}
+                </h3>
                 <hr>
                 {% comment %} <div class="tag-row"> {% endcomment %}
                 <ul class="list-texts text-left">
@@ -29,7 +35,9 @@
                 </ul>
                 {% comment %} </div> {% endcomment %}
                 <div class="text-right">
-                    <a class="btn btn-border" href="{% url 'org-detail' object.id %}">Об организации</a>
+                    {% if object.get_absolute_url %}
+                    <a class="btn btn-border" href="{{ object.get_absolute_url }}">Об организации</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@ urlpatterns = [
     path('search/', include('haystack.urls')),
     path('core/', include('core.system_urls')),
     path('admin/', admin.site.urls),
-    path('', include('structure.system_urls')),
+    # path('', include('structure.system_urls')),
     path('', include('cms.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

@@ -94,11 +94,11 @@ class OrganizationListView(ListView):
     template_name = "structure/structure.html"
     queryset = Organization.objects.filter(level=1)
 
-class OrganizationDetailView(DetailView):
-    template_name = "structure/organization_detail.html"
-    model = Organization
+# class OrganizationDetailView(DetailView):
+#     template_name = "structure/organization_detail.html"
+#     model = Organization
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['page_title'] = context['object'].name
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['page_title'] = context['object'].name
+#         return context

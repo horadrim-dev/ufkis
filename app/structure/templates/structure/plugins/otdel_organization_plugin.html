@@ -1,6 +1,8 @@
 {% load cms_tags sekizai_tags easy_thumbnails_tags static %}
 
 
+{% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %}
+
 <div class="otdel-list list-group accordion-list" data-type="visible" data-time="200">
   {% for object in object_list %}
   <div class="list-group-item">
@@ -23,28 +25,7 @@
     <div class="panel" style="display: none;">
       <div class="inner">
 
-        {% comment %} <div class="list-items text-left"> {% endcomment %}
-          {% comment %} {% for sotrudnik in object.get_employees %} {% endcomment %}
           {% include 'structure/plugins/sotrudnik_organization_plugin.html' with object_list=object.get_employees layout="rows" %}
-          {% comment %} {% render_model_block sotrudnik %}
-          <div class="list-item">
-            <div class="row">
-              <div class="col-md-8">
-                  <h4>{{ sotrudnik.name }}</h4>
-                  <p>{{ sotrudnik.position }}</p>
-              </div>
-              <div class="col-md-4">
-                {% for phone in sotrudnik.phones %}
-                  <div><span><i class="fa fa-phone"></i> {{ phone.number }}</span></div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-          {% endrender_model_block %} {% endcomment %}
-          {% comment %} {% empty %}
-            Сведений по сотрудникам пока нет.
-          {% endfor %} {% endcomment %}
-        {% comment %} </div> {% endcomment %}
 
       </div>
     </div>

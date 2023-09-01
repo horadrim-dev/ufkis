@@ -5,7 +5,7 @@ from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
-from cms.models.fields import PlaceholderField
+from cms.models.fields import PlaceholderField, PageField
 from cms.models.pluginmodel import CMSPlugin
 
 class StructureBase(OrderedModel):
@@ -41,7 +41,8 @@ class Organization(StructureBase):
     logo = FilerImageField(verbose_name="Логотип", 
                            on_delete=models.CASCADE, 
                            blank=True, null=True)
-    content = PlaceholderField('content')
+    # content = PlaceholderField('content')
+    page_link = PageField(verbose_name="Ссылка на страницу", blank=True, null=True)
 
     # PRIEM?
     # DOCUMENT (основной документ, положение, устав)?
@@ -114,7 +115,8 @@ class Organization(StructureBase):
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
     def get_absolute_url(self):
-        return reverse("org-detail", kwargs={"pk": self.pk})
+        return self.page_link.get_absolute_url() if self.page_link else None
+        # return reverse("org-detail", kwargs={"pk": self.pk})
     
 
     class Meta:
