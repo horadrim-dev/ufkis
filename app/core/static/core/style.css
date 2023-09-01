@@ -6729,9 +6729,9 @@ TITLE - RESPONSIVE
         font-size: 13px;
     }
 
-    .title-base hr {
+    /* .title-base hr {
         display: none;
-    }
+    } */
 
     .header-base {
         height: auto;

@@ -1,5 +1,7 @@
 {% load sekizai_tags easy_thumbnails_tags static %}
 
+{% addtoblock "css" %}<link rel="stylesheet" href="{% static 'structure/css/structure.css' %}">{% endaddtoblock %}
+
 <ul class="list-texts list-texts-justified text-left">
   {% if object.phone %}
   <li><b>Телефон приемной: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>

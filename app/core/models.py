@@ -4,6 +4,7 @@ from cms.extensions.extension_pool import extension_pool
 from django.utils.translation import gettext_lazy as _
 from filer.fields.image import FilerImageField
 from cms.models.pagemodel import Page
+from cms.models.pluginmodel import CMSPlugin
 
 class OrderedModel(models.Model):
     
@@ -153,3 +154,32 @@ class Social(models.Model):
 #     page = models.OneToOneField(Page, unique=True, verbose_name=_("Page"), editable=False, related_name='extended_fields',
 #                              on_delete=models.CASCADE)
 #     test_field = models.CharField("TEST_FIELD", blank=True, null=True)
+
+HEADER_LAYOUT_CHOICES = [
+    ('bold-line', 'С жирной линией'),
+    ('thin-line', 'С тонкой линией'),
+    ('no-line', 'Без линии'),
+]
+HEADER_ALIGN_CHOICES = [
+    ('left', 'Слева'),
+    ('center', 'По центру'),
+    ('right', 'Справа'),
+]
+class HeaderPlugin(CMSPlugin):
+    """Модель для плагина выводящего заголовок"""
+    title = models.CharField("Заголовок", default=" ")
+    subtitle = models.CharField("Подзаголовок (не обязательно)", blank=True, null=True)
+    layout = models.CharField("Стиль", choices=HEADER_LAYOUT_CHOICES, default=HEADER_LAYOUT_CHOICES[0][0])
+    align = models.CharField("Выравнивание", choices=HEADER_ALIGN_CHOICES, default=HEADER_ALIGN_CHOICES[0][0])
+
+    def __str__(self):
+        return self.title
+
+WHITESPACE_CHOICES = [
+    ('medium', 'Средне'),
+    ('small', 'Чуть чуть'),
+    ('large', 'Побольше'),
+]
+class WhitespacePlugin(CMSPlugin):
+    """Модель для плагина выводящего просто пустое место"""
+    size = models.CharField("Размер", choices=WHITESPACE_CHOICES, default=WHITESPACE_CHOICES[0][0])

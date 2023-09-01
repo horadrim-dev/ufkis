@@ -1075,7 +1075,7 @@ TITLES
 
 .title-base hr {
     width: 100%;
-    opacity: 0;
+    /* opacity: 0; */
     height: 5px;
 }
 
