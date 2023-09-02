@@ -21,20 +21,25 @@ class ColumnsPlugin(CMSPluginBase):
         response = super().save_model(
             request, obj, form, change
         )
-        bootstrap_col = "col-md-{}".format( 
-            str(12 // int(form.cleaned_data['create']))
-        )
-        for _x in range(int(form.cleaned_data['create'])):
-            col = Column(
-                parent=obj,
-                placeholder=obj.placeholder,
-                language=obj.language,
-                # width=form.cleaned_data['create_width'],
-                classes=bootstrap_col,
-                position=CMSPlugin.objects.filter(parent=obj).count(),
-                plugin_type=ColumnPlugin.__name__
-            )
-            col.save()
+        child_objects = CMSPlugin.objects.filter(parent=obj, plugin_type=ColumnPlugin.__name__)
+        for idx, col in enumerate(form.cleaned_data['create'].split('-')):
+            bootstrap_col = "col-md-{}".format(col)
+
+            if len(child_objects) >= idx + 1:
+                column_obj = Column.objects.get(id=child_objects[idx].id)
+                column_obj.classes = bootstrap_col
+                column_obj.save()
+            else:
+                col = Column(
+                    parent=obj,
+                    placeholder=obj.placeholder,
+                    language=obj.language,
+                    # width=form.cleaned_data['create_width'],
+                    classes=bootstrap_col,
+                    position=CMSPlugin.objects.filter(parent=obj).count(),
+                    plugin_type=ColumnPlugin.__name__
+                )
+                col.save()
         return response
 
 

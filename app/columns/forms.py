@@ -1,5 +1,4 @@
 from django import forms
-from django.utils.translation import gettext_lazy as _
 
 from .models import Columns
 
@@ -8,21 +7,20 @@ class ColumnsForm(forms.ModelForm):
     NUM_COLUMNS = (
         # оставлены только варианты на которые делится 12 
         # для облегчения bootstrap верстки
-        (2, "2"),
-        (3, "3"),
-        (4, "4"),
-        # (5, "5"),
-        (6, "6"),
-        # (7, "7"),
-        # (8, "8"),
-        # (9, "9"),
-        # (10, "10"),
+        ("6-6", "2 колонки, ширина 50% - 50%"),
+        ("9-3", "2 колонки, ширина 75% - 25%"),
+        ("3-9", "2 колонки, ширина 25% - 75%"),
+
+        ("4-4-4", "3 колонки, ширина 33% - 33% -33%"),
+        ("6-3-3", "3 колонки, ширина 50% - 25% - 25%"),
+        ("3-6-3", "3 колонки, ширина 25% - 50% - 25%"),
+        ("3-3-6", "3 колонки, ширина 25% - 25% - 50%"),
     )
 
     create = forms.ChoiceField(
         choices=NUM_COLUMNS,
-        label=_("Create Columns"),
-        help_text=_("Create this number of columns")
+        label="Колонки",
+        # help_text=_("Create this number of columns")
     )
     # create_width = forms.ChoiceField(
     #     choices=WIDTH_CHOICES,
