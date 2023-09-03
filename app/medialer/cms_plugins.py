@@ -128,34 +128,47 @@ class PicturePlugin(CMSPluginBase):
 @plugin_pool.register_plugin
 class VideoPlayerPlugin(CMSPluginBase):
     model = models.VideoPlayer
-    name = _('Video player')
+    name = _('Видео')
     text_enabled = True
-    allow_children = True
+    allow_children = False
     module = "Медиа"
-    child_classes = ['VideoSourcePlugin', 'VideoTrackPlugin']
+    # child_classes = ['VideoSourcePlugin', 'VideoTrackPlugin']
     form = forms.VideoPlayerPluginForm
 
     fieldsets = [
         (None, {
             'fields': (
-                'template',
-                'label',
+                # 'template',
+                # 'label',
+                'source_file',
+                'attributes',
             )
         }),
-        (_('Embed video'), {
+        (_('Встраиваемое видео'), {
             'classes': ('collapse',),
             'fields': (
                 'embed_link',
                 'parameters',
             )
         }),
-        (_('Advanced settings'), {
+        (_('Обложка'), {
             'classes': ('collapse',),
             'fields': (
                 'poster',
-                'attributes',
             )
-        })
+        }),
+        (_('Настройка размеров'), {
+            'classes': ('collapse',),
+            'fields': (
+                'width', 
+                'height',
+            )
+        }),
+        # (_('Advanced settings'), {
+        #     'classes': ('collapse',),
+        #     'fields': (
+        #     )
+        # })
     ]
 
     def render(self, context, instance, placeholder):

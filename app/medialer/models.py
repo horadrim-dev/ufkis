@@ -408,8 +408,8 @@ class AbstractPicture(models.Model):
         if self.link_url and self.link_page_id:
             raise ValidationError(
                 gettext(
-                    'You have given both external and internal links. '
-                    'Only one option is allowed.'
+                    'Вы указали и внешнее изображение и внутреннее.'
+                    'Оставьте что-то одно'
                 )
             )
 
@@ -417,8 +417,8 @@ class AbstractPicture(models.Model):
         if not self.picture and not self.external_picture:
             raise ValidationError(
                 gettext(
-                    'You need to add either an image, '
-                    'or a URL linking to an external image.'
+                    'Необходимо загрузить изображение,'
+                    'или ссылку на внешнее изображение'
                 )
             )
 
@@ -443,8 +443,8 @@ class AbstractPicture(models.Model):
 
         if invalid_option_pair:
             message = gettext(
-                'Invalid cropping settings. '
-                'You cannot combine "{field_a}" with "{field_b}".'
+                'Неправильные настройки обрезки'
+                'Вы не можете использовать "{field_a}" одновременно с "{field_b}".'
             )
             message = message.format(
                 field_a=self._meta.get_field(invalid_option_pair[0]).verbose_name,
@@ -533,6 +533,8 @@ class PluginPicture(AbstractPicture, CMSPlugin):
 
     class Meta:
         abstract = False
+        verbose_name = "изображение"
+        verbose_name_plural = "изображения"
 
 
 class AlbumPicture(AbstractPicture):
@@ -610,33 +612,57 @@ class VideoPlayer(CMSPlugin):
         max_length=255,
     )
     embed_link = models.CharField(
-        verbose_name=_('Embed link'),
+        verbose_name=_('Встраиваемое видео'),
         blank=True,
         max_length=255,
         help_text=_(
-            'Use this field to embed videos from external services '
-            'such as YouTube, Vimeo or others. Leave it blank to upload video '
-            'files by adding nested "Source" plugins.'
+            'Используйте это поля для встраивания видео с внешних видеосервисов '
+            'таких как Youtube, VK, Vimeo и др. '
         ),
+    )
+    source_file = FilerFileField(
+        verbose_name=_('Файл видео'),
+        blank=False,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
     )
     parameters = AttributesField(
-        verbose_name=_('Parameters'),
+        verbose_name=_('Параметры'),
         blank=True,
-        help_text=_(
-            'Parameters are appended to the video link if provided.'
-        ),
+        # help_text=_(
+        #     'Parameters are appended to the video link if provided.'
+        # ),
     )
     poster = FilerImageField(
-        verbose_name=_('Poster'),
+        verbose_name=_('Обложка'),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
     )
     attributes = AttributesField(
-        verbose_name=_('Attributes'),
+        verbose_name=_('Атрибуты'),
         blank=True,
     )
+    width = models.PositiveIntegerField(
+        verbose_name="Ширина",
+        blank=True,
+        null=True,
+        help_text=_(
+            'Ширина плеера в пикселях (по умолчанию ширина 100%)'
+        ),
+    )
+    height = models.PositiveIntegerField(
+        verbose_name="Высота",
+        default=400,
+        help_text=_(
+            'Высота плеера в пикселях'
+        ),
+    )
+
+    class Meta:
+        verbose_name = "видео"
 
     # Add an app namespace to related_name to avoid field name clashes
     # with any other plugins that have a field with the same name as the
@@ -656,6 +682,7 @@ class VideoPlayer(CMSPlugin):
         # Because we have a ForeignKey, it's required to copy over
         # the reference from the instance to the new plugin.
         self.poster = oldinstance.poster
+        self.source_file = oldinstance.source_file
 
     @property
     def embed_link_with_parameters(self):
@@ -672,6 +699,12 @@ class VideoPlayer(CMSPlugin):
         url_parts[4] = urlencode(query)
         return urlunparse(url_parts)
 
+    def clean(self):
+        if self.source_file and self.source_file.extension not in get_extensions():
+            raise ValidationError(
+                gettext('Неверный формат файла: {extension}.')
+                .format(extension=self.source_file.extension)
+            )
 
 class VideoSource(CMSPlugin):
     """
