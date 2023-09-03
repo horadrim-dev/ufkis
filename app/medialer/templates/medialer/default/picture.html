@@ -14,26 +14,32 @@
 
 
 {% localize off %}
-<img src="{{ instance.img_src }}"
-    alt="{% if instance.attributes.alt %}{{ instance.attributes.alt }}{% elif instance.picture.default_alt_text %}{{ instance.picture.default_alt_text }}{% endif %}"
-    {% if instance.width %} width="{{ instance.width }}"{% endif %}
-    {% if instance.height %} height="{{ instance.height }}"{% endif %}
-    {% if img_srcset_data %}
-        srcset="
-            {% for size, thumb in img_srcset_data %}
-                {{ thumb.url }} {{ size }}w,
-            {% endfor %}
-            {{ instance.img_src }} {{ picture_size.size.0 }}w
-        "
-        sizes="
-            {% for size, thumb in img_srcset_data %}
-                (max-width: {{ size }}px) {{ size }}px,
-            {% endfor %}
-            {{ picture_size.size.0 }}px
-        "
-    {% endif %}
-    {{ instance.attributes_str }}
->
+{% if instance.alignment %}
+<div style="text-align:{{ instance.alignment }}">
+{% endif %}
+    <img src="{{ instance.img_src }}"
+        alt="{% if instance.attributes.alt %}{{ instance.attributes.alt }}{% elif instance.picture.default_alt_text %}{{ instance.picture.default_alt_text }}{% endif %}"
+        {% if instance.width %} width="{{ instance.width }}"{% endif %}
+        {% if instance.height %} height="{{ instance.height }}"{% endif %}
+        {% if img_srcset_data %}
+            srcset="
+                {% for size, thumb in img_srcset_data %}
+                    {{ thumb.url }} {{ size }}w,
+                {% endfor %}
+                {{ instance.img_src }} {{ picture_size.size.0 }}w
+            "
+            sizes="
+                {% for size, thumb in img_srcset_data %}
+                    (max-width: {{ size }}px) {{ size }}px,
+                {% endfor %}
+                {{ picture_size.size.0 }}px
+            "
+        {% endif %}
+        {{ instance.attributes_str }}
+    >
+{% if instance.alignment %}
+</div>
+{% endif %}
 {% endlocalize %}
 
 {# start render figure/figcaption #}

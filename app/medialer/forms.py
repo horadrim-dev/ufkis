@@ -24,6 +24,7 @@ class PluginPictureForm(forms.ModelForm):
     class Meta:
         model = models.PluginPicture
         fields = '__all__'
+        # exclude = ['caption_text']
         widgets = {
             'caption_text': forms.Textarea(attrs={'rows': 2}),
         }

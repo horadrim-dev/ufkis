@@ -71,17 +71,17 @@ class PicturePlugin(CMSPluginBase):
             'fields': (
                 'picture',
                 'external_picture',
+                'alignment',
             )
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
-                'template',
-                'use_responsive_image',
+                # 'template',
+                # 'use_responsive_image',
                 ('width', 'height'),
-                'alignment',
-                'caption_text',
-                'attributes',
+                # 'caption_text',
+                # 'attributes',
             )
         }),
         (_('Link settings'), {
@@ -89,15 +89,15 @@ class PicturePlugin(CMSPluginBase):
             'fields': (
                 ('link_url', 'link_page'),
                 'link_target',
-                'link_attributes',
+                # 'link_attributes',
             )
         }),
-        (_('Cropping settings'), {
+        (_('Настройка обрезки'), {
             'classes': ('collapse',),
             'fields': (
-                ('use_automatic_scaling', 'use_no_cropping'),
-                ('use_crop', 'use_upscale'),
-                'thumbnail_options',
+                ('use_automatic_scaling', 'use_no_cropping', 'use_crop', 'use_upscale'),
+                # (),
+                # 'thumbnail_options',
             )
         })
     ]

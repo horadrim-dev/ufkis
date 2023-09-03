@@ -168,9 +168,9 @@ def get_alignment():
         settings,
         'DJANGOCMS_PICTURE_ALIGN',
         (
-            ('left', _('Align left')),
-            ('right', _('Align right')),
-            ('center', _('Align center')),
+            ('left', _('Слева')),
+            ('right', _('Справа')),
+            ('center', _('По центру')),
         )
     )
     return alignment
@@ -227,39 +227,37 @@ class AbstractPicture(models.Model):
         related_name='+',
     )
     external_picture = models.URLField(
-        verbose_name=_('External image'),
+        verbose_name="Ссылка на внешнее изображение",
         blank=True,
         null=True,
         max_length=255,
         help_text=_(
-            'If provided, overrides the embedded image. '
-            'Certain options such as cropping are not applicable to external images.'
+            'Если указано, переопределяет встроенное изображение. '
+            'Некоторые параметры, такие как обрезка, неприменимы к внешним изображениям.'
         )
     )
     width = models.PositiveIntegerField(
-        verbose_name=_('Width'),
+        verbose_name="Ширина",
         blank=True,
         null=True,
         help_text=_(
-            'The image width as number in pixels. '
-            'Example: "720" and not "720px".'
+            'Ширина изображения в пикселях'
         ),
     )
     height = models.PositiveIntegerField(
-        verbose_name=_('Height'),
+        verbose_name="Высота",
         blank=True,
         null=True,
         help_text=_(
-            'The image height as number in pixels. '
-            'Example: "720" and not "720px".'
+            'Высота изображения в пикселях'
         ),
     )
     alignment = models.CharField(
-        verbose_name=_('Alignment'),
+        verbose_name="Выравнивание",
         choices=get_alignment(),
         blank=True,
         max_length=255,
-        help_text=_('Aligns the image according to the selected option.'),
+        # help_text=_('Aligns the image according to the selected option.'),
     )
     caption_text = models.TextField(
         verbose_name=_('Caption text'),
@@ -274,21 +272,21 @@ class AbstractPicture(models.Model):
     )
     # link models
     link_url = models.URLField(
-        verbose_name=_('External URL'),
+        verbose_name=_('Внешняя ссылка'),
         blank=True,
         null=True,
         max_length=2040,
-        help_text=_('Wraps the image in a link to an external URL.'),
+        help_text=_('Обернуть изображение в ссылку на внешний ресурс'),
     )
     link_page = PageField(
-        verbose_name=_('Internal URL'),
+        verbose_name=_('Внутрення ссылка'),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        help_text=_('Wraps the image in a link to an internal (page) URL.'),
+        help_text=_('Обернуть изображение в ссылку на страницу сайта'),
     )
     link_target = models.CharField(
-        verbose_name=_('Link target'),
+        verbose_name=_('Цель ссылки'),
         choices=LINK_TARGET,
         blank=True,
         max_length=255,
@@ -301,32 +299,32 @@ class AbstractPicture(models.Model):
     # cropping models
     # active per default
     use_automatic_scaling = models.BooleanField(
-        verbose_name=_('Automatic scaling'),
+        verbose_name=_('Автоматическое масштабирование'),
         blank=True,
         default=True,
-        help_text=_('Uses the placeholder dimensions to automatically calculate the size.'),
+        # help_text=_('Uses the placeholder dimensions to automatically calculate the size.'),
     )
     # ignores all other cropping options
     # throws validation error if other cropping options are selected
     use_no_cropping = models.BooleanField(
-        verbose_name=_('Use original image'),
+        verbose_name=_('Использовать оригинальное изображение'),
         blank=True,
         default=False,
-        help_text=_('Outputs the raw image without cropping.'),
+        # help_text=_('Вывести изображение в исходном разрешении'),
     )
     # upscale and crop work together
     # throws validation error if other cropping options are selected
     use_crop = models.BooleanField(
-        verbose_name=_('Crop image'),
+        verbose_name=_('Обрезать изображение'),
         blank=True,
         default=False,
-        help_text=_('Crops the image according to the thumbnail settings provided in the template.'),
+        # help_text=_('Crops the image according to the thumbnail settings provided in the template.'),
     )
     use_upscale = models.BooleanField(
-        verbose_name=_('Upscale image'),
+        verbose_name=_('Увеличить изображение'),
         blank=True,
         default=False,
-        help_text=_('Upscales the image to the size of the thumbnail settings in the template.')
+        # help_text=_('Upscales the image to the size of the thumbnail settings in the template.')
     )
     use_responsive_image = models.CharField(
         verbose_name=_('Use responsive image'),
