@@ -27,7 +27,7 @@ ul.navbar-nav li a i {
 ul.dropdown-menu:not(.side-menu.root-level) li a {
     min-width: 200px;
     white-space: unset;
-    line-height: 14px;
+    line-height: 16px;
     /* padding-left: 30px; */
     padding: 15px 20px;
 }
@@ -99,7 +99,7 @@ ul.nav.root-level:not(.ms-rounded)>li>a::before {
 .mega-dropdown-menu .nav-link {
     min-width: 200px;
     white-space: unset;
-    line-height: 14px;
+    line-height: 16px;
     padding-left: 30px;
     padding: 15px 20px;
 }

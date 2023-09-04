@@ -71,9 +71,9 @@ class DocumentCategory(OrderedModel):
 #     def __str__(self):
 #         return self.name
     
-    class Meta:
-        verbose_name = "тип документа"
-        verbose_name_plural = "типы документов"
+    # class Meta:
+    #     verbose_name = "тип документа"
+    #     verbose_name_plural = "типы документов"
 
 
 class Document(models.Model):
