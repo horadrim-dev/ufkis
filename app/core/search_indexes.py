@@ -1,7 +1,7 @@
 from django.utils import timezone
 from haystack import indexes
 from cms.models.managers import PageManager
-from cms.models.pagemodel import Page
+from cms.models import Page
 from cms.models.pluginmodel import CMSPlugin
 from taggit.models import Tag
 # from .models import ExtendedPage
@@ -10,11 +10,11 @@ from taggit.models import Tag
 class PageIndex(indexes.SearchIndex, indexes.Indexable):
     # https://james.lin.net.nz/2013/11/06/django-cms-haystack-2-0-search-index/
     text = indexes.CharField(document=True, use_template=False)
-    pub_date = indexes.DateTimeField(model_attr='publication_date', null=True)
-    login_required = indexes.BooleanField(model_attr='login_required')
-    url = indexes.CharField(model_attr='get_absolute_url')
-    title = indexes.CharField(model_attr='get_title')
-    menu_title = indexes.CharField(model_attr='get_menu_title')
+    # pub_date = indexes.DateTimeField(model_attr='publication_date', null=True)
+    # login_required = indexes.BooleanField(model_attr='login_required')
+    # url = indexes.CharField(model_attr='get_absolute_url')
+    # title = indexes.CharField(model_attr='get_title')
+    # menu_title = indexes.CharField(model_attr='get_menu_title')
 
     def prepare(self, obj):    
         self.prepared_data = super(PageIndex, self).prepare(obj)

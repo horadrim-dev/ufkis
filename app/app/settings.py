@@ -269,9 +269,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ####### django-cms requires
 LANGUAGES = [
-    #  ('ru', 'Russian') ,
-     ('ru', 'Russian') 
+    #  ('ru-RU', 'Russian'),
+     ('ru', 'Russian'),
+    #  ('en', 'English'),
 ]
+# CMS_LANGUAGES = {
+#     'default': {
+#         'fallbacks': ['ru', 'ru-RU'],
+#         'redirect_on_fallback': True,
+#         'public': True,
+#         'hide_untranslated': False,
+#     }
+# }
 SITE_ID = 1
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
@@ -300,12 +309,12 @@ META_USE_GOOGLEPLUS_PROPERTIES=True # django-meta 1.x+
 META_USE_SCHEMAORG_PROPERTIES=True  # django-meta 2.x+
 
 PARLER_LANGUAGES = {
-    1: (
-        {'code': 'ru',},
-        # {'code': 'en',},
-        # {'code': 'it',},
-        # {'code': 'fr',},
-    ),
+    # 1: (
+    #     {'code': 'ru-RU',},
+    #     # {'code': 'en',},
+    #     # {'code': 'it',},
+    #     # {'code': 'fr',},
+    # ),
     'default': {
         'fallbacks': ['ru'],
         # 'fallbacks': ['en', 'it', 'fr'],
