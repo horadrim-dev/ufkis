@@ -13,7 +13,7 @@
   box-shadow: 2px 2px 3px #eee;
 }
  .apparat-item {
-  margin-bottom: 10px;
+  margin-bottom: 10px !important;
 }
  .apparat-item .advs-box {
   padding: 20px;

@@ -27,6 +27,7 @@
                         {% comment %} <h3><a href="{% url 'structure:org-detail' object.id %}">{{ object.name }}</a></h3> {% endcomment %}
                         <h3><a href="#">{{ object.name }}</a></h3>
                         <p>{{ object.position }}</p>
+                        <hr class="space xs">
                         {% for phone in object.phones %}
                           <div><span><i class="fa fa-phone"></i> {{ phone.number }}</span></div>
                         {% endfor %}
