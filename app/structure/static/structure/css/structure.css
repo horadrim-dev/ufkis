@@ -1,37 +1,37 @@
-.structure-container {
+ .structure-container {
   padding-top: 30px;
   padding-bottom: 30px;
 }
-.structure-container .structure-item {
+ .structure-item {
   padding: 20px 0;
   margin: -20px 0;
   color: #4C4C4C;
   font-weight: 100;
 }
-.structure-container .structure-item .advs-box {
+ .structure-item .advs-box {
   padding: 25px ;
   box-shadow: 2px 2px 3px #eee;
 }
-.structure-container .apparat-item {
+ .apparat-item {
   margin-bottom: 10px;
 }
-.structure-container .apparat-item .advs-box {
+ .apparat-item .advs-box {
   padding: 20px;
 }
-.structure-container .apparat-item .photo i {
+ .apparat-item .photo i {
   position: relative !important;
   font-size: 44px;
 }
-.structure-container .otdel {
+ .otdel {
   margin-bottom: 10px;
 }
-.structure-container .otdel .advs-box {
+ .otdel .advs-box {
   padding: 20px;
 }
-.structure-container .accordion-list.otdel-list .list-group-item {
+ .accordion-list.otdel-list .list-group-item {
   line-height: 5rem;
 }
-.structure-container .accordion-list.otdel-list .list-group-item a::before{
+ .accordion-list.otdel-list .list-group-item a::before{
   top: 3.2rem;
   border-color: var(--main-color);
 }
