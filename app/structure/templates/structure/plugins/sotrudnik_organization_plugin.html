@@ -47,6 +47,7 @@
   <div class="grid-list">
     <div class="grid-box row">
       {% for object in object_list %}
+        {% render_model_block object %}
         <div class="grid-item col-md-3">
           <div class="advs-box advs-box-top-icon boxed-inverse">
               {% if object.photo %}
@@ -64,6 +65,7 @@
             </div>
           </div>
         </div>
+        {% endrender_model_block %}
         {% cycle '' '' '' '<div class="clear"></div>' %}
       {% empty %}
       Сведений по сотрудникам пока нет.

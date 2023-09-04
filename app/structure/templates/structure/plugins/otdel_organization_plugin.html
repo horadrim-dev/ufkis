@@ -9,7 +9,7 @@
 <div class="otdel-list list-group accordion-list" data-type="visible" data-time="200">
   {% for object in object_list %}
   <div class="list-group-item">
-    {% render_model_block object %}
+    {% comment %} {% render_model_block object %} {% endcomment %}
     <a href="#" class="">
       <div class="row">
         <div class="col-xs-8">
@@ -24,7 +24,7 @@
         </div>
       </div>
     </a>
-    {% endrender_model_block %}
+    {% comment %} {% endrender_model_block %} {% endcomment %}
     <div class="panel" style="display: none;">
       <div class="inner">
 
