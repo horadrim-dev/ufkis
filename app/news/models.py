@@ -39,7 +39,7 @@ class PostCategory(models.Model):
 #         verbose_name = "тег"
 #         verbose_name_plural = "теги"
 
-PLUGINS_WITH_IMAGES = ("PicturePlugin", "SliderItemPlugin", )
+POSTER_PLUGINS = ("PicturePlugin", "SliderItemPlugin", "VideoPlayerPlugin" )
 
 class Post(models.Model):
     title = models.CharField(
@@ -47,7 +47,7 @@ class Post(models.Model):
 
     alias = models.SlugField(default="", blank=True, unique=True,
                              max_length=1000, help_text="Краткое название транслитом через тире (пример: 'kratkoe-nazvanie-translitom'). Чем короче тем лучше. Для автоматического заполнения - оставьте пустым.")
-    category = models.ForeignKey(PostCategory, on_delete=models.SET_NULL, blank=True, null=True)
+    category = models.ForeignKey(PostCategory, verbose_name="Категория", on_delete=models.SET_NULL, blank=True, null=True)
     published = models.BooleanField(default=False, verbose_name='Опубликовано')
     published_at = models.DateField(default=datetime.date.today, 
                                     verbose_name="Дата публикации")
@@ -105,26 +105,30 @@ class Post(models.Model):
         return CMSPlugin.objects.filter(placeholder_id=self.content_id).count()
     
     @property
-    def image(self):
+    def poster(self):
         if self.cover_image:
-            return self.cover_image
-        else:
-            plugin = CMSPlugin.objects.filter(placeholder_id=self.content_id, 
-                                              plugin_type__in=PLUGINS_WITH_IMAGES) \
-                                        .order_by('position') \
-                                        .first()
-                                        
-            if not plugin:
-                return None
-            if plugin.plugin_type == "PicturePlugin":
-                return plugin.medialer_pluginpicture.picture
-            elif plugin.plugin_type == "SliderItemPlugin":
-                return plugin.slider_slide.image
-            
+            return {"type": "image", "image": self.cover_image }
+
+        plugin = CMSPlugin.objects.filter(placeholder_id=self.content_id, 
+                                          plugin_type__in=POSTER_PLUGINS) \
+                                    .order_by('position') \
+                                    .first()
+        # return plugin or None
+        if not plugin:
+            return None
+        if plugin.plugin_type == "PicturePlugin":
+            return {"type":"image", "image" :plugin.medialer_pluginpicture.picture }
+        elif plugin.plugin_type == "SliderItemPlugin":
+            return {"type":"image", "image" :plugin.slider_slide.image }
+        elif plugin.plugin_type == "VideoPlayerPlugin":
+            return {"type":"video", "videoplayer" :plugin.medialer_videoplayer }
+
+
     def thumb_src(self):
-        image = self.image
-        if not image:
+        poster = self.poster
+        if not poster or poster['type'] == "video":
             return ""
+        image = poster['image']
 
         thumbnail_options = {
             'size': (360, 240),

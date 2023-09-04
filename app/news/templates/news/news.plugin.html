@@ -10,49 +10,11 @@
   <div class="row">
     {% for obj in object_list %}
 
-      {% comment %} {% if forloop.counter <= 2 %} {% endcomment %}
       <div class="col-md-4 col-sm-6">
-      {% render_model_block obj %}
-      {% include 'news/includes/post.item.vertical.html' %}
-      {% endrender_model_block %}
-      </div>
-
-        {% comment %} {% if forloop.counter == 2 %}
-          <div class="col-md-4 col-sm-12">
-            <hr class="space visible-sm" />
-            <div>
-        {% endif %}
-
-      {% else %}
-
         {% render_model_block obj %}
-        <div class="advs-box advs-box-side-icon">
-            <div class="caption-box">
-                <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
-                <span class="extra-content">{{ obj.published_at }}</span>.
-                <p>
-                  {% if obj.description %}
-                      {{ obj.description|striptags|truncatechars_html:150}}
-                  {% endif %}
-                </p>
-                <hr class="space xs" />
-                <div class="text-right">
-                    <a href="{{ obj.get_absolute_url }}" class="read-more btn-border">
-                        <i class="fa fa-chevron-circle-right"></i> Перейти
-                    </a>
-                </div>
-            </div>
-        </div>
+          {% include 'news/includes/post.item.vertical.html' %}
         {% endrender_model_block %}
-        <hr class="space s" />
-
-        {% if forloop.last %}
-            </div>
-            <a href="{% url 'news:index' %}" class="btn btn-lg w-100">Больше новостей</a>
-          </div>
-        {% endif %} 
-
-      {% endif %}{% endcomment %}
+      </div>
 
     {% empty %}
       <p> Записей не найдено.</p>

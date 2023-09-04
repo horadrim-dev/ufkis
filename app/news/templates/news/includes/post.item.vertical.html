@@ -56,10 +56,8 @@
     {% endif %} {% endcomment %}
     <div class="advs-box-content">
         <h2 class="text-m"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h2>
-        {% if obj.image %}
-        <a class="img-box" href="{{ obj.get_absolute_url }}">
-            <img class="anima" src="{{ obj.thumb_src }}" alt="" />
-        </a>
+        {% if obj.poster %}
+            {% include 'news/includes/poster.html' %}
         {% endif %}
         {% if ADMIN_MODE %}
             <div class="post-status">

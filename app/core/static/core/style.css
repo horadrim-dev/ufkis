@@ -290,9 +290,9 @@ TAG ROW
         font-weight: 600;
     }
 
-    .tag-row > div {
+    /* .tag-row > div {
         padding: 5px 0;
-    }
+    } */
 
     .tag-row.icon-row {
         position: relative;

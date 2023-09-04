@@ -622,7 +622,7 @@ class VideoPlayer(CMSPlugin):
     )
     source_file = FilerFileField(
         verbose_name=_('Файл видео'),
-        blank=False,
+        blank=True,
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
