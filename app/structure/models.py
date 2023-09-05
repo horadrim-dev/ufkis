@@ -212,7 +212,11 @@ class Sotrudnik(StructureBase):
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
     def phones(self):
-        return self.phone_set.all()
+        phones = self.phone_set.all()  
+        if phones:
+            return phones
+        if self.otdel:
+            return self.otdel.phones()
 
     class Meta:
         ordering = ['organization', 'otdel', 'order' ]

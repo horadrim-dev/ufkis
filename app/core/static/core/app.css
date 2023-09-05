@@ -25,7 +25,7 @@ ul.navbar-nav li a i {
 }
 
 ul.dropdown-menu:not(.side-menu.root-level) li a {
-    min-width: 200px;
+    min-width: 250px;
     white-space: unset;
     line-height: 16px;
     /* padding-left: 30px; */
@@ -157,12 +157,15 @@ ul.mega-dropdown-menu .nav-item > a::after {
 .navbar-nav > li.active:hover > ul,
 .navbar-nav > li.open > ul,
 .navbar-nav > li.open > .mega-menu,
-.navbar-nav > li:hover > .mega-menu  {
+.navbar-nav > li:hover > .mega-menu {
     opacity: 1;
     visibility: visible;
     -webkit-transform: scaleY(1) translateZ(0px);
     transform: scaleY(1) translateZ(0px);
     border-top-color: var(--menu-bg-color);
+}
+.dropdown-submenu:hover > .dropdown-menu {
+    border-top-width: 0;
 }
 header .navbar-header {
     padding: 0 10px;
