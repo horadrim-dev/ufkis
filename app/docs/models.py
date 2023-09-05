@@ -125,11 +125,11 @@ class Document(models.Model):
         return reverse('docs:document_download', kwargs={'id': self.id})
 
     def __str__(self):
-        return self.full_name + self.subname[:50] 
+        return self.full_name + self.subname[:100] if self.subname else self.full_name
     
     @property
     def short_name(self):
-        return self.name[:50]
+        return self.name[:100]
 
     @property
     def full_name(self):
