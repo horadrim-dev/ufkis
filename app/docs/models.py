@@ -124,6 +124,13 @@ class Document(models.Model):
             return self.document_url
         return reverse('docs:document_download', kwargs={'id': self.id})
 
+    def __str__(self):
+        return self.full_name + self.subname[:50] 
+    
+    @property
+    def short_name(self):
+        return self.name[:50]
+
     @property
     def full_name(self):
         return " ".join([

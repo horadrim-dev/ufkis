@@ -18,5 +18,5 @@ class DocumentCategoryAdmin(admin.ModelAdmin):
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     form = DocumentForm
-    list_display = ('name', 'category', )
+    list_display = ('short_name', 'number', 'date', 'subname', 'category', )
     list_filter = ["category",]
