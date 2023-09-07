@@ -47,3 +47,13 @@ class DocumentForm(forms.ModelForm):
         if not doc_file and not doc_url:
             msg = "Загрузите файл документа или введите ссылку на него."
             self.add_error("document_file", msg)
+
+
+# class DocumentsPluginForm(forms.ModelForm):
+
+#     # tags = TagField(required=False, widget=LabelWidget)
+
+#     class Meta:
+#         model = DocumentsPlugin
+#         # fields = []
+#         exclude = []

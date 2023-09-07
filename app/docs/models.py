@@ -7,7 +7,7 @@ import uuid
 from django.dispatch import receiver
 import os
 from taggit.managers import TaggableManager
-from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase
+from taggit.models import TaggedItemBase, TagBase, GenericTaggedItemBase, Tag
 from cms.models.pluginmodel import CMSPlugin
 
 class ContentManager(models.Manager):
@@ -185,8 +185,9 @@ BOOTSTRAP_COL_CHOICES = [ ("12", 1), ("6", 2), ("4", 3), ("3", 4), ("2", 6) ] # 
 class DocumentsPlugin(CMSPlugin):
     """Модель для плагина выводящего документы выбранной категории"""
 
-    category = models.ForeignKey(DocumentCategory, on_delete=models.CASCADE, 
+    category = models.ForeignKey(DocumentCategory, on_delete=models.CASCADE, blank=True, null=True,
                                  verbose_name="Категория")
+    tag = models.ForeignKey(Tag, on_delete=models.SET_NULL, blank=True, null=True)
     show_description = models.BooleanField("Отображать описание документов", default=False)
     show_icon = models.BooleanField("Отображать иконку документов", default=True)
     # show_link = models.BooleanField("Отображать кнопку ссылки на документ", default=True)
@@ -196,13 +197,26 @@ class DocumentsPlugin(CMSPlugin):
     bootstrap_col = models.CharField("Количество элементов в строке", max_length=8,
                                      choices=BOOTSTRAP_COL_CHOICES, default=BOOTSTRAP_COL_CHOICES[3][0])
     hide_more_button = models.BooleanField("Скрыть кнопку перехода к документам", default=False)
-    # num_objects = models.PositiveIntegerField("Количество объектов", default=0)
+    num_objects = models.PositiveIntegerField("Количество объектов", default=8)
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]
     
+    def count_not_loaded_documents(self):
+        '''Возвращает количество документов, 
+        которые еще есть в базе, но не отображены плагином'''
+        num = self.get_related_documents_queryset.count() - self.num_objects
+        return num if num > 0 else 0
+    
+    @property
+    def get_related_documents_queryset(self):
+        qs = self.category.document_set.all() if self.category else Document.objects.all()
+        if self.tag:
+            qs = qs.filter(tags__in=[self.tag])
+        return qs
+
     def related_documents(self):
-        return self.category.document_set.all()
+        return self.get_related_documents_queryset[:self.num_objects]
 
 class DocumentPlugin(CMSPlugin):
     """Модель для плагина выводящего выбранный документ"""

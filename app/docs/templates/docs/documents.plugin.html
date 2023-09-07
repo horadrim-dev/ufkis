@@ -1,4 +1,4 @@
-{% load cms_tags sekizai_tags thumbnail static %}
+{% load cms_tags sekizai_tags thumbnail static core_tags %}
 
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/content-box.css' %}">{% endaddtoblock %}
 {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/css/image-box.css' %}">{% endaddtoblock %} 
@@ -27,7 +27,12 @@
     <hr class="space m" />
     {% if not HIDE_MORE_BUTTON %}
     <div class="text-center">
-      <a href="{{ instance.category.get_absolute_url }}" class="btn btn-m btn-border "><i class="fa fa-book"></i> {{ instance.category }}</a>
+      <a href="{% url 'docs:index' %}?category={% if instance.category %}{{ instance.category.id }}{% endif %}&tags={% if instance.tag %}{{ instance.tag.name | prepare_tag_name }}{% endif %}" 
+         class="btn btn-m btn-border ">
+        <i class="fa fa-book"></i>
+        {% if instance.category %}{{ instance.category }}{% else %}Документы{% endif %}{% if instance.tag %} по тегу "{{ instance.tag.name }}"{% endif %}
+        {% if instance.count_not_loaded_documents %}(+{{ instance.count_not_loaded_documents }}){% endif %}
+      </a>
     </div>
     {% endif %}
 

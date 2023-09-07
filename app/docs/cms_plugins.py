@@ -3,7 +3,7 @@ from cms.plugin_pool import plugin_pool
 from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
 from news.models import Post
-
+# from .forms import DocumentsPluginForm
 from .models import DocumentsPlugin, DocumentPlugin
 
 @plugin_pool.register_plugin
@@ -11,6 +11,7 @@ class DocumentsPlugin(CMSPluginBase):
     """Выводит документы определенной категории"""
 
     model =  DocumentsPlugin
+    # form = DocumentsPluginForm
     render_template = 'docs/documents.plugin.html'
     name = "Документы"   
     module = "Документы"
