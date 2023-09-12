@@ -18,20 +18,24 @@ class StructureToolbar(CMSToolbar):
 
         page_menu = self.toolbar.get_menu(PAGE_MENU_IDENTIFIER)
 
-        news_menu = self.toolbar.get_or_create_menu(
+        menu = self.toolbar.get_or_create_menu(
             key='structure_cms_integration',
             verbose_name='Структура',
             position = page_menu
         )
-        news_menu.add_sideframe_item(
+        menu.add_sideframe_item(
+            name='Виды организаций',
+            url=admin_reverse('structure_categoryorganization_changelist')
+        )
+        menu.add_sideframe_item(
             name='Организации',
             url=admin_reverse('structure_organization_changelist')
         )
-        news_menu.add_sideframe_item(
+        menu.add_sideframe_item(
             name='Отделы',
             url=admin_reverse('structure_otdel_changelist')
         )
-        news_menu.add_sideframe_item(
+        menu.add_sideframe_item(
             name='Сотрудники',
             url=admin_reverse('structure_sotrudnik_changelist')
         )

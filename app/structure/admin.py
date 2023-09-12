@@ -13,6 +13,12 @@ class PhoneSotrudnikInline(admin.TabularInline):
     exclude = ['otdel']
     extra = 0
 
+@admin.register(CategoryOrganization)
+class OrganizationAdmin(admin.ModelAdmin):
+    # form = COrganizationForm
+    list_display = ('name', )
+    exclude = []
+
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
     form = OrganizationForm

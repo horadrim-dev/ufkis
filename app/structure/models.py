@@ -15,8 +15,24 @@ class StructureBase(OrderedModel):
         abstract = True
 
 
+class CategoryOrganization(StructureBase):
+    name = models.CharField(verbose_name="Полное название", max_length=128)
+
+    class Meta:
+        verbose_name = "вид организаций"
+        verbose_name_plural = "виды организаций"
+
+    def __str__(self):
+        return self.name
+    
+
+    def get_absolute_url(self):
+        return "{}?category={}".format(reverse("structure:index"), self.pk)
+    
 
 class Organization(StructureBase):
+    category = models.ForeignKey(CategoryOrganization, verbose_name="Вид организации (не обязательно)",
+                                 on_delete=models.SET_NULL, blank=True, null=True)
     parent = models.ForeignKey('self', verbose_name="Родительская организация",
                             on_delete=models.SET_NULL,
                             blank=True, null=True,)
@@ -124,6 +140,16 @@ class Organization(StructureBase):
         verbose_name = "организация"
         verbose_name_plural = "организации"
 
+
+# class Section(StructureBase):
+
+#     organization = models.ForeignKey(Organization, verbose_name="Организация", on_delete=models.SET_NULL)
+#     name = models.CharField("Название секции")
+
+
+#     class Meta:
+#         verbose_name = "секция"
+#         verbose_name_plural = "секции"
 
 class Otdel(StructureBase):
     organization = models.ForeignKey(Organization, verbose_name="Организация",
@@ -288,3 +314,4 @@ class SotrudnikOrganizationPlugin(CMSPlugin):
 
     show_detail_link = models.BooleanField("Отображать ссылку на страницу сотрудников",
                                            default=True, help_text="если она есть")       
+    

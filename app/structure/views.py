@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, JsonResponse, Http404
-from .models import Organization, Otdel
+from .models import Organization, Otdel, CategoryOrganization
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
@@ -92,8 +92,29 @@ class GetOtdelsView(View):
     
 class OrganizationListView(ListView):
     template_name = "structure/structure.html"
-    queryset = Organization.objects.filter(level=1)
+    # model = Organization
+    # queryset = Organization.objects.filter(level=1)
 
+    def get_queryset(self):
+        cat = self.request.GET.get("category", None)
+        if cat and cat.isdigit():
+            qs = Organization.objects.filter(category=cat)
+        else:
+            # передаем только элементы верхнего уровня
+            # остальные подтягиваются рекурсивно в шаблоне
+            qs = Organization.objects.filter(level=1)
+
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        cat = self.request.GET.get("category", None)
+        if cat and cat.isdigit():
+            cat = get_object_or_404(CategoryOrganization, pk=cat)
+            context['page_title'] = cat.name
+        return context
+    
 # class OrganizationDetailView(DetailView):
 #     template_name = "structure/organization_detail.html"
 #     model = Organization
