@@ -160,3 +160,6 @@ ul.slides li .news-item {
 .news-container .submit {
   border-radius: 10px;
 }
+.news-item .tag-row {
+  margin-top: 10px !important;
+}
