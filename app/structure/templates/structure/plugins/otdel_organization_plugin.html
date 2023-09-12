@@ -26,9 +26,14 @@
     </a>
     {% comment %} {% endrender_model_block %} {% endcomment %}
     <div class="panel" style="display: none;">
-      <div class="inner">
+      <div class="inner text-center">
 
-          {% include 'structure/plugins/sotrudnik_organization_plugin.html' with object_list=object.get_employees layout="rows" %}
+          {% include 'structure/plugins/sotrudnik_organization_plugin.html' with object_list=object.get_employees layout="rows" instance=None %}
+
+          {% if SHOW_DETAIL_LINK and object.page %}
+            <a href="{{ object.get_absolute_url }}" class="btn btn-lg btn-border w-100">Подробнее об отделе</a>
+            <hr class="space s">
+          {% endif %}
 
       </div>
     </div>

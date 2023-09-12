@@ -42,7 +42,7 @@ class Organization(StructureBase):
                            on_delete=models.CASCADE, 
                            blank=True, null=True)
     # content = PlaceholderField('content')
-    page_link = PageField(verbose_name="Ссылка на страницу", blank=True, null=True)
+    page = PageField(verbose_name="Ссылка на страницу", blank=True, null=True)
 
     # PRIEM?
     # DOCUMENT (основной документ, положение, устав)?
@@ -115,7 +115,7 @@ class Organization(StructureBase):
         return thumbnailer.get_thumbnail(thumbnail_options).url
 
     def get_absolute_url(self):
-        return self.page_link.get_absolute_url() if self.page_link else None
+        return self.page.get_absolute_url() if self.page else None
         # return reverse("org-detail", kwargs={"pk": self.pk})
     
 
@@ -129,6 +129,8 @@ class Otdel(StructureBase):
     organization = models.ForeignKey(Organization, verbose_name="Организация",
                                      on_delete=models.CASCADE)
     name = models.CharField(verbose_name="Название", max_length=256)
+    page = PageField(verbose_name="Ссылка на страницу", blank=True, null=True,
+                          help_text="Не обязательно")
     # PHONEs?
 
 
@@ -151,6 +153,9 @@ class Otdel(StructureBase):
 
     def phones(self):
         return self.phone_set.all()
+
+    def get_absolute_url(self):
+        return self.page.get_absolute_url() if self.page else None
 
     class Meta:
         ordering = ['organization', 'order' ]
@@ -177,6 +182,8 @@ class Sotrudnik(StructureBase):
                                   default=False,
                                   help_text="Если отмечено, сотрудник будет выведен \
                                   в разделе \"Аппарат управления\" организации")
+    page = PageField(verbose_name="Ссылка на страницу", blank=True, null=True,
+                          help_text="Не обязательно")
     # PHONE?
 
 
@@ -218,6 +225,9 @@ class Sotrudnik(StructureBase):
         if self.otdel:
             return self.otdel.phones()
 
+    def get_absolute_url(self):
+        return self.page.get_absolute_url() if self.page else None
+
     class Meta:
         ordering = ['organization', 'otdel', 'order' ]
         verbose_name = "сотрудник"
@@ -255,6 +265,8 @@ class OtdelOrganizationPlugin(CMSPlugin):
     """Модель для плагина выводящего сотрудников по отделам"""
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, 
                                  verbose_name="Организация")
+    show_detail_link = models.BooleanField("Отображать ссылку на страницы отделов и сотрудников",
+                                           default=True, help_text="если она есть")       
 
 LAYOUT_CHOICES = [
     ("rows", "Построчно"),
@@ -273,3 +285,6 @@ class SotrudnikOrganizationPlugin(CMSPlugin):
                                   default=False,
                                   help_text="Оставить только сотрудников аппарата (поле \"Отдел\" будет проигнорировано)" )
     layout = models.CharField("Макет", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[0][0])
+
+    show_detail_link = models.BooleanField("Отображать ссылку на страницу сотрудников",
+                                           default=True, help_text="если она есть")       

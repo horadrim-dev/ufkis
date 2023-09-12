@@ -41,6 +41,7 @@ class OtdelOrganizationPluginPublisher(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context = super().render(context, instance, placeholder)
         context['object_list'] = instance.organization.get_otdels()
+        context['SHOW_DETAIL_LINK'] = instance.show_detail_link
         return context
  
 @plugin_pool.register_plugin
@@ -64,5 +65,6 @@ class SotrudnikOrganizationPluginPublisher(CMSPluginBase):
 
         context['object_list'] = qs
         context['layout'] = instance.layout
+        context['SHOW_DETAIL_LINK'] = instance.show_detail_link
         return context
  
