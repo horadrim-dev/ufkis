@@ -1,4 +1,4 @@
-{% load cms_tags sekizai_tags static compress %}
+{% load cms_tags sekizai_tags easy_thumbnails_tags static compress %}
 <!DOCTYPE html>
 <!--[if lt IE 10]> <html  lang="ru" class="iex"> <![endif]-->
 <!--[if (gt IE 10)|!(IE)]><!-->
@@ -14,7 +14,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       {% comment %} <meta name="description" content="{{site_settings.title}} {{site_settings.subtitle}}"> {% endcomment %}
-      <link rel="icon" href="{% static 'core/template-images/favicon.png' %}">
+      <link rel="icon" href="{% thumbnail site_settings.logo "32x32" autocrop %}">
 
       {% addtoblock "css" %}<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Google+Sans:400,500,700|Google+Sans+Text:400&amp;lang=ru">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">{% endaddtoblock %}
