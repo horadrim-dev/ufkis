@@ -14,7 +14,7 @@
 {% elif instance.source_file %}
     {# render <source> or <track> plugins #}
     <video controls {{ instance.attributes_str }}
-        width={% if instance.width%}{{instance.width}}{% else %}100%{% endif %} height={{ instance.height }} 
+        width={% if instance.width%}{{instance.width}}{% else %}100%{% endif %} {% comment %}height={{ instance.height }}{% endcomment %}
         {% if instance.poster %} poster="{{ instance.poster.url }}"{% endif %}>
         {% comment %} {% for plugin in instance.child_plugin_instances %}
             {% render_plugin plugin %}
