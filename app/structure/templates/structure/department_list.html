@@ -1,0 +1,58 @@
+{% extends 'structure/base.html' %}
+{% load cms_tags sekizai_tags static structure_tags %}
+
+
+{% block app_content %}
+
+
+{% include './includes/department_filter.html' %}
+
+<hr class="space m">
+
+{% for object in object_list %}
+  <div class="structure-item">
+    <div class="advs-box advs-box advs-box-side-icon boxed-inverse">
+      <h3>
+          {{ object.name }}
+      </h3>
+      <h4>{{ object.organization }}</h4>
+      <hr>
+
+      {% if object.get_photos %}
+      <div class="grid-list gallery thumb-s">
+        <div class="grid-box row">
+          {% comment %} <div class="row"> {% endcomment %}
+            {% for photo in object.get_photos %}
+            <div class="grid-item col-md-2">
+              <a class="img-box thumbnail" href="{{ photo.photo.url}}">
+                <span><img src="{{ photo.thumb_src }}"></span>
+              </a>
+            </div>
+            {% endfor %}
+          {% comment %} </div> {% endcomment %}
+        </div>
+      </div>
+      <div class="clear"></div>
+      {% endif %}
+
+      <ul class="list-texts list-texts-justified text-left">
+        {% if object.phone %}
+        <li><b>Телефон: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
+        {% endif %}
+        {% if object.schedule %}
+        <li><b>Режим работы: </b><i class="fa fa-calendar"></i> {{ object.schedule }}</li>
+        {% endif %}
+      </ul>
+      {% comment %} <div class="tag-row"> {% endcomment %}
+      {{ object.description | safe }}
+      {% comment %} </div> {% endcomment %}
+    </div>
+  </div>
+
+{% empty %}
+
+  Нет данных.
+
+{% endfor %}
+
+{% endblock app_content %}

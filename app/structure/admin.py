@@ -39,6 +39,23 @@ class SotrudnikAdmin(admin.ModelAdmin):
     list_display = ('name', 'organization', 'otdel', 'order', )
     list_filter = ["organization", "otdel"]
 
+class PhotoDepartmentInline(admin.TabularInline):
+    model = PhotoDepartment
+    exclude = ['order']
+    extra = 3
+
+@admin.register(Department)
+class DepartmentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'organization', 'activity')
+    list_filter = ["organization", "activity"]
+    exclude = []
+    inlines = (PhotoDepartmentInline, )
+
+
+@admin.register(Activity)
+class ActivityAdmin(admin.ModelAdmin):
+    list_display = ('name', )
+    exclude = []
 # @admin.register(Phone)
 # class PhoneAdmin(admin.ModelAdmin):
     # form = PhoneForm

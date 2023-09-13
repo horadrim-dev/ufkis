@@ -3,12 +3,15 @@ from django.shortcuts import render
 from django.views.generic import View
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, JsonResponse, Http404
-from .models import Organization, Otdel, CategoryOrganization
+from .models import Organization, Otdel, CategoryOrganization, Department, Activity
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView
 from django.http import Http404
 from django.shortcuts import get_object_or_404
+from django_filters.views import FilterView
+from .filtersets import DepartmentFilterSet
+
 
 # ACTION_LIST = ("get-otdels", )
 # RESULTS = {
@@ -123,3 +126,17 @@ class OrganizationListView(ListView):
 #         context = super().get_context_data(**kwargs)
 #         context['page_title'] = context['object'].name
 #         return context
+
+
+class DepartmentFilterView(FilterView):
+    template_name = "structure/department_list.html"
+    filterset_class = DepartmentFilterSet
+    model = Department
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        activity_id = self.request.GET.get("activity", None)
+        if activity_id and activity_id.isdigit():
+            activity = get_object_or_404(Activity, pk=activity_id)
+            context['page_title'] = activity.name
+        return context

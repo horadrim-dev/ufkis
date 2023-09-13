@@ -32,6 +32,14 @@ class StructureToolbar(CMSToolbar):
             url=admin_reverse('structure_organization_changelist')
         )
         menu.add_sideframe_item(
+            name='Виды спорта',
+            url=admin_reverse('structure_activity_changelist')
+        )
+        menu.add_sideframe_item(
+            name='Секции',
+            url=admin_reverse('structure_department_changelist')
+        )
+        menu.add_sideframe_item(
             name='Отделы',
             url=admin_reverse('structure_otdel_changelist')
         )

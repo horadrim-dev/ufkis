@@ -1,12 +1,16 @@
 from django.db import models
 from djangocms_text_ckeditor.fields import HTMLField
 from filer.fields.image import FilerImageField
+from filer.fields.file import File
 from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
 from django.urls import reverse
 from phonenumber_field.modelfields import PhoneNumberField
 from cms.models.fields import PlaceholderField, PageField
 from cms.models.pluginmodel import CMSPlugin
+from django.dispatch import receiver
+import os
+
 
 class StructureBase(OrderedModel):
 
@@ -141,15 +145,87 @@ class Organization(StructureBase):
         verbose_name_plural = "организации"
 
 
-# class Section(StructureBase):
+class Activity(StructureBase):
+    name = models.CharField("Название")
+    logo = FilerImageField(verbose_name="Лого", 
+                           on_delete=models.CASCADE)
 
-#     organization = models.ForeignKey(Organization, verbose_name="Организация", on_delete=models.SET_NULL)
-#     name = models.CharField("Название секции")
+    class Meta:
+        verbose_name = "вид деятельности"
+        verbose_name_plural = "виды деятельности"
+
+    def __str__(self):
+        return self.name
+
+    def thumb_src(self):
+        image = self.logo
+        if not image:
+            return None
+
+        thumbnail_options = {
+            'size': (300, 200),
+            'crop': True,
+            'upscale': True,
+            'subject_location': image.subject_location,
+        }
+        thumbnailer = get_thumbnailer(image)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
+
+class Department(StructureBase):
+
+    organization = models.ForeignKey(Organization, verbose_name="Организация", on_delete=models.CASCADE)
+    activity = models.ForeignKey(Activity, verbose_name="Вид деятельности", on_delete=models.CASCADE)
+    name = models.CharField("Название")
+    schedule  = models.CharField("Режим работы", max_length=256, blank=True, null=True)
+    phone = PhoneNumberField(verbose_name="Телефон", blank=True, null=True)
+    description = HTMLField("Описание")
+
+    def __str__(self):
+        return self.name
+    
+    def get_photos(self):
+        return self.photodepartment_set.all()
+
+    class Meta:
+        verbose_name = "секция"
+        verbose_name_plural = "секции"
+
+class PhotoDepartment(StructureBase):
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    photo = FilerImageField(verbose_name="Фото", on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "фото"
+        verbose_name_plural = "фото"
+
+    def thumb_src(self):
+        image = self.photo
+        if not image:
+            return None
+
+        thumbnail_options = {
+            'size': (150, 130),
+            'crop': True,
+            'upscale': True,
+            'subject_location': image.subject_location,
+        }
+        thumbnailer = get_thumbnailer(image)
+        return thumbnailer.get_thumbnail(thumbnail_options).url
 
 
-#     class Meta:
-#         verbose_name = "секция"
-#         verbose_name_plural = "секции"
+
+@receiver(models.signals.post_delete, sender=PhotoDepartment)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Удаляет файл при удалении объекта
+    """
+    if instance.photo:
+        if os.path.isfile(instance.photo.path):
+            # delete file from file system
+            os.remove(instance.photo.path)
+            # delete Filer File object
+            File.objects.filter(id=instance.photo_id).delete()
+
 
 class Otdel(StructureBase):
     organization = models.ForeignKey(Organization, verbose_name="Организация",
