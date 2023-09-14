@@ -41,6 +41,9 @@
           {% if object.phone %}
           <li><b>Телефон: </b><i class="fa fa-phone"></i> {{ object.phone }}</li>
           {% endif %}
+          {% if object.get_address %}
+          <li><b>Адрес: </b><span><i class="fa fa-map-marker"></i> {{ object.get_address }}</span></li>
+          {% endif %}
           {% if object.schedule %}
           <li><b>Режим работы: </b><i class="fa fa-calendar"></i> {{ object.schedule }}</li>
           {% endif %}

@@ -177,12 +177,18 @@ class Department(StructureBase):
     activity = models.ForeignKey(Activity, verbose_name="Вид деятельности", on_delete=models.CASCADE)
     name = models.CharField("Название")
     schedule  = models.CharField("Режим работы", max_length=256, blank=True, null=True)
+    address_same = models.BooleanField("Адрес совпадает с адресом организации", default=True)
+    address = models.CharField("Адрес", max_length=512, blank=True, null=True,
+                               help_text="Заполняется если адрес секции не совпадает с адресом организации")
     phone = PhoneNumberField(verbose_name="Телефон", blank=True, null=True)
     description = HTMLField("Описание")
 
     def __str__(self):
         return self.name
     
+    def get_address(self):
+        return self.organization.address if self.address_same else self.address
+
     def get_photos(self):
         return self.photodepartment_set.all()
 
