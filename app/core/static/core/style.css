@@ -4098,7 +4098,7 @@ ul.list-texts {
         width: 100%;
         position: absolute;
         left: 0;
-        top: 19px;
+        top: 25px;
         border-bottom: 1px dotted #bbb;
         z-index: 1;
     }
