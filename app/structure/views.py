@@ -132,6 +132,7 @@ class DepartmentFilterView(FilterView):
     template_name = "structure/department_list.html"
     filterset_class = DepartmentFilterSet
     model = Department
+    paginate_by = 6
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
