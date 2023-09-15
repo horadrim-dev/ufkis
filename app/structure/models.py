@@ -410,4 +410,11 @@ LAYOUT_CHOICES = [
 class ActivityPlugin(CMSPlugin):
     """Модель для плагина выводящего список видов деятельности"""
     layout = models.CharField("Макет", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[0][0])
-    # show_logo = models.BooleanField("Отображать")
+
+
+class DepartmentPlugin(CMSPlugin):
+    """Модель для плагина выводящего список секций по виду деятельности"""
+    activity = models.ForeignKey(Activity, verbose_name="Вид спорта", on_delete=models.CASCADE)
+
+    def get_departments(self):
+        return Department.objects.filter(activity=self.activity)

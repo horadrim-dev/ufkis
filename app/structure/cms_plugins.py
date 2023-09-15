@@ -1,7 +1,7 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from .models import AttributesPlugin, LogoPlugin, OtdelOrganizationPlugin, SotrudnikOrganizationPlugin, \
-                    ActivityPlugin, Activity
+                    ActivityPlugin, Activity, Department, DepartmentPlugin
 from .forms import SotrudnikOrganizationPluginForm
 
 @plugin_pool.register_plugin
@@ -81,4 +81,18 @@ class ActivityPluginPublisher(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context = super().render(context, instance, placeholder)
         context['object_list'] = Activity.objects.all()
+        return context
+    
+
+@plugin_pool.register_plugin
+class DepartmentPluginPublisher(CMSPluginBase):
+    module = "Структура"
+    name = "Спортивные секции"
+    model = DepartmentPlugin
+    allow_children = False
+    render_template = "structure/plugins/department_plugin.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['object_list'] = instance.get_departments()
         return context

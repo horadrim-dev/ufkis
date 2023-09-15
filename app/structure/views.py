@@ -129,7 +129,7 @@ class OrganizationListView(ListView):
 
 
 class DepartmentFilterView(FilterView):
-    template_name = "structure/department_list.html"
+    template_name = "structure/department.html"
     filterset_class = DepartmentFilterSet
     model = Department
     paginate_by = 6
