@@ -4,7 +4,7 @@ from filer.fields.image import FilerImageField
 from filer.fields.file import File
 from core.models import OrderedModel
 from easy_thumbnails.files import get_thumbnailer
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from phonenumber_field.modelfields import PhoneNumberField
 from cms.models.fields import PlaceholderField, PageField
 from cms.models.pluginmodel import CMSPlugin
@@ -170,6 +170,12 @@ class Activity(StructureBase):
         }
         thumbnailer = get_thumbnailer(image)
         return thumbnailer.get_thumbnail(thumbnail_options).url
+    
+    def get_absolute_url(self):
+        try:
+            return "{}?activity={}".format(reverse("department:index"), self.pk)
+        except NoReverseMatch:
+            return "#"
 
 class Department(StructureBase):
 
@@ -397,3 +403,11 @@ class SotrudnikOrganizationPlugin(CMSPlugin):
     show_detail_link = models.BooleanField("Отображать ссылку на страницу сотрудников",
                                            default=True, help_text="если она есть")       
     
+LAYOUT_CHOICES = [
+    ("blocks", "Блоки (без лого)"),
+    ("image-blocks", "Блоки с логотипом на фоне"),
+]
+class ActivityPlugin(CMSPlugin):
+    """Модель для плагина выводящего список видов деятельности"""
+    layout = models.CharField("Макет", choices=LAYOUT_CHOICES, default=LAYOUT_CHOICES[0][0])
+    # show_logo = models.BooleanField("Отображать")

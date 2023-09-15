@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('', DepartmentFilterView.as_view(), name='department_index'),
+    path('', DepartmentFilterView.as_view(), name='index'),
     # path('orgs/<int:pk>', OrganizationDetailView.as_view(), name='org-detail'),
 ] 
 

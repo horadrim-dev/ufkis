@@ -12,7 +12,7 @@ class StructureApphook(CMSApp):
 
 @apphook_pool.register
 class DepartmentApphook(CMSApp):
-    app_name = "structure"  # must match the application namespace
+    app_name = "department"  # must match the application namespace
     name = "Спортивные секции"
 
     def get_urls(self, page=None, language=None, **kwargs):

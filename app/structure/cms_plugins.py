@@ -1,6 +1,7 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from .models import AttributesPlugin, LogoPlugin, OtdelOrganizationPlugin, SotrudnikOrganizationPlugin
+from .models import AttributesPlugin, LogoPlugin, OtdelOrganizationPlugin, SotrudnikOrganizationPlugin, \
+                    ActivityPlugin, Activity
 from .forms import SotrudnikOrganizationPluginForm
 
 @plugin_pool.register_plugin
@@ -68,3 +69,16 @@ class SotrudnikOrganizationPluginPublisher(CMSPluginBase):
         context['SHOW_DETAIL_LINK'] = instance.show_detail_link
         return context
  
+
+@plugin_pool.register_plugin
+class ActivityPluginPublisher(CMSPluginBase):
+    module = "Структура"
+    name = "Виды спорта"
+    model = ActivityPlugin
+    allow_children = False
+    render_template = "structure/plugins/activity_plugin.html"
+
+    def render(self, context, instance, placeholder):
+        context = super().render(context, instance, placeholder)
+        context['object_list'] = Activity.objects.all()
+        return context
