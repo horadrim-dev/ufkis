@@ -140,6 +140,7 @@ INSTALLED_APPS = [
     'structure',
     'docs',
     'contact',
+    'events',
     # 'cmsplugin_contact'
     # 'django.contrib.postgres',
 ]
