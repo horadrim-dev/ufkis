@@ -12,7 +12,7 @@
                     <div class="grid-list gallery">
                         <div class="grid-box row">
                         {% for choice in filter.form.activity %}
-                            <div class="grid-item col-md-3">
+                            <div class="grid-item col-md-2">
 
                                 {{choice.tag}}
                                 <label for="{{ choice.id_for_label }}">
@@ -20,8 +20,8 @@
                                     {% if forloop.first %}
                                     {% comment %} <div class="not-set {% if choice.data.selected %}active{% endif %}"> {% endcomment %}
                                     <div class="not-set">
-                                        <i class="fa fa-filter icon text-xl"></i>
-                                        <h3>{{ choice.choice_label|safe }}</h3>
+                                        <i class="fa fa-filter icon text-l"></i>
+                                        <h4>{{ choice.choice_label|safe }}</h4>
                                     </div>
                                     {% else %}
                                     <div class="img-box adv-circle circle adv-circle-center white 
@@ -37,7 +37,7 @@
 
                                 </label>
                             </div>
-                            {% cycle '' '' '' '<div class="clear"></div>' %}
+                            {% cycle '' '' '' '' '' '<div class="clear"></div>' %}
                         {% endfor %}
                         </div>
                     </div>

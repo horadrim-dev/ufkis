@@ -163,7 +163,7 @@ class Activity(StructureBase):
             return None
 
         thumbnail_options = {
-            'size': (300, 200),
+            'size': (193, 115),
             'crop': True,
             'upscale': True,
             'subject_location': image.subject_location,

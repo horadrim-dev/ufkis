@@ -62,15 +62,15 @@
 .activities .not-set {
     background: #f9f9f9;
     border: 1px solid #eee;
-    padding-top: 50px;
+    padding-top: 18px;
     padding-bottom: 4px;
     margin-bottom: 4px;
     text-align: center;
     cursor: pointer;
     border-radius: 20px;
     transition: 300ms;
-    width: 273px;
-    height: 188px;
+    width: 178px;
+    height: 106px;
 }
 .activities .not-set:hover,
 .activities .not-set.active{
