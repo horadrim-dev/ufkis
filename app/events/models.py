@@ -3,7 +3,7 @@ from djangocms_text_ckeditor.fields import HTMLField
 import datetime
 from filer.fields.image import FilerImageField
 from easy_thumbnails.files import get_thumbnailer
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 from cms.models.pluginmodel import CMSPlugin
 import uuid
 
@@ -13,8 +13,8 @@ class EventContentManager(models.Manager):
     def upcoming(self):
         return self.filter(start_at__gte=datetime.datetime.now())
 
-    def finished(self):
-        return self.filter(published=True, start_at__lte=datetime.datetime.now())
+    # def finished(self):
+    #     return self.filter(published=True, start_at__lte=datetime.datetime.now())
 
 
 class Event(models.Model):
@@ -23,8 +23,8 @@ class Event(models.Model):
     place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
     start_at = models.DateTimeField(default=datetime.datetime.now, 
                                     verbose_name="Время начала мероприятия")
-    finish_at = models.DateTimeField(default=datetime.datetime.now, 
-                                    verbose_name="Время окончания мероприятия")
+    # finish_at = models.DateTimeField(default=datetime.datetime.now, 
+    #                                 verbose_name="Время окончания мероприятия")
     poster = FilerImageField(
         verbose_name="Обложка",
         blank=True,
@@ -33,7 +33,7 @@ class Event(models.Model):
         related_name='+',
         help_text="Если оставить пустым, будет использовано изображение из альбома"
     )
-    description = HTMLField(verbose_name="Описание")
+    description = HTMLField(verbose_name="Описание", blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
@@ -64,7 +64,10 @@ class Event(models.Model):
         return thumbnailer.get_thumbnail(thumbnail_options).url
     
     def get_absolute_url(self):
-        return "{}?lightbox=event-{}".format(reverse("events:index"), self.id)
+        try:
+            return "{}?lightbox=event-{}".format(reverse("events:index"), self.id)
+        except NoReverseMatch:
+            return "#"
     
 
 class UpcomingEventsPlugin(CMSPlugin):
