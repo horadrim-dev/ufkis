@@ -30,6 +30,8 @@ def render_share_buttons(context, url, title, description=None, image_src=None,
 
     socials = []
 
+    socials.append(('copy-button', 'link', 'Скопировать ссылку', absolute_url))
+
     if context['site_settings'].share_vk:
         social_url  = 'https://vk.com/share.php?';
         params = {
@@ -40,7 +42,7 @@ def render_share_buttons(context, url, title, description=None, image_src=None,
             'noparse':  'true'
         }
         endcoded_url = social_url + urllib.parse.urlencode(params)
-        socials.append(('vk', 'ВКонтакте', endcoded_url))
+        socials.append(('share-button', 'vk', 'ВКонтакте', endcoded_url))
 
     if context['site_settings'].share_ok:
         social_url  = 'https://connect.ok.ru/offer?';
@@ -51,7 +53,7 @@ def render_share_buttons(context, url, title, description=None, image_src=None,
             'imageUrl' : absolute_image_src,
         }
         endcoded_url = social_url + urllib.parse.urlencode(params)
-        socials.append(('odnoklassniki', 'Одноклассники', endcoded_url))
+        socials.append(('share-button', 'odnoklassniki', 'Одноклассники', endcoded_url))
 
     if context['site_settings'].share_fb:
         social_url  = 'http://www.facebook.com/sharer.php?';
@@ -60,7 +62,7 @@ def render_share_buttons(context, url, title, description=None, image_src=None,
             't': title,
         }
         endcoded_url = social_url + urllib.parse.urlencode(params)
-        socials.append(('facebook', 'Facebook', endcoded_url))
+        socials.append(('share-button', 'facebook', 'Facebook', endcoded_url))
 
     if context['site_settings'].share_twitter:
         social_url  = 'https://twitter.com/share?';
@@ -70,7 +72,7 @@ def render_share_buttons(context, url, title, description=None, image_src=None,
             'counturl' : absolute_url,
         }
         endcoded_url = social_url + urllib.parse.urlencode(params)
-        socials.append(('twitter', 'Twitter', endcoded_url))
+        socials.append(('share-button', 'twitter', 'Twitter', endcoded_url))
 
     return {
         'size': size if size in SIZE_CHOICES else None,

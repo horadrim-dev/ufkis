@@ -22,9 +22,18 @@
         style="{% if style == 'all_in_one' %}display: none;{% endif %}"
     >
 
-        {% for icon, tooltip, url in socials %}
+        {% for type, icon, tooltip, url in socials %}
         <a target="_blank" href="#"
-            onclick="window.open('{{ url }}', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600')"
+            {% if type == 'share-button' %}
+
+                onclick="window.open('{{ url }}', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600')"
+
+            {% elif type == 'copy-button' %}
+                {# обрабатывается в app.js #}
+                class="copy-url"
+                data-url="{{ url }}"
+
+            {% endif %}
             >
             <i class="fa fa-{{ icon }} 
 
