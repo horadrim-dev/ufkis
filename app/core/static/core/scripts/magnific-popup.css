@@ -558,11 +558,11 @@ Schiocco - Copyright (c) Federico Schiocchet - Schiocco (www.Schiocco.it) - Fram
 
 .box-lightbox {
     background-color: #FFF;
-    margin: 10px auto;
+    margin: 50px auto;
     border-radius: 2px;
     display: none;
     max-width: 800px;
-    max-height: 750px;
+    /* max-height: 750px; */
     padding: 30px;
     float: none;
 }

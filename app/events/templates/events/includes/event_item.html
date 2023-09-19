@@ -1,0 +1,61 @@
+{% load cms_tags core_tags %}
+
+<div class="events-item">
+    {% render_model_block object %}
+    <div class="row vertical-row">
+        <div class="col-md-2 text-center">
+            <h2>{{ object.start_at.time }}</h2>
+        </div>
+        {% if object.poster %}
+        <div class="col-md-3">
+            <a class="img-box lightbox thumbnail" href="#event-{{object.id}}" data-lightbox-anima="show-scale">
+                <img src="{{ object.poster_thumb_src }}" alt="">
+            </a>
+        </div>
+        <div class="col-md-5">
+        {% else %}
+        <div class="col-md-8">
+        {% endif %}
+            <a class="lightbox dashed" href="#event-{{object.id}}" data-lightbox-anima="show-scale">
+                <span class="h3">{{ object.name }}</span>
+            </a>
+            <hr class="space xs">
+
+            {{ object.description|striptags|truncatechars_html:150}}
+
+            {% if object.place %}
+            <hr class="space xs">
+            <h4><i class="fa fa-map-marker"></i> {{ object.place }}</h4>
+            {% endif %}
+
+        </div> 
+        <div class="col-md-2">
+            {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.poster.url description=object.description|striptags|truncatechars_html:150 style="list" %}
+        </div> 
+    </div>
+    {% endrender_model_block %}
+
+    {# LIGTHBOX #}
+    <div id="event-{{object.id}}" class="box-lightbox mfp-hide">
+        <div class="subtitle g">
+            <h1>{{ object.name }}</h1>
+            <hr>
+            <h3>Начало мероприятия: <i class="fa fa-calendar"></i> {{ object.start_at.date }} {{ object.start_at.time }}</h3>
+            {% if object.place %}
+            <h3>Место проведения: <i class="fa fa-map-marker"></i> {{ object.place }}</h3>
+            {% endif %}
+            <hr>
+        </div> 
+
+        {% if object.poster %}
+            <img src="{{ object.poster.url }}" />
+            <hr class="space m">
+        {% endif %}
+
+        <div class="text-right">
+            {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.poster.url description=object.description|striptags|truncatechars_html:150 style="list" %}
+        </div>
+        <hr class="space m">
+        {{ object.description | safe }}
+    </div>
+</div>
