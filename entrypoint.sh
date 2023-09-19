@@ -34,5 +34,6 @@ chmod 755 $(find ./mediafiles -type d)
 chmod 644 $(find ./staticfiles -type f)
 chmod 644 $(find ./mediafiles -type f)
 python manage.py rebuild_index --noinput
+python manage.py filer_check
 
 exec "$@"
