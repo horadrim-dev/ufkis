@@ -31,7 +31,6 @@ class Event(models.Model):
         null=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        help_text="Если оставить пустым, будет использовано изображение из альбома"
     )
     description = HTMLField(verbose_name="Описание", blank=True, null=True)
 
