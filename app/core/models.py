@@ -166,7 +166,7 @@ HEADER_ALIGN_CHOICES = [
     ('right', 'Справа'),
 ]
 class HeaderPlugin(CMSPlugin):
-    """Модель для плагина выводящего заголовок"""
+    """Модель плагина выводящего заголовок"""
     title = models.CharField("Заголовок", default=" ")
     subtitle = models.CharField("Подзаголовок (не обязательно)", blank=True, null=True)
     layout = models.CharField("Стиль", choices=HEADER_LAYOUT_CHOICES, default=HEADER_LAYOUT_CHOICES[0][0])
@@ -175,11 +175,36 @@ class HeaderPlugin(CMSPlugin):
     def __str__(self):
         return self.title
 
+
 WHITESPACE_CHOICES = [
     ('medium', 'Средне'),
     ('small', 'Чуть чуть'),
     ('large', 'Побольше'),
 ]
 class WhitespacePlugin(CMSPlugin):
-    """Модель для плагина выводящего просто пустое место"""
+    """Модель плагина выводящего просто пустое место"""
     size = models.CharField("Размер", choices=WHITESPACE_CHOICES, default=WHITESPACE_CHOICES[0][0])
+
+
+SUBMENU_LAYOUT_CHOICES = [
+    ("blocks", "Блоки"),
+    ("list", "Список")
+]
+class SubmenuPlugin(CMSPlugin):
+    """Модель плагина выводящего дочернее меню"""
+    layout = models.CharField("Макет", choices=SUBMENU_LAYOUT_CHOICES, default=SUBMENU_LAYOUT_CHOICES[0][0])
+    parent_page = models.CharField("ID родителя (не обязательно)", max_length=32, blank=True, null=True,
+                               help_text="Указывается идентификатор страницы, дочернее меню которой будет отображено. \
+                                (ID заполняется в расширенных настройках страницы). Если не указано, будет отображено \
+                                дочернее меню текущей страницы")
+    
+
+class PureCodePlugin(CMSPlugin):
+    """Модель плагина позволяющего ввети пользовательский код"""
+    # css = models.Text
+    code = models.TextField("HTML", blank=True, null=True,
+                            help_text="Использовать js и css здесь возможно, но не рекомендуется.")
+    css = models.TextField("CSS", blank=True, null=True,)
+    js = models.TextField("JAVASCRIPT", blank=True, null=True,
+                          help_text="Доступно использование jQuery, пример \"$(document).ready(function () { \
+                          alert(\"test\");});\"")
