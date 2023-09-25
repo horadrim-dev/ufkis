@@ -28,13 +28,6 @@
  .otdel .advs-box {
   padding: 20px;
 }
- .accordion-list.otdel-list .list-group-item {
-  line-height: 5rem;
-}
- .accordion-list.otdel-list .list-group-item a::before{
-  top: 3.2rem;
-  border-color: var(--main-color);
-}
 .sotrudnik-list .grid-item .advs-box {
   margin-top: 0 !important;
 }

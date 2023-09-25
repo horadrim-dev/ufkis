@@ -208,3 +208,37 @@ class PureCodePlugin(CMSPlugin):
     js = models.TextField("JAVASCRIPT", blank=True, null=True,
                           help_text="Доступно использование jQuery, пример \"$(document).ready(function () { \
                           alert(\"test\");});\"")
+
+
+# TABS_POSITION_CHOICES = [
+#     ("top", "Сверху"),
+#     ("left", "Слева"),
+#     ("right", "Справа"),
+#     ("bottom", "Снизу"),
+# ]
+class TabsPlugin(CMSPlugin):
+    """Модель плагина вкладок"""
+    # tabs_position = models.CharField("Расположение переключателей вкладок", max_length=32, 
+    #                                  choices=TABS_POSITION_CHOICES, default=TABS_POSITION_CHOICES[0][0])
+    justified = models.BooleanField("Растянуть строку переключателей вкладок во всю ширину", default=True)
+
+class TabPlugin(CMSPlugin):
+    """Модель плагина вкладки"""
+    name = models.CharField("Название", max_length=128, )
+
+    def __str__(self):
+        return self.name
+
+class AccordionPlugin(CMSPlugin):
+    """Модель плагина аккордеон"""
+    speed = models.PositiveSmallIntegerField("Скорость раскрытия (мс)", default=1000)
+    close_others = models.BooleanField("Закрывать другие вкладки при открытии", default=True)
+    auto_open = models.BooleanField("Автоматически открывать вкладку при загрузке", default=True)
+    num_auto_open = models.PositiveSmallIntegerField("Номер вкладки", default=1)
+
+class ItemAccordionPlugin(CMSPlugin):
+    """Модель плагина вкладки аккордеона"""
+    name = models.CharField("Название", max_length=128, )
+
+    def __str__(self):
+        return self.name

@@ -813,7 +813,8 @@ HEADER AND MENUS
     width: 0%;
     height: 2px;
     /* height: 100%; */
-    background-color: #4d4d4d0a;
+    /* background-color: #4d4d4d0a; */
+    background-color: var(--main-color-2);
     transition: all 0.35s ease-out;
     -webkit-transition: all 0.35s ease-out;
 }
