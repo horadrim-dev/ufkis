@@ -1,0 +1,19 @@
+{% load cms_tags %}
+ 
+<div>
+	<h3>Содержание</h3>
+	<div class="list-items text-left">
+		{% for plugin in instance.child_plugin_instances %}
+		<div class="list-item">
+			<p><a href="#razdel-{{ plugin.id }}">{{ plugin.name }}</a></p>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+<div class="">
+	{% for plugin in instance.child_plugin_instances %}
+	 	<a name="razdel-{{ plugin.id }}"></a> {{ plugin.name }}
+		<div class="clear"></div>
+		{% render_plugin plugin %}
+	{% endfor %}
+</div>

@@ -242,3 +242,11 @@ class ItemAccordionPlugin(CMSPlugin):
 
     def __str__(self):
         return self.name
+
+
+class ItemArticlePlugin(CMSPlugin):
+    """Модель плагина раздела статьи"""
+    name = models.CharField("Название", max_length=128, )
+
+    def __str__(self):
+        return self.name

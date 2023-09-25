@@ -1,7 +1,9 @@
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
+from django.template import Template
 from .models import HeaderPlugin, WhitespacePlugin, SubmenuPlugin, PureCodePlugin, \
-                    TabsPlugin, TabPlugin, AccordionPlugin, ItemAccordionPlugin
+                    TabsPlugin, TabPlugin, AccordionPlugin, ItemAccordionPlugin, \
+                    ItemArticlePlugin
 
 @plugin_pool.register_plugin
 class HeaderPluginPublisher(CMSPluginBase):
@@ -108,3 +110,22 @@ class AccordionPluginPublisher(CMSPluginBase):
     allow_children = True
     child_classes = ["ItemAccordionPluginPublisher"]
     render_template = "core/plugins/accordion.html"
+
+@plugin_pool.register_plugin
+class ItemArticlePluginPublisher(CMSPluginBase):
+    model = ItemArticlePlugin
+    module = "Общий"
+    name = "Раздел"
+    render_template = "core/plugins/article_item.html"
+    parent_classes = ["ArticlePluginPublisher"]
+    allow_children = True
+
+
+@plugin_pool.register_plugin
+class ArticlePluginPublisher(CMSPluginBase):
+    module = "Общий"
+    name = "Статья"
+    # model = ArticlePlugin
+    allow_children = True
+    child_classes = ["ItemArticlePluginPublisher"]
+    render_template = "core/plugins/article.html"
