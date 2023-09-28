@@ -4983,7 +4983,7 @@ TITLE MODERN
         padding: 5px 0;
         margin: -1px;
         display: inline-block;
-        border-bottom: 1px solid #6A4D8F;
+        /* border-bottom: 1px solid #6A4D8F; */
         white-space: nowrap;
         padding-bottom: 10px;
     }
@@ -4999,9 +4999,9 @@ TITLE MODERN
         border-top: 1px solid #C1C1C1;
     }
 
-    .title-modern.st-icon hr {
+    /* .title-modern.st-icon hr {
         margin-right: 45px;
-    }
+    } */
 
 .title-modern-2 hr {
     max-width: 700px;

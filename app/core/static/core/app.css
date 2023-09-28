@@ -7,6 +7,9 @@
     --menu-font-color:#fff;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 .blackout {
   position: absolute;
   width: 100%;
@@ -496,4 +499,10 @@ html.special .caret::before {
 .accordion-list .list-group-item a::before{
   top: 3.2rem;
   border-color: var(--main-color);
+}
+.anchor-target {
+    padding-top: 140px;
+    margin-top: -140px;
+    -webkit-background-clip: content-box;
+    background-clip: content-box;
 }

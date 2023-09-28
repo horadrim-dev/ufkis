@@ -1,7 +1,7 @@
 {% load cms_tags %}
  
-<div>
-	<h3>Содержание</h3>
+<div class="article-summary">
+	<h4>Содержание:</h4>
 	<div class="list-items text-left">
 		{% for plugin in instance.child_plugin_instances %}
 		<div class="list-item">
@@ -10,10 +10,16 @@
 		{% endfor %}
 	</div>
 </div>
+<hr class="space m">
 <div class="">
 	{% for plugin in instance.child_plugin_instances %}
-	 	<a name="razdel-{{ plugin.id }}"></a> {{ plugin.name }}
+	 	<a name="razdel-{{ plugin.id }}" class="anchor-target"></a> 
+		<div class="title-modern st-icon text-left">
+			<h2>{{ plugin.name }}</h2>
+			<hr>
+		</div>
 		<div class="clear"></div>
 		{% render_plugin plugin %}
+		<hr class="space m">
 	{% endfor %}
 </div>
