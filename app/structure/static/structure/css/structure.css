@@ -69,3 +69,6 @@
 .activities .not-set.active{
     background: #fff;
 }
+.activities .activity-button {
+  background-color: #fff !important;
+}
