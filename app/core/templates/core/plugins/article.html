@@ -1,11 +1,12 @@
 {% load cms_tags %}
  
 <div class="article-summary">
-	<h4>Содержание:</h4>
+	<h3>Содержание:</h3>
+	<hr class="space xs">
 	<div class="list-items text-left">
 		{% for plugin in instance.child_plugin_instances %}
 		<div class="list-item">
-			<p><a href="#razdel-{{ plugin.id }}">{{ plugin.name }}</a></p>
+			<a href="#razdel-{{ plugin.id }}">{{ plugin.name }}</a>
 		</div>
 		{% endfor %}
 	</div>
@@ -20,6 +21,6 @@
 		</div>
 		<div class="clear"></div>
 		{% render_plugin plugin %}
-		<hr class="space m">
+		{% if not foorloop.last %}<hr class="space m">{% endif %}
 	{% endfor %}
 </div>
