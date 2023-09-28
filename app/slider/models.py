@@ -9,7 +9,6 @@ import uuid
 class Slider(CMSPlugin):
 
     num_items = models.PositiveSmallIntegerField("Количество отображаемых элементов", default=5)
-
     # def get_slides(self):
     #     return self.slide_set.all()
 
@@ -36,14 +35,16 @@ class Slide(CMSPlugin):
     #     )
     # title = models.CharField("Название", max_length=255, help_text="Не обязательно", default="", blank=True, null=True)
     # subtitle = models.CharField("Подзаголовок", max_length=255, default="", blank=True, null=True)
-    url = models.URLField("Ссылка", help_text="Не обязательно", default="", blank=True, null=True)
 
     image = FilerImageField(
         verbose_name='Изображение',
         on_delete=models.CASCADE,
     )
+    lightbox_on = models.BooleanField("Увеличивать изображение по клику", default=True)
+
     thumb_width = models.PositiveSmallIntegerField("Ширина", default=300)
     thumb_height = models.PositiveSmallIntegerField("Высота", default=200)
+    url = models.URLField("Ссылка", help_text="Не обязательно", default="", blank=True, null=True)
     # def __str__(self):
     #     return self.title if self.title else ""
 
