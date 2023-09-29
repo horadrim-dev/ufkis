@@ -141,6 +141,7 @@ INSTALLED_APPS = [
     'docs',
     'contact',
     'events',
+    'cmsplugin_yandexmap',
     # 'cmsplugin_contact'
     # 'django.contrib.postgres',
 ]
@@ -416,3 +417,6 @@ ELASTICSEARCH_DSL={
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 # HAYSTACK_SIGNAL_PROCESSOR = 'celery_haystack.signals.CelerySignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
+
+### YANDEX
+YANDEX_MAPS_API_KEY = env('YANDEX_MAPS_API_KEY')

@@ -6,10 +6,9 @@
         (function () {
             // save settings form plugin
             var container = 'yandex-map-{{ object.id }}';
-            var latLng = {{ object.get_lat_lng }};
+            var latLng = {% if object.get_lat_lng %}{{ object.get_lat_lng }}{% else %}""{% endif %};
             var title = "{{ object.get_title }}";
-            var address = "{{ object.zipcode }}, {{ object.city }}, {{ object.address }}";
-            var additional_content = "{{ object.get_content }}";
+            var address = "{{ object.full_address }}";
             var zoom = {{ object.get_zoom_level }};
 
             var map;

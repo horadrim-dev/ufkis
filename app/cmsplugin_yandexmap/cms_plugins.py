@@ -8,7 +8,7 @@ from django.forms.widgets import Media
 
 class YandexMapPlugin(CMSPluginBase):
     model = YandexMap
-    name = _("Yandex Map")
+    name = _("Яндекс карта")
     render_template = "cmsplugin_yandexmap/yandexmap.html"
     
     def render(self, context, instance, placeholder):
