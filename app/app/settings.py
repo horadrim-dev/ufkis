@@ -142,6 +142,7 @@ INSTALLED_APPS = [
     'contact',
     'events',
     'cmsplugin_yandexmap',
+    'popups',
     # 'cmsplugin_contact'
     # 'django.contrib.postgres',
 ]

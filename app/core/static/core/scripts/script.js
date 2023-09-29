@@ -1539,6 +1539,8 @@ function isScrollView(t) {
         });
         $("body").on("click", ".popup-close", function () {
             $(this).closest(".popup-banner").hide();
+            //добавляем в куки (аля просмотрено)
+            Cookies.set("hide_" + $(this).closest(".popup-banner").attr("id"), 1);
         });
         $('[data-trigger="load"].box-lightbox').each(function () {
             var e = $(this).attr("data-expire");
