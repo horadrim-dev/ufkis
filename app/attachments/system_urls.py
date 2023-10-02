@@ -4,9 +4,9 @@ from django.urls import path, re_path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import *
 
 urlpatterns = [
-    path('structure/', include("structure.system_urls")),
-    path('attachments/', include("attachments.system_urls")),
+    path('download/<int:id>/', attachment_download, name='attachment_download' ),
 ] 
 
