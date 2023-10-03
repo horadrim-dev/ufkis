@@ -2,7 +2,8 @@
 
 {% if obj.poster.type == "image" %}
     <a class="img-box" href="{{ obj.get_absolute_url }}">
-        <img class="anima" src="{% thumbnail obj.poster.image "300x300"  %}" alt="" />
+        {% comment %} <img class="anima" src="{% thumbnail obj.poster.image "300x300"  %}" alt="" /> {% endcomment %}
+        <img class="anima" src="{{ obj.thumb_src }}" alt="" />
     </a>
 {% elif obj.poster.type == "video" %}
     {% include 'medialer/default/video_player.html' with instance=obj.poster.videoplayer %}

@@ -127,7 +127,7 @@ class Organization(StructureBase):
 
         thumbnail_options = {
             'size': (155, 200),
-            'crop': True,
+            'crop': False,
             'upscale': True,
             'subject_location': logo.subject_location,
         }
