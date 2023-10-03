@@ -34,6 +34,7 @@ class Event(models.Model):
     )
     description = HTMLField(verbose_name="Описание", blank=True, null=True)
 
+
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
 
@@ -55,7 +56,7 @@ class Event(models.Model):
 
         thumbnail_options = {
             'size': (360, 240),
-            'crop': True,
+            'crop': False,
             'upscale': True,
             'subject_location': image.subject_location,
         }

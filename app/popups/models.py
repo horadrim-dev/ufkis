@@ -13,5 +13,7 @@ POPUP_POSITION_CHOICES = [
 class Popup(CMSPlugin):
     layout = models.CharField("Расположение", choices=POPUP_POSITION_CHOICES,
                                 default=POPUP_POSITION_CHOICES[0][0])
-    title = models.CharField(max_length=256, blank=True, null=True)
+    title = models.CharField("Заголовок", max_length=256, blank=True, null=True)
     content = HTMLField("Содержимое")
+    use_button = models.BooleanField("Использовать кнопку", default=True)
+    button_text = models.CharField("Текст кнопки", max_length=64, default="Хорошо")

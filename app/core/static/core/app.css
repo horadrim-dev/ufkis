@@ -506,3 +506,10 @@ html.special .caret::before {
     -webkit-background-clip: content-box;
     background-clip: content-box;
 }
+.popup-banner a.btn.popup-close {
+    position: inherit;
+    width: inherit;
+    padding-right: 12px;
+    height: inherit;
+    border-radius: inherit;
+}

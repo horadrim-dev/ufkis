@@ -25,6 +25,11 @@
         {% endif %}
         <div class="panel-body">
           {{ instance.content | safe }}
+          {% if instance.use_button %}
+          <div class="text-center">
+            <a href="#" class="btn btn-border popup-close">{{ instance.button_text }}</a>
+          </div>
+          {% endif %}
         </div>
     </div>
     {% else %}
@@ -32,6 +37,11 @@
       <h3>{{ instance.title }}</h3>
       {% endif %}
       {{ instance.content | safe }}
+      {% if instance.use_button %}
+      <div class="text-center">
+        <a href="#" class="btn btn-border popup-close">{{ instance.button_text }}</a>
+      </div>
+      {% endif %}
     {% endif %}
 </div>
 
