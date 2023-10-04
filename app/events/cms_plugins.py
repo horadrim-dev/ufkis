@@ -10,7 +10,7 @@ from .models import UpcomingEventsPlugin, Event
 class UpcomingEventsPluginPublisher(CMSPluginBase):
     model = UpcomingEventsPlugin
     render_template = 'events/plugins/upcoming_events.html'
-    name = "Ближайшие мероприятия"   
+    name = "Ближайшие мероприятия"
     module = "Мероприятия"
 
     def render(self, context, instance, placeholder):
@@ -20,7 +20,7 @@ class UpcomingEventsPluginPublisher(CMSPluginBase):
             'instance': instance,
         })
 
-        context['object_list'] = Event.objects.upcoming()[:instance.num_objects]
+        context['object_list'] = instance.get_objects()
 
         return context
 

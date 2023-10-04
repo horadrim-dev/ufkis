@@ -26,6 +26,10 @@ class EventsToolbar(CMSToolbar):
             name='Мероприятия',
             url=admin_reverse('events_event_changelist')
         )
+        menu .add_sideframe_item(
+            name='Категории мероприятий',
+            url=admin_reverse('events_categoryevent_changelist')
+        )
         # news_menu.add_modal_item(
         #     name='Типы документов',
         #     url=admin_reverse('docs_documenttype_changelist')

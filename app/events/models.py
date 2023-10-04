@@ -16,9 +16,20 @@ class EventContentManager(models.Manager):
     # def finished(self):
     #     return self.filter(published=True, start_at__lte=datetime.datetime.now())
 
+class CategoryEvent(models.Model):
+    name = models.CharField("Название категории", max_length=64)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "категория мероприятий"
+        verbose_name_plural = "категории мероприятий"
 
 class Event(models.Model):
     '''Модель мероприятия'''
+    category = models.ForeignKey(CategoryEvent, verbose_name="Категория", 
+                                 on_delete=models.SET_NULL, blank=True, null=True)
     name = models.CharField("Название мероприятия", max_length=512)
     place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
     start_at = models.DateTimeField(default=datetime.datetime.now, 
@@ -73,6 +84,16 @@ class Event(models.Model):
 class UpcomingEventsPlugin(CMSPlugin):
 
     num_objects = models.PositiveIntegerField("Количество мероприятий", default=3)
+    category = models.ForeignKey(CategoryEvent, verbose_name="Категория", 
+                                 on_delete=models.SET_NULL, blank=True, null=True)
+
+    def get_objects(self):
+        qs = Event.objects.upcoming()
+        if self.category:
+            qs = qs.filter(category=self.category)
+        if self.num_objects:
+            qs = qs[:self.num_objects]
+        return qs
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]
