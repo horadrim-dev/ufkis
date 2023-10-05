@@ -513,3 +513,9 @@ html.special .caret::before {
     height: inherit;
     border-radius: inherit;
 }
+.ui-icon-circle-triangle-e {
+    content: "\f061" !important;
+}
+.ui-icon-circle-triangle-w {
+    content: "\f060" !important;
+}

@@ -12,7 +12,7 @@
     <div class="grid-box row">
       {% for object in object_list %}
 
-        <div class="grid-item col-md-6">
+        <div class="grid-item col-md-12">
           {% render_model_block object %}
             {% include 'events/includes/event_item_side.html' %}
           {% endrender_model_block %}

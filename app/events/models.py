@@ -13,6 +13,8 @@ class EventContentManager(models.Manager):
     def upcoming(self):
         return self.filter(start_at__gte=datetime.datetime.now())
 
+    def upcoming_by_date(self, date):
+        return self.filter(start_at__date=date)
     # def finished(self):
     #     return self.filter(published=True, start_at__lte=datetime.datetime.now())
 
@@ -97,3 +99,16 @@ class UpcomingEventsPlugin(CMSPlugin):
 
     def generate_id(self):
         return str(uuid.uuid4().fields[-1])[:7]
+
+class CalendarEventsPlugin(CMSPlugin):
+
+    # num_objects = models.PositiveIntegerField("Количество мероприятий", default=3)
+    # category = models.ForeignKey(CategoryEvent, verbose_name="Категория", 
+    #                              on_delete=models.SET_NULL, blank=True, null=True)
+
+    def get_objects(self):
+        return Event.objects.upcoming()
+
+    def generate_id(self):
+        return str(uuid.uuid4().fields[-1])[:7]
+    

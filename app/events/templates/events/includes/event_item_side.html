@@ -5,12 +5,12 @@
     {% comment %} <div class="advs-box-content"> {% endcomment %}
     <div class="row">
         {% if object.poster %}
-        <div class="col-md-6">
+        <div class="col-md-4">
             <a class="img-box lightbox thumbnail" href="{{ object.poster.url }}">
                 <img src="{{ object.poster_thumb_src }}" alt="">
             </a>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
         {% else %}
         <div class="col-md-12">
         {% endif %}

@@ -1,0 +1,29 @@
+{% regroup object_list by day|date:"d E Y" as grouped_list %}
+
+<div class="">
+    {% comment %} <p class="list-group-item active">Latest posts</p> {% endcomment %}
+    {% for group in grouped_list %}
+
+        <div class="title-modern text-center">
+            <h2>{{ group.grouper }}</h2>
+            <hr>
+        </div>
+        {% comment %} <hr class="space s"> {% endcomment %}
+
+        {% for object in  group.list %}
+
+            {% include 'events/includes/event_item.html' %}
+
+        {% endfor %}
+
+        <hr class="space m">
+    {% empty %}
+        {% if date %}
+        <div class="title-modern text-center">
+            <h2>{{ date|date:"d E Y" }}</h2>
+            <hr>
+        </div>
+        {% endif %}
+        Запланированных мероприятий пока нет.
+    {% endfor %}
+</div>

@@ -59,6 +59,7 @@
 
 
       {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+      {% render_block "dynamic-css" %}
 
       {% block head %}
       {% endblock head %}
@@ -133,6 +134,7 @@
       <script src="{% static 'core/scripts/jquery.min.js' %}"></script>
 
       {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
+      {% render_block "dynamic-js" %}
 
       {% if request.toolbar and request.toolbar.edit_mode_active %}
       <script>

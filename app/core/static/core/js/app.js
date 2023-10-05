@@ -25,21 +25,22 @@
         // $(window).trigger('resize');
 
         // COPY-URL-BUTTONS
-        $(".copy-url").on('click', function (e) {
-            e.preventDefault();
-            var url = $(this).attr("data-url");
+        $.fn.copyToClipboard = function (url) {
             var inp = document.createElement('input')
             inp.value = url
             document.body.appendChild(inp)
             inp.select()
-            
             if (document.execCommand('copy')) {
                 toastr.success("Ссылка скопирована в буфер обмена");
             } else {
                 toastr.error("Не удалось скопировать ссылку");
             }
-            
             document.body.removeChild(inp)
+        }
+        $(".copy-url").on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).attr("data-url");
+            $(this).copyToClipboard(url);
         });
     };
 })(jQuery || django.jQuery);

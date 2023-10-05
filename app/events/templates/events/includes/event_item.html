@@ -6,7 +6,7 @@
         <div class="col-md-2 text-center">
             <h2>{{ object.start_at.time }}</h2>
         </div>
-        {% if object.poster %}
+        {% if object.poster and LAYOUT == 'NORMAL' %}
         <div class="col-md-3">
             <a class="img-box lightbox thumbnail" href="#event-{{object.id}}" data-lightbox-anima="show-scale">
                 <img src="{{ object.poster_thumb_src }}" alt="">
@@ -14,14 +14,19 @@
         </div>
         <div class="col-md-5">
         {% else %}
-        <div class="col-md-8">
+        <div class="col-md-7">
         {% endif %}
             <a class="lightbox dashed" href="#event-{{object.id}}" data-lightbox-anima="show-scale">
+                {% if LAYOUT == 'NORMAL' %}
                 <span class="h3">{{ object.name }}</span>
+                {% elif LAYOUT == 'SMALL' %}
+                <span class="h4">{{ object.name }}</span>
+                {% endif %}
             </a>
             <hr class="space xs">
-
+            {% if LAYOUT != 'SMALL' %}
             {{ object.description|striptags|truncatechars_html:150}}
+            {% endif %}
 
             {% if object.place %}
             <hr class="space xs">
@@ -29,8 +34,12 @@
             {% endif %}
 
         </div> 
-        <div class="col-md-2">
-            {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.poster.url description=object.description|striptags|truncatechars_html:150 style="list" %}
+        <div class="col-md-3">
+            {% if LAYOUT == 'NORMAL' %}
+                {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.poster.url description=object.description|striptags|truncatechars_html:150 style="list" %}
+            {% elif LAYOUT == 'SMALL' %}
+                {% render_share_buttons url=object.get_absolute_url title=object.name image_src=object.poster.url description=object.description|striptags|truncatechars_html:150 style="list" size="micro" %}
+            {% endif %}
         </div> 
     </div>
     {% endrender_model_block %}
