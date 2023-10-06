@@ -27,8 +27,8 @@
                 <span class="h4">{{ object.name }}</span>
                 {% endif %}
             </a>
-            <hr class="space xs">
             {% if LAYOUT != 'SMALL' %}
+            <hr class="space xs">
             {{ object.description|striptags|truncatechars_html:150}}
             {% endif %}
 
