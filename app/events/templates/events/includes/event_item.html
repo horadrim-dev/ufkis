@@ -4,7 +4,11 @@
     {% render_model_block object %}
     <div class="row vertical-row">
         <div class="col-md-2 text-center">
+            {% if LAYOUT == 'NORMAL' %}
             <h2>{{ object.start_at.time }}</h2>
+            {% elif LAYOUT == 'SMALL' %}
+            <h3>{{ object.start_at.time }}</h3>
+            {% endif %}
         </div>
         {% if object.poster and LAYOUT == 'NORMAL' %}
         <div class="col-md-3">
