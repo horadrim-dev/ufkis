@@ -543,6 +543,8 @@ class AlbumPicture(AbstractPicture):
                               verbose_name="Альбом")
     class Meta:
         abstract = False
+        verbose_name = "фото"
+        verbose_name_plural = "фото"
 
 
 
