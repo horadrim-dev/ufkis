@@ -832,6 +832,7 @@ header.scroll-css .navbar-brand {
 .navbar-brand .navbar-brand-title span:first-child {
     display: block;
     font-weight: bold;
+    color: var(--main-color);
 }
 
 .navbar-brand-logo {
