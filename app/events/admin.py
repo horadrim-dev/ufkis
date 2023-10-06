@@ -9,4 +9,5 @@ class CategoryEventAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     model = Event
+    list_display = ('name', 'category', 'start_at')
 

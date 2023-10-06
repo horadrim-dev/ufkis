@@ -18,17 +18,19 @@ class EventsListView(ListView):
         context['LAYOUT'] = 'NORMAL'
         return context
 
+
 class GetEventListView(TemplateView):
     """
     Возвращает отрендеренный список мероприятий в заданный день в ответ на ajax запрос.
-    Используется в плагине "Календарь"
+    Используется в плагине "Календарь мероприятий"
     """
+
     template_name = "events/includes/event_list.html"
 
     def get(self,request, *args, **kwargs):
         # пропускаем только ajax запросы
-        # if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
-        #     raise Http404
+        if not request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            raise Http404
 
         return super().get(request, *args, **kwargs)
     
@@ -41,15 +43,18 @@ class GetEventListView(TemplateView):
         except ValueError:
             raise Http404
 
-        category = self.request.GET.get("category", None)
+        # список меропиятий в заданный день
         qs = Event.objects.upcoming_by_date(date)
-        if category:
-            qs = qs.filter(category=category)
+
+        category_id = self.request.GET.get("event-category", None)
+        if category_id and category_id.isdigit():
+            qs = qs.filter(category=category_id)
         
         qs = qs.annotate(day=TruncDay('start_at'))
 
         context['object_list'] = qs
         context['LAYOUT'] = 'SMALL'
         context['date'] = date
+
         return context
     

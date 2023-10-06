@@ -15,7 +15,13 @@
         <div id="calendar-{{id}}"></div>
         <input type="hidden" id="calendar-{{id}}-value" {% if events_dates %}value="{{ events_dates.0 }}{% endif %}">
     </div>
-    <div id="calendar-{{id}}-target" class="events-list col-md-8"></div>
+    <div id="calendar-{{id}}-content" class="events-list col-md-8">
+        {% if object_list %}
+            {% include 'events/includes/event_list.html' with LAYOUT="SMALL" %}
+        {% else %}
+            Запланированных мероприятий пока нет
+        {% endif %}
+    </div>
 </div>
 
 {% addtoblock "js" %}
@@ -58,35 +64,36 @@
         original_onPageLoad();
 
         let events_dates = {{ events_dates | safe }};
+        let datepicker_div = "#calendar-{{id}}";
+        let date_value = '#calendar-{{id}}-value';
+        let url = "{% url 'events_by_date' %}";
+        let wrapper = "#calendar-{{id}}-wrapper";
+        let content = "#calendar-{{id}}-content";
 
-        $( "#calendar-{{id}}" ).datepicker({
+        $(datepicker_div).datepicker({
             dateFormat: "yy-mm-dd",
             changeYear: false,
             minDate: 0,
-            //maxDate: new Date(2025, 11, 15),
             beforeShowDay: function(date){
                 var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
                 return [events_dates.indexOf(string) != -1] // если дата в списке - вернет true
 		    },
             onSelect: function(date) {
                 //обработчики выбора даты
-                $('#calendar-{{id}}-value').val(date)
-                let url = "{% url 'events_by_date' %}";
-                let wrapper = "#calendar-{{id}}-wrapper";
-                let target = "#calendar-{{id}}-target";
+                $(date_value).val(date)
                 $.ajax({
                     url: url,
                     data: {
-                     'date': date // add id to the GET parameters
+                     'date': date, 
+                     {% if instance.category %}'event-category': {{ instance.category.id }},{% endif %}
                     },
                     beforeSend: function() {
                         $(wrapper + ' .preloader').show();
                     },
                     success: function (res) {  
-                        $(target).html(res);
-                        //$(document).off();
-                        //$(document).onPageLoad();
-                        $(target + ' a[href="#"]').on('click', function (e) {
+                        $(content).html(res);
+                        // make js work again
+                        $(content + ' a[href="#"]').on('click', function (e) {
                             e.preventDefault();
                         });
                         $(".copy-url").on('click', function (e) {
@@ -94,7 +101,7 @@
                             var url = $(this).attr("data-url");
                             $(this).copyToClipboard(url);
                         });
-                        $(target + " .lightbox").each(function () {
+                        $(content + " .lightbox").each(function () {
                             $(this).initMagnificPopup();
                         });
                     },
@@ -104,7 +111,7 @@
                 });
             },
         });
-        $( "#calendar-{{id}}" ).datepicker("setDate", $('#calendar-{{id}}-value').val());
+        $(datepicker_div).datepicker("setDate", $(date_value).val());
     };
 })(jQuery || django.jQuery);
 </script>
