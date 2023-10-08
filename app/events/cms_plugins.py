@@ -5,7 +5,7 @@ from django.contrib import admin
 from news.models import Post
 from django.db.models.functions import TruncDay
 
-from .models import UpcomingEventsPlugin, Event, CalendarEventsPlugin
+from .models import UpcomingEventsPlugin, Event, CalendarEventsPlugin, DayEvent
 
 @plugin_pool.register_plugin
 class UpcomingEventsPluginPublisher(CMSPluginBase):
@@ -39,18 +39,18 @@ class CalendarEventsPluginPublisher(CMSPluginBase):
     def render(self, context, instance, placeholder):
 
         # получаем список дат, в которые есть мероприятия
-        events_dates_qs = Event.objects.upcoming() 
+        events_dates_qs = DayEvent.objects.upcoming() 
         if instance.category:
-            events_dates_qs = events_dates_qs.filter(category=instance.category)
+            events_dates_qs = events_dates_qs.filter(event__category=instance.category)
         events_dates_qs = events_dates_qs.values_list('start_at__date') \
                                          .distinct() \
-                                         .order_by()
+                                         .order_by('start_at__date')
 
         if events_dates_qs:
             # формируем список мероприятий в ближайший день
-            closest_events_qs = Event.objects.upcoming_by_date(events_dates_qs[0][0])
+            closest_events_qs = DayEvent.objects.upcoming_by_date(events_dates_qs[0][0])
             if instance.category:
-                closest_events_qs = closest_events_qs.filter(category=instance.category)
+                closest_events_qs = closest_events_qs.filter(event__category=instance.category)
             
             closest_events_qs = closest_events_qs.annotate(day=TruncDay('start_at'))
             context['object_list'] = closest_events_qs 

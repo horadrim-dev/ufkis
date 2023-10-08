@@ -1,7 +1,7 @@
 {% load cms_tags core_tags easy_thumbnails_tags %}
 
 <div class="events-item advs-box advs-box-side boxed-inverse">
-    {% render_model_block object %}
+    {% render_model_block object.event %}
     {% comment %} <div class="advs-box-content"> {% endcomment %}
     <div class="row">
         {% if object.poster %}
