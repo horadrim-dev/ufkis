@@ -1,17 +1,18 @@
 from django.views.generic import ListView, DetailView, View, TemplateView
 from django.db.models.functions import TruncDay
-from .models import Event
+from .models import Event, DayEvent
 from django.http import HttpResponse, JsonResponse, Http404
 import datetime 
 from django.db.models import ExpressionWrapper, DateField
 
 
-class EventsListView(ListView):
+class DayEventsListView(ListView):
     template_name = "events/events.html"
-    model = Event
+    # model = DayEvent
 
     def get_queryset(self):
-        return Event.objects.upcoming().annotate(day=TruncDay('start_at'))
+        # return Event.objects.upcoming().annotate(day=TruncDay('start_at'))
+        return DayEvent.objects.upcoming().annotate(day=TruncDay('start_at'))
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +20,7 @@ class EventsListView(ListView):
         return context
 
 
-class GetEventListView(TemplateView):
+class GetDayEventListView(TemplateView):
     """
     Возвращает отрендеренный список мероприятий в заданный день в ответ на ajax запрос.
     Используется в плагине "Календарь мероприятий"
@@ -44,7 +45,7 @@ class GetEventListView(TemplateView):
             raise Http404
 
         # список меропиятий в заданный день
-        qs = Event.objects.upcoming_by_date(date)
+        qs = DayEvent.objects.upcoming_by_date(date)
 
         category_id = self.request.GET.get("event-category", None)
         if category_id and category_id.isdigit():

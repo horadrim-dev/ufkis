@@ -96,7 +96,7 @@
                         $(content + ' a[href="#"]').on('click', function (e) {
                             e.preventDefault();
                         });
-                        $(".copy-url").on('click', function (e) {
+                        $(content + " .copy-url").on('click', function (e) {
                             e.preventDefault();
                             var url = $(this).attr("data-url");
                             $(this).copyToClipboard(url);
