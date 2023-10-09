@@ -527,3 +527,6 @@ html.special .caret::before {
 .ui-icon-circle-triangle-w {
     content: "\f060" !important;
 }
+.mfp-figure figure {
+    background: #fff;
+}
