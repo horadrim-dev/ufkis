@@ -51,18 +51,6 @@ class Event(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self,  *args, **kwargs):
-        
-        super().save(*args, **kwargs)
-
-        # проверяем дни мероприятия, если их кол-во больше 1
-        # присваиваем каждому из них постфикс (День1, День2 и т.д.)
-        event_days = self.dayevent_set.all()
-        if len(event_days) > 1:
-            for idx, day in enumerate(event_days, 1):
-                day.postfix_name = " [День {}]".format(str(idx))
-                day.save()
-
     # def get_absolute_url(self):
     #     try:
     #         return "{}?lightbox=event-{}".format(reverse("events:index"), self.id)
@@ -84,10 +72,11 @@ class DayEvent(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     start_at = models.DateTimeField(default=datetime.datetime.now, 
                                     verbose_name="Время начала мероприятия")
-    # постфикс добавляется при сохранения мероприятия (День1, День2 и т.д.)
-    # и недоступен при редактировании формы
-    postfix_name = models.CharField("Постфикс названия", blank=True, null=True)
     place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
+    postfix_name = models.CharField("Постфикс названия мероприятия", blank=True, null=True,
+                                    help_text="Пример: День 1, Второй этап и т.д. \
+                                               Будет отображено в квадратных скобках в \
+                                               конце названия мероприятия.")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
 
@@ -116,7 +105,7 @@ class DayEvent(models.Model):
     @property
     def name(self):
         if self.postfix_name:
-            return self.event.name + self.postfix_name
+            return "{} [{}]".format(self.event.name, self.postfix_name)
         else:
             return self.event.name
 

@@ -10,7 +10,7 @@ class CategoryEventAdmin(admin.ModelAdmin):
 class DayEventStackedInline(admin.StackedInline):
     model = DayEvent
     extra = 0
-    exclude = ['postfix_name']
+    # exclude = ['postfix_name']
     formset = DayEventStackedInlineFormSet
 
 @admin.register(Event)
