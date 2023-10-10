@@ -5,7 +5,7 @@
 {% endif %}
 
 {% if js %}
-{% addtoblock "js" %}<script>{{ js | safe }}</script>{% endaddtoblock %}
+{% addtoblock "dynamic-js" %}<script>{{ js | safe }}</script>{% endaddtoblock %}
 {% endif %}
 
 {% if code %}

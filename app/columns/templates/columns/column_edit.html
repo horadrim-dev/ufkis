@@ -1,5 +1,5 @@
 {% load sekizai_tags cms_tags %}
-{% addtoblock "js" %}
+{% addtoblock "dynamic-js" %}
 <script type="text/javascript">
     CMS.$(document).ready(function () {
                 new CMS.Placeholder('#cms_placeholder-{{ instance.pk }}', {

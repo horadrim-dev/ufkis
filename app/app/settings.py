@@ -367,7 +367,7 @@ COMPRESS_FILTERS = {
         'compressor.filters.cssmin.rCSSMinFilter',
     ],
     'js':[
-        'compressor.filters.jsmin.JSMinFilter',
+        # 'compressor.filters.jsmin.JSMinFilter',
         # 'compressor.filters.jsmin.CalmjsFilter',
     ]
 }

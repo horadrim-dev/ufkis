@@ -51,23 +51,15 @@
         {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.twbsPagination.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-        {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}
-        {% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script async  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}{% endcomment %}
+        {% comment %}{% addtoblock "js" %}<script async  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/social.stream.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/jquery.slimscroll.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/smooth.scroll.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
 
-
-      {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
-      {% render_block "dynamic-css" %}
-
-      {% block head %}
-      {% endblock head %}
-
-
       {# fix header for admin view #}
       {% if request.user.is_authenticated or "edit" in request.GET %}
-        {% addtoblock "css" %}
+        {% addtoblock "dynamic-css" %}
         <style>
           .navbar-fixed-top {
             top: 46px;
@@ -76,6 +68,12 @@
         {% endaddtoblock %}
         {% comment %} <div style="width:100%; height:46px;"></div> {% endcomment %}
       {% endif %}
+
+      {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+      {% render_block "dynamic-css" %}
+
+      {% block head %}
+      {% endblock head %}
       
     </head>
     <body>
@@ -104,19 +102,6 @@
     {% static_placeholder "[ALL] bottom" %}
 
     {% include 'core/footer.html' %}
-		{% comment %} <footer class="ftco-footer ftco-bg-dark ftco-section pb-0">
-			<div class="container">
-				{% static_placeholder 'footer' %}
-				
-				<div class="row">
-				<div class="col-md-12 text-center">
-					<p>
-						&copy;<script>document.write(new Date().getFullYear());</script> 
-					</p>
-				</div>
-				</div>
-			</div>
-		</footer> {% endcomment %}
 
         {% comment %} {% if not user.is_authenticated %} {% endcomment %}
         {% comment %} <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div> {% endcomment %}

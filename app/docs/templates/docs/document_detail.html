@@ -7,9 +7,6 @@
 
 {% block app_content %}
 
-    {% comment %} {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/flexslider/flexslider.css' %}">{% endaddtoblock %}
-    {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-
     <div class="news-item detail">
         {% comment %} <div class="row"> {% endcomment %}
         {% if ADMIN_MODE or EDIT_MODE %}

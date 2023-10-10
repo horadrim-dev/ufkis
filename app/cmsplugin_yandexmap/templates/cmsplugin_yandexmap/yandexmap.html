@@ -1,7 +1,7 @@
 {% load i18n sekizai_tags %}
 
-    {% addtoblock "js" %}<script src="https://api-maps.yandex.ru/2.1/?apikey={{ object.get_api_key }}&lang=ru_RU" type="text/javascript"></script>{% endaddtoblock %}
-    {% addtoblock "js" %}
+    {% addtoblock "dynamic-js" %}<script src="https://api-maps.yandex.ru/2.1/?apikey={{ object.get_api_key }}&lang=ru_RU" type="text/javascript"></script>{% endaddtoblock %}
+    {% addtoblock "dynamic-js" %}
     <script type="text/javascript">
         (function () {
             // save settings form plugin
