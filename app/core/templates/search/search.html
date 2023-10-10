@@ -44,6 +44,8 @@
                                 {% include "news/search_postcategory_item.html" %}
                             {% elif result.model_name == "album" %}
                                 {% include "medialer/search_album_item.html" %}
+                            {% elif result.model_name == "dayevent" %}
+                                {% include "events/search_dayevent.html" %}
                             {% endif %}
                         {% endwith %}
                     </div>
