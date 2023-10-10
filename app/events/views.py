@@ -4,7 +4,7 @@ from .models import Event, DayEvent
 from django.http import HttpResponse, JsonResponse, Http404
 import datetime 
 from django.db.models import ExpressionWrapper, DateField
-
+from django.utils.timezone import make_aware
 
 class DayEventsListView(ListView):
     template_name = "events/events.html"
@@ -40,7 +40,7 @@ class GetDayEventListView(TemplateView):
 
         date = self.request.GET.get("date", "")
         try:
-            date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+            date = make_aware(datetime.datetime.strptime(date, "%Y-%m-%d")).date()
         except ValueError:
             raise Http404
 

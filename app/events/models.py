@@ -7,7 +7,7 @@ from easy_thumbnails.files import get_thumbnailer
 from django.urls import reverse, NoReverseMatch
 from cms.models.pluginmodel import CMSPlugin
 import uuid
-
+from django.utils import timezone
 
 
 class CategoryEvent(models.Model):
@@ -61,7 +61,7 @@ class Event(models.Model):
 class DayEventContentManager(models.Manager):
 
     def upcoming(self):
-        return self.filter(start_at__gte=datetime.datetime.now())
+        return self.filter(start_at__gte=timezone.now())
 
     def upcoming_by_date(self, date):
         return self.upcoming().filter(start_at__date=date)
@@ -70,7 +70,7 @@ class DayEventContentManager(models.Manager):
 
 class DayEvent(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    start_at = models.DateTimeField(default=datetime.datetime.now, 
+    start_at = models.DateTimeField(default=timezone.now, 
                                     verbose_name="Время начала мероприятия")
     place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
     postfix_name = models.CharField("Постфикс названия мероприятия", blank=True, null=True,
