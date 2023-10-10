@@ -1,3 +1,0 @@
-{% load i18n %}{% trans "Сообщение от" %}: {{ data.email }}
-
-{{ data.content|safe }}
