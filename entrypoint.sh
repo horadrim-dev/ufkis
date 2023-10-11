@@ -29,6 +29,7 @@ echo "Elasticsearch started"
 
 python manage.py migrate
 python manage.py filer_check --delete-missing --noinput
+rm -r ./staticfiles/CACHE/
 python manage.py collectstatic --noinput
 chmod 755 $(find ./staticfiles -type d)
 chmod 755 $(find ./mediafiles -type d)
