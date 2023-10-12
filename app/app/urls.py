@@ -27,6 +27,7 @@ urlpatterns = [
     # re_path(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     path('search/', include('haystack.urls')),
     path('core/', include('core.system_urls')),
+    path("prometheus/", include("django_prometheus.urls")),
     path('admin/', admin.site.urls),
     # path('', include('structure.system_urls')),
     path('', include('cms.urls')),

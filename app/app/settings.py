@@ -91,6 +91,7 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "captcha",
     'haystack',  # search engine
+    'django_prometheus',
     # приложение обеспечивающее фоновое обновление 
     # индексов при получении сигналов create/delete объектов
     # https://github.com/django-haystack/celery-haystack
@@ -149,6 +150,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -163,6 +166,8 @@ MIDDLEWARE = [
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
+
+    "django_prometheus.middleware.PrometheusAfterMiddleware",
 ]
 
 
@@ -198,7 +203,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 if POSTGRES_IS_AVAIL:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgresql",
+            "ENGINE": "django_prometheus.db.backends.postgresql",
             'OPTIONS': {
                 'options': '-c search_path=ufkis_schema'
             },
@@ -422,3 +427,5 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
 
 ### YANDEX
 YANDEX_MAPS_API_KEY = env('YANDEX_MAPS_API_KEY')
+
+# PROMETHEUS_EXPORT_MIGRATIONS = env.bool("PROMETHEUS_EXPORT_MIGRATIONS", True)
