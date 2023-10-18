@@ -46,6 +46,8 @@
                                 {% include "medialer/search_album_item.html" %}
                             {% elif result.model_name == "dayevent" %}
                                 {% include "events/search_dayevent.html" %}
+                            {% elif result.model_name == "attachment" %}
+                                {% include "attachments/search_attachment.html" %}
                             {% endif %}
                         {% endwith %}
                     </div>
