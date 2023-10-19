@@ -37,6 +37,7 @@
         
       {% addtoblock "js" %}<script src="{% static 'core/js/accessibility.min.js' %}"></script>{% endaddtoblock %}
 
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script  src="{% static 'core/js/toastr.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/scripts/navbar-collapsing.js' %}"></script>{% endaddtoblock %}
@@ -116,7 +117,6 @@
 
       <script src="{% static 'core/scripts/jquery.min.js' %}"></script>
 
-      {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script  src="{% static 'core/js/app.js' %}"></script>{% endaddtoblock %}
 
       {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
