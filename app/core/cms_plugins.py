@@ -51,7 +51,7 @@ class SubmenuPluginPublisher(CMSPluginBase):
 
 @plugin_pool.register_plugin
 class BlockPluginPublisher(CMSPluginBase):
-    module = "Общий"
+    module = "Контейнеры"
     name = "Блок"
     allow_children = True
     render_template = "core/plugins/block.html"
@@ -84,7 +84,7 @@ class TabPluginPublisher(CMSPluginBase):
 
 @plugin_pool.register_plugin
 class TabsPluginPublisher(CMSPluginBase):
-    module = "Общий"
+    module = "Контейнеры"
     name = "Вкладки"
     model = TabsPlugin
     allow_children = True
@@ -104,7 +104,7 @@ class ItemAccordionPluginPublisher(CMSPluginBase):
 
 @plugin_pool.register_plugin
 class AccordionPluginPublisher(CMSPluginBase):
-    module = "Общий"
+    module = "Контейнеры"
     name = "Аккордеон"
     model = AccordionPlugin
     allow_children = True

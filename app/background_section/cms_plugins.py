@@ -11,6 +11,7 @@ class BackgroundSectionPlugin(CMSPluginBase):
     model = BackgroundSection
     render_template = 'background_section.html'
     name = "Секция"
+    module = "Контейнеры"
     allow_children = True
     form = SectionForm
 

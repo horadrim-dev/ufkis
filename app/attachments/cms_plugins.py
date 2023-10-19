@@ -13,6 +13,7 @@ class AttachmentInlineAdmin(admin.StackedInline):
 class AttachmentPlugin(CMSPluginBase):
     model = Attachments
     name = "Вложения"
+    module = "Документы"
     render_template = "attachments/attachments.html"
     allow_children = False
     inlines = (AttachmentInlineAdmin, )

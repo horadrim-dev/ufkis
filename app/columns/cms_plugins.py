@@ -10,7 +10,7 @@ from .models import Column, Columns
 @plugin_pool.register_plugin
 class ColumnsPlugin(CMSPluginBase):
     model = Columns
-    module = "Колонки"
+    module = "Контейнеры"
     name = "Колонки"
     render_template = "columns/columns.html"
     allow_children = True

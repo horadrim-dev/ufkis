@@ -6,20 +6,20 @@ from django.contrib import admin
 from .models import Infoblock, Slide
 from .forms import InfoblockForm
 
-class SlideInlineAdmin(admin.StackedInline):
-    model = Slide
-    extra = 0
+# class SlideInlineAdmin(admin.StackedInline):
+#     model = Slide
+#     extra = 0
 
 @plugin_pool.register_plugin
 class InfoBlockPlugin(CMSPluginBase):
     model = Infoblock
-    module = "Инфослайдер"
-    name = "Инфослайдер"
+    module = "Контейнеры"
+    name = "Контент-слайдер"
     render_template = "./infoblock.html"
     cache = True
     # inlines = (SlideInlineAdmin, )
     allow_children = True
-    child_classes = ["SlidePlugin"]
+    child_classes = ["BackgroundSectionPlugin"]
     form = InfoblockForm
     # fieldsets = (
     #     (None, {
@@ -51,6 +51,7 @@ class InfoBlockPlugin(CMSPluginBase):
 
 @plugin_pool.register_plugin
 class SlidePlugin(CMSPluginBase):
+    # НЕ ИСПОЛЬЗУЕТСЯ, ОСТАВЛЕНО ВО ИЗБЕЖАНИЕ ПРОБЛЕМ С МИГРАЦИЕЙ
     model = Slide
     module = "Инфослайдер"
     name = "Слайд"

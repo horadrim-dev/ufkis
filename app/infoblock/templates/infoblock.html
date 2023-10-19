@@ -15,14 +15,16 @@
 </style>
 {% endaddtoblock %}
 
-<div class="section-empty no-paddings">
+{% comment %} <div class="section-empty no-paddings"> {% endcomment %}
     <div class="section-slider" id="slider-{{id}}">
         <div class="flexslider advanced-slider slider" data-options="animation:fade">
             <ul class="slides">
                 {% for plugin in instance.child_plugin_instances %}
-                    {% render_plugin plugin %}
+                    <li data-slider-anima="fade-right" data-time="1000">
+                        {% render_plugin plugin %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-</div>
+{% comment %} </div> {% endcomment %}
