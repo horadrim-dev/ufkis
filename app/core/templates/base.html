@@ -37,22 +37,20 @@
         
       {% addtoblock "js" %}<script src="{% static 'core/js/accessibility.min.js' %}"></script>{% endaddtoblock %}
 
-      {% addtoblock "js" %}<script morti  src="{% static 'core/js/toastr.min.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script morti  src="{% static 'core/js/app.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %}
-      {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script  src="{% static 'core/js/toastr.min.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script  src="{% static 'core/scripts/bootstrap/js/bootstrap.min.js' %}"></script>{% endaddtoblock %}
       {% addtoblock "js" %}<script src="{% static 'core/scripts/navbar-collapsing.js' %}"></script>{% endaddtoblock %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/bootstrap5.3.0/js/bootstrap.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/bootstrap5.3.0/js/bootstrap.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/imagesloaded.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/parallax.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
       {% addtoblock "js" %}<script src="{% static 'core/scripts/flexslider/jquery.flexslider-min.js' %}"></script>{% endaddtoblock %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/php/contact-form.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/jquery.twbsPagination.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-      {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %} {% endcomment %}
-        {% comment %} {% addtoblock "js" %}<script morti  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}{% endcomment %}
-        {% comment %}{% addtoblock "js" %}<script morti  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/isotope.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/php/contact-form.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/jquery.progress-counter.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/jquery.twbsPagination.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+      {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/jquery.tab-accordion.js' %}"></script>{% endaddtoblock %} {% endcomment %}
+        {% comment %} {% addtoblock "js" %}<script  src="{% static 'core/scripts/bootstrap/js/bootstrap.popover.min.js' %}"></script>{% endaddtoblock %}{% endcomment %}
+        {% comment %}{% addtoblock "js" %}<script  src="{% static 'core/scripts/jquery.magnific-popup.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/social.stream.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/jquery.slimscroll.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
         {% comment %} {% addtoblock "js" %}<script src="{% static 'core/scripts/smooth.scroll.min.js' %}"></script>{% endaddtoblock %} {% endcomment %}
@@ -117,6 +115,9 @@
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/app.css' %}">{% endaddtoblock %}
 
       <script src="{% static 'core/scripts/jquery.min.js' %}"></script>
+
+      {% addtoblock "js" %}<script src="{% static 'core/scripts/script.js' %}"></script>{% endaddtoblock %}
+      {% addtoblock "js" %}<script  src="{% static 'core/js/app.js' %}"></script>{% endaddtoblock %}
 
       {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
       {% render_block "dynamic-js" %}

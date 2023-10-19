@@ -26,16 +26,16 @@
 
         // COPY-URL-BUTTONS
         $.fn.copyToClipboard = function (url) {
-            var inp = document.createElement('input')
-            inp.value = url
-            document.body.appendChild(inp)
-            inp.select()
+            var inp = document.createElement('input');
+            inp.value = url;
+            document.body.appendChild(inp);
+            inp.select();
             if (document.execCommand('copy')) {
                 toastr.success("Ссылка скопирована в буфер обмена");
             } else {
                 toastr.error("Не удалось скопировать ссылку");
             }
-            document.body.removeChild(inp)
+            document.body.removeChild(inp);
         }
         $(".copy-url").on('click', function (e) {
             e.preventDefault();

@@ -23,13 +23,14 @@
     >
 
         {% for type, icon, tooltip, url in socials %}
-        <a target="_blank" href="#"
+        <a target="_blank" 
             {% if type == 'share-button' %}
-
+                href="#"
                 onclick="window.open('{{ url }}', '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=600')"
 
             {% elif type == 'copy-button' %}
                 {# обрабатывается в app.js #}
+                href="{{ url }}"
                 class="copy-url"
                 data-url="{{ url }}"
 
