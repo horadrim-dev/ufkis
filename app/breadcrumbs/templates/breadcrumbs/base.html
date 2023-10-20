@@ -17,10 +17,10 @@
     ">
     <div class="container">
         <div class="title-base">
-            <div class="image-right">
+            {% comment %} <div class="image-right">
                 <img src="{% thumbnail image width_height_thumb upscale crop %}" alt="">
-            </div>
-            <hr class="anima" />
+            </div> {% endcomment %}
+            {% comment %} <hr class="anima" /> {% endcomment %}
             <h1>
                 {% if page_title %}
                     {{ page_title }}

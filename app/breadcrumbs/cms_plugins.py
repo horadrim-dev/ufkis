@@ -7,15 +7,15 @@ from .models import Breadcrumbs
 class BreadcrumbsPlugin(CMSPluginBase):
     model = Breadcrumbs
     render_template = 'breadcrumbs/base.html'
-    name = "Breadcrumbs"
+    name = "Хлебные крошки"
     allow_children = False
     cache = False
 
     def render(self, context, instance, placeholder):
         context.update({
             'instance': instance,
-            'image': instance.image,
-            'width_height_thumb': instance.width_height_thumb,
+            # 'image': instance.image,
+            # 'width_height_thumb': instance.width_height_thumb,
             'white_mode': instance.white_mode
         })
         if instance.title:
