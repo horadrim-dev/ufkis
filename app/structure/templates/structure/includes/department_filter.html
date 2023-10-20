@@ -29,7 +29,7 @@
                                     >
                                         <img src="{{ choice.data.value.instance.thumb_src}}" alt="" />
                                         <div class="caption">
-                                            <h2>{{ choice.choice_label|safe }}</h2>
+                                            {% comment %} <h2>{{ choice.choice_label|safe }}</h2> {% endcomment %}
                                         </div>
                                     </div>
                                     {% endif %}
