@@ -391,11 +391,15 @@ footer .text-l {
 .nav > li.dropdown > a {
   padding-right: 20px;
 }
-.align-left {
-    float:left;
+img.align-left {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
 }
-.align-right {
-    float:right;
+img.align-right {
+    float: right;
+    padding-left: 20px;
+    padding-bottom: 20px;
 }
 header .navbar-brand {
     padding-right: 0;
