@@ -133,7 +133,8 @@ class Post(models.Model):
         thumbnail_options = {
             'size': (360, 240),
             'crop': False,
-            'upscale': True,
+            'upscale': False,
+            'autocrop': False,
             'subject_location': image.subject_location,
         }
         thumbnailer = get_thumbnailer(image)
