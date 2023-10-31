@@ -92,8 +92,7 @@ class MessageForm(ContactForm):
     attachment_3 = forms.FileField(required=False, 
                                    widget=forms.ClearableFileInput(attrs={"class": "form-control"}))
 
-    # Капча отключена изза ошибки "timeout-or-duplicate"
-    #captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
