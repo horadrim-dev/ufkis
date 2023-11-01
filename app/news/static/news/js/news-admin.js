@@ -16,14 +16,14 @@
                         break;
                     }
                 }
-            }
+            };
             return cookieValue;
         }
-        const csrftoken = getCookie('csrftoken');
 
         $("#publish-post button").click(function(){
             var url = $(this).attr("url");
             var data = $(this).attr("data");
+            var csrftoken = getCookie('csrftoken');
             $.ajax({
                 url: url,
                 method: 'post',
