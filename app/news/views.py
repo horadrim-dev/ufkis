@@ -65,12 +65,14 @@ class PostListView(PublishedObjectsMixin, FilterView):
                             self.get_news_list_layout(),
                             path=reverse("news:index"),
                             httponly=False,
+                            samesite=None,
                             max_age=3600*24*7)
         # seting news filter state to cookie
         response.set_cookie('news_filter_state', 
                             self.get_filter_state(),
                             path=reverse("news:index"),
                             httponly=False,
+                            samesite=None,
                             max_age=3600*24*7)
         return response
 
