@@ -33,6 +33,7 @@ env = environ.Env(
     # set casting, default value
     ALLOWED_HOSTS=(list, []),
     CSRF_TRUSTED_ORIGINS=(list, []),
+    CORS_ALLOWED_ORIGINS=(list, []),
     DEBUG=(bool, False),
     RECIPIENTS_EMAIL=(list, []),
     EMAIL_USE_TLS=(bool, True),
@@ -92,6 +93,7 @@ INSTALLED_APPS = [
     "captcha",
     'haystack',  # search engine
     'django_prometheus',
+    'corsheaders',
     # приложение обеспечивающее фоновое обновление 
     # индексов при получении сигналов create/delete объектов
     # https://github.com/django-haystack/celery-haystack
@@ -151,6 +153,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
+
+    "corsheaders.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -434,3 +438,4 @@ YANDEX_MAPS_API_KEY = env('YANDEX_MAPS_API_KEY')
 FILER_ALLOW_REGULAR_USERS_TO_ADD_ROOT_FOLDERS = True
 
 CSRF_COOKIE_HTTPONLY = False
+CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
