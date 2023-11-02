@@ -2,7 +2,7 @@ from typing import Any
 from django.db import models
 from django.db.models.query import QuerySet
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, Http404
+from django.http import HttpRequest, HttpResponse, JsonResponse, Http404
 from django.views.generic import ListView, DetailView, View
 from django.core.exceptions import PermissionDenied
 from .models import Post
@@ -12,6 +12,8 @@ from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
 
 class PublishedObjectsMixin:
 
@@ -74,10 +76,15 @@ class PostListView(PublishedObjectsMixin, FilterView):
         paginate_by = self.request.GET.get('count', '')
         return paginate_by if paginate_by in PAGINATE_BY_CHOICES else self.paginate_by
 
+
 class PostDetailView(PublishedObjectsMixin, DetailView):
     template_name = 'news/post.detail.html'
     slug_field = 'alias'
     model = Post
+
+    @method_decorator(ensure_csrf_cookie)
+    def get(self, request, *args, **kwargs) :
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
