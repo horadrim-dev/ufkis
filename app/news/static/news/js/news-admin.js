@@ -9,7 +9,7 @@
             e.preventDefault();
             var url = $(this).attr("action");
             var data = $(this).attr("data");
-            var csrftoken = getCookie('csrftoken');
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             $.ajax({
                 url: url,
                 method: 'post',
