@@ -5,8 +5,9 @@
         original_onPageLoad();
 
 
-        $("#publish-post button").click(function(){
-            var url = $(this).attr("url");
+        $("#publish-post form").on('submit', function(e){
+            e.preventDefault();
+            var url = $(this).attr("action");
             var data = $(this).attr("data");
             var csrftoken = getCookie('csrftoken');
             $.ajax({

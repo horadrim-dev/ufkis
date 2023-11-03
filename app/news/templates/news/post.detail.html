@@ -55,16 +55,16 @@
                 {% endif %} {% endcomment %}
                 {% if ADMIN_MODE %}
                     <div id="publish-post">
-                    {% if object.published %}
-                        <button class="btn btn-border btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
-                            <i class="fa fa-eye-slash"></i>Снять с публикации
-                        </button>
-                        {% csrf_token %}
-                    {% else %}
-                        <button class="btn btn-lg " url="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state" type="button">
-                            <i class="fa fa-eye"></i>Опубликовать
-                        </button>
-                    {% endif %}
+                        <form action="{% url "news:admin" %}" data="post={{ object.id }}&action=toggle-publish-state">
+                            {% csrf_token %}
+                            <button class="btn btn-border btn-lg " type="submit">
+                                {% if object.published %}
+                                <i class="fa fa-eye-slash"></i>Снять с публикации
+                                {% else %}
+                                <i class="fa fa-eye"></i>Опубликовать
+                                {% endif %}
+                            </button>
+                        </form>
                     </div>
                 {% endif %}
                 {% if EDIT_MODE %}
