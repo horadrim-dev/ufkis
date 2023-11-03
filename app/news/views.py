@@ -12,7 +12,7 @@ from cms.models.pluginmodel import CMSPlugin
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 
 
 class PublishedObjectsMixin:
@@ -86,7 +86,7 @@ class PostDetailView(PublishedObjectsMixin, DetailView):
     slug_field = 'alias'
     model = Post
 
-    @method_decorator(ensure_csrf_cookie)
+    @method_decorator(csrf_exempt)
     def get(self, request, *args, **kwargs) :
         return super().get(request, *args, **kwargs)
 

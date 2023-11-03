@@ -9,11 +9,10 @@
             var url = $(this).attr("url");
             var data = $(this).attr("data");
             var csrftoken = getCookie('csrftoken');
-            console.log(csrftoken);
             $.ajax({
                 url: url,
                 method: 'post',
-                // headers: {'X-CSRFToken': csrftoken},
+                headers: {'X-CSRFToken': csrftoken},
                 xhrFields: { withCredentials: true },
                 dataType: 'json',
                 data: data,
