@@ -13,7 +13,7 @@
             $.ajax({
                 url: url,
                 method: 'post',
-                headers: {'X-CSRFToken': csrftoken},
+                // headers: {'X-CSRFToken': csrftoken},
                 xhrFields: { withCredentials: true },
                 dataType: 'json',
                 data: data,
