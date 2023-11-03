@@ -119,6 +119,7 @@ class AdminView(View):
     def ajax_post(self, request, *args, **kwargs):
 
         if not request.user.is_authenticated:
+            print('NOT LOGGED IN')
             raise PermissionDenied
 
         action = request.POST.get("action")
