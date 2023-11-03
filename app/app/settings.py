@@ -154,10 +154,10 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
 
-    "corsheaders.middleware.CorsMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -439,3 +439,4 @@ FILER_ALLOW_REGULAR_USERS_TO_ADD_ROOT_FOLDERS = True
 
 CSRF_COOKIE_HTTPONLY = False
 CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+SESSION_COOKIE_SAMESITE = None

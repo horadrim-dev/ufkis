@@ -14,6 +14,7 @@
                 url: url,
                 method: 'post',
                 headers: {'X-CSRFToken': csrftoken},
+                xhrFields: { withCredentials: true },
                 dataType: 'json',
                 data: data,
                 beforeSend: function () {
