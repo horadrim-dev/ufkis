@@ -31,11 +31,11 @@ html {
 /* header {
     margin-bottom: -22px;
 } */
-ul.navbar-nav li a i {
+header .navbar-collapse:not(.open) ul.navbar-nav li a i {
     color: var(--menu-font-color);
 }
 
-ul.dropdown-menu:not(.side-menu.root-level) li a {
+.navbar-collapse:not(.open) .dropdown-menu:not(.side-menu.root-level) li a {
     min-width: 250px;
     white-space: unset;
     line-height: 16px;
@@ -43,7 +43,7 @@ ul.dropdown-menu:not(.side-menu.root-level) li a {
     padding: 15px 20px;
 }
 
-ul.dropdown-menu:not(.side-menu.root-level) li.dropdown-submenu>a:after {
+.navbar-collapse:not(.open) ul.dropdown-menu:not(.side-menu.root-level) > li.dropdown-submenu>a:after {
     /* float: unset; */
     /* margin-bottom: 2px; */
     position: absolute;
@@ -202,7 +202,7 @@ header .navbar-header button > i {
         /* min-height: 300px; */
         overflow: visible auto;
     }
-    #main-menu li {
+    #main-menu li:not(:last-child) {
         /* text-align:center !important; */
         border-bottom: 1px solid #e3e3e3;
     }
@@ -212,14 +212,18 @@ header .navbar-header button > i {
     #main-menu > li li {
         /* background: #eee; */
         margin-left: 20px;
+        margin-right: 20px;
     }
     #main-menu > li li li {
         /* background: #ddd; */
         margin-left: 40px;
 
     }
-    ul.dropdown-menu:not(.side-menu.root-level) li {
+    /* ul.dropdown-menu:not(.side-menu.root-level) li {
         width: 100%;
+    } */
+    ul.fa-ul {
+        margin-left: 0;
     }
     .mega-menu .mega-dropdown-menu > .nav-item {
     max-width: 100%;
@@ -253,6 +257,9 @@ header .navbar-header button > i {
         visibility: visible;
         -webkit-transform: scaleY(1) translateZ(0px);
         transform: scaleY(1) translateZ(0px);
+        margin-left: -44px;
+        padding-left: 25px;
+        padding-right: 25px;
     }
     header .navbar-header {
         margin-bottom: 10px;
@@ -524,6 +531,7 @@ html.special .caret::before {
     padding-right: 12px;
     height: inherit;
     border-radius: inherit;
+    font-size: 16px;
 }
 .ui-icon-circle-triangle-e {
     content: "\f061" !important;
@@ -533,4 +541,7 @@ html.special .caret::before {
 }
 .mfp-figure figure {
     background: #fff;
+}
+.ui-datepicker {
+    width: 100% !important;
 }

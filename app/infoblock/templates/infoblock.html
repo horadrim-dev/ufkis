@@ -20,7 +20,8 @@
         <div class="flexslider advanced-slider slider" data-options="animation:fade">
             <ul class="slides">
                 {% for plugin in instance.child_plugin_instances %}
-                    <li data-slider-anima="fade-right" data-time="1000">
+                    {% comment %} <li data-slider-anima="fade-right" data-time="1000"> {% endcomment %}
+                    <li>
                         {% render_plugin plugin %}
                     </li>
                 {% endfor %}
