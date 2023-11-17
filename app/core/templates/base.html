@@ -75,15 +75,8 @@
 
       {% block head %}
       {% endblock head %}
-      
-    </head>
-    <body>
 
-    <div id="preloader"></div>
-
-		{% cms_toolbar %}
-
-    {% comment %} {% if not request.toolbar %} {% endcomment %}
+      {% comment %} {% if not request.toolbar %} {% endcomment %}
       <!-- Yandex.Metrika counter -->
       <script src="https://mc.yandex.ru/metrika/tag.js"></script>
       <script type="text/javascript" >
@@ -100,7 +93,15 @@
       </script>
       <noscript><div><img src="https://mc.yandex.ru/watch/95595864" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
       <!-- /Yandex.Metrika counter -->
-    {% comment %} {% endif %} {% endcomment %}
+      {% comment %} {% endif %} {% endcomment %}
+      
+    </head>
+    <body>
+
+    <div id="preloader"></div>
+
+		{% cms_toolbar %}
+
 
 		{% comment %} <header> {% endcomment %}
 			{% comment %} {% static_placeholder 'header' %} {% endcomment %}
