@@ -16,6 +16,23 @@
       {% comment %} <meta name="description" content="{{site_settings.title}} {{site_settings.subtitle}}"> {% endcomment %}
       <link rel="icon" href="{% thumbnail site_settings.logo "32x32" autocrop %}">
 
+      <!-- Yandex.Metrika counter -->
+      <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(95595864, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+        });
+      </script>
+      <noscript><div><img src="https://mc.yandex.ru/watch/95595864" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+      <!-- /Yandex.Metrika counter -->
+
       {% addtoblock "css" %}<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Google+Sans:400,500,700|Google+Sans+Text:400&amp;lang=ru">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/scripts/bootstrap/css/bootstrap.css' %}">{% endaddtoblock %}
       {% addtoblock "css" %}<link rel="stylesheet" href="{% static 'core/bootstrap5_sup.css' %}">{% endaddtoblock %}
