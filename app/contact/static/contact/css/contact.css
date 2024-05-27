@@ -7,9 +7,10 @@
     width: 50px;
 }
 .checkbox-label {
-    position: absolute;
+    /* position: absolute; */
     margin-left: 15px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    display: inline-flex;
 }
 .step-item {
     opacity: .4;
@@ -29,7 +30,7 @@ ul.errorlist {
     font-family: FontAwesome;
     font-size: 12px;
     margin-left: 5px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .form-box:not(.form-inline) .g-recaptcha {
   margin-bottom: 0;

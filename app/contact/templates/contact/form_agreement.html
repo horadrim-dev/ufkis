@@ -5,10 +5,15 @@
     {% with wizard.form as form %}
 
     <hr class="space m">
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row vertical-row">
+        <div class="col-xs-1">
             {{ form.accept_terms}}
-            <span class="checkbox-label {% if form.agree.field.required %}required{% endif %}">{{ form.accept_terms.label_tag }}</span>
+        </div>
+        <div class="col-xs-11">
+            {% comment %} <span class="checkbox-label {% if form.agree.field.required %}required{% endif %}">{{ form.accept_terms.label_tag }}</span> {% endcomment %}
+            <span class="checkbox-label {% if form.accept_terms.field.required %}required{% endif %}">
+                <label for="{{ form.accept_terms.id_for_label }}">{{ form.accept_terms.label }}</label>
+            </span>
         </div>
     </div>
     <hr class="space m">

@@ -58,11 +58,11 @@ class UserDataForm(ContactForm):
         })
     )
     phone = PhoneNumberField(label="Телефон")
+            # "placeholder": "+7 1112223344"
 
     agree_pd = forms.BooleanField(
         widget=forms.CheckboxInput(attrs={
             "class": "form-control form-value checkbox",
-            "placeholder": "+7 1112223344"
         })
     )
 

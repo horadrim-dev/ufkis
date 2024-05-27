@@ -9,16 +9,20 @@ class ContactSettings(SingletonModel):
     agreement_title = models.CharField("Название этапа ознакомления с соглашением", max_length=256,
         default="Прочитайте правила пользования виртуальной приемной")
     agreement = HTMLField("Соглашение", configuration='CKEDITOR_SETTINGS_POST', default="")
-    agreement_checkbox_text = models.CharField("Текст галочки на форме соглашения", max_length=256,
-        default="Я прочитал(а) правила пользования виртуальной приемной")
+    # agreement_checkbox_text = models.CharField("Текст галочки на форме соглашения", max_length=256,
+        # default="Я прочитал(а) правила пользования виртуальной приемной")
+    agreement_checkbox_text = HTMLField("Текст галочки на форме соглашения", configuration='CKEDITOR_SETTINGS_POST', 
+                                       default="Я прочитал(а) правила пользования виртуальной приемной")
     userdata_title = models.CharField("Название этапа ввода пользовательских данных", max_length=256,
         default="Укажите данные о себе")
     # recipient_list не работает по невыясненным причинам, поэтому поле удалено
     # recipient_emails = models.EmailField(verbose_name='Email адреса', blank=True, null=True,
     #                                  help_text="Через запятую! На эти адреса будут приходить обращения из виртуальной приемной")
     userdata_form_text = HTMLField("Текст на форме данных пользователя", configuration='CKEDITOR_SETTINGS_POST', default="")
-    userdata_checkbox_text = models.CharField("Текст галочки на форме данных пользователя", max_length=256,
-        default="Я соглашаюсь на обработку моих персональных данных")
+    userdata_checkbox_text = HTMLField("Текст галочки на форме данных пользователя", configuration='CKEDITOR_SETTINGS_POST', 
+                                       default="Я соглашаюсь на обработку моих персональных данных")
+    # userdata_checkbox_text = models.CharField("Текст галочки на форме данных пользователя", max_length=256,
+    #     default="Я соглашаюсь на обработку моих персональных данных")
     message_title = models.CharField("Название этапа заполнения обращение", max_length=256,
         default="Заполните и отправьте обращение")
     message_form_text = HTMLField("Текст на форме заполнения обращения ", configuration='CKEDITOR_SETTINGS_POST', default="")
