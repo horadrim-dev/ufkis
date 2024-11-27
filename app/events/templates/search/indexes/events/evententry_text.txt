@@ -1,4 +1,4 @@
 {{ object.name }}
 {{ object.description }}
 {{ object.place }}
-{{ object.start_at }} 
+{{ object.start_at }}

@@ -6,6 +6,6 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('by-date/', GetDayEventListView.as_view(), name='events_by_date' ),
+    path('by-date/', GetSessionEventListView.as_view(), name='events_by_date' ),
 ] 
 

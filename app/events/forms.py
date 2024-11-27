@@ -2,7 +2,7 @@ from django import forms
 from .models import Event
 
 
-class  DayEventStackedInlineFormSet(forms.BaseInlineFormSet):
+class  SessionEventStackedInlineFormSet(forms.BaseInlineFormSet):
 
     def clean(self):
         """Проверка того, что хотя бы один день мероприятия добавлен."""

@@ -7,6 +7,6 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('', DayEventsListView.as_view(), name='index'),
+    path('', SessionEventsListView.as_view(), name='index'),
 ] 
 

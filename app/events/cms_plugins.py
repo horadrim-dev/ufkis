@@ -5,7 +5,7 @@ from django.contrib import admin
 from news.models import Post
 from django.db.models.functions import TruncDay
 
-from .models import UpcomingEventsPlugin, Event, CalendarEventsPlugin, DayEvent
+from .models import UpcomingEventsPlugin, Event, CalendarEventsPlugin, EventEntry
 
 @plugin_pool.register_plugin
 class UpcomingEventsPluginPublisher(CMSPluginBase):
@@ -39,7 +39,7 @@ class CalendarEventsPluginPublisher(CMSPluginBase):
     def render(self, context, instance, placeholder):
 
         # получаем список дат, в которые есть мероприятия
-        events_dates_qs = DayEvent.objects.upcoming() 
+        events_dates_qs = EventEntry.objects.upcoming() 
         if instance.category:
             events_dates_qs = events_dates_qs.filter(event__category=instance.category)
         events_dates_qs = events_dates_qs.values_list('start_at__date') \
@@ -48,7 +48,7 @@ class CalendarEventsPluginPublisher(CMSPluginBase):
 
         if events_dates_qs:
             # формируем список мероприятий в ближайший день
-            closest_events_qs = DayEvent.objects.upcoming_by_date(events_dates_qs[0][0])
+            closest_events_qs = EventEntry.objects.upcoming_by_date(events_dates_qs[0][0])
             if instance.category:
                 closest_events_qs = closest_events_qs.filter(event__category=instance.category)
             

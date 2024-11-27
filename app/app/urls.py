@@ -18,12 +18,18 @@ from django.conf.urls import include
 from django.urls import path, re_path, include
 from cms.sitemaps import CMSSitemap
 from django.contrib.sitemaps.views import sitemap
-
+from django.views.i18n import JavaScriptCatalog
 from django.conf import settings
 from django.conf.urls.static import static
 
+js_info_dict = {
+    'packages': ('recurrence', ),
+}
+
+
 urlpatterns = [
     re_path(r'^sitemap\.xml$', sitemap, {'sitemaps': {'cmspages': CMSSitemap}}),
+    re_path(r'^jsi18n/$', JavaScriptCatalog.as_view(), js_info_dict),
     # re_path(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     path('search/', include('haystack.urls')),
     path('core/', include('core.system_urls')),
