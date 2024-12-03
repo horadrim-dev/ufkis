@@ -25,9 +25,7 @@ class Event(models.Model):
     category = models.ForeignKey(CategoryEvent, verbose_name="Категория", 
                                  on_delete=models.SET_NULL, blank=True, null=True)
     name = models.CharField("Название мероприятия", max_length=512)
-    # place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
-    # start_at = models.DateTimeField(default=datetime.datetime.now, 
-    #                                 verbose_name="Время начала мероприятия")
+
     poster = FilerImageField(
         verbose_name="Обложка",
         blank=True,
@@ -41,7 +39,6 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
 
-    # objects = EventContentManager()
 
     class Meta:
         verbose_name = "мероприятие"
@@ -50,13 +47,6 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
-
-    # def get_absolute_url(self):
-    #     try:
-    #         return "{}?lightbox=event-{}".format(reverse("events:index"), self.id)
-    #     except NoReverseMatch:
-    #         return "#"
-    
 
 
 class SessionEvent(models.Model):
@@ -96,7 +86,6 @@ class SessionEvent(models.Model):
                 self.create_event_entries()
 
     def create_event_entries(self):
-        #now = timezone.now().date() #- datetime.timedelta(days=1)
         now = datetime.datetime.today() - datetime.timedelta(days=1)
         then = now.replace(year=now.year + 10)
         tz = timezone.get_current_timezone()
@@ -107,18 +96,24 @@ class SessionEvent(models.Model):
             dtstart=datetime.datetime(now.year, now.month, now.day, 0, 0, 0, tzinfo=tz),
             inc=False,
         )
-        # assert False, [x.date() for x in entries]
-        for entry in entries:
-            start_time = datetime.datetime.combine(
-                entry.date(), # + datetime.timedelta(days=1),
-                self.start_time,
-                tzinfo=tz
-            )
 
-            # start_time = timezone.localtime(start_time)
+        # assert False, [x for x in entries]
+
+        for entry in entries:
+
+            # Если подставлять время в полученные рекуренсы напрямую, смещаются даты мероприятий
+            # Поэтому в рекуренсах время не меняем, а полученные объекты просто сортируются по start_time
+
+            # start_time = datetime.datetime.combine(
+            #     entry.date() + datetime.timedelta(days=1),
+            #     self.start_time,
+            #     tzinfo=tz
+            # )
+            #start_time = entry.replace(hour=self.start_time.hour, minute=self.start_time.minute)
 
             e = EventEntry.objects.create(
-                start_at=start_time,
+                start_at=entry,
+                #start_at=start_time,
                 event=self.event,
                 session=self
             )
@@ -149,18 +144,11 @@ class EventEntry(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     session = models.ForeignKey(SessionEvent, on_delete=models.CASCADE)
 
-    # place = models.CharField("Место проведения", max_length=256, blank=True, null=True)
-    # postfix_name = models.CharField("Постфикс названия мероприятия", blank=True, null=True,
-    #                                 help_text="Пример: День 1, Второй этап и т.д. \
-    #                                            Будет отображено в квадратных скобках в \
-    #                                            конце названия мероприятия.")
-    # created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    # updated_at = models.DateTimeField(auto_now=True, verbose_name="Последнее изменение")
-
     objects = EventEntryContentManager()
 
     class Meta:
-        ordering = ['start_at']
+        # ordering = ['start_at']
+        ordering = ['start_at', 'session__start_time']
 
     def __str__(self):
         return self.name
